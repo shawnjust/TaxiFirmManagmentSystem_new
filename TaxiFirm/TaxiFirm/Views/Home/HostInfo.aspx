@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ShowHostModal>" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
@@ -46,8 +46,8 @@
                         <fieldset>
                             <legend>基本信息</legend>
                             <label>
-                                <h4>车主姓名:&nbsp;&nbsp; <small> 方志晗</small></h4></label>
-                                <label><h4>公司：  &nbsp;&nbsp;<small>Google美国</small></h4></label>
+                                <h4>车主姓名:&nbsp;&nbsp; <small> <%: Model.name %></small></h4></label>
+                                <label><h4>公司：  &nbsp;&nbsp;<small> <%:  %> </small></h4></label>
                                 <label><h4>身份证号码: &nbsp;&nbsp;<small>452524141241</small></h4></label>
                                 <label><h4>出生日期:&nbsp;&nbsp;  <small>1993/7/12</small></h4></label>
                                 <label><h4>性别:  &nbsp;&nbsp;<small>男</small></h4></label>
