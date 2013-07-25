@@ -1,12 +1,11 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.AddHostModal>" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
-   添加车主
+    添加车主
 </asp:Content>
-
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-  <meta charset="utf-8">
- <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+    <meta charset="utf-8">
+    <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="../../Scripts/BackControl/My97DatePicker/WdatePicker.js"></script>
     <body>
@@ -18,29 +17,34 @@
                             添加车主 <small>车主管理</small>
                         </h1>
                     </div>
+                    <% using (Html.BeginForm())
+                       {%>
+                    <%: Html.ValidationSummary(true) %>
                     <div class="row-fluid">
                         <div class="span8">
-                            <form>
+                            
                             <fieldset>
                                 <legend>基本信息 </legend>
                                 <label>
                                     车主姓名</label>
                                 <p>
-                                    <input type="text" />
+                                    <%: Html.TextBoxFor(model => model.name) %>
+                                    <%: Html.ValidationMessageFor(model => model.name) %>
                                 </p>
                                 <p>
-                                    
-                                        公司编号
+                                    公司编号
                                 </p>
                                 <p>
-                                    <input name="text" type="text" />
+                                    <%: Html.DropDownListFor(model => model.firm_id, Model.firm_list)%>
+                                    <%: Html.ValidationMessageFor(model => model.firm_id)%>
                                 </p>
                                 <p>
                                     <label>
                                         身份证</label>
                                 </p>
                                 <p>
-                                    <input name="text2" type="text" />
+                                    <%: Html.TextBoxFor(model => model.id_card) %>
+                                    <%: Html.ValidationMessageFor(model => model.id_card)%>
                                 </p>
                                 <p>
                                     <label>
@@ -48,7 +52,8 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <input name="text3" type="text" onClick="WdatePicker()"/>
+                                    <%: Html.TextBoxFor(model => model.birthday, new { onclick = "WdatePicker()" })%>
+                                    <%: Html.ValidationMessageFor(model => model.birthday)%>
                                 </p>
                                 <p>
                                     <label>
@@ -56,28 +61,29 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <select>
-                                       <option value="1">男</option>
-                                       <option value="2">女</option>
-                                    </select>
+                                        <%: Html.Label("男") %>
+                                        <%: Html.RadioButtonFor(model => model.gender, false)%>
+                                        <%: Html.Label("女") %>
+                                        <%: Html.RadioButtonFor(model => model.gender, true)%>
+                                        <%: Html.ValidationMessageFor(model => model.gender)%>
                                 </p>
                                 <label class="checkbox">
                                     <input type="checkbox" />
-                                </label>是否确定
+                                </label>
+                                是否确定
                             </fieldset>
-                            </form>
+                           
                         </div>
                         <div class="span4">
-                            <form>
                             <fieldset>
-                                <legend>额外信息</legend><legend>
-                                </legend>
+                                <legend>额外信息</legend><legend></legend>
                                 <label>
                                     电话号码
                                     <br>
                                 </label>
                                 <p>
-                                    <input type="text" />
+                                    <%: Html.TextBoxFor(model => model.telephone)%>
+                                    <%: Html.ValidationMessageFor(model => model.telephone)%>
                                 </p>
                                 <p>
                                     <label>
@@ -86,20 +92,25 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <input name="text5" type="text" />
+                                    <%: Html.TextBoxFor(model => model.address)%>
+                                    <%: Html.ValidationMessageFor(model => model.address)%>
                                 </p>
-                                <p>&nbsp;
-                                    </p>
+                                <p>
+                                    &nbsp;
+                                </p>
                                 <label class="checkbox">
                                 </label>
-                                <p>&nbsp;
-                                    </p>
+                                <p>
+                                    &nbsp;
+                                </p>
                             </fieldset>
-                            </form>
                         </div>
                     </div>
-                    <button class="btn btn-primary" type="button">
-                        添加</button>
+                    <p>
+                        <input type="submit" class="btn btn-primary" value="添加" />
+                    </p>
+                     <% } %>
+                    
                 </div>
             </div>
         </div>
