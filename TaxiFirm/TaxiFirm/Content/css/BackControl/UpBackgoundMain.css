@@ -1,0 +1,35 @@
+@charset "utf-8";
+/* CSS Document */
+
+.LeftUp{
+	background-image:url(../../picture/BackControl/LeftUp.png);
+	height:23px;}
+.LeftBottom{
+	background-image:url(../../picture/BackControl/LeftButtom.png);
+	height:22px;
+	border-top-width:2px;
+	border-top-color:#BEBEBE;
+	border-top-style:solid;
+	}
+.bottom{
+	background-image:url(../../picture/BackControl/BackBottom.png);
+	height:22px;
+	border-top-width:2px;
+	border-top-color:#BEBEBE;
+	border-top-style:solid;
+	color:#666;
+	font-size:13px;
+	}
+.control
+{
+       border-right-width:1px;
+	border-right-color:#BEBEBE;
+	border-right-style:solid;
+	
+	 border-left-width:1px;
+	border-left-color:#BEBEBE;
+	border-left-style:solid;
+	color:#33F;
+	
+    
+    }

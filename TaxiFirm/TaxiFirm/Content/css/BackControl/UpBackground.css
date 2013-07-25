@@ -1,0 +1,60 @@
+@charset "utf-8";
+/* CSS Document */
+body{
+	margin-top:0;
+	}
+.center{
+	background-image:url(../../picture/BackControl/UpBackground.jpg);
+	background-repeat:repeat-x;
+	border-bottom-color:#BEBEBE;
+	border-bottom-width:3px;
+	border-bottom-style:solid;
+	height:88px;
+	
+	
+	}
+a
+{
+    color:Black;
+    }
+.down{
+	background-image:url(../../picture/BackControl/UpDownBackground.jpg);
+	background-repeat:repeat-x;
+	border-bottom-width:3px;
+	height:15px;
+	border-bottom-style:solid;
+	border-bottom-color:#BEBEBE;
+	
+	}
+.center table
+{
+	height:100%;
+	}
+
+.upSelect{
+	background-image:url(../../picture/BackControl/select.jpg);
+	height:40px;
+	width:129px;
+	
+	}
+.upSelect:hover
+{
+	cursor:pointer;
+	}
+.beSelect{
+	background-image:url(../../picture/BackControl/Beselect.jpg);
+	height:40px;
+	width:129px;
+	}
+.font1{
+	font-family:幼圆;
+	font-size:22px;
+	}
+#logout{
+	cursor:pointer;
+	}
+	.controlArea:hover
+{
+	cursor:pointer;
+
+	}

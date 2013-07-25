@@ -1,0 +1,29 @@
+﻿<?xml version="1.0" encoding="utf-8"?><Database Name="taxiserver" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
+  <Connection Mode="WebSettings" ConnectionString="Data Source=10.60.36.5;Initial Catalog=taxiserver;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="taxiserverConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.checkEmpolyeeLoginPassword" Method="checkEmpolyeeLoginPassword" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.checkCustomerLoginPassword" Method="checkCustomerLoginPassword" IsComposable="true">
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isDriver" Method="isDriver" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isEmpolyee" Method="isEmpolyee" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isHost" Method="isHost" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isManager" Method="isManager" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+</Database>

@@ -1,0 +1,109 @@
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title>Add News</title>
+</head>
+<style type="text/css">
+textarea:focus, #contact select:focus {
+    border: 1px solid rgb(214, 214, 214);
+    outline: medium none;
+    position: relative;
+    z-index: 5;
+}
+#textfield2{
+	background-color:#0CC;
+	color:#0CF;
+	}
+input[type="text"], input[type="password"], input[type="email"], input[type="file"],textarea, select {
+    border: 1px solid rgb(224, 224, 224);
+    padding: 8px 9px;
+    outline: medium none;
+    font-size: 13px;
+    color: rgb(136, 136, 136);
+    margin: 0px;
+    max-width: 100%;
+    display: block;
+    background: none repeat scroll 0% 0% rgb(255, 255, 255);
+    box-shadow: 0px 2px 0px 0px rgba(0, 0, 0, 0.03);
+    border-radius: 2px 2px 2px 2px;
+}
+.button.gray:hover, .button.light:hover, .button.color, input[type="button"], input[type="file"],input[type="submit"], input[type="button"]:focus, input[type="submit"]:focus {
+    background: none repeat scroll 0% 0% rgb(22, 159, 230);
+}
+input[type="button"], input[type="submit"], input[type="button"]:focus, input[type="submit"]:focus {
+    color: rgb(255, 255, 255);
+    background: none repeat scroll 0% 0% rgb(22, 159, 230);
+    padding: 9px 11px;
+    border: medium none !important;
+}
+body, h1, h2, h3, h4, h5, h6, .button, input[type="button"], input[type="submit"], input[type="text"], input[type="password"], input[type="email"], textarea, select {
+    font-family: "Open Sans","HelveticaNeue","Helvetica Neue",Helvetica,Arial,sans-serif;
+}
+p.margin {
+    margin: 0px 0px 25px;
+}
+p {
+    margin: 0px 0px 15px;
+    line-height: 21px;
+}
+a.fl {
+	position:relative;
+	overflow:hidden;
+	display:inline-block;
+	color:#005197;
+	text-decoration:underline;
+	vertical-align:bottom;
+	*vertical-align:auto
+	}
+a.fl input {
+	position:absolute;
+	right:0;
+	top:0;
+	height:100px;
+	opacity:0;
+	filter:alpha(opacity=0);
+	cursor:pointer;
+	cursor:hand
+	}
+a.fl:hover {color:#f65100}
+</style>
+<body>
+<form id="form1" name="form1" method="post" action="">
+  <label for="textfield2"></label>
+</form>
+<table width="100%" border="0" cellpadding="0" cellspacing="0">
+  <tr>
+    <td colspan="5" align="center"><h3>添加新闻</h3></td>
+  </tr>
+  <tr>
+    <td width="17%">&nbsp;</td>
+    <td align="right"><h4>请输入新闻标题</h4></td>
+    <td colspan="2" align="left"><input type="text" name="textfield" id="textfield" style="width:350px"/></td>
+    <td align="center">&nbsp;</td>
+  </tr>
+  <tr>
+    <td>&nbsp;</td>
+    <td width="18%" align="right"><h4>请选择图片</h4></td>
+    <td width="16%" align="right"><input type="file" name="textfield2" id="textfield2"  /></td>
+    <td width="16%" align="left"></td>
+    <td width="33%" align="left">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="203" rowspan="2"><h3>&nbsp;</h3></td>
+    <td height="23" align="right" valign="top"><h3>输入内容</h3></td>
+    <td colspan="3" rowspan="2" align="left"><textarea name="textarea" id="textarea" cols="60" rows="15"></textarea></td>
+  </tr>
+  <tr>
+    <td height="252" align="right">&nbsp;</td>
+  </tr>
+  <tr>
+    <td></td>
+    <td align="right"><form id="form3" name="form3" method="post" action="">
+    </form><h3>确认提交</h3></td>
+    <td colspan="2" align="center"><input type="submit" name="button2" id="button2" value="提交" /></td>
+    <td align="center">&nbsp;</td>
+  </tr>
+</table>
+</body>
+</html>

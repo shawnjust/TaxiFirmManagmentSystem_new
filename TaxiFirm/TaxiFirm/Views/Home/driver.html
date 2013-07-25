@@ -1,0 +1,101 @@
+<html>
+ <meta charset="utf-8">
+ <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
+    <script language="javascript" type="text/javascript" src="../../Scripts/BackControl/My97DatePicker/WdatePicker.js"></script>
+    <body>
+        <div class="container-fluid">
+            <div class="row-fluid">
+                <div class="span8">
+                    <div class="page-header">
+                        <h1>
+                            添加车主 <small>车主管理</small>
+                        </h1>
+                    </div>
+                    <div class="row-fluid">
+                        <div class="span8">
+                            <form>
+                            <fieldset>
+                                <legend>基本信息 </legend>
+                                <label>
+                                    车主姓名</label>
+                                <p>
+                                    <input type="text" />
+                                </p>
+                                <p>
+                                    
+                                        公司编号
+                                </p>
+                                <p>
+                                    <input name="text" type="text" />
+                                </p>
+                                <p>
+                                    <label>
+                                        身份证</label>
+                                </p>
+                                <p>
+                                    <input name="text2" type="text" />
+                                </p>
+                                <p>
+                                    <label>
+                                        出生日期
+                                    </label>
+                                </p>
+                                <p>
+                                    <input name="text3" type="text" onClick="WdatePicker()"/>
+                                </p>
+                                <p>
+                                    <label>
+                                        性别
+                                    </label>
+                                </p>
+                                <p>
+                                    <select>
+                                       <option value="1">男</option>
+                                       <option value="2">女</option>
+                                    </select>
+                                </p>
+                                <label class="checkbox">
+                                    <input type="checkbox" />
+                                </label>是否确定
+                            </fieldset>
+                            </form>
+                        </div>
+                        <div class="span4">
+                            <form>
+                            <fieldset>
+                                <legend>额外信息</legend><legend>
+                                </legend>
+                                <label>
+                                    电话号码
+                                    <br>
+                                </label>
+                                <p>
+                                    <input type="text" />
+                                </p>
+                                <p>
+                                    <label>
+                                        地址
+                                        <br>
+                                    </label>
+                                </p>
+                                <p>
+                                    <input name="text5" type="text" />
+                                </p>
+                                <p>&nbsp;
+                                    </p>
+                                <label class="checkbox">
+                                </label>
+                                <p>&nbsp;
+                                    </p>
+                            </fieldset>
+                            </form>
+                        </div>
+                    </div>
+                    <button class="btn btn-primary" type="button">
+                        添加</button>
+                </div>
+            </div>
+        </div>
+    </body>
+</html>

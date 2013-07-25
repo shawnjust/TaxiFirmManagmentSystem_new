@@ -1,0 +1,55 @@
+@charset "utf-8";
+/* CSS Document */
+.CenterUp{
+	background-image:url(../../Content/picture/BackControl/CenterUp.png);
+	height:23px;
+	
+	
+}
+body{
+	margin-top:0px;
+	margin-left:0px;
+	margin-right:0px;}
+.UpRight{
+	width:48px;
+	height:24px;
+	font-size:12px;}
+.UpRight:hover{
+	cursor:pointer;}
+	
+	.UpRight2{
+	width:48px;
+	height:24px;
+	font-size:12px;}
+.UpRight2:hover{
+	cursor:pointer;}
+.UpSelect1{
+
+	
+	border-left-color:#BEBEBE;
+	border-left-width:1px;
+	border-left-style:solid;
+	border-right-color:#BEBEBE;
+	border-right-width:1px;
+	border-right-style:solid;
+	font-size:14px;}
+.UpSelect1:hover{
+	cursor:pointer;}
+.centerHead{
+	background-image:url(../../Content/picture/BackControl/UpHead.png);
+	border-top-color:#BEBEBE;
+	border-top-width:1px;
+	border-top-style:solid;
+	border-top-width:1px;}
+.table1{
+	border-color:#BEBEBE;
+	border-width:1px;
+	border-style:solid;}
+.table1 tr td{
+	border-color:#BEBEBE;
+	border-width:1px;
+	border-style:solid;
+	}
+.centerButtom{
+	font-size:14px;
+	}

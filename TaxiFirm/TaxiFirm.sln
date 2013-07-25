@@ -1,0 +1,26 @@
+﻿
+Microsoft Visual Studio Solution File, Format Version 11.00
+# Visual Studio 2010
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiFirm", "TaxiFirm\TaxiFirm.csproj", "{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}"
+EndProject
+Project("{FAE04EC0-301F-11D3-BF4B-00C04F79EFBC}") = "TaxiFirm.Tests", "TaxiFirm.Tests\TaxiFirm.Tests.csproj", "{AC77CC9B-CB93-4ADE-B53C-7B170341D115}"
+EndProject
+Global
+	GlobalSection(SolutionConfigurationPlatforms) = preSolution
+		Debug|Any CPU = Debug|Any CPU
+		Release|Any CPU = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(ProjectConfigurationPlatforms) = postSolution
+		{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}.Release|Any CPU.Build.0 = Release|Any CPU
+		{AC77CC9B-CB93-4ADE-B53C-7B170341D115}.Debug|Any CPU.ActiveCfg = Debug|Any CPU
+		{AC77CC9B-CB93-4ADE-B53C-7B170341D115}.Debug|Any CPU.Build.0 = Debug|Any CPU
+		{AC77CC9B-CB93-4ADE-B53C-7B170341D115}.Release|Any CPU.ActiveCfg = Release|Any CPU
+		{AC77CC9B-CB93-4ADE-B53C-7B170341D115}.Release|Any CPU.Build.0 = Release|Any CPU
+	EndGlobalSection
+	GlobalSection(SolutionProperties) = preSolution
+		HideSolutionNode = FALSE
+	EndGlobalSection
+EndGlobal

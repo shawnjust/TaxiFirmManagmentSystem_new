@@ -1,0 +1,10 @@
+@charset "utf-8";
+/* CSS Document */
+body, a, h1, h2, li,p,font {
+	padding: 0px;
+	border: none;
+	margin: 0px;
+	font-family: 微软雅黑;
+	}
+.pointer:hover{
+	cursor:pointer;}
