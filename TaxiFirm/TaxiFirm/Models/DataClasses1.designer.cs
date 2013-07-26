@@ -62,14 +62,6 @@ namespace TaxiFirm.Models
 			OnCreated();
 		}
 		
-		public System.Data.Linq.Table<View_manager> View_manager
-		{
-			get
-			{
-				return this.GetTable<View_manager>();
-			}
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkEmpolyeeLoginPassword", IsComposable=true)]
 		public System.Nullable<int> checkEmpolyeeLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
 		{
@@ -105,35 +97,36 @@ namespace TaxiFirm.Models
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmpolyeeById", IsComposable=true)]
+		public IQueryable<getEmpolyeeByIdResult> getEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return this.CreateMethodCallQuery<getEmpolyeeByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+		}
 	}
 	
-	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_manager")]
-	public partial class View_manager
+	public partial class getEmpolyeeByIdResult
 	{
 		
 		private int _empolyee_id;
+		
+		private int _firm_id;
 		
 		private string _name;
 		
 		private string _id_card;
 		
+		private System.DateTime _birthday;
+		
 		private System.Nullable<bool> _gender;
 		
 		private string _telephone;
 		
-		private System.Nullable<System.DateTime> _birthday;
-		
-		private System.Nullable<int> _firm_id;
-		
-		private string _firm_name;
-		
-		private string _phone_number;
+		private System.Nullable<int> _age;
 		
 		private string _empolyee_address;
 		
-		private string _firm_address;
-		
-		public View_manager()
+		public getEmpolyeeByIdResult()
 		{
 		}
 		
@@ -153,7 +146,23 @@ namespace TaxiFirm.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int NOT NULL")]
+		public int firm_id
+		{
+			get
+			{
+				return this._firm_id;
+			}
+			set
+			{
+				if ((this._firm_id != value))
+				{
+					this._firm_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string name
 		{
 			get
@@ -169,7 +178,7 @@ namespace TaxiFirm.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20) NOT NULL", CanBeNull=false)]
 		public string id_card
 		{
 			get
@@ -181,6 +190,22 @@ namespace TaxiFirm.Models
 				if ((this._id_card != value))
 				{
 					this._id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date NOT NULL")]
+		public System.DateTime birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if ((this._birthday != value))
+				{
+					this._birthday = value;
 				}
 			}
 		}
@@ -201,7 +226,7 @@ namespace TaxiFirm.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
 		public string telephone
 		{
 			get
@@ -217,71 +242,23 @@ namespace TaxiFirm.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date")]
-		public System.Nullable<System.DateTime> birthday
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int")]
+		public System.Nullable<int> age
 		{
 			get
 			{
-				return this._birthday;
+				return this._age;
 			}
 			set
 			{
-				if ((this._birthday != value))
+				if ((this._age != value))
 				{
-					this._birthday = value;
+					this._age = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int")]
-		public System.Nullable<int> firm_id
-		{
-			get
-			{
-				return this._firm_id;
-			}
-			set
-			{
-				if ((this._firm_id != value))
-				{
-					this._firm_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20)")]
-		public string firm_name
-		{
-			get
-			{
-				return this._firm_name;
-			}
-			set
-			{
-				if ((this._firm_name != value))
-				{
-					this._firm_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20)")]
-		public string phone_number
-		{
-			get
-			{
-				return this._phone_number;
-			}
-			set
-			{
-				if ((this._phone_number != value))
-				{
-					this._phone_number = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50)")]
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
 		public string empolyee_address
 		{
 			get
@@ -293,22 +270,6 @@ namespace TaxiFirm.Models
 				if ((this._empolyee_address != value))
 				{
 					this._empolyee_address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50)")]
-		public string firm_address
-		{
-			get
-			{
-				return this._firm_address;
-			}
-			set
-			{
-				if ((this._firm_address != value))
-				{
-					this._firm_address = value;
 				}
 			}
 		}

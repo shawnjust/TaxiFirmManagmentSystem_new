@@ -52,7 +52,7 @@
             <td width="30%" height="48">&nbsp;</td>
             <td width="70%" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td height="58" valign="bottom"><img title="安全退出" id="logout" src="../../Content/picture/BackControl/logout1.png" width="92" height="34" /></td>
+                <td height="58" valign="bottom"><a href="/Home/BackHandle?type=logout"> <img title="安全退出" id="logout" src="../../Content/picture/BackControl/logout1.png" width="92" height="34" /></a></td>
                 </tr>
               <tr>
                 <td height="19">&nbsp;</td>

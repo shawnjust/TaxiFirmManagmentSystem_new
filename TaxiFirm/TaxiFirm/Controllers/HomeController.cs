@@ -6,9 +6,28 @@ using System.Web.Mvc;
 using TaxiFirm.Models;
 namespace TaxiFirm.Controllers
 {
+    
     [HandleError]
     public class HomeController : Controller
     {
+        public ActionResult BackHandle()
+        {
+
+            string type = Request.QueryString.Get("type");
+            if (type == "logout")
+            {
+                if (Session["CurrentManager"] != null)
+                {
+                    Session.Remove("CurrentManager");
+                    Session.Remove("Identity");
+                }
+                Response.Redirect("/FrontPage/Index");
+            }
+            else {
+               
+            }
+            return RedirectToAction("Index");
+        }
         [HttpPost]
         public ActionResult LoginHandle(string username,string psword)
         {
@@ -23,7 +42,11 @@ namespace TaxiFirm.Controllers
                 Current = IdHandle.CheckIdentity(userid, psword);
                 if (Current == Identity.manager)
                 {
-                    TempData["Identity"] = Identity.manager;
+                 
+                    Session["name"] = new Manager().GetName(userid);
+                    Session["Identity"] = Identity.manager;
+                    Session["CurrentManager"] = new Manager(userid);
+        
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
