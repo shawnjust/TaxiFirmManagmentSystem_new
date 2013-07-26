@@ -25,7 +25,7 @@ namespace TaxiFirm.Models.Manager
             foreach (var col in table)
             {
                 Manager manager = new Manager();
-                manager
+          
  
             }
 

@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 
-namespace TaxiFirm.Models
+namespace TaxiFirm.Models.Manager
 {
     public class Manager
     {
