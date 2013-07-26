@@ -18,6 +18,8 @@ namespace TaxiFirm.Models.Manager
             return col.name;
 
         }
+
+        //分页得到经理页面
         public List<Manager> GetManagerByPage(Page page)
         {
             var table=data.getManagerByPage(page.CurrentPage, page.CountPerPage);
@@ -25,7 +27,30 @@ namespace TaxiFirm.Models.Manager
             foreach (var col in table)
             {
                 Manager manager = new Manager();
-          
+                manager.Address = col.empolyee_address;
+                manager.Birthday =(DateTime) col.birthday;
+                manager.FirmID = (int)col.firm_id;
+                manager.IdCard = col.id_card;
+                manager.Name = col.name;
+                manager.Telephone = col.phone_number;
+                manager.FirmAddress = col.firm_address;
+                manager.FirmName = col.firm_name;
+               
+                if (col.gender == null)
+                {
+                   manager.Gender = "未知";
+
+                }
+                else if ((bool)col.gender)
+                {
+                    manager.Gender = "男";
+                }
+                else
+                {
+                   manager.Gender = "女";
+                }
+
+                managers.Add(manager);
  
             }
 

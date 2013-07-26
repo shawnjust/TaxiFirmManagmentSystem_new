@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage"%>
-<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models"%>
+<%@ Import Namespace="TaxiFirm.Models.Manager"%>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
    欢迎你
 </asp:Content>
@@ -28,7 +29,7 @@
                             <legend>您的信息
                             <label>
                             </legend>
-                            <h4>您的姓名:&nbsp;&nbsp;<%:Session["name"] %><small></small></h4>
+                            <h4>您的姓名:&nbsp;&nbsp;<%:CurrentManager.Name %><small></small></h4>
                                 </label>
                                 <label><h4>公司：  &nbsp;&nbsp;<small><%:CurrentManager.FirmID%></small></h4></label>
                                 <label><h4>身份证号码: &nbsp;&nbsp;<small><%:CurrentManager.IdCard%></small></h4></label>

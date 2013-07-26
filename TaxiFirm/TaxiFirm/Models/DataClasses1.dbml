@@ -40,4 +40,22 @@
       <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getManagerByPage" Method="getManagerByPage" IsComposable="true">
+    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getManagerByPageResult">
+      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id_card" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="telephone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="firm_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firm_name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="firm_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>

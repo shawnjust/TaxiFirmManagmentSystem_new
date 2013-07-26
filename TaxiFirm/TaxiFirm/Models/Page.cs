@@ -9,6 +9,7 @@ namespace TaxiFirm.Models
     {
         public int WholeSize { get; set; }
         public int CountPerPage { get; set; }
+        public int CountCurrentPage { get; set; }
         public int CurrentPage { get; set; }
         public int WholePage { get; set; }
 
@@ -17,7 +18,17 @@ namespace TaxiFirm.Models
         }
         public void SetWholePage()
         {
-            this.WholePage = this.WholeSize / this.CountPerPage;
+            this.WholePage = (this.WholeSize-1)/ this.CountPerPage+1;
+        }
+
+        public void SetCountCurrentPage()
+        {
+            CountCurrentPage = CountPerPage;
+            if (this.CurrentPage == this.WholePage)
+            {
+                CountCurrentPage = this.WholeSize % this.CountPerPage;
+            }
+ 
         }
     }
 }

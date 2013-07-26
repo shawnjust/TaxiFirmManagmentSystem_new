@@ -80,7 +80,9 @@
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
     <Compile Include="Models\IdentityHandle.cs" />
-    <Compile Include="Models\Manager.cs" />
+    <Compile Include="Models\Manager\Manager.cs" />
+    <Compile Include="Models\Manager\ManagerHandle.cs" />
+    <Compile Include="Models\Page.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

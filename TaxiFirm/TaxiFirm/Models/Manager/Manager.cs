@@ -14,7 +14,8 @@ namespace TaxiFirm.Models.Manager
         public  string Gender { get; set; }
         public  string Telephone { get; set; }
         public string Address { get; set; }
-
+        public string FirmName { get; set; }
+        public string FirmAddress { get; set; }
 
         public DataClasses1DataContext data = new DataClasses1DataContext();
         public Manager()

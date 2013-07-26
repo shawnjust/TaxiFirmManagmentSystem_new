@@ -3,6 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
+using TaxiFirm.Models.Manager;
 using TaxiFirm.Models;
 namespace TaxiFirm.Controllers
 {
@@ -10,18 +11,16 @@ namespace TaxiFirm.Controllers
     [HandleError]
     public class HomeController : Controller
     {
+       
+           
+        
         public ActionResult BackHandle()
         {
 
             string type = Request.QueryString.Get("type");
             if (type == "logout")
             {
-                if (Session["CurrentManager"] != null)
-                {
-                    Session.Remove("CurrentManager");
-                    Session.Remove("Identity");
-                }
-                Response.Redirect("/FrontPage/Index");
+                this.LogOut();
             }
             else {
                
@@ -43,7 +42,7 @@ namespace TaxiFirm.Controllers
                 if (Current == Identity.manager)
                 {
                  
-                    Session["name"] = new Manager().GetName(userid);
+                   
                     Session["Identity"] = Identity.manager;
                     Session["CurrentManager"] = new Manager(userid);
         
@@ -195,6 +194,22 @@ namespace TaxiFirm.Controllers
             return View();
         }
 
+        public void LogOut()
+        {
+
+            if (Session["CurrentManager"] != null)
+            {
+                Session.Remove("CurrentManager");
+                Session.Remove("Identity");
+            }
+            Response.Redirect("/FrontPage/Index");
+        }
+        //分页转到经理页面
+        public void GoManagerList(int pagecount)
+        {
+
+ 
+        }
         
     }
 }
