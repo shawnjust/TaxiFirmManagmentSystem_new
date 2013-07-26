@@ -17,7 +17,9 @@ namespace TaxiFirm.Models
 
 
         public DataClasses1DataContext data = new DataClasses1DataContext();
-
+        public Manager()
+        {
+        }
         public Manager(int id)
         {
             var table = data.getEmpolyeeById(id);
@@ -48,18 +50,8 @@ namespace TaxiFirm.Models
  
         }
 
-        public Manager()
-        {
-        }
-        public string GetName(int id)
-        {
-           
-            var table=data.getEmpolyeeById(id);
-           // int a = table.ToArray<getEmpolyeeByIdResult>().Length;
-            var col = table.First<getEmpolyeeByIdResult>();
-            return col.name;
- 
-        }
+       
+      
         
     }
 }
