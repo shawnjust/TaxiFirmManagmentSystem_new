@@ -20,8 +20,11 @@ namespace TaxiFirm.Models.Manager
         }
 
         //分页得到经理页面
-        public List<Manager> GetManagerByPage(Page page)
+        public List<Manager> GetManagerByPage(MyPage page)
         {
+           
+            page.CountPerPage = 10;
+            page.WholePage = (int)data.getManagerPageCount(page.CountCurrentPage);
             var table=data.getManagerByPage(page.CurrentPage, page.CountPerPage);
             List<Manager> managers = new List<Manager>();
             foreach (var col in table)
@@ -35,7 +38,8 @@ namespace TaxiFirm.Models.Manager
                 manager.Telephone = col.phone_number;
                 manager.FirmAddress = col.firm_address;
                 manager.FirmName = col.firm_name;
-               
+                manager.EmployId = col.empolyee_id;
+
                 if (col.gender == null)
                 {
                    manager.Gender = "未知";

@@ -1,4 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager"  %>
+<%@ Import Namespace="TaxiFirm.Models" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">角色管理</asp:Content>
 
@@ -40,6 +42,8 @@
     });
 </script>
 
+<% List<Manager> managers = (List<Manager>)ViewData["managers"];
+    MyPage page = (MyPage)ViewData["page"];%>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -112,20 +116,31 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                          <td align="center"><input name="" type="checkbox" value="" />&nbsp;</td>
+                    <%int num=(page.CurrentPage-1)*page.CountPerPage+1;
+                        for(int i=0;i<managers.Count;i++) 
+                        {
+                            Manager manager = managers[i];%>
+                       
+                        <%if(i==0||i==5) {%>  <tr>
+                        <%}else if(i==1||i==6){%> <tr class="success">
+                        <%}else if(i==2||i==7){ %><tr class="error">
+                       <% }else if(i==3||i==8){ %><tr class="warning">
+                        <%}else if(i==4||i==9){ %><tr class="info">
+                       <%} %>
+                       <td align="center"> <input name="" type="checkbox" value="" />&nbsp;</td>
                             <td>
-                                1
+                                <%:num++ %>
                             </td>
-                            <td>方志晗</td>
+                            <td><%:manager.Name %></td>
                             <td>
-                                20</td>
-                            <td>男</td>
-                            <td>18817598873</td>
+                                <%:manager.Age %></td>
+                            <td><%:manager.Gender %></td>
+                            <td><%:manager.Telephone %></td>
                             <td>有</td>
-                            <td  style="color:#900" class="pointer"><%:Html.ActionLink("信息管理","ManagerInfo","Home")%></td>
+                            <td  style="color:#900" class="pointer"><a href="/Home/ManagerInfo?id=<%:manager.EmployId%>">信息管理</a></td>
                         </tr>
-                        <tr class="success">
+                        <%} %>
+                     <!--   <tr class="success">
                           <td align="center"><input name="input" type="checkbox" value="" /></td>
                             <td>2</td>
                             <td>方志晗</td>
@@ -165,6 +180,7 @@
                             <td>5</td>
                             <td><span class="pointer" style="color:#900">信息管理</span></td>
                         </tr>
+                        
                         <tr>
                           <td align="center"><input name="input5" type="checkbox" value="" /></td>
                             <td>
@@ -218,7 +234,7 @@
                             <td>18817598873</td>
                             <td>5</td>
                             <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
+                        </tr>-->
                         
                     </tbody>
                 </table>

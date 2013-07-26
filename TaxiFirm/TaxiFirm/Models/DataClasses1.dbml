@@ -58,4 +58,8 @@
       <Column Name="firm_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getManagerPageCount" Method="getManagerPageCount" IsComposable="true">
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>

@@ -23,6 +23,7 @@ namespace TaxiFirm.Controllers
                 this.LogOut();
             }
             else {
+              
                
             }
             return RedirectToAction("Index");
@@ -171,6 +172,9 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ManagerList()
         {
+            int page = int.Parse(Request.QueryString.Get("page"));
+            this.GoManagerList(page);
+
             return View();
         }
         public ActionResult ModifyManager()
@@ -207,6 +211,12 @@ namespace TaxiFirm.Controllers
         //分页转到经理页面
         public void GoManagerList(int pagecount)
         {
+            MyPage page = new MyPage();
+            page.CurrentPage = pagecount;
+            List<Manager> managers = new ManagerHandle().GetManagerByPage(page);
+            ViewData["managers"] = managers;
+            ViewData["page"] = page;
+
 
  
         }

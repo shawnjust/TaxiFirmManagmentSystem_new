@@ -5,7 +5,7 @@ using System.Web;
 
 namespace TaxiFirm.Models
 {
-    public class Page
+    public class MyPage
     {
         public int WholeSize { get; set; }
         public int CountPerPage { get; set; }
@@ -13,7 +13,7 @@ namespace TaxiFirm.Models
         public int CurrentPage { get; set; }
         public int WholePage { get; set; }
 
-        public Page()
+        public MyPage()
         { 
         }
         public void SetWholePage()

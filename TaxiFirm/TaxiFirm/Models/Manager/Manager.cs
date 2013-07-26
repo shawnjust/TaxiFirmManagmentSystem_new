@@ -16,7 +16,8 @@ namespace TaxiFirm.Models.Manager
         public string Address { get; set; }
         public string FirmName { get; set; }
         public string FirmAddress { get; set; }
-
+        public int Age { get; set; }
+        public int EmployId { get; set; }
         public DataClasses1DataContext data = new DataClasses1DataContext();
         public Manager()
         {
@@ -28,13 +29,14 @@ namespace TaxiFirm.Models.Manager
             if (table.ToArray<getEmpolyeeByIdResult>().Length > 0)
             {
                 var col = table.First<getEmpolyeeByIdResult>();
+                this.EmployId = id;
                 this.Name = col.name;
                 this.FirmID = col.firm_id;
                 this.IdCard = col.id_card;
                 this.Birthday = col.birthday;
                 this.Address = col.empolyee_address;
                 this.Telephone = col.telephone;
-
+                this.Age = int.Parse(DateTime.Now.Year.ToString()) -int.Parse(Birthday.Year.ToString());
                 if (col.gender==null)
                 {
                     this.Gender = "未知";

@@ -109,6 +109,12 @@ namespace TaxiFirm.Models
 		{
 			return this.CreateMethodCallQuery<getManagerByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerPageCount", IsComposable=true)]
+		public System.Nullable<int> getManagerPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
 	}
 	
 	public partial class getEmpolyeeByIdResult
