@@ -9,6 +9,27 @@
  <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="../../Scripts/BackControl/My97DatePicker/WdatePicker.js"></script>
+    <script language="javascript">
+        function check(basic_information_form) {
+            if (basic_information_form.Driver_Name.value == "") {
+                alert("请输入Email地址!"); basic_information_form.Driver_Name.focus(); return;
+            }
+            if (!checkemail(basic_information_form.Driver_Name.value)) {
+                alert("您输入Email地址不正确!"); basic_information_form.Driver_Name.focus(); return;
+            }
+            basic_information_form.submit();
+        }
+        function checkemail(Driver_Name) {
+            var str = Driver_Name;
+            var Expression = /[^\u4E00-\u9FA5]/;
+            var objExp = new RegExp(Expression);
+            if (objExp.test(str) == true) {
+                return true;
+            } else {
+                return false;
+            }
+        }
+</script>
 <body>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -21,7 +42,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form>
+                            <form name="basic_information_form" action="AddDriver.aspx">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
@@ -52,7 +73,7 @@
                                 		<h4>健康状况</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_Condition" type="text" onblur="if ((/[^\d]/g.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_Condition" type="text" onblur="if (!(/^(?:0|[1-9][0-9]?|100)$/.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>
@@ -72,7 +93,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_ID" type="text" />
+                                    <input name="Driver_ID" type="text"  onblur="if (!(/\d{17}[\d|X]|\d{15}/g.test(this.value)) ){alert('身份证号码为17位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>
