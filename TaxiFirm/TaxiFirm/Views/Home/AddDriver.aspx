@@ -93,7 +93,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_ID" type="text"  onblur="if (!(/\d{17}[\d|X]|\d{15}/g.test(this.value)) ){alert('身份证号码为17位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_ID" type="text" onblur="if (!(/\d{17}[\d|X]|\d{15}/g.test(this.value)) ){alert('身份证号码为17位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>
@@ -115,7 +115,7 @@
                                 <h4>联系电话</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_TelePhone" type="text" />
+                                    <input name="Driver_TelePhone" type="text"  onblur="if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.value)) ){alert('电话号码为11位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                 <h4>家庭住址</h4>
