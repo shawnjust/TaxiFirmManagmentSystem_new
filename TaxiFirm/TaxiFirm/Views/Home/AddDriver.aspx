@@ -29,7 +29,10 @@
                                 <label>
                                     <h4>司机姓名</h4></label>
                                 <p>
-                                    <input name="Driver_Name" type="text" pattern="^[u4e00-u9fa5aa-zA-Z]{2,}$" title="请输入2个以上汉字"/>
+                                 <!--  
+                                    <input name="Driver_Name" type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"/>
+                                   -->
+                                    <input name="Driver_Name" type="text" onblur="if ((/[^\u4E00-\u9FA5]/g.test(this.value)) ){alert('对不起，司机姓名需要输入汉字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     
@@ -49,7 +52,7 @@
                                 		<h4>健康状况</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_Condition" type="text" />
+                                    <input name="Driver_Condition" type="text" onblur="if ((/[^\d]/g.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>

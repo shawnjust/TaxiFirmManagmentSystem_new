@@ -81,7 +81,7 @@
 						<h3>用户登录</h3>
 						<div>
 							<label>用户名:</label>
-							<input type="text" name="username" />
+							<input type="text" name="username"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
 							<span class="error">用户名错误</span>
 						</div>
 						<div>
