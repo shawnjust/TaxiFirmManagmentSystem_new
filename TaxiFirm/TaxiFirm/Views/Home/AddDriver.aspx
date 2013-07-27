@@ -29,7 +29,7 @@
                                 <label>
                                     <h4>司机姓名</h4></label>
                                 <p>
-                                    <input name="Driver_Name" type="text" />
+                                    <input name="Driver_Name" type="text" pattern="^[u4e00-u9fa5aa-zA-Z]{2,}$" title="请输入2个以上汉字"/>
                                 </p>
                                 <p>
                                     
@@ -61,7 +61,6 @@
                                 <legend><h3>扩展信息</h3></legend><legend>
                                 <label>
                                     <h4>驾驶证编号：</h4>
-                                    <br>
                                 </label>
                                 <p>
                                     <input name="Driver_DriverNumber" type="text" />

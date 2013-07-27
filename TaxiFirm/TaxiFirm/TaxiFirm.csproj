@@ -81,12 +81,18 @@
     </Compile>
     <Compile Include="Models\HostModels.cs" />
     <Compile Include="Models\IdentityHandle.cs" />
+    <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\BackControl\BackControlLeft.css" />
+    <Content Include="Content\css\BackControl\bootstrap-responsive.css" />
+    <Content Include="Content\css\BackControl\bootstrap.css" />
+    <Content Include="Content\css\BackControl\clean.css" />
+    <Content Include="Content\css\BackControl\ComplainList.css" />
     <Content Include="Content\css\BackControl\driver.css" />
     <Content Include="Content\css\BackControl\model.css" />
+    <Content Include="Content\css\BackControl\thickbox.css" />
     <Content Include="Content\css\BackControl\UpBackgoundMain.css" />
     <Content Include="Content\css\BackControl\UpBackground.css" />
     <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
