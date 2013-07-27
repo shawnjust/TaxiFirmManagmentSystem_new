@@ -31,48 +31,44 @@
 			<div class="content">
 				<div id="form_wrapper" class="form_wrapper">
 					<form class="register">
-						<h3>Register</h3>
+						<h3>注册</h3>
 						<div class="column">
 							<div>
-								<label>First Name:</label>
+								<label>姓:</label>
 								<input type="text" />
-								<span class="error">This is an error</span>
+								<span class="error" pattern="[\u4e00-\u9fa5]{1,2}" title="输入汉字">需要输入汉字</span>
 							</div>
 							<div>
-								<label>Last Name:</label>
+								<label>名:</label>
 								<input type="text" />
-								<span class="error">This is an error</span>
+								<span class="error" pattern="[\u4e00-\u9fa5]{1,2}" title="输入汉字">需要输入汉字</span>
 							</div>
 							<div>
-								<label>Website:</label>
-								<input type="text" value="http://"/>
+								<label>权限:</label>
+								<input type="text" value=""/>
 								<span class="error">This is an error</span>
 							</div>
 						</div>
 						<div class="column">
 							<div>
-								<label>Username:</label>
+								<label>用户名:</label>
 								<input type="text"/>
 								<span class="error">This is an error</span>
 							</div>
 							<div>
 								<label>Email:</label>
 								<input type="text" />
-								<span class="error">This is an error</span>
+								<span class="error">Email格式不正确</span>
 							</div>
 							<div>
-								<label>Password:</label>
+								<label>密码:</label>
 								<input type="password" />
-								<span class="error">This is an error</span>
+								<span class="error">密码输入错误</span>
 							</div>
 						</div>
 						<div class="bottom">
-							<div class="remember">
-								<input type="checkbox" />
-								<span>Send me updates</span>
-							</div>
-							<input type="submit" value="Register" />
-							<a href="/FrontPage/Index" rel="login" class="linkform">You have an account already? Log in here</a>
+							<input type="submit" value="注册" />
+							<a href="/FrontPage/Index" rel="login" class="linkform">已有账户？在这登录</a>
 							<div class="clear"></div>
 						</div>
 					</form>
@@ -91,7 +87,7 @@
 						</div>
 						<div class="bottom">
 							<div class="remember"><input type="checkbox" /><span>保持登录</span></div>
-							<input type="submit"  value="Login" onclick="Submit()"></input>
+							<input type="submit"  value="登录" onclick="Submit()"></input>
 							<a href="register.html" rel="register" class="linkform">还没账户？在这里注册</a>
 							<div class="clear"></div>
 						</div>

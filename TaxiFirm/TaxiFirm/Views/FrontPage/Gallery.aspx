@@ -362,22 +362,23 @@
 		<!-- About -->
 		<div class="four columns">
 			<img id="logo-footer" src="../../Content/picture/FrontPage/logo-footer.png" alt="" />
-			<p>Morbi gravida imperdiet rutrum fusce mattis, lectus consequat vestibulum, duinibh fermentum ligula.</p>
+			<p>出租车管理系统由一行八人历时20天开发完成，具有独立的运作能力，可以直接投入商业化运作</p>
+			
 		</div>
 
 		<!-- Contact Details -->
 		<div class="four columns">
-			<h4>Contact Details</h4>
+			<h4>联系方式</h4>
 			<ul class="contact-details-alt">
-				<li><i class="halflings white map-marker"></i> <p><strong>Address:</strong> 123 Seward Street, Oklahoma City, USA</p></li>
-				<li><i class="halflings white user"></i> <p><strong>Phone:</strong> +48 880 440 110</p></li>
-				<li><i class="halflings white envelope"></i> <p><strong>Email:</strong> <a href="#">mail@example.com</a></p></li>
+				<li><i class="halflings white map-marker"></i> <p><strong>地址:</strong> 4800号 曹安公路,上海市嘉定区, CHA</p></li>
+				<li><i class="halflings white user"></i> <p><strong>电话:</strong> +86 189 1827 1950</p></li>
+				<li><i class="halflings white envelope"></i> <p><strong>Email:</strong> <a href="#">chengran327@gmail.com</a></p></li>
 			</ul>
 		</div>
 
 		<!-- Photo Stream -->
 		<div class="four columns">
-			<h4>Photo Stream</h4>
+			<h4>照片流</h4>
 			<div class="flickr-widget">
 				<script type="text/javascript" src="http://www.flickr.com/badge_code_v2.gne?count=6&amp;display=latest&amp;size=s&amp;layout=x&amp;source=user&amp;user=48035108@N07"></script>
 				<div class="clearfix"></div>
@@ -386,18 +387,18 @@
 
 		<!-- Twitter -->
 		<div class="four columns">
-			<h4>Twitter</h4>
-			<ul id="twitter"></ul>
-				<script type="text/javascript">
-				    jQuery(document).ready(function ($) {
-				        $.getJSON('http://api.twitter.com/1/statuses/user_timeline/vasterad.json?count=1&amp;callback=?', function (tweets) {
-				            $("#twitter").html(tz_format_twitter(tweets));
-				        });
-				    });
-				</script>
+			<h4>成员</h4>
+			<ul id="facebook">
+            	<li><i class="icon-group"></i>方志晗  &nbsp; &nbsp;<i class="icon-user"></i>盛雯 &nbsp; &nbsp;<i class="icon-user"></i>王成</li>
+                <li></li>
+                <li><i class="icon-user"></i>赵青</li>
+                <li><i class="icon-user"></i>路捷</li>
+                <li><i class="icon-user"></i>洪海杰</li>
+                <li><i class="icon-user"></i>宁婧</li>
+                <li><i class="icon-user"></i>程冉</li>
+            </ul>
 			<div class="clearfix"></div>
 		</div>
-
 	</div>
 	<!-- 960 Container / End -->
 
@@ -414,7 +415,7 @@
 		<!-- Copyrights -->
 		<div class="eight columns">
 			<div class="copyright">
-				© Copyright 2012 by <a href="#">Nevia</a>. All Rights Reserved.
+				© Copyright 2012 by <a href="#">TaxiFirm Server</a>. All Rights Reserved.
 			</div>
 		</div>
 
@@ -442,9 +443,9 @@
 <script src="../../Scripts/FrontPage/switcher.js"></script>
 
 <section id="style-switcher">
-	<h2>Style Switcher <a href="#"></a></h2>
+	<h2>选择样式 <a href="#"></a></h2>
 	<div>
-	<h3>Predefined Colors</h3>
+	<h3>预定颜色</h3>
 		<ul class="colors" id="color1">
 			<li><a href="#" class="blue" title="Blue"></a></li>
 			<li><a href="#" class="green" title="Green"></a></li>
@@ -466,13 +467,13 @@
 			<li><a href="#" class="dirty-green" title="Dirty Green"></a></li>
 		</ul>
 		
-	<h3>Menu Style</h3>
+	<h3>菜单款式</h3>
 	<select id="menu-style">
-		<option value="1">Style 1</option>
-		<option value="2">Style 2</option>
+		<option value="1">3D特效</option>
+		<option value="2">极简风格</option>
 	</select>
 
-	<h3>Background Image</h3>
+	<h3>背景图片</h3>
 		 <ul class="colors bg" id="bg">
 			<li><a href="#" class="bg1"></a></li>
 			<li><a href="#" class="bg2"></a></li>
@@ -495,7 +496,7 @@
 		</ul>
 	</div>
 
-	<div id="reset"><a href="#" class="button color blue">Reset</a></div>
+	<div id="reset"><a href="#" class="button color blue">重置</a></div>
 
 </section>
 <!-- Style Switcher / End -->

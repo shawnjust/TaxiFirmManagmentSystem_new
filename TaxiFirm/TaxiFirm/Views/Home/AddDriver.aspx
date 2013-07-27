@@ -53,7 +53,7 @@
                                  <!--  
                                     <input name="Driver_Name" type="text" onkeyup="value=value.replace(/[^\u4E00-\u9FA5]/g,'')" onbeforepaste="clipboardData.setData('text',clipboardData.getData('text').replace(/[^\u4E00-\u9FA5]/g,''))"/>
                                    -->
-                                    <input name="Driver_Name" type="text" onblur="if ((/[^\u4E00-\u9FA5]/g.test(this.value)) ){alert('对不起，司机姓名需要输入汉字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_Name" type="text" pattern="[\u4e00-\u9fa5]{2,4}" title="司机姓名需要输入汉字" onblur="if (!(/[\u4e00-\u9fa5]{2,4}/.test(this.value)) ){alert('司机姓名需要输入汉字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     
@@ -73,7 +73,7 @@
                                 		<h4>健康状况</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_Condition" type="text" onblur="if (!(/^(?:0|[1-9][0-9]?|100)$/.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_Condition" type="text" class="error" pattern="^(?:0|[1-9][0-9]?|100)$" title="健康状况需要输入100以内的数字" onblur="if (!(/^(?:0|[1-9][0-9]?|100)$/.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>
@@ -87,13 +87,13 @@
                                     <h4>驾驶证编号：</h4>
                                 </label>
                                 <p>
-                                    <input name="Driver_DriverNumber" type="text" />
+                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{17}[\d|X]|\d{15}" title="驾驶证编号为15位数字"  onblur="if (!(/\d{17}[\d|X]|\d{15}/.test(this.value)) ){alert('驾驶证编号为15位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_ID" type="text" onblur="if (!(/\d{17}[\d|X]|\d{15}/g.test(this.value)) ){alert('身份证号码为17位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                   <input name="Driver_ID" type="text" class="error" pattern="\d{17}[\d|X]|\d{15}" title="身份证号码为17位" onblur="if (!(/\d{17}[\d|X]|\d{15}/.test(this.value)) ){alert('身份证号码为11位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
                             </form>
@@ -115,20 +115,14 @@
                                 <h4>联系电话</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_TelePhone" type="text"  onblur="if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.value)) ){alert('电话号码为11位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_TelePhone" type="text" class="error" pattern="^1[3|4|5|8][0-9]\d{4,8}$" title="电话号码为11位数字\" onblur="if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.value)) ){alert('联系电话为11位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                 <h4>家庭住址</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_HomeAddress" type="text" />
+                                    <input name="Driver_HomeAddress" type="text" class="error" pattern="^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+" title="地址不能为空" onblur="if (!(/^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+/.test(this.value)) ){alert('地址不能为空\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
-                                <p>
-                                    </p>
-                                <label class="checkbox">
-                                </label>
-                                <p>&nbsp;
-                                    </p>
                             </fieldset>
                             </form>
                         </div>

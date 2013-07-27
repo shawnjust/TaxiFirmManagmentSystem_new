@@ -5,6 +5,7 @@
 </asp:Content>
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+       <!--   <link href="../../Content/css/FrontPage/style.css" rel="stylesheet"  type="text/css" /> -->
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     <body>
         <div class="container-fluid">
@@ -23,7 +24,7 @@
                                 <label>
                                     车牌号（*必填）</label>
                                 <p>
-                                    <input type="text" />
+                                    <input id="text" class="error" type="text" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" name="Plate_Number" style=""></input>
                                 </p>
                                 <p>
                                     
@@ -100,7 +101,7 @@
                         </div>
                     </div>
                     <button class="btn btn-primary" type="button">
-                        Add</button>
+                        提交</button>
                 </div>
             </div>
         </div>
