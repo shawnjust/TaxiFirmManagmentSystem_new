@@ -81,6 +81,8 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+    <Compile Include="Models\Driver\Driver.cs" />
+    <Compile Include="Models\Driver\DriverHandle.cs" />
     <Compile Include="Models\Firm\Firm.cs" />
     <Compile Include="Models\Firm\FirmHandle.cs" />
     <Compile Include="Models\HostModels.cs" />

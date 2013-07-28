@@ -272,19 +272,26 @@ namespace TaxiFirm.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveDriverInfo(string Driver_Name, bool Driver_Gender, DateTime Driver_Birthday, int Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
+        public ActionResult SaveDriverInfo(string Driver_Name, string Driver_Gender, string firm_id,string Driver_Birthday, string Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
         {
             TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+            bool Gender=false;
+            DateTime Birthday = DateTime.Parse(Driver_Birthday);
+            int Condition = int.Parse(Driver_Condition);
+            int Firm_id = int.Parse(firm_id);
+            string password = Driver_ID.Substring(13, 4);
             ViewData["Driver_Name"] = Driver_Name;
             ViewData["Driver_ID"] = Driver_ID;
-            ViewData["Driver_Birthday"] = Driver_Birthday;
+            ViewData["Driver_Birthday"] = Birthday;
             ViewData["Driver_Gender"] = Driver_Gender;
+            Gender = bool.Parse(Driver_Gender);
             ViewData["Driver_TelePhone"] = Driver_TelePhone;
             ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
-            ViewData["Driver_Condition"] = Driver_Condition;
+            ViewData["Driver_Condition"] = Condition;
             ViewData["Driver_LicenseID"] = Driver_LicenseID;
-            db.addEmpolyee("1234", 1, Driver_Name, Driver_ID, Driver_Birthday, Driver_Gender, Driver_TelePhone, Driver_HomeAddress);
-            db.addDriver(10, Driver_Condition, Driver_LicenseID);
+            ViewData["firm_id"] = Firm_id;
+            db.addEmpolyee(password, Firm_id, Driver_Name, Driver_ID, Birthday, Gender, Driver_TelePhone, Driver_HomeAddress);
+            db.addDriver(10,Condition, Driver_LicenseID);
             return View();
         }
     }
