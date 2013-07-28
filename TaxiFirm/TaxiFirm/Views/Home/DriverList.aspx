@@ -6,7 +6,8 @@
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
     <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
-
+        <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+        <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -205,16 +206,32 @@
   <tr>
     <td height="32" align="left" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="centerButtom">
-        <td width="27%">共有1111条信息，当前第1页，共100页</td>
-        <td width="36%">&nbsp;</td>
-        <td width="4%"><input type="submit" name="button" id="button" value="首页" /></td>
-        <td width="5%"><input type="submit" name="button2" id="button2" value="上一页" /></td>
-        <td width="5%"><input type="submit" name="button3" id="button3" value="下一页" /></td>
-        <td width="5%"><input type="submit" name="button4" id="button4" value="尾页" /></td>
-        <td width="4%">转到</td>
-        <td width="3%"><input name="textfield" type="text" id="textfield" size="3" /></td>
-        <td width="2%">页</td>
-        <td width="9%"><input type="submit" name="button5" id="button5" value="跳转" /></td>
+        
+                <div class="pagination pagination-centered">
+                    <ul>
+                        <li>
+                            <a href="#">Prev</a>
+                        </li>
+                        <li>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">Next</a>
+                        </li>
+                  </ul>
+              </div>
       </tr>
     </table></td>
   </tr>
