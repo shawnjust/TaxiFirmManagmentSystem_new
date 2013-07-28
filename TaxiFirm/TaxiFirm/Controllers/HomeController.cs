@@ -268,9 +268,24 @@ namespace TaxiFirm.Controllers
             ViewData["managers"] = managers;
             ViewData["page"] = page;
 
-
-
         }
 
+
+        [HttpPost]
+        public ActionResult SaveDriverInfo(string Driver_Name, bool Driver_Gender, DateTime Driver_Birthday, int Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
+        {
+            TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+            ViewData["Driver_Name"] = Driver_Name;
+            ViewData["Driver_ID"] = Driver_ID;
+            ViewData["Driver_Birthday"] = Driver_Birthday;
+            ViewData["Driver_Gender"] = Driver_Gender;
+            ViewData["Driver_TelePhone"] = Driver_TelePhone;
+            ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
+            ViewData["Driver_Condition"] = Driver_Condition;
+            ViewData["Driver_LicenseID"] = Driver_LicenseID;
+            db.addEmpolyee("1234", 1, Driver_Name, Driver_ID, Driver_Birthday, Driver_Gender, Driver_TelePhone, Driver_HomeAddress);
+            db.addDriver(10, Driver_Condition, Driver_LicenseID);
+            return View();
+        }
     }
 }

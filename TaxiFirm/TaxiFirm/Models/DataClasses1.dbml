@@ -157,4 +157,21 @@
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.addDriver" Method="addDriver">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="health" Type="System.Int32" DbType="Int" />
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
