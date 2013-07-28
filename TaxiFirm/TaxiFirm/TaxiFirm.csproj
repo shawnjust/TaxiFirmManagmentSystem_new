@@ -406,6 +406,7 @@
     <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />
     <Content Include="Views\Home\NotificationContent.aspx" />
+    <Content Include="Views\Home\SaveDriverInfo.aspx" />
     <Content Include="Views\Home\TaxiList.aspx" />
     <Content Include="Views\Home\NewsContent.aspx" />
     <Content Include="Views\Home\DriverSelect.aspx" />
@@ -495,7 +496,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52949</DevelopmentServerPort>
+          <DevelopmentServerPort>57526</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

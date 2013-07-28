@@ -69,7 +69,7 @@
                                         <h4>司机性别</h4>
                                 </p>
                                 <p>
-                                   <small><input id="man" type="radio" checked="checked" name="Driver_Gender" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="Driver_Gender"/>&nbsp;&nbsp;女
+                                   <small><input id="man" type="radio" checked="checked" name="Driver_Gender" value="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio" value="0"  name="Driver_Gender"/>&nbsp;&nbsp;女
                                    </small>
                                 </p>
                                 <p>
@@ -110,7 +110,7 @@
                             <br/>
                             <br/>
                             <br/>
-                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
+                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle" onclick="submitAll()">
                         提交</button>
                             </div>
                             
