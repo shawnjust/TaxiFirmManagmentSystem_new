@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Invoice" %>
+<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Customer" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     发票信息
 </asp:Content>
@@ -11,6 +13,13 @@
 <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
+<style>
+a:hover
+{
+   cursor:pointer;
+    }
+
+</style>
 <script type="text/javascript">
     $(document).ready(function () {
 
@@ -36,12 +45,60 @@
 
         });
 
+        $(".ChangePage").click(
+        function () {
 
+            var CustomerId = document.getElementById("Cid");
+            var id = CustomerId.value;
+            var type = this.id;
+            var form1 = document.getElementById("changepage");
+            var content = form1.title;
+
+            var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
+            var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
+
+
+            if (type == "Prev") {
+                if (CurrentPage <= 1) {
+                    window.alert("已到最前页");
+                } else {
+
+                    form1.action = "/Home/InvoiceList?page=" + (CurrentPage - 1)+"&id="+id;
+                    form1.submit();
+
+                }
+
+
+
+
+            } else if (type == "Next") {
+                if (CurrentPage >= WholePage) {
+                    window.alert("已到最后页");
+
+                } else {
+                    form1.action = "/Home/InvoiceList?page=" + (CurrentPage + 1) + "&id=" + id; ;
+                    form1.submit();
+
+                }
+
+            }
+
+
+
+        }
+
+
+
+        );
 
 
     });
 </script>
-
+<% 
+    List<Invoice> invoices = (List<Invoice>) ViewData["invoices"];
+    MyPage page = (MyPage) ViewData["page"];
+    Customer customer = (Customer)ViewData["customer"];
+     %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -79,7 +136,7 @@
             <div class="span6">
               <div class="page-header">
                 <h1>发票列表</h1>
-                <h1><small style="font-size:15px">用户： 方志晗&nbsp;&nbsp; 发票张数：23&nbsp;&nbsp; 积分123 </small> </h1>
+                <h1><small style="font-size:15px">用户： <%:customer.NickName %>&nbsp;&nbsp; 发票张数：<%:invoices.Count %>&nbsp;&nbsp; 积分<%:customer.Credit %> </small> </h1>
               </div>
             </div>
             <div class="span6">
@@ -102,7 +159,32 @@
                 <th width="49">登记时间</th>
                 </tr>
             </thead>
+
             <tbody>
+            
+                <%int num=(page.CurrentPage-1)*page.CountPerPage+1;
+                        for(int i=0;i<invoices.Count;i++) 
+                        {
+                            Invoice invoice = invoices[i];%>
+                       
+                        <%if(i==0||i==5) {%>  <tr>
+                        <%}else if(i==1||i==6){%> <tr class="success">
+                        <%}else if(i==2||i==7){ %><tr class="error">
+                       <% }else if(i==3||i==8){ %><tr class="warning">
+                        <%}else if(i==4||i==9){ %><tr class="info">
+                       <%} %>
+                       <td align="center"> <input name="" type="checkbox" value="" />&nbsp;</td>
+                            <td>
+                                <%:num++ %>
+                            </td>
+                           <td><%:invoice.InvoiceId %></td>
+                           <td><%:invoice.Amount %></td>
+                           <td><%:invoice.CustomerId %></td>
+                           <td><%:invoice.RegisterTime %></td>
+                                     </tr>
+                        <%} %>
+
+            <!--
               <tr>
                 <td align="center"><input name="input" type="checkbox" value="" />
                   &nbsp;</td>
@@ -184,17 +266,50 @@
                 <td>123323</td>
                 <td>2014-5-28</td>
                 </tr>
+                -->
             </tbody>
           </table>
-          <div class="pagination pagination-centered">
-            <ul>
-              <li> <a href="#">Prev</a></li>
-              <li> <a href="#">1</a></li>
-              <li> <a href="#">2</a></li>
-              <li> <a href="#">3</a></li>
-              <li> <a href="#">4</a></li>
-              <li> <a href="#">5</a></li>
-              <li> <a href="#">Next</a></li>
+           <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post">
+           </form>
+           <input type="hidden" value="<%:customer.CustomerId%>" id="Cid" />
+
+
+            <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="Prev">Prev</a> </li>
+                <%  int current = page.CurrentPage - 3;
+                    for (int i = 0; i < page.PageWidth; i++)
+                    {
+                        current++;
+                        if (current == page.CurrentPage)
+                        { %>
+                      <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                        else if (current >= 1 && current <= page.WholePage)
+                        {%>
+                  
+                <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>"><%:current%></a> </li>
+                <%}
+                        else if (current < 1)
+                        {
+                            while (current < 1)
+                            { current++; }
+
+                            if (current == page.CurrentPage)
+                            { %>
+                      <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                            else
+                            {%> 
+                           <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>"><%:current%></a> </li>
+                          <%
+}
+                        }
+                    }%>
+            
+                <li> <a class="ChangePage" id="Next">Next</a> </li>
             </ul>
           </div>
         </div>

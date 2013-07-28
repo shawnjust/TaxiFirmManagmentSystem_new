@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
 </asp:Content>
@@ -21,6 +22,7 @@
                         经理信息<small>角色管理</small>
                     </h1>
                 </div>
+                <%Manager manager = (Manager)ViewData["manager"];  %>
                 <div class="row-fluid">
                     <div class="span8">
                     <div class="span4">
@@ -46,11 +48,12 @@
                         <fieldset>
                             <legend>基本信息</legend>
                             <label>
-                                <h4>经理姓名:&nbsp;&nbsp; <small> 宁婧</small></h4></label>
-                                <label><h4>公司：  &nbsp;&nbsp;<small>Google中国</small></h4></label>
-                                <label><h4>身份证号码: &nbsp;&nbsp;<small>452524141241</small></h4></label>
-                                <label><h4>出生日期:&nbsp;&nbsp;  <small>1994/7/12</small></h4></label>
-                                <label><h4>性别:  &nbsp;&nbsp;<small>女</small></h4></label>
+                                <h4>经理姓名:&nbsp;&nbsp; <small> <%:manager.Name %></small></h4></label>
+                                <label><h4>公司：  &nbsp;&nbsp;<small><%:manager.FirmID %></small></h4></label>
+                                <label><h4>身份证号码: &nbsp;&nbsp;<small><%:manager.IdCard %></small></h4></label>
+                                <label><h4>出生日期:&nbsp;&nbsp;  <small><%:manager.Birthday %></small></h4></label>
+                                <label><h4>性别:  &nbsp;&nbsp;<small><%:manager.Gender %></small></h4></label>
+                                 <label><h4>年龄:  &nbsp;&nbsp;<small><%:manager.Age%></small></h4></label>
                                 
                         </fieldset>
                         </form>
@@ -58,16 +61,21 @@
                         <fieldset>
                             <legend>扩展信息</legend>
                             <label>
-                                <h4>电话号码: &nbsp;&nbsp;<small>18914252534</small></h4></label><label><h4>地址:  &nbsp;&nbsp;<small>美国硅谷山景城谷歌总部</small></h4></label>
+                                <h4>电话号码: &nbsp;&nbsp;<small><%:manager.Telephone %></small></h4></label><label><h4>地址:  &nbsp;&nbsp;<small><%:manager.Address %></small></h4></label>
                                 <label><h4>权限:  &nbsp;&nbsp;<small>无</small></h4></label>
                         </fieldset>
                         </form>
                         </div>
-                        <div class="span4">
+                        <div class="span4" style="width:300px">
                         <form>
                           <fieldset>
-                            <legend>经理照片</legend>
-                             <img src="../../Content/picture/FrontPage/about.jpg" />
+                            <legend>公司信息</legend>
+                       
+                            <label>
+                                <h4>公司编号: &nbsp;&nbsp;<small><%:manager.FirmID %></small></h4></label><label><h4>公司名称:  &nbsp;&nbsp;<small><%:manager.firm.FirmName%></small></h4></label>
+                                <label><h4>公司地址:  &nbsp;&nbsp;<small><%:manager.firm.FirmAddress %></small></h4></label>
+                                 <label><h4>公司电话:  &nbsp;&nbsp;<small><%:manager.firm.PhoneNumber %></small></h4></label>
+                     
                           </fieldset>
                         </form>
                        

@@ -1,10 +1,19 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage" MasterPageFile="~/Views/Shared/Site.Master"%>
-
+<%@ Import Namespace="TaxiFirm.Models.Customer" %>
+<%@ Import Namespace="TaxiFirm.Models" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     顾客列表
 </asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
+
+<style>
+a:hover
+{
+   cursor:pointer;
+    }
+
+</style>
 <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../Scripts/BackControl/bootstrap.js"></script>
 <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
@@ -35,13 +44,63 @@
 
 
         });
+         $(".ChangePage").click(
+        function () {
+
+            var type = this.id;
+            var form1 = document.getElementById("changepage");
+            var content = form1.title;
+
+            var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
+            var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
+           
+
+            if (type == "Prev") {
+                if (CurrentPage <= 1) {
+                    window.alert("已到最前页");
+                } else {
+
+                    form1.action = "/Home/Customer?page=" + (CurrentPage - 1);
+                    form1.submit();
+
+                }
+
+
+
+
+            } else if (type == "Next") {
+                if (CurrentPage >= WholePage) {
+                    window.alert("已到最后页");
+
+                } else {
+                    form1.action = "/Home/Customer?page=" + (CurrentPage + 1);
+                    form1.submit();
+
+                }
+
+            }
+
+
+
+        }
+
+
+
+        );
+
+
+    
 
 
 
 
     });
 </script>
-
+<%
+    List<Customer> customers = (List<Customer>)ViewData["customers"];
+    MyPage page = (MyPage) ViewData["page"];
+    
+     %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -109,7 +168,7 @@
                         <tr>
                           <th align="center">选中</th>
                           <th>序号</th>
-                          <th>姓名</th>
+                          <th>昵称</th>
                           <th>
                                 用户编号</th>
                           <th>
@@ -119,23 +178,32 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                          <td align="center"><input name="" type="checkbox" value="" />&nbsp;</td>
+                         <%int num=(page.CurrentPage-1)*page.CountPerPage+1;
+                        for(int i=0;i<customers.Count;i++) 
+                        {
+                            Customer customer = customers[i];%>
+                       
+                        <%if(i==0||i==5) {%>  <tr>
+                        <%}else if(i==1||i==6){%> <tr class="success">
+                        <%}else if(i==2||i==7){ %><tr class="error">
+                        <%}else if(i==3||i==8){ %><tr class="warning">
+                        <%}else if(i==4||i==9){ %><tr class="info">
+                        <%}%>
+                       <td align="center"> <input name="" type="checkbox" value="" />&nbsp;</td>
                             <td>
-                                1
+                                <%:num++ %>
                             </td>
+                            <td><%:customer.NickName %></td>
                             <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Default
-                            </td>
-                            <td>ezhihan@gmail.com</td>
-                            <td  style="color:#900" class="pointer"><%:Html.ActionLink("查看记录","InvoiceList","Home") %></td>
+                                <%:customer.CustomerId %></td>
+                            <td><%:customer.Credit %></td>
+                            <td><%:customer.Email %></td>
+                            <td><a href="/Home/InvoiceList?id=<%:customer.CustomerId%>&page=1">查看记录</a></td>
+                         
                         </tr>
+                        <%} %>
+
+                        <!--
                         <tr class="success">
                           <td align="center"><input name="input" type="checkbox" value="" /></td>
                             <td>2</td>
@@ -273,33 +341,49 @@
                             <td>&nbsp;</td>
                             <td><span class="pointer" style="color:#900">查看记录</span></td>
                         </tr>
-                        
+                        -->
                     </tbody>
                 </table>
                 
-                <div class="pagination pagination-centered">
-                  <ul>
-                        <li>
-                            <a href="#">Prev</a>
-                        </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
+                   <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
+
+
+            <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="Prev">Prev</a> </li>
+                <%  int current = page.CurrentPage - 3;
+                    for (int i = 0; i < page.PageWidth; i++)
+                    {
+                        current++;
+                        if (current == page.CurrentPage)
+                        { %>
+                      <li> <a href="/Home/Customer?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                        else if (current >= 1 && current <= page.WholePage)
+                        {%>
+                  
+                <li> <a href="/Home/Customer?page=<%:current%>"><%:current%></a> </li>
+                <%}
+                        else if (current < 1)
+                        {
+                            while (current < 1)
+                            { current++; }
+
+                            if (current == page.CurrentPage)
+                            { %>
+                      <li> <a href="/Home/Customer?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                            else
+                            {%> 
+                           <li> <a href="/Home/Customer?page=<%:current%>"><%:current%></a> </li>
+                          <%
+}
+                        }
+                    }%>
+            
+                <li> <a class="ChangePage" id="Next">Next</a> </li>
                   </ul>
               </div>
             </div>

@@ -11,7 +11,15 @@
 <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
+<style>
+a:hover
+{
+   cursor:pointer;
+    }
+
+</style>
 <script type="text/javascript">
+
     $(document).ready(function () {
 
 
@@ -36,7 +44,49 @@
 
         });
 
+        $(".ChangePage").click(
+        function () {
 
+            var type = this.id;
+            var form1 = document.getElementById("changepage");
+            var content = form1.title;
+
+            var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
+            var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
+
+
+            if (type == "Prev") {
+                if (CurrentPage <= 1) {
+                    window.alert("已到最前页");
+                } else {
+
+                    form1.action = "/Home/ManagerList?page=" + (CurrentPage - 1);
+                    form1.submit();
+
+                }
+
+
+
+
+            } else if (type == "Next") {
+                if (CurrentPage >= WholePage) {
+                    window.alert("已到最后页");
+
+                } else {
+                    form1.action = "/Home/ManagerList?page=" + (CurrentPage + 1);
+                    form1.submit();
+
+                }
+
+            }
+
+
+
+        }
+
+
+
+        );
 
 
     });
@@ -124,9 +174,9 @@
                         <%if(i==0||i==5) {%>  <tr>
                         <%}else if(i==1||i==6){%> <tr class="success">
                         <%}else if(i==2||i==7){ %><tr class="error">
-                       <% }else if(i==3||i==8){ %><tr class="warning">
+                        <%}else if(i==3||i==8){ %><tr class="warning">
                         <%}else if(i==4||i==9){ %><tr class="info">
-                       <%} %>
+                        <%}%>
                        <td align="center"> <input name="" type="checkbox" value="" />&nbsp;</td>
                             <td>
                                 <%:num++ %>
@@ -239,29 +289,46 @@
                     </tbody>
                 </table>
                 
-                <div class="pagination pagination-centered">
-                    <ul>
-                        <li>
-                            <a href="#">Prev</a>
-                        </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
+               <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
+
+
+            <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="Prev">Prev</a> </li>
+                <%  int current = page.CurrentPage - 3;
+                    for (int i = 0; i < page.PageWidth; i++)
+                    {
+                        current++;
+                        if (current == page.CurrentPage)
+                        { %>
+                      <li> <a href="/Home/ManagerList?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                        else if (current >= 1 && current <= page.WholePage)
+                        {%>
+                  
+                <li> <a href="/Home/ManagerList?page=<%:current%>"><%:current%></a> </li>
+                <%}
+                        else if (current < 1)
+                        {
+                            while (current < 1)
+                            { current++; }
+
+                            if (current == page.CurrentPage)
+                            { %>
+                      <li> <a href="/Home/ManagerList?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%
+}
+                            else
+                            {%> 
+                           <li> <a href="/Home/ManagerList?page=<%:current%>"><%:current%></a> </li>
+                          <%
+}
+                        }
+                    }%>
+            
+                <li> <a class="ChangePage" id="Next">Next</a> </li>
+                        
                   </ul>
               </div>
             </div>

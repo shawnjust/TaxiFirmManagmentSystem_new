@@ -86,7 +86,7 @@
           </tr>
           <tr>
             <td width="12">&nbsp;</td>
-            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><%:Html.ActionLink("组织管理","FirmList","Home") %></td>
+            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/FirmList?page=1">组织管理</a></td>
             <td>&nbsp;</td>
           </tr>
           <tr>

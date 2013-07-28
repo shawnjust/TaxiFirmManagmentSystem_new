@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using TaxiFirm.Models.Firm;
 namespace TaxiFirm.Models.Manager
 {
     public class ManagerHandle
@@ -24,20 +24,21 @@ namespace TaxiFirm.Models.Manager
         {
            
             page.CountPerPage = 10;
-            page.WholePage = (int)data.getManagerPageCount(page.CountCurrentPage);
+            page.WholePage = (int)data.getManagerPageCount(page.CountPerPage);
             var table=data.getManagerByPage(page.CurrentPage, page.CountPerPage);
             List<Manager> managers = new List<Manager>();
             foreach (var col in table)
             {
+                                                    
                 Manager manager = new Manager();
+                manager.EmployId=col.empolyee_id;
                 manager.Address = col.empolyee_address;
                 manager.Birthday =(DateTime) col.birthday;
                 manager.FirmID = (int)col.firm_id;
                 manager.IdCard = col.id_card;
                 manager.Name = col.name;
                 manager.Telephone = col.phone_number;
-                manager.FirmAddress = col.firm_address;
-                manager.FirmName = col.firm_name;
+                manager.firm = new TaxiFirm.Models.Firm.Firm(manager.FirmID); ;
                 manager.EmployId = col.empolyee_id;
 
                 if (col.gender == null)
