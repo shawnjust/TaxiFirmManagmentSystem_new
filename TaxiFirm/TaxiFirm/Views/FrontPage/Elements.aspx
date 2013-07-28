@@ -232,7 +232,7 @@
 			</div>
 
 			<div class="notification success closeable">
-				<p><span>使用发票前请仔细核对是否过期</span></p>
+				<p><span>等级越高享受的优惠越多</span></p>
 			</div>
 
 			<div class="notification warning closeable">
@@ -241,6 +241,10 @@
 
 			<div class="notification notice closeable">
 				<p><span>积分仅限本人使用，不得转让或出租</span></p>
+			</div>
+            
+            <div class="notification success closeable">
+				<p><span>使用发票前请仔细核对是否过期</span></p>
 			</div>
 
 	</div>
