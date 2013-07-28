@@ -15,15 +15,18 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="../../Content/css/FrontPage/style.css">
-<link rel="stylesheet" href="../../Content/css/FrontPage/colors/blue.css" id="colors">
+<link href="../../Content/css/FrontPage/style.css" rel="stylesheet" >
+<link href="../../Content/css/FrontPage/colors/blue.css" id="colors" rel="stylesheet" >
 <link rel="shortcut icon" href="../../Content/favicon.ico" type="image/x-icon" />
+<!-- <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" /> -->
+   
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
 
 <!-- Java Script
 ================================================== -->
+<!-- <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script> -->
 <script src="../../Scripts/FrontPage/jquery.min.js"></script>
 <script src="../../Scripts/FrontPage/jquery-ui.min.js"></script>
 <script src="../../Scripts/FrontPage/jquery.flexslider.js"></script>
@@ -48,9 +51,13 @@
 ================================================== -->
 <div id="top-line"></div>
 
-<!-- 960 Container -->
-<div class="container">
 
+<!-- Page Content -->
+<div class="page-content">
+
+
+	<!-- 960 Container -->
+	<div class="container">
 	<!-- Header -->
 	<header id="header">
 
@@ -134,13 +141,13 @@
 
 	<div class="sixteen floated page-title">
 
-		<h2>Shortcodes <span>/ Elements</span></h2>
+		<h2>积分系统 <span>/ 请通过填写下列表单获取您的积分</span></h2>
 
 		<nav id="breadcrumbs">
 			<ul>
 				<li>你在:</li>
-				<li><a href="/FrontPage/Index">主页</a></li>
-				<li>Elements</li>
+				<li><a href="index.html">主页</a></li>
+				<li>积分系统</li>
 			</ul>
 		</nav>
 
@@ -153,61 +160,23 @@
 <!-- Page Content -->
 <div class="page-content">
 
-
-	<!-- 960 Container -->
+    <!-- 960 Container -->
 	<div class="container">
 
-	<!-- Buttons
+	<!-- Blockquote
 	================================================== -->
 
-		<div class="eight columns">
-
+		<div class="sixteen columns">
 			<!-- Headline -->
-			<h3 class="margin-reset">Buttons</h3><br />
-
-			<a href="#" class="button gray">Button</a>&nbsp;
-			<a href="#" class="button color">Button</a>&nbsp;
-			<a href="#" class="button light">Button</a>
-
-			<div class="clearfix" style="margin: 6px 0 0 0;"></div>
-
-			<a href="#" class="button gray medium"><i class="icon-folder-open white"></i> Button</a>&nbsp;
-			<a href="#" class="button color medium"><i class="icon-beaker white"></i> Button</a>&nbsp;
-			<a href="#" class="button light medium"><i class="halflings user white"></i> Button</a>&nbsp;
-
-			<div class="clearfix"></div>
-			<br />
-			<br />
-
-		</div>
-
-
-	<!-- Tabs
-	================================================== -->
-
-		<div class="eight columns">
-
-			<!-- Headline -->
-			<h3 class="margin-reset">Tabs</h3><br />
-
-			<!-- Tabs Navigation -->
-			<ul class="tabs-nav">
-				<li class="active"><a href="#tab1">First Tab</a></li>
-				<li><a href="#tab2">Second</a></li>
-				<li><a href="#tab3">Third</a></li>
-			</ul>
-
-			<!-- Tabs Content -->
-			<div class="tabs-container">
-				<div class="tab-content" id="tab1">1. Lorem ipsum pharetra lorem felis. Aliquam egestas consectetur elementum class aptentea taciti sociosqu ad litora torquent perea conubia nostra lorem consectetur adipiscing elit.</div>
-				<div class="tab-content" id="tab2">2. Lorem ipsum pharetra lorem felis. Aliquam egestas consectetur elementum class aptentea taciti sociosqu ad litora torquent perea conubia nostra lorem consectetur adipiscing elit.</div>
-				<div class="tab-content" id="tab3">3. Lorem ipsum pharetra lorem felis. Aliquam egestas consectetur elementum class aptentea taciti sociosqu ad litora torquent perea conubia nostra lorem consectetur adipiscing elit.</div>
-			</div>
-
+			<p>请您认真填写下列表单，我们会通过您输入的发票号码来获取您的消费消息。您获得的积分是和您的消费金额成一比一关系。我们会根据您的积分为您在后续消费中给予优惠，感谢您支持我们的公司。</p>
+			<blockquote>长运出租车董事长 盛雯</blockquote>
 		</div>
 
 	</div>
 	<!-- 960 Container / End -->
+	<!-- 960 Container -->
+	<div class="container">
+
 
 
 	<!-- Divider -->
@@ -224,87 +193,27 @@
 		<div class="eight columns">
 			
 			<!-- Headline -->
-			<h3 class="margin-reset">Large Notice</h3><br />
+			<h3 class="margin-reset">乘换车优惠</h3><br />
 
 			<!-- Large Notice -->
 			<div class="large-notice">
-				<h2>This is a Headline</h2>
-				<p>This is example of style component for calling extra attention to featured content or information.</p>
-				<a href="#" class="button medium color">Read More</a>
+				<h3>当前等级： 5</h3>
+                <div class="skill-bar"><div class="skill-bar-content" data-percentage="80" style="width: 80%;">
+                      80%
+                    </div><span class="skill-title">
+                      完成 80%
+                    </span>
+                </div>
+				<p>当前优惠： 积分满2000可换取50元话费</p>
+                <h4>发票号</h4>
+                <p>
+                <input id="invoiceNumber" type="text" style="width: 70%;" name="invoiceNumber"></input>
+                </p>
+                <p>一张发票仅能作用一次</p>
+				<a href="#" class="button medium color">提交</a>
 			</div>
 
 		<br /><br />
-
-		</div>
-
-
-	<!-- Accordions
-	================================================== -->
-
-		<div class="eight columns">
-
-			<!-- Headline -->
-			<h3 class="margin-reset">Accordions</h3><br />
-
-			<!-- Accordion -->
-			<ul id="accordion">
-
-				<!-- Section 1 -->
-				<h3>Web Development</h3>
-				<div>
-					<p>Mauris mauris ante, blandit et, ultrices a, susceros. Nam mi. Proin viverra leo ut odio. Curabitur malesuada. Vestibulum a velit eu ante scelerisque vulputate aliquam egestas litora torquent conubia.</p>
-				</div>
-
-				<!-- Section 2 -->
-				<h3>Top Notch Support</h3>
-				<div>
-					<p>Sed non urna. Donec et ante. Phasellus eu ligula. Vestibulum sit amet purus. Vivamus hendrerit, dolor at aliquet laoreet, mauris turpis porttitor velit, faucibus interdum tellus libero ac justo. Vivamus non quam. Nullam laoreet, velit ut condimentum feugiat.</p>
-				</div>
-
-				<!-- Section 3 -->
-				<h3>Social Marketing</h3>
-				<div>
-					<p>Nam enim risus, molestie et, porta ac, aliquam ac, risus. Quisque lobortis. Phasellus pellentesque purus in massa. Aenean in pede. Phasellus ac libero ac tellus pellentesque semper.</p>
-					<br />
-					<ul class="check-list">
-						<li>Compatible with the latest W3C standards</li>
-						<li>Flexible, Responsive Layout</li>
-						<li>Compatible with Major Browsers</li>
-						<li>Attuned to Smartphones and Tablet PCs</li>
-					</ul>
-				</div>
-			</div>
-			<!-- Accordion / End -->
-
-		</div>
-
-	</div>
-	<!-- 960 Container / End -->
-
-
-	<!-- Divider -->
-	<div class="line" style="margin-top: 0px; margin-bottom: 40px;"></div>
-
-
-	<!-- 960 Container -->
-	<div class="container">
-
-	<!-- Progress Bars
-	================================================== -->
-
-		<div class="eight columns">
-
-			<!-- Headline -->
-			<h3 class="margin-reset">Progress Bars</h3><br />
-		
-			<!-- Progress Bars -->
-			<div id="skill-bars">
-				<div class="skill-bar"><div class="skill-bar-content" data-percentage="80"></div><span class="skill-title">Web Design 80%</span></div>
-				<div class="skill-bar"><div class="skill-bar-content" data-percentage="90"></div><span class="skill-title">HTML / CSS 90%</span></div>
-				<div class="skill-bar"><div class="skill-bar-content" data-percentage="85"></div><span class="skill-title">WordPress 85%</span></div>
-				<div class="skill-bar"><div class="skill-bar-content" data-percentage="70"></div><span class="skill-title">jQuery 70%</span></div>
-				<div class="skill-bar"><div class="skill-bar-content" data-percentage="75"></div><span class="skill-title">SEO 75%</span></div>
-			</div>
 
 		</div>
 
@@ -315,23 +224,23 @@
 		<div class="eight columns">
 
 			<!-- Headline -->
-			<h3 class="margin-reset">Alert Boxes</h3><br />
+			<h3 class="margin-reset">注意事项</h3><br />
 
 
 			<div class="notification error closeable">
-				<p><span>Error!</span> Please fill in all the fields required.</p>
+				<p><span> 乘车结束后请收集发票</span></p>
 			</div>
 
 			<div class="notification success closeable">
-				<p><span>Success!</span> You did it, now relax and enjoy it.</p>
+				<p><span>使用发票前请仔细核对是否过期</span></p>
 			</div>
 
 			<div class="notification warning closeable">
-				<p><span>Warning!</span> Change this and that and try again.</p>
+				<p><span>登记完成后便不能对发票信息进行更改</span></p>
 			</div>
 
 			<div class="notification notice closeable">
-				<p><span>Notice!</span> Please edit the information below.</p>
+				<p><span>积分仅限本人使用，不得转让或出租</span></p>
 			</div>
 
 	</div>
@@ -351,76 +260,50 @@
 
 		<div class="sixteen columns">
 			<!-- Headline -->
-			<h3 class="margin-reset">Client List</h3><br />
-
-			<ul class="client-list">
-				<li><img src="../../Content/picture/FrontPage/logo-01.png" alt=""/></li>
-				<li><img src="../../Content/picture/FrontPage/logo-01.png" alt=""/></li>
-				<li><img src="../../Content/picture/FrontPage/logo-01.png" alt=""/></li>
-				<li><img src="../../Content/picture/FrontPage/logo-01.png" alt=""/></li>
-				<li><img src="../../Content/picture/FrontPage/logo-01.png" alt=""/></li>
-			</ul>
-		</div>
-
-	</div>
-	<!-- 960 Container / End -->
-
-
-	<div class="line" style="margin-top: 40px; margin-bottom: 40px;"></div>
-
-
-	<!-- 960 Container -->
-	<div class="container">
-
-	<!-- Regular Table
-	================================================== -->
-
-		<div class="sixteen columns">
-			<!-- Headline -->
-			<h3 class="margin-reset">Regular Table</h3><br />
+			<h3 class="margin-reset">积分记录</h3><br />
 
 			<table class="standard-table">
 
 				<tr>
-					<th>Header 1</th>
-					<th>Header 2</th>
-					<th>Header 3</th>
-					<th>Header 4</th>
+					<th>编号</th>
+					<th>发票号</th>
+					<th>报销时间</th>
+					<th>金额</th>
 				</tr>
 
 				<tr>
-					<td>Item #1</td>
-					<td>Description</td>
-					<td>100 GB</td>
-					<td>100 GB</td>
+					<td>1</td>
+					<td>103254352</td>
+					<td>01/04/2012</td>
+					<td>50 ￥</td>
 				</tr>
 
 				<tr>
-					<td>Item #2</td>
-					<td>Description</td>
-					<td>200 GB</td>
-					<td>200 GB</td>
+					<td>2</td>
+					<td>103242563</td>
+					<td>01/04/2012</td>
+					<td>50 ￥</td>
 				</tr>
 
 				<tr>
-					<td>Item #3</td>
-					<td>Description</td>
-					<td>300 GB</td>
-					<td>300 GB</td>
+					<td>3</td>
+					<td>103242563</td>
+					<td>01/04/2012</td>
+					<td>50 ￥</td>
 				</tr>
 
 				<tr>
-					<td>Item #4</td>
-					<td>Description</td>
-					<td>400 GB</td>
-					<td>400 GB</td>
+					<td>4</td>
+					<td>103242563</td>
+					<td>01/04/2012</td>
+					<td>50 ￥</td>
 				</tr>
 
 				<tr>
-					<td>Item #5</td>
-					<td>Description</td>
-					<td>500 GB</td>
-					<td>500 GB</td>
+					<td>5</td>
+					<td>103242563</td>
+					<td>01/04/2012</td>
+					<td>50 ￥</td>
 				</tr>
 
 			</table>
@@ -438,6 +321,7 @@
 
 </div>
 <!-- Wrapper / End -->
+
 
 
 <!-- Footer
@@ -518,7 +402,7 @@
 				</ul>
 			</nav>
 		</div>
-
+        </div>
 	</div>
 	<!-- 960 Container / End -->
 

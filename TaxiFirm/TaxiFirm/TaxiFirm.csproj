@@ -92,6 +92,13 @@
     <Compile Include="Models\Manager\ManagerHandle.cs" />
     <Compile Include="Models\MyPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Views\FrontPage\credit.aspx.cs">
+      <DependentUpon>credit.aspx</DependentUpon>
+      <SubType>ASPXCodeBehind</SubType>
+    </Compile>
+    <Compile Include="Views\FrontPage\credit.aspx.designer.cs">
+      <DependentUpon>credit.aspx</DependentUpon>
+    </Compile>
   </ItemGroup>
   <ItemGroup>
     <Content Include="Content\css\BackControl\BackControlLeft.css" />
@@ -374,6 +381,7 @@
     <Content Include="Views\FrontPage\About.aspx" />
     <Content Include="Views\FrontPage\Complain.aspx" />
     <Content Include="Views\FrontPage\Contact.aspx" />
+    <Content Include="Views\FrontPage\credit.aspx" />
     <Content Include="Views\FrontPage\Elements.aspx" />
     <Content Include="Views\FrontPage\ErrorPage.aspx" />
     <Content Include="Views\FrontPage\Gallery.aspx" />
