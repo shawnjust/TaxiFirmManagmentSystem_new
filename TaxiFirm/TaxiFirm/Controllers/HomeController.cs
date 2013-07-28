@@ -211,6 +211,24 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+
+        [HttpPost]
+        public ActionResult GetSelfManagerModify(string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
+        {
+
+            Manager manager = (Manager)Session["CurrentManager"];
+            manager.Name = Manager_Name;
+            manager.GenderBite = bool.Parse(gender);
+            manager.FirmID = int.Parse(FirmID);
+            manager.IdCard = Manager_IDCard;
+            manager.Address = Manager_HomeAddress;
+            manager.Telephone = Manager_TelePhone;
+            manager.Birthday = Convert.ToDateTime(Manager_Birthday);
+
+            Session["CurrentManager"] = manager;
+
+            return RedirectToAction("ManagerSelfInfo");
+        }
         public ActionResult FirmList()
         {
 
@@ -228,6 +246,7 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ModifySelfInfo()
         {
+            ViewData["firms"] = new FirmHandle().GetAllFirm();
             return View();
         }
         public void LogOut()

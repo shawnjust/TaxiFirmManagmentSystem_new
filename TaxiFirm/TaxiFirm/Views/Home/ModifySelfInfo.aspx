@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Firm" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
    信息修改
 </asp:Content>
@@ -17,7 +17,25 @@
         
         }
 	</style>
-     <% Manager manager=(Manager)Session["CurrentManager"];%>
+    <script src="../../Scripts/jquery-1.4.1.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        $(document).ready(function () {
+            $("#button1").click(
+            function () {
+                var form1 = document.getElementById("form1");
+                form1.submit();
+                window.alert("success");
+
+
+            }
+
+            );
+        });
+    
+    </script>
+     <% Manager manager=(Manager)Session["CurrentManager"];
+        List<Firm> firms = (List<Firm>)ViewData["firms"];
+         %>
         <div class="container-fluid">
             <div class="row-fluid">
                 <div class="span12">
@@ -29,7 +47,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form>
+                           <form id="form1" method="post" action="/Home/GetSelfManagerModify">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
@@ -52,17 +70,17 @@
                                 <p>
                                 <%if (manager.Gender == "男")
                                   { %>
-                                   <small><input id="man" type="radio" checked="checked" name="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="1"/>&nbsp;&nbsp;女
+                                   <small><input id="man" type="radio" checked="checked" name="gender" value="true" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="gender" value="false"/>&nbsp;&nbsp;女
                                    </small>
                                    <%}
                                   else if (manager.Gender == "女")
                                   { %>
-                                     <small><input id="Radio1" type="radio" name="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="Radio2" type="radio"  checked="checked"  name="1"/>&nbsp;&nbsp;女
+                                     <small><input id="Radio1" type="radio" name="gender" value="true" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="Radio2" type="radio"  checked="checked"  name="gender" value="false"/>&nbsp;&nbsp;女
                                    </small>
                                    <%}
                                   else
                                   { %>
-                                     <small><input id="Radio3" type="radio"  name="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="Radio4" type="radio"  name="1"/>&nbsp;&nbsp;女
+                                     <small><input id="Radio3" type="radio"  name="gender"  value="true"/>&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="Radio4" type="radio"  name="gender" value="false"/>&nbsp;&nbsp;女
                                    </small>
                                    <%} %>
                                 </p>
@@ -70,24 +88,43 @@
                                         <h4>出生日期</h4>
                                 </p>
                                 <p>
-                                    <input name="Manager_Birthday" type="text" onClick="WdatePicker()" value="1994-3-27"/>
+                                    <input name="Manager_Birthday" type="text" onClick="WdatePicker()" value="<%:manager.Birthday.ToShortDateString().ToString().Replace("/","-")%>"/>
                                 </p>
                                 <p>
                                         <h4>公司</h4>
                                 </p>
                                 <p>
-                                  <select name="select" size="1" id="select">
-                                  <option>1222</option>
-                                  <option>1222</option>
+                                  <select name="FirmID" size="1" id="select">
+                                  <% for (int i = 0; i < firms.Count(); i++)
+                                     {
+                                         if (firms[i].FirmID == manager.FirmID)
+                                         { 
+                                         
+                                         
+                                         %>
+                                          <option selected value="<%:firms[i].FirmID %>"><%:firms[i].FirmID%></option>
+                                         <%}
+                                         else
+                                         {
+                                         %>
+                                     
+                                       <option value="<%:firms[i].FirmID%>"><%:firms[i].FirmID%></option>
+                                     <%
+                                         
+                                       
+                                     
+                                      }
+                                     }%>
+                               
                                   </select>
                                 </p>
                               
                             </fieldset>
 
-                            </form>
+                           
                             </div>
                             <div class="span4">
-                            	<form>
+                            	
                                 <br/>
                             <fieldset>
                                 <legend><h3>扩展信息</h3></legend><legend>
@@ -98,17 +135,17 @@
                                   <input name="Manager_IDCard" type="text" value="<%:manager.IdCard %>" />
                                 </p>
                             </fieldset>
-                            </form>
+                         
                             <br/>
                             <br/>
                             <br/>
                             <br/>
-                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
+                                                <button id="button1" class="btn btn-primary" type="button" style="alignment-adjust:middle">
                         提交</button>
                             </div>
                             
                             <div class="span4">
-                            <form>
+                          
                               <br/>
                             <fieldset>
                           
