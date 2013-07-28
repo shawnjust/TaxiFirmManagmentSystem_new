@@ -103,27 +103,26 @@ a:hover
         <td width="379" height="24">&nbsp;</td>
         <td width="48" height="24" class="UpRight2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="38%" height="24"><input type="checkbox" name="checkbox" id="checkbox" /></td>
-            <td width="62%" style="font-size:12px;">全选</td>
+            <td width="38%" height="24">&nbsp;</td>
+            <td width="62%" style="font-size:12px;">&nbsp;</td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight">&nbsp;</td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="42%" align="center" valign="middle"><img src="../../Content/picture/BackControl/edit.png" width="14" height="14" /></td>
-            <td width="58%" height="23" style="font-size:12px;">编辑</td>
+            <td width="42%" align="center" valign="middle">&nbsp;</td>
+            <td width="58%" height="23" style="font-size:12px;">&nbsp;</td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0"></
           <tr>
-            <td width="29%" align="center" valign="middle"><img src="../../Content/picture/BackControl/delete.png" width="11" height="12" /></td>
-            <td width="71%" height="23" style="font-size:12px;" style="font-size:12px;">删除</td>
+           
+            
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="44%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/save.png" width="12" height="12" /></td>
-            <td width="56%" height="23" style="font-size:12px;">保存</td>
+          
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight">&nbsp;</td>
@@ -153,7 +152,7 @@ a:hover
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                          <th align="center">选中</th>
+                        
                           <th>序号</th>
                           <th>姓名</th>
                           <th>
@@ -177,7 +176,7 @@ a:hover
                         <%}else if(i==3||i==8){ %><tr class="warning">
                         <%}else if(i==4||i==9){ %><tr class="info">
                         <%}%>
-                       <td align="center"> <input name="" type="checkbox" value="" />&nbsp;</td>
+                     
                             <td>
                                 <%:num++ %>
                             </td>
