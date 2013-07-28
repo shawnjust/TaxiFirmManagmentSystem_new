@@ -38,7 +38,7 @@
                         <fieldset>
                             <legend>基本信息</legend>
                             <label>
-                                车牌号:</label><label>颜色:</label><label>品牌:</label><label>所属公司:</label><label>Driver:</label>
+                                车牌号:</label><label>颜色:</label><label>品牌:</label><label>所属公司:</label><label>司机:</label>
                         </fieldset>
                         </form>
                         <form>

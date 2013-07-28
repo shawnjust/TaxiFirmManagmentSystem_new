@@ -85,11 +85,15 @@
     <Compile Include="Models\Firm\FirmHandle.cs" />
     <Compile Include="Models\HostModels.cs" />
     <Compile Include="Models\IdentityHandle.cs" />
+<<<<<<< HEAD
     <Compile Include="Models\RegexValidation.cs" />
+=======
+    <Compile Include="Models\Invoice\Invoice.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />
     <Compile Include="Models\Manager\ManagerHandle.cs" />
     <Compile Include="Models\MyPage.cs" />
+>>>>>>> be07edc94197120a30e6e74f0d8f279358d98876
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>

@@ -250,7 +250,7 @@
 
 						</fieldset>
 
-						<input type="submit" class="submit" id="submit" value="Send Message" />
+						<input type="submit" class="submit" id="submit" value="提交" />
 						<div class="clearfix"></div>
 
 					</form>

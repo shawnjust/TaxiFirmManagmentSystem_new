@@ -6,6 +6,8 @@
 
 <asp:Content ID="Content2" ContentPlaceHolderID="MainContent" runat="server">
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+<script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -46,11 +48,12 @@
 </script>
 
 
+<br/>
+<br />
 
+<p style="margin-left: 440px"><h2 style="font-size:60" align="center">司机个人基本信息</h2></p>
 
-<p><h2 style="font-size:60" align="center">司机个人基本信息</h2></p>
-
-<table  frame="box" cellpadding="0" cellspacing="5" width="500px" align="center">
+<table  frame="box" cellpadding="5" cellspacing="5" width="500px" align="center">
     <tr>
         <td>
             <table border="0" cellspacing="5" cellpadding="5" align="center">
@@ -111,10 +114,20 @@
             </table>
         </td>
     </tr>
+    <tr>
+    <td>
+ 
+    </td>
+    </tr>
 </table>
+    <div align="center" class="container-fluid">
+    <br />
+    <br />
+     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify">修改</button>
+     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Delete">删除</button>
+    </div>
 
-
-		
+		       
 
 </asp:Content>
 

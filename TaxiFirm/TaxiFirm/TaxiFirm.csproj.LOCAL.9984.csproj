@@ -74,22 +74,14 @@
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Customer\Customer.cs" />
-    <Compile Include="Models\Customer\CustomerHandle.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Firm\Firm.cs" />
-    <Compile Include="Models\Firm\FirmHandle.cs" />
     <Compile Include="Models\HostModels.cs" />
     <Compile Include="Models\IdentityHandle.cs" />
     <Compile Include="Models\RegexValidation.cs" />
-    <Compile Include="Models\Invoice\InvoiceHandle.cs" />
-    <Compile Include="Models\Manager\Manager.cs" />
-    <Compile Include="Models\Manager\ManagerHandle.cs" />
-    <Compile Include="Models\MyPage.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -402,7 +394,6 @@
     <Content Include="Views\Home\ManagerList.aspx" />
     <Content Include="Views\Home\ManagerSelfInfo.aspx" />
     <Content Include="Views\Home\ModifyManager.aspx" />
-    <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />
     <Content Include="Views\Home\NotificationContent.aspx" />
     <Content Include="Views\Home\TaxiList.aspx" />
