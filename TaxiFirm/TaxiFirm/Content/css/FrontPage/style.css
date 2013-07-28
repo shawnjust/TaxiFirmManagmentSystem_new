@@ -51,7 +51,7 @@
 	top: 0;
 	right: 0;
 	margin: 1px 0 0 -35px;
-	background: url('../../Content/picture/FrontPage/search.png') center center no-repeat;
+	background: url('../images/search.png') center center no-repeat;
 	width: 35px;
 	height: 32px;
 	cursor: pointer;
@@ -119,26 +119,26 @@
 .social-icons li:hover { opacity: 1; }
 
 /* Icon List */
-.twitter {background: url(../../Content/picture/FrontPage/social/twitter.png) no-repeat 50%;}
-.facebook {background: url(../../Content/picture/FrontPage/social/facebook.png) no-repeat 50%; margin: 0 -4px;}  
-.dribbble {background: url(../../Content/picture/FrontPage/social/dribbble.png) no-repeat 50%;}
-.linkedin {background: url(../../Content/picture/FrontPage/social/linkedin.png) no-repeat 50%;}
-.rss {background: url(../../Content/picture/FrontPage/social/rss.png) no-repeat 50%; margin: 0 -5px 0 0;}
-.amazon {background: url(../../Content/picture/FrontPage/social/amazon.png) no-repeat 50%; }
-.blogger {background: url(../../Content/picture/FrontPage/social/blogger.png) no-repeat 50%; }
-.deviantart {background: url(../../Content/picture/FrontPage/social/deviantart.png) no-repeat 50%; }
-.digg {background: url(../../Content/picture/FrontPage/social/digg.png) no-repeat 50%; }
-.flickr {background: url(../../Content/picture/FrontPage/social/flickr.png) no-repeat 50%; }
-.forrst {background: url(../../Content/picture/FrontPage/social/forrst.png) no-repeat 50%; }
-.lastfm {background: url(../../Content/picture/FrontPage/social/lastfm.png) no-repeat 50%; }
-.picasa {background: url(../../Content/picture/FrontPage/social/picasa.png) no-repeat 50%; }
-.pinterest {background: url(../../Content/picture/FrontPage/social/pinterest.png) no-repeat 50%; }
-.skype {background: url(../../Content/picture/FrontPage/social/skype.png) no-repeat 50%; }
-.tumblr {background: url(../../Content/picture/FrontPage/social/tumblr.png) no-repeat 50%; }
-.vimeo {background: url(../../Content/picture/FrontPage/social/vimeo.png) no-repeat 50%; }
-.wordpress {background: url(../../Content/picture/FrontPage/social/wordpress.png) no-repeat 50%; }
-.yahoo {background: url(../../Content/picture/FrontPage/social/yahoo.png) no-repeat 50%; }
-.youtube {background: url(../../Content/picture/FrontPage/social/youtube.png) no-repeat 50%; }
+.twitter {background: url(../images/social/twitter.png) no-repeat 50%;}
+.facebook {background: url(../images/social/facebook.png) no-repeat 50%; margin: 0 -4px;}
+.dribbble {background: url(../images/social/dribbble.png) no-repeat 50%;}
+.linkedin {background: url(../images/social/linkedin.png) no-repeat 50%;}
+.rss {background: url(../images/social/rss.png) no-repeat 50%; margin: 0 -5px 0 0;}
+.amazon {background: url(../images/social/amazon.png) no-repeat 50%; }
+.blogger {background: url(../images/social/blogger.png) no-repeat 50%; }
+.deviantart {background: url(../images/social/deviantart.png) no-repeat 50%; }
+.digg {background: url(../images/social/digg.png) no-repeat 50%; }
+.flickr {background: url(../images/social/flickr.png) no-repeat 50%; }
+.forrst {background: url(../images/social/forrst.png) no-repeat 50%; }
+.lastfm {background: url(../images/social/lastfm.png) no-repeat 50%; }
+.picasa {background: url(../images/social/picasa.png) no-repeat 50%; }
+.pinterest {background: url(../images/social/pinterest.png) no-repeat 50%; }
+.skype {background: url(../images/social/skype.png) no-repeat 50%; }
+.tumblr {background: url(../images/social/tumblr.png) no-repeat 50%; }
+.vimeo {background: url(../images/social/vimeo.png) no-repeat 50%; }
+.wordpress {background: url(../images/social/wordpress.png) no-repeat 50%; }
+.yahoo {background: url(../images/social/yahoo.png) no-repeat 50%; }
+.youtube {background: url(../images/social/youtube.png) no-repeat 50%; }
 
 
 /* Menu
@@ -583,7 +583,7 @@ ul.cols1 p a, ul.cols2 p a, ul.cols3 p a, ul.cols4 p a, ul.cols5 p a {
 
 /* LayerSlider Skin */
 #layerslider-container {
-	background: url(../../Content/picture/FrontPage/layerslider-loader.gif) no-repeat center;
+	background: url(../images/layerslider-loader.gif) no-repeat center;
 }
 
 .ls-fullwidth .ls-nav-prev,
@@ -610,8 +610,8 @@ ul.cols1 p a, ul.cols2 p a, ul.cols3 p a, ul.cols4 p a, ul.cols5 p a {
 	top: 50%;
 }
 
-.ls-fullwidth .ls-nav-prev { background: url(../../Content/picture/FrontPage/slider-left.png) no-repeat 50%; background-color: #4c4c4c; left: 0; border-radius: 0 2px 2px 0; }
-.ls-fullwidth .ls-nav-next { background: url(../../Content/picture/FrontPage/slider-right.png) no-repeat 50%; background-color: #4c4c4c; right: 0; border-radius: 2px 0 0 2px; }
+.ls-fullwidth .ls-nav-prev { background: url(../images/slider-left.png) no-repeat 50%; background-color: #4c4c4c; left: 0; border-radius: 0 2px 2px 0; }
+.ls-fullwidth .ls-nav-next { background: url(../images/slider-right.png) no-repeat 50%; background-color: #4c4c4c; right: 0; border-radius: 2px 0 0 2px; }
 
 .ls-fullwidth .ls-nav-next:hover,
 .ls-fullwidth .ls-nav-prev:hover { background-color: #169fe6; }
@@ -622,7 +622,7 @@ ul.cols1 p a, ul.cols2 p a, ul.cols3 p a, ul.cols4 p a, ul.cols5 p a {
 	display: block;
 	margin-left: -25px;
 	margin-top: -25px;
-	background: url(../../Content/picture/FrontPage/layerslider-video.png) no-repeat 50%;
+	background: url(../images/layerslider-video.png) no-repeat 50%;
 	opacity: 0.8;
 }
 
@@ -687,8 +687,8 @@ html[xmlns] .slides {display: block;}
 /* Direction Nav */
 .flex-direction-nav {*height: 0;}
 
-.flex-direction-nav .flex-next {background: url(../../Content/picture/FrontPage/slider-right.png) no-repeat 50%; background-color: #4c4c4c; right: 0; border-radius: 2px 0 0 2px; }
-.flex-direction-nav .flex-prev {background: url(../../Content/picture/FrontPage/slider-left.png) no-repeat 50%; background-color: #4c4c4c; left:0; border-radius: 0 2px 2px 0; }
+.flex-direction-nav .flex-next {background: url(../images/slider-right.png) no-repeat 50%; background-color: #4c4c4c; right: 0; border-radius: 2px 0 0 2px; }
+.flex-direction-nav .flex-prev {background: url(../images/slider-left.png) no-repeat 50%; background-color: #4c4c4c; left:0; border-radius: 0 2px 2px 0; }
 
 .flex-direction-nav a {
 	width: 39px;
@@ -1079,7 +1079,7 @@ blockquote {
 	color: #888;
 	padding: 0 11px 0 0;
 	margin: 0 0 0 5px;
-	background: url(../../Content/picture/FrontPage/breadcrumbs.png) no-repeat 100% 50%;
+	background: url(../images/breadcrumbs.png) no-repeat 100% 50%;
 }
 
 #breadcrumbs ul li:last-child a,
@@ -1147,7 +1147,7 @@ p.margin { margin: 0 0 25px 0; }
 	top:0;
 	right:0;
 	margin: 0 0 0 -35px;
-	background: url(../../Content/picture/FrontPage/search-2.png) 50% no-repeat;
+	background: url(../images/search-2.png) 50% no-repeat;
 	background-color: #169fe6;
 	width: 35px;
 	height: 36px;
@@ -1174,7 +1174,7 @@ p.margin { margin: 0 0 25px 0; }
 	display: block;
 	padding: 3px 0;
 	padding-left: 12px;
-	background: url(../../Content/picture/FrontPage/categories.png) no-repeat left 7px;
+	background: url(../images/categories.png) no-repeat left 7px;
 }
 
 .categories li a:hover {color: #888}
@@ -1269,7 +1269,7 @@ p.margin { margin: 0 0 25px 0; }
 	line-height: 20px;
 	margin: 0 0 15px 0;
 	padding: 0 0 0 25px;
-	background: url(../../Content/picture/FrontPage/twitter-01.png) no-repeat left 5%;
+	background: url(../images/twitter-01.png) no-repeat left 5%;
 }
 
 #twitter-blog li:last-child { margin: 0; }
@@ -1392,7 +1392,7 @@ p.margin { margin: 0 0 25px 0; }
 }
 
 #fancybox-loading, .fancybox-close, .fancybox-prev span, .fancybox-next span {
-	background-image: url('../../Content/picture/FrontPage/fancybox_sprite.png');
+	background-image: url('../images/fancybox_sprite.png');
 }
 
 #fancybox-loading {
@@ -1410,7 +1410,7 @@ p.margin { margin: 0 0 25px 0; }
 #fancybox-loading div {
 	width: 44px;
 	height: 44px;
-	background: url('../../Content/picture/FrontPage/fancybox_loading.gif') center center no-repeat;
+	background: url('../images/fancybox_loading.gif') center center no-repeat;
 }
 
 .fancybox-close {
@@ -1430,7 +1430,7 @@ p.margin { margin: 0 0 25px 0; }
 	height: 100%;
 	cursor: pointer;
 	text-decoration: none;
-	background: transparent url('../../Content/picture/FrontPage/blank.gif'); /* helps IE */
+	background: transparent url('../images/blank.gif'); /* helps IE */
 	-webkit-tap-highlight-color: rgba(0,0,0,0);
 	z-index: 8040;
 }
@@ -1484,7 +1484,7 @@ p.margin { margin: 0 0 25px 0; }
 	overflow: hidden;
 }
 
-.ie8 .fancybox-overlay { background: url('../../Content/picture/FrontPage/fancybox_overlay.png') !important; }
+.ie8 .fancybox-overlay { background: url('../images/fancybox_overlay.png') !important; }
 
 .fancybox-overlay {
 	position: absolute;
@@ -1493,7 +1493,7 @@ p.margin { margin: 0 0 25px 0; }
 	overflow: hidden;
 	display: none;
 	z-index: 8010;
-	background: url('../../Content/picture/FrontPage/fancybox_overlay.png');
+	background: url('../images/fancybox_overlay.png');
 }
 
 .fancybox-overlay-fixed {
@@ -1614,7 +1614,7 @@ p.margin { margin: 0 0 25px 0; }
 	width: 30px;
 	height: 30px;
 	text-indent: -9999px;
-	background-image: url('../../Content/picture/FrontPage/fancybox_buttons.png');
+	background-image: url('../images/fancybox_buttons.png');
 	background-repeat: no-repeat;
 	outline: none;
 	opacity: 0.8;
@@ -1738,7 +1738,7 @@ ol li ol.childlist .comment-des {
 	height: 20px; 
 	position: relative;
 	float: left;
-	background: url(../../Content/picture/FrontPage/comment-arrow.png) no-repeat;
+	background: url(../images/comment-arrow.png) no-repeat;
 	margin-left: -30px;
 }
 
@@ -2271,7 +2271,7 @@ input[type="submit"]:hover { background:#aaa; }
 	display: inline-block;
 	background-color: #ccc;
 	border-radius: 2px;
-	background-image: url(../../Content/picture/FrontPage/accordion-plus.png);
+	background-image: url(../images/accordion-plus.png);
 	background-repeat: no-repeat;
 	background-position: 50%;
 	float: left;
@@ -2287,7 +2287,7 @@ input[type="submit"]:hover { background:#aaa; }
 .ui-accordion-icon-active {
 	background-color: #169fe6;
 	box-shadow:  inset 0px -1px 0px 0px rgba(0,0,0, 0.15);
-	background-image: url(../../Content/picture/FrontPage/accordion-minus.png);
+	background-image: url(../images/accordion-minus.png);
 }
 
 
@@ -2334,7 +2334,7 @@ input[type="submit"]:hover { background:#aaa; }
 	display: inline-block;
 	background-color: #ccc;
 	border-radius: 2px;
-	background-image: url(../../Content/picture/FrontPage/accordion-plus.png);
+	background-image: url(../images/accordion-plus.png);
 	background-repeat: no-repeat;
 	background-position: 50%;
 	float: left;
@@ -2350,7 +2350,7 @@ input[type="submit"]:hover { background:#aaa; }
 .trigger.active .toggle-icon {
 	background-color: #169fe6;
 	box-shadow:  inset 0px -1px 0px 0px rgba(0,0,0, 0.15);
-	background-image: url(../../Content/picture/FrontPage/accordion-minus.png);
+	background-image: url(../images/accordion-minus.png);
 }
 
 .toggle-container p { margin: 0; }
@@ -2391,10 +2391,10 @@ input[type="submit"]:hover { background:#aaa; }
 .star-list li:first-child,
 .check-list li:first-child { margin-top: 0; }
 
-.check-list li { background: url(../../Content/picture/FrontPage/icon-list-check.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
-.sign-list li { background: url(../../Content/picture/FrontPage/icon-list-sign.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
-.plus-list li { background: url(../../Content/picture/FrontPage/icon-list-plus.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
-.star-list li { background: url(../../Content/picture/FrontPage/icon-list-star.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
+.check-list li { background: url(../images/icon-list-check.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
+.sign-list li { background: url(../images/icon-list-sign.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
+.plus-list li { background: url(../images/icon-list-plus.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
+.star-list li { background: url(../images/icon-list-star.png) no-repeat 0% 3px; padding: 0 0 0 18px; }
 
 
 /* Table
@@ -2456,7 +2456,7 @@ table.standard-table tr:hover td {background-color: #fafafa;}
 }
 
 .testimonials-bg {
-	background: url(../../Content/picture/FrontPage/testimonials-bg.png) no-repeat;
+	background: url(../images/testimonials-bg.png) no-repeat;
 	margin-top: -1px;
 	display: block;
 	margin-left: 25px;
@@ -2948,7 +2948,7 @@ span.time {
 #twitter li {
 	margin: 0 0 15px 0;
 	padding: 0 0 0 25px;
-	background: url(../../Content/picture/FrontPage/social/twitter.png) no-repeat left 5%;
+	background: url(../images/social/twitter.png) no-repeat left 5%;
 }
 
 #twitter li:last-child {
@@ -3405,45 +3405,45 @@ span.hours {float: right;}
 	   (min-resolution: 1.3dppx) {
 	   
 	/* Miscellaneous */
-	#twitter li { background: url(../../Content/picture/FrontPage/social/twitter@2x.png) no-repeat left 5%; background-size: 16px auto; }
-	#twitter-blog li { background: url(../../Content/picture/FrontPage/twitter-01@2x.png) no-repeat left 5%; background-size: 16px auto; }
-	#breadcrumbs ul li { background: url(../../Content/picture/FrontPage/breadcrumbs@2x.png) no-repeat 100% 50%; background-size: 3px auto; }
-	.categories a { background: url(../../Content/picture/FrontPage/categories@2x.png) no-repeat left 47%; background-size: 5px auto; }
-	.search-btn { background: url('../../Content/picture/FrontPage/search@2x.png') center center no-repeat; background-size: 13px auto; }
-	.search-btn-widget { background: url(../../Content/picture/FrontPage/search-2@2x.png) 50% no-repeat; background-color: #169fe6; background-size: 13px auto; }
-	.flex-direction-nav .flex-next {background: url(../../Content/picture/FrontPage/slider-right@2x.png) no-repeat 50%; background-color: #4c4c4c; right: 0; background-size: 25%;}
-	.flex-direction-nav .flex-prev {background: url(../../Content/picture/FrontPage/slider-left@2x.png) no-repeat 50%; background-color: #4c4c4c; left:0; background-size: 25%;}
-	.ls-fullwidth .ls-nav-prev { background: url(../../Content/picture/FrontPage/slider-left@2x.png) no-repeat 50%; background-color: #4c4c4c; left: 0; background-size: 25%; }
-	.ls-fullwidth .ls-nav-next { background: url(../../Content/picture/FrontPage/slider-right@2x.png) no-repeat 50%; background-color: #4c4c4c; right: 0; background-size: 25%; }
-	.ui-accordion-icon, .ui-accordion-icon-active { background-image: url(../../Content/picture/FrontPage/accordion-plus@2x.png); background-repeat: no-repeat; background-position: 50%; background-size: 12px;}
-	.ui-accordion-icon-active { background-image: url(../../Content/picture/FrontPage/accordion-minus@2x.png); }
-	.toggle-icon { background-image: url(../../Content/picture/FrontPage/accordion-plus@2x.png); background-repeat: no-repeat; background-position: 50%; background-size: 12px; }
-	.trigger.active .toggle-icon { background-image: url(../../Content/picture/FrontPage/accordion-minus@2x.png); background-size: 12px;}
-	.check-list li { background: url(../../Content/picture/FrontPage/icon-list-check@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 13px 11px; }
-	.sign-list li { background: url(../../Content/picture/FrontPage/icon-list-sign@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
-	.plus-list li { background: url(../../Content/picture/FrontPage/icon-list-plus@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
-	.star-list li { background: url(../../Content/picture/FrontPage/icon-list-star@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
+	#twitter li { background: url(../images/social/twitter@2x.png) no-repeat left 5%; background-size: 16px auto; }
+	#twitter-blog li { background: url(../images/twitter-01@2x.png) no-repeat left 5%; background-size: 16px auto; }
+	#breadcrumbs ul li { background: url(../images/breadcrumbs@2x.png) no-repeat 100% 50%; background-size: 3px auto; }
+	.categories a { background: url(../images/categories@2x.png) no-repeat left 47%; background-size: 5px auto; }
+	.search-btn { background: url('../images/search@2x.png') center center no-repeat; background-size: 13px auto; }
+	.search-btn-widget { background: url(../images/search-2@2x.png) 50% no-repeat; background-color: #169fe6; background-size: 13px auto; }
+	.flex-direction-nav .flex-next {background: url(../images/slider-right@2x.png) no-repeat 50%; background-color: #4c4c4c; right: 0; background-size: 25%;}
+	.flex-direction-nav .flex-prev {background: url(../images/slider-left@2x.png) no-repeat 50%; background-color: #4c4c4c; left:0; background-size: 25%;}
+	.ls-fullwidth .ls-nav-prev { background: url(../images/slider-left@2x.png) no-repeat 50%; background-color: #4c4c4c; left: 0; background-size: 25%; }
+	.ls-fullwidth .ls-nav-next { background: url(../images/slider-right@2x.png) no-repeat 50%; background-color: #4c4c4c; right: 0; background-size: 25%; }
+	.ui-accordion-icon, .ui-accordion-icon-active { background-image: url(../images/accordion-plus@2x.png); background-repeat: no-repeat; background-position: 50%; background-size: 12px;}
+	.ui-accordion-icon-active { background-image: url(../images/accordion-minus@2x.png); }
+	.toggle-icon { background-image: url(../images/accordion-plus@2x.png); background-repeat: no-repeat; background-position: 50%; background-size: 12px; }
+	.trigger.active .toggle-icon { background-image: url(../images/accordion-minus@2x.png); background-size: 12px;}
+	.check-list li { background: url(../images/icon-list-check@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 13px 11px; }
+	.sign-list li { background: url(../images/icon-list-sign@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
+	.plus-list li { background: url(../images/icon-list-plus@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
+	.star-list li { background: url(../images/icon-list-star@2x.png) no-repeat 0% 3px; padding: 0 0 0 18px; background-size: 12px; }
 
 	/* Social Icons */
-	.twitter {background: url(../../Content/picture/FrontPage/social/twitter@2x.png) no-repeat 50%; background-size: 50%; }
-	.facebook {background: url(../../Content/picture/FrontPage/social/facebook@2x.png) no-repeat 50%; margin: 0 -4px; background-size: 50%;}
-	.dribbble {background: url(../../Content/picture/FrontPage/social/dribbble@2x.png) no-repeat 50%; background-size: 50%; }
-	.linkedin {background: url(../../Content/picture/FrontPage/social/linkedin@2x.png) no-repeat 50%; background-size: 50%; }
-	.rss {background: url(../../Content/picture/FrontPage/social/rss@2x.png) no-repeat 50%; margin: 0 -5px 0 0; background-size: 50%; }
-	.amazon {background: url(../../Content/picture/FrontPage/social/amazon@2x.png) no-repeat 50%; background-size: 50%; }
-	.blogger {background: url(../../Content/picture/FrontPage/social/blogger@2x.png) no-repeat 50%; background-size: 50%; }
-	.deviantart {background: url(../../Content/picture/FrontPage/social/deviantart@2x.png) no-repeat 50%; background-size: 50%; }
-	.digg {background: url(../../Content/picture/FrontPage/social/digg@2x.png) no-repeat 50%; background-size: 50%; }
-	.flickr {background: url(../../Content/picture/FrontPage/social/flickr@2x.png) no-repeat 50%; background-size: 50%; }
-	.forrst {background: url(../../Content/picture/FrontPage/social/forrst@2x.png) no-repeat 50%; background-size: 50%; }
-	.lastfm {background: url(../../Content/picture/FrontPage/social/lastfm@2x.png) no-repeat 50%; background-size: 50%; }
-	.picasa {background: url(../../Content/picture/FrontPage/social/picasa@2x.png) no-repeat 50%; background-size: 50%; }
-	.pinterest {background: url(../../Content/picture/FrontPage/social/pinterest@2x.png) no-repeat 50%; background-size: 50%; }
-	.skype {background: url(../../Content/picture/FrontPage/social/skype@2x.png) no-repeat 50%; background-size: 50%; }
-	.tumblr {background: url(../../Content/picture/FrontPage/social/tumblr@2x.png) no-repeat 50%; background-size: 50%; }
-	.vimeo {background: url(../../Content/picture/FrontPage/social/vimeo@2x.png) no-repeat 50%; background-size: 50%; }
-	.wordpress {background: url(../../Content/picture/FrontPage/social/wordpress@2x.png) no-repeat 50%; background-size: 50%; }
-	.yahoo {background: url(../../Content/picture/FrontPage/social/yahoo@2x.png) no-repeat 50%; background-size: 50%; }
-	.youtube {background: url(../../Content/picture/FrontPage/social/youtube@2x.png) no-repeat 50%; background-size: 50%; }
+	.twitter {background: url(../images/social/twitter@2x.png) no-repeat 50%; background-size: 50%; }
+	.facebook {background: url(../images/social/facebook@2x.png) no-repeat 50%; margin: 0 -4px; background-size: 50%;}
+	.dribbble {background: url(../images/social/dribbble@2x.png) no-repeat 50%; background-size: 50%; }
+	.linkedin {background: url(../images/social/linkedin@2x.png) no-repeat 50%; background-size: 50%; }
+	.rss {background: url(../images/social/rss@2x.png) no-repeat 50%; margin: 0 -5px 0 0; background-size: 50%; }
+	.amazon {background: url(../images/social/amazon@2x.png) no-repeat 50%; background-size: 50%; }
+	.blogger {background: url(../images/social/blogger@2x.png) no-repeat 50%; background-size: 50%; }
+	.deviantart {background: url(../images/social/deviantart@2x.png) no-repeat 50%; background-size: 50%; }
+	.digg {background: url(../images/social/digg@2x.png) no-repeat 50%; background-size: 50%; }
+	.flickr {background: url(../images/social/flickr@2x.png) no-repeat 50%; background-size: 50%; }
+	.forrst {background: url(../images/social/forrst@2x.png) no-repeat 50%; background-size: 50%; }
+	.lastfm {background: url(../images/social/lastfm@2x.png) no-repeat 50%; background-size: 50%; }
+	.picasa {background: url(../images/social/picasa@2x.png) no-repeat 50%; background-size: 50%; }
+	.pinterest {background: url(../images/social/pinterest@2x.png) no-repeat 50%; background-size: 50%; }
+	.skype {background: url(../images/social/skype@2x.png) no-repeat 50%; background-size: 50%; }
+	.tumblr {background: url(../images/social/tumblr@2x.png) no-repeat 50%; background-size: 50%; }
+	.vimeo {background: url(../images/social/vimeo@2x.png) no-repeat 50%; background-size: 50%; }
+	.wordpress {background: url(../images/social/wordpress@2x.png) no-repeat 50%; background-size: 50%; }
+	.yahoo {background: url(../images/social/yahoo@2x.png) no-repeat 50%; background-size: 50%; }
+	.youtube {background: url(../images/social/youtube@2x.png) no-repeat 50%; background-size: 50%; }
 
 }

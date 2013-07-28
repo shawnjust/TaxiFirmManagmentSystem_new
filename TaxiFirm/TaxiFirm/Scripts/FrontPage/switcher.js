@@ -12,92 +12,92 @@ jQuery(document).ready(function($) {
 	
 		// Color Changer
 		$(".green" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/green.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/green.css" );
 			return false;
 		});
 		
 		$(".blue" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/blue.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/blue.css" );
 			return false;
 		});
 		
 		$(".orange" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/orange.css" );
+		    $("#colors").attr("href", "../../Content/css/FrontPage/colors/orange.css");
 			return false;
 		});
 		
 		$(".navy" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/navy.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/navy.css" );
 			return false;
 		});
 		
 		$(".yellow" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/yellow.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/yellow.css" );
 			return false;
 		});
 		
 		$(".peach" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/peach.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/peach.css" );
 			return false;
 		});
 		
 		$(".beige" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/beige.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/beige.css" );
 			return false;
 		});
 
 		$(".purple" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/purple.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/purple.css" );
 			return false;
 		});
 
 		$(".red" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/red.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/red.css" );
 			return false;
 		});
 
 		$(".pink" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/pink.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/pink.css" );
 			return false;
 		});
 		
 		$(".celadon" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/celadon.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/celadon.css" );
 			return false;
 		});
 		
 		$(".brown" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/brown.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/brown.css" );
 			return false;
 		});
 		
 		$(".cherry" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/cherry.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/cherry.css" );
 			return false;
 		});
 		
 		$(".gray" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/gray.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/gray.css" );
 			return false;
 		});
 		
 		$(".dark" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/dark.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/dark.css" );
 			return false;
 		});
 		
 		$(".cyan" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/cyan.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/cyan.css" );
 			return false;
 		});
 		
 		$(".olive" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/olive.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/olive.css" );
 			return false;
 		});
 		
 		$(".dirty-green" ).click(function(){
-			$("#colors" ).attr("href", "css/colors/dirty-green.css" );
+			$("#colors" ).attr("href", "../../Content/css/FrontPage/colors/dirty-green.css" );
 			return false;
 		});
 

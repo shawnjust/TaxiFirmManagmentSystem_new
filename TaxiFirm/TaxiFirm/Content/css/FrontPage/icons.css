@@ -12,7 +12,7 @@
   height: 14px;
   line-height: 14px;
   vertical-align: text-top;
-  background-image: url(../../Content/picture/FrontPage/glyphicons_halflings.svg);
+  background-image: url(../images/glyphicons_halflings.png);
   background-position: 0 0;
   background-repeat: no-repeat;
   vertical-align: top;
@@ -22,17 +22,17 @@
 }
 
 .ie8 .halflings {
-  background-image: url(../../Content/picture/FrontPage/glyphicons_halflings.png);
+  background-image: url(../images/glyphicons_halflings.png);
  }
 
 .no-inlinesvg .halflings-icon {
-  background-image: url(../../Content/picture/FrontPage/glyphicons_halflings.png);
+  background-image: url(../images/glyphicons_halflings.png);
 }
 .halflings.white {
-  background-image: url(../../Content/picture/FrontPage/glyphicons_halflings-white.svg);
+  background-image: url(../images/glyphicons_halflings-white.png);
 }
 .no-inlinesvg .halflings.white {
-  background-image: url(../../Content/picture/FrontPage/glyphicons_halflings-white.png);
+  background-image: url(../images/glyphicons_halflings-white.png);
 }
 .halflings.glass {
   background-position: 0 0;

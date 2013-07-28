@@ -17,8 +17,9 @@
 <!-- CSS
 ========================================= ========= -->
  
-<link rel="stylesheet" href="../../Content/css/FrontPage/style.css">
-<link rel="stylesheet" href="../../Content/css/FrontPage/colors/blue.css" id="colors">
+<link rel="stylesheet" type="text/css" href="../../Content/css/FrontPage/style.css">
+<link rel="stylesheet" type="text/css" href="../../Content/css/FrontPage/icons.css">
+<link rel="stylesheet" type="text/css" href="../../Content/css/FrontPage/colors/blue.css" id="colors">
 <link rel="shortcut icon" href="../../Content/favicon.ico" type="image/x-icon" />
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>

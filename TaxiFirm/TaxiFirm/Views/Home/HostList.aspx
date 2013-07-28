@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.HostListModal>>" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     车主列表
@@ -119,114 +119,33 @@
                         </tr>
                     </thead>
                     <tbody>
+                    <% foreach (var item in Model)
+                        { %>
                         <tr>
                           <td align="center"><input name="" type="checkbox" value="" />&nbsp;</td>
                             <td>
-                                1
+                                <%: item.employee_id %>
                             </td>
-                            <td>方志晗</td>
                             <td>
-                                20</td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td  style="color:#900" class="pointer"><%:Html.ActionLink("详细信息","HostInfo","Home") %></td>
-                        </tr>
-                        <tr class="success">
-                          <td align="center"><input name="input" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input2" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input3" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input4" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr>
-                          <td align="center"><input name="input5" type="checkbox" value="" /></td>
-                            <td>
-                                1
+                                <%: item.name %>
                             </td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="success">
-                          <td align="center"><input name="input6" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input7" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input8" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>方志晗</td>
                             <td>
-                                20
+                                <%: item.age %>
                             </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
+                            <td>
+                                <%: item.gender==true?"男":"女" %>
+                            </td>
+                            <td>
+                                <%: item.telephone %>
+                            </td>
+                            <td>
+                                <%: item.car_count %>
+                            </td>
+                            <td  style="color:#900" class="pointer">
+                                <%: Html.ActionLink("详细信息", "HostInfo", new { id = item.employee_id })%>
+                            </td>
                         </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input9" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>方志晗</td>
-                            <td>20</td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">详细信息</span></td>
-                        </tr>
-                        
+                        <% } %>
                     </tbody>
                 </table>
                 
