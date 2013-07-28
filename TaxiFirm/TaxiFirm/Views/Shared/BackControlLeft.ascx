@@ -46,7 +46,7 @@
           </tr>
           <tr>
             <td width="12">&nbsp;</td>
-            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/ManagerList?page=1">角色管理</a></td>
+            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/ManagerList?type=common&page=1">角色管理</a></td>
             <td>&nbsp;</td>
           </tr>
           <tr>

@@ -21,7 +21,7 @@ namespace TaxiFirm.Controllers
         {
 
             string type = Request.QueryString.Get("type");
-            if (type == "logout")
+            if (type.Equals("logout"))
             {
                 this.LogOut();
             }
@@ -126,6 +126,7 @@ namespace TaxiFirm.Controllers
             ViewData["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(CustomerId, page);
             ViewData["page"] = page;
             ViewData["customer"] = new CustomerHandle().getCustomerById(CustomerId);
+            
             return View();
         }
         public ActionResult ComplainList()
@@ -188,11 +189,63 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+         
+       
         public ActionResult ManagerList()
         {
-            int page = int.Parse(Request.QueryString.Get("page"));
-            this.GoManagerList(page);
 
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+                try
+                {
+                    int id = int.Parse(NameID);
+                    Manager manager = new Manager(id);
+                    List<Manager> managers = new List<Manager>();
+                    if (manager.Name != null&&!manager.Equals(""))
+                    {
+                        managers.Add(manager);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["managers"] = managers;
+                    MyPage page = new MyPage();
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"]=page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+                catch {
+
+                    MyPage page = new MyPage();
+
+                   
+                    page.CurrentPage = page1;
+
+                    List<Manager> managers = new ManagerHandle().GetManagerByNameByPage(page,NameID);
+                    ViewData["type"] = "search";
+                    ViewData["managers"] = managers;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+                
+                }
+
+
+            }
+            else
+            {
+                int page = int.Parse(Request.QueryString.Get("page"));
+                this.GoManagerList(page);
+            }
             return View();
         }
         public ActionResult ModifyManager()
@@ -265,6 +318,7 @@ namespace TaxiFirm.Controllers
             MyPage page = new MyPage();
             page.CurrentPage = pagecount;
             List<Manager> managers = new ManagerHandle().GetManagerByPage(page);
+            ViewData["type"] = "common";
             ViewData["managers"] = managers;
             ViewData["page"] = page;
 

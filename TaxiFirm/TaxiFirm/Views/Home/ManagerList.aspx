@@ -43,7 +43,19 @@ a:hover
 
 
         });
+        $(".btn").click(
+        function () {
+            var NameInput = document.getElementById("NameID");
+            var name = NameInput.value;
+            var form1 = document.getElementById("search_form");
+            form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=1";
+            form1.submit();
 
+
+
+        }
+
+        );
         $(".ChangePage").click(
         function () {
 
@@ -60,7 +72,16 @@ a:hover
                     window.alert("已到最前页");
                 } else {
 
-                    form1.action = "/Home/ManagerList?page=" + (CurrentPage - 1);
+                    var type = document.getElementById("type").value;
+
+
+                    if ("common" == type) {
+                        form1.action = "/Home/ManagerList?type=common&page=" + (CurrentPage - 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=" + (CurrentPage - 1);
+                    }
                     form1.submit();
 
                 }
@@ -73,9 +94,17 @@ a:hover
                     window.alert("已到最后页");
 
                 } else {
-                    form1.action = "/Home/ManagerList?page=" + (CurrentPage + 1);
-                    form1.submit();
+                    var type = document.getElementById("type").value;
 
+
+                    if ("common" == type) {
+                        form1.action = "/Home/ManagerList?type=common&page=" + (CurrentPage + 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
+                    }
+                    form1.submit();
                 }
 
             }
@@ -93,7 +122,9 @@ a:hover
 </script>
 
 <% List<Manager> managers = (List<Manager>)ViewData["managers"];
-    MyPage page = (MyPage)ViewData["page"];%>
+    MyPage page = (MyPage)ViewData["page"];
+    string type = (string)ViewData["type"];
+    %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -144,8 +175,8 @@ a:hover
                     <div class="span6">
                          <p>&nbsp;</p>
                          <p>&nbsp;</p>
-                         <form class="form-search"> 
-                            <input type="text" title= "输入客户名或id" class="input-medium search-query" /> <button type="submit" class="btn">搜索</button>
+                         <form id="search_form" method="post"> 
+                            <input type="text" title= "输入客户名或id" class="input-medium search-query" id="NameID" name="NameID" /> <button type="button" class="btn">搜索</button>
                       </form>
                 </div>
                 </div>
@@ -164,133 +195,60 @@ a:hover
                             <th>信息</th>
                         </tr>
                     </thead>
+                    <% if (managers != null && managers.Count != 0)
+                       { %>
                     <tbody>
-                    <%int num=(page.CurrentPage-1)*page.CountPerPage+1;
-                        for(int i=0;i<managers.Count;i++) 
-                        {
-                            Manager manager = managers[i];%>
+                    <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+
+                      for (int i = 0; i < managers.Count; i++)
+                      {
+                          Manager manager = managers[i];%>
                        
-                        <%if(i==0||i==5) {%>  <tr>
-                        <%}else if(i==1||i==6){%> <tr class="success">
-                        <%}else if(i==2||i==7){ %><tr class="error">
-                        <%}else if(i==3||i==8){ %><tr class="warning">
-                        <%}else if(i==4||i==9){ %><tr class="info">
+                        <%if (i == 0 || i == 5)
+                          {%>  <tr>
+                        <%}
+                          else if (i == 1 || i == 6)
+                          {%> <tr class="success">
+                        <%}
+                          else if (i == 2 || i == 7)
+                          { %><tr class="error">
+                        <%}
+                          else if (i == 3 || i == 8)
+                          { %><tr class="warning">
+                        <%}
+                          else if (i == 4 || i == 9)
+                          { %><tr class="info">
                         <%}%>
                      
                             <td>
-                                <%:num++ %>
+                                <%:num++%>
                             </td>
-                            <td><%:manager.Name %></td>
+                            <td><%:manager.Name%></td>
                             <td>
-                                <%:manager.Age %></td>
-                            <td><%:manager.Gender %></td>
-                            <td><%:manager.Telephone %></td>
+                                <%:manager.Age%></td>
+                            <td><%:manager.Gender%></td>
+                            <td><%:manager.Telephone%></td>
                             <td>有</td>
                             <td  style="color:#900" class="pointer"><a href="/Home/ManagerInfo?id=<%:manager.EmployId%>">信息管理</a></td>
                         </tr>
-                        <%} %>
-                     <!--   <tr class="success">
-                          <td align="center"><input name="input" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>无</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input2" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input3" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input4" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        
-                        <tr>
-                          <td align="center"><input name="input5" type="checkbox" value="" /></td>
-                            <td>
-                                1
-                            </td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="success">
-                          <td align="center"><input name="input6" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input7" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>方志晗</td>
-                            <td>20 </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input8" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>方志晗</td>
-                            <td>
-                                20
-                            </td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input9" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>方志晗</td>
-                            <td>20</td>
-                            <td>男</td>
-                            <td>18817598873</td>
-                            <td>5</td>
-                            <td><span class="pointer" style="color:#900">信息管理</span></td>
-                        </tr>-->
-                        
-                    </tbody>
+                        <%}
+                      
+                       %>
+                    
+                    </tbody><%} %>
                 </table>
                 
                <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
 
-
+               <input type="hidden" id="type" value=<%:type%> />
+               <%if ("search".Equals(type)) { 
+                 
+                 %>
+                 
+                 <input type="hidden" id="name_id" value="<%:ViewData["NameID"] %>" />
+                 <%
+                 
+                 }%>
             <div class="pagination pagination-centered">
               <ul>
                 <li> <a class="ChangePage" id="Prev">Prev</a> </li>
@@ -299,29 +257,54 @@ a:hover
                     {
                         current++;
                         if (current == page.CurrentPage)
-                        { %>
-                      <li> <a href="/Home/ManagerList?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
-                      <%
+                        {
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
 }
                         else if (current >= 1 && current <= page.WholePage)
-                        {%>
-                  
-                <li> <a href="/Home/ManagerList?page=<%:current%>"><%:current%></a> </li>
-                <%}
+                        
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
                         else if (current < 1)
                         {
                             while (current < 1)
                             { current++; }
 
                             if (current == page.CurrentPage)
-                            { %>
-                      <li> <a href="/Home/ManagerList?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
-                      <%
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
 }
                             else
-                            {%> 
-                           <li> <a href="/Home/ManagerList?page=<%:current%>"><%:current%></a> </li>
-                          <%
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" ><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
 }
                         }
                     }%>
