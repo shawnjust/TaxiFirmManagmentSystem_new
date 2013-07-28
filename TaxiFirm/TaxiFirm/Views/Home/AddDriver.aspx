@@ -96,7 +96,7 @@
                                     <h4>驾驶证编号：</h4>
                                 </label>
                                 <p>
-                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{17}[\d|X]|\d{15}" title="驾驶证编号为15位数字"  onblur="if (!(/\d{17}[\d|X]|\d{15}/.test(this.value)) ){alert('驾驶证编号为15位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{15}[\d|X]|\d{12}" title="驾驶证编号为12位数字"  onblur="if (!(/\d{15}[\d|X]|\d{12}/.test(this.value)) ){alert('驾驶证编号为12位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     <h4>身份证号：</h4>
