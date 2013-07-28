@@ -1,6 +1,5 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="taxiserver" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=10.60.36.5;Initial Catalog=taxiserver;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="taxiserverConnectionString" Provider="System.Data.SqlClient" />
-<<<<<<< HEAD
   <Function Name="dbo.checkCustomerLoginPassword" Method="checkCustomerLoginPassword" IsComposable="true">
     <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
@@ -32,71 +31,11 @@
       <Column Name="taxi_count" Type="System.Int32" DbType="Int" CanBeNull="true" />
     </ElementType>
   </Function>
-  <Function Name="dbo.getCustomerByPage" Method="getCustomerByPage" IsComposable="true">
-    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
-    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getCustomerByPageResult">
-      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
-=======
-  <Function Name="dbo.getManagerPageCount" Method="getManagerPageCount" IsComposable="true">
-    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getManagerByPage" Method="getManagerByPage" IsComposable="true">
-    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
-    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getManagerByPageResult">
-      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="id_card" Type="System.String" DbType="Char(20)" CanBeNull="true" />
-      <Column Name="gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="telephone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
-      <Column Name="firm_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="firm_name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
-      <Column Name="phone_number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
-      <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-      <Column Name="firm_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
->>>>>>> 7fcf975372e9dd7c256379a8268ce822ff7314d1
-    </ElementType>
-  </Function>
-  <Function Name="dbo.getCustomerById" Method="getCustomerById" IsComposable="true">
-    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getCustomerByIdResult">
-      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
-  <Function Name="dbo.getCustomePageCount" Method="getCustomePageCount" IsComposable="true">
-    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-<<<<<<< HEAD
-=======
-  <Function Name="dbo.getCustomerByPage" Method="getCustomerByPage" IsComposable="true">
-    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
-    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getCustomerByPageResult">
-      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
-      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.getCustomerInvoicePageCount" Method="getCustomerInvoicePageCount" IsComposable="true">
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
     <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
->>>>>>> 7fcf975372e9dd7c256379a8268ce822ff7314d1
   <Function Name="dbo.getCustomerInvoiceByPage" Method="getCustomerInvoiceByPage" IsComposable="true">
     <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
@@ -113,10 +52,28 @@
       <Column Name="regist_time" Type="System.DateTime" DbType="SmallDateTime" CanBeNull="true" />
     </ElementType>
   </Function>
-<<<<<<< HEAD
-  <Function Name="dbo.getCustomerInvoicePageCount" Method="getCustomerInvoicePageCount" IsComposable="true">
+  <Function Name="dbo.getCustomerByPage" Method="getCustomerByPage" IsComposable="true">
+    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getCustomerByPageResult">
+      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getCustomerById" Method="getCustomerById" IsComposable="true">
     <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getCustomerByIdResult">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getCustomePageCount" Method="getCustomePageCount" IsComposable="true">
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.getEmpolyeeById" Method="getEmpolyeeById" IsComposable="true">
@@ -131,32 +88,7 @@
       <Column Name="telephone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
       <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-=======
-  <Function Name="dbo.isHost" Method="isHost" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.isDriver" Method="isDriver" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.isEmpolyee" Method="isEmpolyee" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.isManager" Method="isManager" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.checkEmpolyeeLoginPassword" Method="checkEmpolyeeLoginPassword" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.checkCustomerLoginPassword" Method="checkCustomerLoginPassword" IsComposable="true">
-    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
+    </ElementType>
   </Function>
   <Function Name="dbo.getFirmByID" Method="getFirmByID" IsComposable="true">
     <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
@@ -165,7 +97,6 @@
       <Column Name="firm_name" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
       <Column Name="firm_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
       <Column Name="phone_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
->>>>>>> 7fcf975372e9dd7c256379a8268ce822ff7314d1
     </ElementType>
   </Function>
   <Function Name="dbo.getFirmViewByPage" Method="getFirmViewByPage" IsComposable="true">
@@ -188,7 +119,22 @@
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-<<<<<<< HEAD
+  <Function Name="dbo.isDriver" Method="isDriver" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isEmpolyee" Method="isEmpolyee" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isHost" Method="isHost" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.isManager" Method="isManager" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.getManagerByPage" Method="getManagerByPage" IsComposable="true">
     <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
@@ -211,47 +157,47 @@
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.isDriver" Method="isDriver" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+<<<<<<< HEAD
+  <Function Name="dbo.getManagerByNamePageCount" Method="getManagerByNamePageCount" IsComposable="true">
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="managerName" Type="System.String" DbType="VarChar(20)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.isEmpolyee" Method="isEmpolyee" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.isManager" Method="isManager" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.isHost" Method="isHost" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-=======
-  <Function Name="dbo.getEmpolyeeIdByIdCard" Method="getEmpolyeeIdByIdCard" IsComposable="true">
-    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.getEmpolyeeById" Method="getEmpolyeeById" IsComposable="true">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getEmpolyeeByIdResult">
+  <Function Name="dbo.getManagerByNameByPage" Method="getManagerByNameByPage" IsComposable="true">
+    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="managerName" Type="System.String" DbType="VarChar(20)" />
+    <ElementType Name="getManagerByNameByPageResult">
+      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
       <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="firm_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="id_card" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
-      <Column Name="birthday" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="id_card" Type="System.String" DbType="Char(20)" CanBeNull="true" />
       <Column Name="gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
-      <Column Name="telephone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="age" Type="System.Int32" DbType="Int" CanBeNull="true" />
-      <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="telephone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="birthday" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="firm_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="firm_name" Type="System.String" DbType="NVarChar(20)" CanBeNull="true" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="firm_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
+=======
+  <Function Name="dbo.addDriver" Method="addDriver">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="health" Type="System.Int32" DbType="Int" />
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.getAllFirm" Method="getAllFirm" IsComposable="true">
-    <ElementType Name="getAllFirmResult">
-      <Column Name="firm_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="firm_name" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
-      <Column Name="firm_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="phone_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
-    </ElementType>
->>>>>>> 7fcf975372e9dd7c256379a8268ce822ff7314d1
+  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+>>>>>>> 447ab165ee3609852310a3d252c62f1c0cc91575
   </Function>
 </Database>
