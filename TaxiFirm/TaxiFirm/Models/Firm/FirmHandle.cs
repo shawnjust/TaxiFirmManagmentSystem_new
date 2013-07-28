@@ -34,5 +34,30 @@ namespace TaxiFirm.Models.Firm
 
             return firms;
         }
+
+        public List<Firm> GetAllFirm()
+        {
+
+
+
+            var table = data.getAllFirm();
+            List<Firm> firms = new List<Firm>();
+            foreach (var col in table)
+            {
+
+                Firm firm = new Firm();
+
+                firm.FirmAddress = col.firm_address;
+                firm.FirmID = col.firm_id;
+                firm.FirmName = col.firm_name;
+              
+                firm.PhoneNumber = col.phone_number;
+         
+                firms.Add(firm);
+
+            }
+
+            return firms;
+        }
     }
 }

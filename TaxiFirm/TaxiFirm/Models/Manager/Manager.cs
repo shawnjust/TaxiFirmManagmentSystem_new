@@ -19,6 +19,7 @@ namespace TaxiFirm.Models.Manager
         public int EmployId { get; set; }
         public TaxiFirm.Models.Firm.Firm firm { get; set; }
         public DataClasses1DataContext data = new DataClasses1DataContext();
+        public bool GenderBite { get; set; }
         public Manager()
         {
         }
@@ -38,6 +39,7 @@ namespace TaxiFirm.Models.Manager
                 this.Birthday = col.birthday;
                 this.Address = col.empolyee_address;
                 this.Telephone = col.telephone;
+                this.GenderBite = (bool)col.gender;
                 
                 this.Age = int.Parse(DateTime.Now.Year.ToString()) -int.Parse(Birthday.Year.ToString());
                 if (col.gender==null)
