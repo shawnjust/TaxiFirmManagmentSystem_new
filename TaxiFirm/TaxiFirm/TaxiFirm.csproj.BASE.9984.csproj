@@ -1,0 +1,495 @@
+﻿<?xml version="1.0" encoding="utf-8"?>
+<Project ToolsVersion="4.0" DefaultTargets="Build" xmlns="http://schemas.microsoft.com/developer/msbuild/2003">
+  <PropertyGroup>
+    <Configuration Condition=" '$(Configuration)' == '' ">Debug</Configuration>
+    <Platform Condition=" '$(Platform)' == '' ">AnyCPU</Platform>
+    <ProductVersion>
+    </ProductVersion>
+    <SchemaVersion>2.0</SchemaVersion>
+    <ProjectGuid>{17857FC3-5E21-4AF2-BCC4-66F41174DB2B}</ProjectGuid>
+    <ProjectTypeGuids>{F85E285D-A4E0-4152-9332-AB1D724D3325};{349c5851-65df-11da-9384-00065b846f21};{fae04ec0-301f-11d3-bf4b-00c04f79efbc}</ProjectTypeGuids>
+    <OutputType>Library</OutputType>
+    <AppDesignerFolder>Properties</AppDesignerFolder>
+    <RootNamespace>TaxiFirm</RootNamespace>
+    <AssemblyName>TaxiFirm</AssemblyName>
+    <TargetFrameworkVersion>v4.0</TargetFrameworkVersion>
+    <MvcBuildViews>false</MvcBuildViews>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Debug|AnyCPU' ">
+    <DebugSymbols>true</DebugSymbols>
+    <DebugType>full</DebugType>
+    <Optimize>false</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>DEBUG;TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <PropertyGroup Condition=" '$(Configuration)|$(Platform)' == 'Release|AnyCPU' ">
+    <DebugType>pdbonly</DebugType>
+    <Optimize>true</Optimize>
+    <OutputPath>bin\</OutputPath>
+    <DefineConstants>TRACE</DefineConstants>
+    <ErrorReport>prompt</ErrorReport>
+    <WarningLevel>4</WarningLevel>
+  </PropertyGroup>
+  <ItemGroup>
+    <Reference Include="Microsoft.CSharp" />
+    <Reference Include="System" />
+    <Reference Include="System.Data" />
+    <Reference Include="System.Data.Linq" />
+    <Reference Include="System.Drawing" />
+    <Reference Include="System.Web.DynamicData" />
+    <Reference Include="System.Web.Entity" />
+    <Reference Include="System.Web.ApplicationServices" />
+    <Reference Include="System.ComponentModel.DataAnnotations">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Core">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Data.DataSetExtensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Mvc, Version=2.0.0.0, Culture=neutral, PublicKeyToken=31bf3856ad364e35, processorArchitecture=MSIL" />
+    <Reference Include="System.Xml.Linq">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web" />
+    <Reference Include="System.Web.Extensions">
+      <RequiredTargetFramework>3.5</RequiredTargetFramework>
+    </Reference>
+    <Reference Include="System.Web.Abstractions" />
+    <Reference Include="System.Web.Routing" />
+    <Reference Include="System.Xml" />
+    <Reference Include="System.Configuration" />
+    <Reference Include="System.Web.Services" />
+    <Reference Include="System.EnterpriseServices" />
+  </ItemGroup>
+  <ItemGroup>
+    <Compile Include="Controllers\AccountController.cs" />
+    <Compile Include="Controllers\FrontPageController.cs" />
+    <Compile Include="Controllers\HandleController.cs" />
+    <Compile Include="Controllers\HomeController.cs" />
+    <Compile Include="Global.asax.cs">
+      <DependentUpon>Global.asax</DependentUpon>
+    </Compile>
+    <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\DataClasses1.designer.cs">
+      <AutoGen>True</AutoGen>
+      <DesignTime>True</DesignTime>
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </Compile>
+    <Compile Include="Models\HostModels.cs" />
+    <Compile Include="Models\IdentityHandle.cs" />
+    <Compile Include="Properties\AssemblyInfo.cs" />
+  </ItemGroup>
+  <ItemGroup>
+    <Content Include="Content\css\BackControl\BackControlLeft.css" />
+    <Content Include="Content\css\BackControl\driver.css" />
+    <Content Include="Content\css\BackControl\model.css" />
+    <Content Include="Content\css\BackControl\UpBackgoundMain.css" />
+    <Content Include="Content\css\BackControl\UpBackground.css" />
+    <Content Include="Content\css\fonts\fontawesome-webfont.svg" />
+    <Content Include="Content\css\FrontPage\base.css" />
+    <Content Include="Content\css\FrontPage\colors\beige.css" />
+    <Content Include="Content\css\FrontPage\colors\blue.css" />
+    <Content Include="Content\css\FrontPage\colors\brown.css" />
+    <Content Include="Content\css\FrontPage\colors\celadon.css" />
+    <Content Include="Content\css\FrontPage\colors\cherry.css" />
+    <Content Include="Content\css\FrontPage\colors\cyan.css" />
+    <Content Include="Content\css\FrontPage\colors\dark.css" />
+    <Content Include="Content\css\FrontPage\colors\dirty-green.css" />
+    <Content Include="Content\css\FrontPage\colors\gray.css" />
+    <Content Include="Content\css\FrontPage\colors\green.css" />
+    <Content Include="Content\css\FrontPage\colors\navy.css" />
+    <Content Include="Content\css\FrontPage\colors\olive.css" />
+    <Content Include="Content\css\FrontPage\colors\orange.css" />
+    <Content Include="Content\css\FrontPage\colors\peach.css" />
+    <Content Include="Content\css\FrontPage\colors\pink.css" />
+    <Content Include="Content\css\FrontPage\colors\purple.css" />
+    <Content Include="Content\css\FrontPage\colors\red.css" />
+    <Content Include="Content\css\FrontPage\colors\yellow.css" />
+    <Content Include="Content\css\FrontPage\icons.css" />
+    <Content Include="Content\css\FrontPage\login-style.css" />
+    <Content Include="Content\css\FrontPage\responsive.css" />
+    <Content Include="Content\css\FrontPage\style.css" />
+    <Content Include="Content\css\FrontPage\switcher.css" />
+    <Content Include="Content\css\images\about-01.jpg" />
+    <Content Include="Content\css\images\about-02.jpg" />
+    <Content Include="Content\css\images\about-03.jpg" />
+    <Content Include="Content\css\images\about.jpg" />
+    <Content Include="Content\css\images\accordion-minus.png" />
+    <Content Include="Content\css\images\accordion-minus_402x.png" />
+    <Content Include="Content\css\images\accordion-plus.png" />
+    <Content Include="Content\css\images\accordion-plus_402x.png" />
+    <Content Include="Content\css\images\ajax-loader.gif" />
+    <Content Include="Content\css\images\bg\bedge_grunge.png" />
+    <Content Include="Content\css\images\bg\brushed_alu.png" />
+    <Content Include="Content\css\images\bg\crisp_paper_ruffles.png" />
+    <Content Include="Content\css\images\bg\diamond_upholstery.png" />
+    <Content Include="Content\css\images\bg\egg_shell.png" />
+    <Content Include="Content\css\images\bg\grey.png" />
+    <Content Include="Content\css\images\bg\light_toast.png" />
+    <Content Include="Content\css\images\bg\linedpaper.png" />
+    <Content Include="Content\css\images\bg\noise.png" />
+    <Content Include="Content\css\images\bg\noise_pattern_with_crosslines.png" />
+    <Content Include="Content\css\images\bg\purty_wood.png" />
+    <Content Include="Content\css\images\bg\retina_dust.png" />
+    <Content Include="Content\css\images\bg\scribble_light.png" />
+    <Content Include="Content\css\images\bg\subtle_stripes.png" />
+    <Content Include="Content\css\images\bg\textured_stripes.png" />
+    <Content Include="Content\css\images\bg\tileable_wood_texture.png" />
+    <Content Include="Content\css\images\bg\vichy.png" />
+    <Content Include="Content\css\images\bg\washi.png" />
+    <Content Include="Content\css\images\blank.gif" />
+    <Content Include="Content\css\images\blog-01-large.jpg" />
+    <Content Include="Content\css\images\blog-01-medium.jpg" />
+    <Content Include="Content\css\images\blog-01.jpg" />
+    <Content Include="Content\css\images\blog-02-medium.jpg" />
+    <Content Include="Content\css\images\blog-02a-large.jpg" />
+    <Content Include="Content\css\images\blog-02a.jpg" />
+    <Content Include="Content\css\images\blog-02b-large.jpg" />
+    <Content Include="Content\css\images\blog-02b.jpg" />
+    <Content Include="Content\css\images\blog-02c-large.jpg" />
+    <Content Include="Content\css\images\blog-02c.jpg" />
+    <Content Include="Content\css\images\blog-03-medium.jpg" />
+    <Content Include="Content\css\images\blog-03.jpg" />
+    <Content Include="Content\css\images\blog-04-medium.jpg" />
+    <Content Include="Content\css\images\breadcrumbs.png" />
+    <Content Include="Content\css\images\breadcrumbs_402x.png" />
+    <Content Include="Content\css\images\categories.png" />
+    <Content Include="Content\css\images\categories_402x.png" />
+    <Content Include="Content\css\images\comment-arrow.png" />
+    <Content Include="Content\css\images\fancybox_buttons.png" />
+    <Content Include="Content\css\images\fancybox_loading.gif" />
+    <Content Include="Content\css\images\fancybox_overlay.png" />
+    <Content Include="Content\css\images\fancybox_sprite.png" />
+    <Content Include="Content\css\images\glyphicons_halflings-white.png" />
+    <Content Include="Content\css\images\glyphicons_halflings-white.svg" />
+    <Content Include="Content\css\images\glyphicons_halflings.png" />
+    <Content Include="Content\css\images\glyphicons_halflings.svg" />
+    <Content Include="Content\css\images\icon-list-check.png" />
+    <Content Include="Content\css\images\icon-list-check_402x.png" />
+    <Content Include="Content\css\images\icon-list-plus.png" />
+    <Content Include="Content\css\images\icon-list-plus_402x.png" />
+    <Content Include="Content\css\images\icon-list-sign.png" />
+    <Content Include="Content\css\images\icon-list-sign_402x.png" />
+    <Content Include="Content\css\images\icon-list-star.png" />
+    <Content Include="Content\css\images\icon-list-star_402x.png" />
+    <Content Include="Content\css\images\layerslider-loader.gif" />
+    <Content Include="Content\css\images\layerslider-video.png" />
+    <Content Include="Content\css\images\logo-01.png" />
+    <Content Include="Content\css\images\logo-footer.png" />
+    <Content Include="Content\css\images\logo-footer2.png" />
+    <Content Include="Content\css\images\logo.png" />
+    <Content Include="Content\css\images\logo2.png" />
+    <Content Include="Content\css\images\logo3.png" />
+    <Content Include="Content\css\images\logo4.png" />
+    <Content Include="Content\css\images\portfolio\portfolio-001.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-002.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-003.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-01.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-02.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-03.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-04.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-05.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-06.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-07.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-08.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-09.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-10.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-11.jpg" />
+    <Content Include="Content\css\images\portfolio\portfolio-12.jpg" />
+    <Content Include="Content\css\images\portfolio\single-project-01-large.jpg" />
+    <Content Include="Content\css\images\portfolio\single-project-01.jpg" />
+    <Content Include="Content\css\images\portfolio\single-project-02-large.jpg" />
+    <Content Include="Content\css\images\portfolio\single-project-02.jpg" />
+    <Content Include="Content\css\images\search-2.png" />
+    <Content Include="Content\css\images\search-2_402x.png" />
+    <Content Include="Content\css\images\search.png" />
+    <Content Include="Content\css\images\search_402x.png" />
+    <Content Include="Content\css\images\slide-001.jpg" />
+    <Content Include="Content\css\images\slide-003.jpg" />
+    <Content Include="Content\css\images\slide-01.jpg" />
+    <Content Include="Content\css\images\slide-010.jpg" />
+    <Content Include="Content\css\images\slide-01a.png" />
+    <Content Include="Content\css\images\slide-02.png" />
+    <Content Include="Content\css\images\slide-0221.jpg" />
+    <Content Include="Content\css\images\slide-02a.png" />
+    <Content Include="Content\css\images\slide-02b.png" />
+    <Content Include="Content\css\images\slide-02c.png" />
+    <Content Include="Content\css\images\slide-02d.png" />
+    <Content Include="Content\css\images\slide-02e.png" />
+    <Content Include="Content\css\images\slide-03.jpg" />
+    <Content Include="Content\css\images\slide-04.jpg" />
+    <Content Include="Content\css\images\slide-05.jpg" />
+    <Content Include="Content\css\images\slider-left.png" />
+    <Content Include="Content\css\images\slider-left_402x.png" />
+    <Content Include="Content\css\images\slider-right.png" />
+    <Content Include="Content\css\images\slider-right_402x.png" />
+    <Content Include="Content\css\images\social\amazon.png" />
+    <Content Include="Content\css\images\social\amazon_402x.png" />
+    <Content Include="Content\css\images\social\blogger.png" />
+    <Content Include="Content\css\images\social\blogger_402x.png" />
+    <Content Include="Content\css\images\social\deviantart.png" />
+    <Content Include="Content\css\images\social\deviantart_402x.png" />
+    <Content Include="Content\css\images\social\digg.png" />
+    <Content Include="Content\css\images\social\digg_402x.png" />
+    <Content Include="Content\css\images\social\dribbble.png" />
+    <Content Include="Content\css\images\social\dribbble_402x.png" />
+    <Content Include="Content\css\images\social\facebook.png" />
+    <Content Include="Content\css\images\social\facebook_402x.png" />
+    <Content Include="Content\css\images\social\flickr.png" />
+    <Content Include="Content\css\images\social\flickr_402x.png" />
+    <Content Include="Content\css\images\social\forrst.png" />
+    <Content Include="Content\css\images\social\forrst_402x.png" />
+    <Content Include="Content\css\images\social\lastfm.png" />
+    <Content Include="Content\css\images\social\lastfm_402x.png" />
+    <Content Include="Content\css\images\social\linkedin.png" />
+    <Content Include="Content\css\images\social\linkedin_402x.png" />
+    <Content Include="Content\css\images\social\picasa.png" />
+    <Content Include="Content\css\images\social\picasa_402x.png" />
+    <Content Include="Content\css\images\social\pinterest.png" />
+    <Content Include="Content\css\images\social\pinterest_402x.png" />
+    <Content Include="Content\css\images\social\rss.png" />
+    <Content Include="Content\css\images\social\rss_402x.png" />
+    <Content Include="Content\css\images\social\skype.png" />
+    <Content Include="Content\css\images\social\skype_402x.png" />
+    <Content Include="Content\css\images\social\tumblr.png" />
+    <Content Include="Content\css\images\social\tumblr_402x.png" />
+    <Content Include="Content\css\images\social\twitter.png" />
+    <Content Include="Content\css\images\social\twitter_402x.png" />
+    <Content Include="Content\css\images\social\vimeo.png" />
+    <Content Include="Content\css\images\social\vimeo_402x.png" />
+    <Content Include="Content\css\images\social\wordpress.png" />
+    <Content Include="Content\css\images\social\wordpress_402x.png" />
+    <Content Include="Content\css\images\social\yahoo.png" />
+    <Content Include="Content\css\images\social\yahoo_402x.png" />
+    <Content Include="Content\css\images\social\youtube.png" />
+    <Content Include="Content\css\images\social\youtube_402x.png" />
+    <Content Include="Content\css\images\switcher.png" />
+    <Content Include="Content\css\images\switcher_402x.png" />
+    <Content Include="Content\css\images\testimonials-bg.png" />
+    <Content Include="Content\css\images\twitter-01.png" />
+    <Content Include="Content\css\images\twitter-01_402x.png" />
+    <Content Include="Content\favicon.ico" />
+    <Content Include="Content\picture\BackControl\1.png" />
+    <Content Include="Content\picture\BackControl\2.png" />
+    <Content Include="Content\picture\BackControl\3.png" />
+    <Content Include="Content\picture\BackControl\add.png" />
+    <Content Include="Content\picture\BackControl\BackBottom.png" />
+    <Content Include="Content\picture\BackControl\Beselect.jpg" />
+    <Content Include="Content\picture\BackControl\CenterBeSelect.png" />
+    <Content Include="Content\picture\BackControl\CenterUp.png" />
+    <Content Include="Content\picture\BackControl\CenterUp2.png" />
+    <Content Include="Content\picture\BackControl\CenterUp2Select.png" />
+    <Content Include="Content\picture\BackControl\date.png" />
+    <Content Include="Content\picture\BackControl\delete.png" />
+    <Content Include="Content\picture\BackControl\edit.png" />
+    <Content Include="Content\picture\BackControl\homeButton.png" />
+    <Content Include="Content\picture\BackControl\identity.png" />
+    <Content Include="Content\picture\BackControl\LeftButtom.png" />
+    <Content Include="Content\picture\BackControl\leftIcon.png" />
+    <Content Include="Content\picture\BackControl\leftSelect.png" />
+    <Content Include="Content\picture\BackControl\LeftUp.png" />
+    <Content Include="Content\picture\BackControl\LeftUpCenter.png" />
+    <Content Include="Content\picture\BackControl\logOut.jpg" />
+    <Content Include="Content\picture\BackControl\LogOut.png" />
+    <Content Include="Content\picture\BackControl\logout1.png" />
+    <Content Include="Content\picture\BackControl\number.png" />
+    <Content Include="Content\picture\BackControl\organization.png" />
+    <Content Include="Content\picture\BackControl\save.png" />
+    <Content Include="Content\picture\BackControl\select.jpg" />
+    <Content Include="Content\picture\BackControl\Upback.png" />
+    <Content Include="Content\picture\BackControl\UpBackground.jpg" />
+    <Content Include="Content\picture\BackControl\UpDownBackground.jpg" />
+    <Content Include="Content\picture\BackControl\UpHead.png" />
+    <Content Include="Content\picture\BackControl\Upicon.png" />
+    <Content Include="Content\picture\BackControl\Upnext.png" />
+    <Content Include="Content\picture\BackControl\User.png" />
+    <Content Include="Content\picture\driver.jpg" />
+    <Content Include="Content\picture\drivers\01.jpg" />
+    <Content Include="Content\picture\drivers\02.jpg" />
+    <Content Include="Content\picture\drivers\03.jpg" />
+    <Content Include="Content\picture\drivers\04.jpg" />
+    <Content Include="Content\picture\drivers\05.jpg" />
+    <Content Include="Content\picture\drivers\06.jpg" />
+    <Content Include="Content\picture\drivers\07.jpg" />
+    <Content Include="Content\picture\drivers\08.png" />
+    <Content Include="Content\picture\drivers\09.jpg" />
+    <Content Include="Content\picture\drivers\10.jpg" />
+    <Content Include="Global.asax" />
+    <Content Include="Scripts\BackControl\bootstrap.js" />
+    <Content Include="Scripts\BackControl\bootstrap.min.js" />
+    <Content Include="Scripts\BackControl\date.js" />
+    <Content Include="Scripts\BackControl\jquery.js" />
+    <Content Include="Scripts\BackControl\My97DatePicker\calendar.js" />
+    <Content Include="Scripts\BackControl\My97DatePicker\lang\en.js" />
+    <Content Include="Scripts\BackControl\My97DatePicker\lang\zh-cn.js" />
+    <Content Include="Scripts\BackControl\My97DatePicker\lang\zh-tw.js" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\datePicker.gif" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\default\datepicker.css" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\default\img.gif" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\WdatePicker.css" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\whyGreen\bg.jpg" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\whyGreen\datepicker.css" />
+    <Content Include="Scripts\BackControl\My97DatePicker\skin\whyGreen\img.gif" />
+    <Content Include="Scripts\BackControl\My97DatePicker\WdatePicker.js" />
+    <Content Include="Scripts\BackControl\thickbox_plus.js" />
+    <Content Include="Scripts\BackControl\UpSelect.js" />
+    <Content Include="Scripts\backLeft.js" />
+    <Content Include="Scripts\FrontPage\ChunkFive_400.font.js" />
+    <Content Include="Scripts\FrontPage\cufon-yui.js" />
+    <Content Include="Scripts\FrontPage\custom.js" />
+    <Content Include="Scripts\FrontPage\jquery-ui.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.contact.js" />
+    <Content Include="Scripts\FrontPage\jquery.easing.1.3.js" />
+    <Content Include="Scripts\FrontPage\jquery.fancybox.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.flexslider.js" />
+    <Content Include="Scripts\FrontPage\jquery.gmap.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.isotope.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.jcarousel.js" />
+    <Content Include="Scripts\FrontPage\jquery.layerslider.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.min.js" />
+    <Content Include="Scripts\FrontPage\jquery.modernizr.js" />
+    <Content Include="Scripts\FrontPage\jquery.selectnav.js" />
+    <Content Include="Scripts\FrontPage\jquery.twitter.js" />
+    <Content Include="Scripts\FrontPage\switcher.js" />
+    <Content Include="Views\fonts\fontawesome-webfont.svg" />
+    <Content Include="Views\FrontPage\About.aspx" />
+    <Content Include="Views\FrontPage\Complain.aspx" />
+    <Content Include="Views\FrontPage\Contact.aspx" />
+    <Content Include="Views\FrontPage\Elements.aspx" />
+    <Content Include="Views\FrontPage\ErrorPage.aspx" />
+    <Content Include="Views\FrontPage\Gallery.aspx" />
+    <Content Include="Views\FrontPage\Index.aspx" />
+    <Content Include="Views\FrontPage\Login.aspx" />
+    <Content Include="Views\FrontPage\News.aspx" />
+    <Content Include="Views\FrontPage\NewsContent.aspx" />
+    <Content Include="Views\FrontPage\Notification.aspx" />
+    <Content Include="Views\Home\AddCar.aspx" />
+    <Content Include="Views\Home\AddDriver.aspx" />
+    <Content Include="Views\Home\AddHost.aspx" />
+    <Content Include="Views\Home\AddNews.aspx" />
+    <Content Include="Views\Home\Backup.aspx" />
+    <Content Include="Views\Home\BackupList.aspx" />
+    <Content Include="Views\Home\CarDealing.aspx" />
+    <Content Include="Views\Home\CarInfoDisplay.aspx" />
+    <Content Include="Views\Home\ComplainList.aspx" />
+    <Content Include="Views\Home\Customer.aspx" />
+    <Content Include="Views\Home\DriverInfo.aspx" />
+    <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\FirmList.aspx" />
+    <Content Include="Views\Home\HostInfo.aspx" />
+    <Content Include="Views\Home\HostList.aspx" />
+    <Content Include="Views\Home\InformationList.aspx" />
+    <Content Include="Views\Home\InvoiceList.aspx" />
+    <Content Include="Views\Home\ManagerInfo.aspx" />
+    <Content Include="Views\Home\ManagerList.aspx" />
+    <Content Include="Views\Home\ManagerSelfInfo.aspx" />
+    <Content Include="Views\Home\ModifyManager.aspx" />
+    <Content Include="Views\Home\NewsList.aspx" />
+    <Content Include="Views\Home\NotificationContent.aspx" />
+    <Content Include="Views\Home\TaxiList.aspx" />
+    <Content Include="Views\Home\NewsContent.aspx" />
+    <Content Include="Views\Home\DriverSelect.aspx" />
+    <Content Include="Views\Shared\BackControlLeft.ascx" />
+    <Content Include="Views\Shared\BackControlUp.ascx" />
+    <Content Include="Web.config" />
+    <Content Include="Web.Debug.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Web.Release.config">
+      <DependentUpon>Web.config</DependentUpon>
+    </Content>
+    <Content Include="Content\Site.css" />
+    <Content Include="Scripts\jquery-1.4.1.js" />
+    <Content Include="Scripts\jquery-1.4.1.min.js" />
+    <Content Include="Scripts\jquery-1.4.1-vsdoc.js" />
+    <Content Include="Scripts\jquery.validate.js" />
+    <Content Include="Scripts\jquery.validate.min.js" />
+    <Content Include="Scripts\jquery.validate-vsdoc.js" />
+    <Content Include="Scripts\MicrosoftAjax.js" />
+    <Content Include="Scripts\MicrosoftAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.js" />
+    <Content Include="Scripts\MicrosoftMvcAjax.debug.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.js" />
+    <Content Include="Scripts\MicrosoftMvcValidation.debug.js" />
+    <Content Include="Views\Account\ChangePassword.aspx" />
+    <Content Include="Views\Account\ChangePasswordSuccess.aspx" />
+    <Content Include="Views\Account\LogOn.aspx" />
+    <Content Include="Views\Account\Register.aspx" />
+    <Content Include="Views\Home\About.aspx" />
+    <Content Include="Views\Home\Index.aspx" />
+    <Content Include="Views\Shared\Error.aspx" />
+    <Content Include="Views\Shared\LogOnUserControl.ascx" />
+    <Content Include="Views\Shared\Site.Master" />
+    <Content Include="Views\Web.config" />
+  </ItemGroup>
+  <ItemGroup>
+    <Folder Include="App_Data\" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Content\css\fonts\Descr.WD3" />
+    <None Include="Content\css\fonts\fontawesome-webfont.eot" />
+    <None Include="Content\css\fonts\fontawesome-webfont.eot%40" />
+    <None Include="Content\css\fonts\fontawesome-webfont.ttf" />
+    <None Include="Content\css\fonts\fontawesome-webfont.woff" />
+    <None Include="Content\css\images\bg\Descr.WD3" />
+    <None Include="Content\css\images\bg\Thumbs.db" />
+    <None Include="Content\css\images\Descr.WD3" />
+    <None Include="Content\css\images\portfolio\Descr.WD3" />
+    <None Include="Content\css\images\portfolio\Thumbs.db" />
+    <None Include="Content\css\images\social\Descr.WD3" />
+    <None Include="Content\css\images\social\Thumbs.db" />
+    <None Include="Content\picture\drivers\Thumbs.db" />
+    <None Include="Models\DataClasses1.dbml">
+      <Generator>MSLinqToSQLGenerator</Generator>
+      <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
+      <SubType>Designer</SubType>
+    </None>
+    <None Include="Scripts\BackControl\My97DatePicker\skin\whyGreen\Thumbs.db" />
+    <None Include="Scripts\BackControl\My97DatePicker\WdatePicker.js.bak" />
+    <None Include="Views\fonts\Descr.WD3" />
+    <None Include="Views\fonts\fontawesome-webfont.eot" />
+    <None Include="Views\fonts\fontawesome-webfont.eot%40" />
+    <None Include="Views\fonts\fontawesome-webfont.ttf" />
+    <None Include="Views\fonts\fontawesome-webfont.woff" />
+  </ItemGroup>
+  <ItemGroup>
+    <Service Include="{3259AA49-8AA1-44D3-9025-A0B520596A8C}" />
+  </ItemGroup>
+  <ItemGroup>
+    <None Include="Models\DataClasses1.dbml.layout">
+      <DependentUpon>DataClasses1.dbml</DependentUpon>
+    </None>
+  </ItemGroup>
+  <Import Project="$(MSBuildBinPath)\Microsoft.CSharp.targets" />
+  <Import Project="$(MSBuildExtensionsPath32)\Microsoft\VisualStudio\v10.0\WebApplications\Microsoft.WebApplication.targets" />
+  <!-- To modify your build process, add your task inside one of the targets below and uncomment it. 
+       Other similar extension points exist, see Microsoft.Common.targets.
+  <Target Name="BeforeBuild">
+  </Target> -->
+  <Target Name="AfterBuild" Condition="'$(MvcBuildViews)'=='true'">
+    <AspNetCompiler VirtualPath="temp" PhysicalPath="$(ProjectDir)" />
+  </Target>
+  <ProjectExtensions>
+    <VisualStudio>
+      <FlavorProperties GUID="{349c5851-65df-11da-9384-00065b846f21}">
+        <WebProjectProperties>
+          <UseIIS>False</UseIIS>
+          <AutoAssignPort>True</AutoAssignPort>
+          <DevelopmentServerPort>52949</DevelopmentServerPort>
+          <DevelopmentServerVPath>/</DevelopmentServerVPath>
+          <IISUrl>
+          </IISUrl>
+          <NTLMAuthentication>False</NTLMAuthentication>
+          <UseCustomServer>False</UseCustomServer>
+          <CustomServerUrl>
+          </CustomServerUrl>
+          <SaveServerSettingsInUserFile>False</SaveServerSettingsInUserFile>
+        </WebProjectProperties>
+      </FlavorProperties>
+    </VisualStudio>
+  </ProjectExtensions>
+</Project>
