@@ -1,4 +1,7 @@
 ﻿<%@ Control Language="C#" Inherits="System.Web.Mvc.ViewUserControl<dynamic>" %>
+ 
+ 
+
 <link href="../../Content/css/BackControl/UpBackground.css" rel="stylesheet" type="text/css" />
 <script src="../../Scripts/BackControl/jquery.js" type="text/javascript"></script>
 <script src="../../Scripts/BackControl/UpSelect.js" type="text/javascript"></script>
@@ -40,7 +43,7 @@
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("司机管理","DriverList","Home") %></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车辆管理", "TaxiList", "Home")%></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车主管理","HostList","Home") %></td>
-                <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("客户管理", "Customer", "Home")%></td>
+                <td width="129" align="center" valign="middle" class="upSelect"><a href="/Home/Customer?page=1">客户管理</a></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%:Html.ActionLink("信息管理","BackupList","Home")%></td>
                 <td width="129">&nbsp;</td>
               </tr>
@@ -52,7 +55,7 @@
             <td width="30%" height="48">&nbsp;</td>
             <td width="70%" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
-                <td height="58" valign="bottom"><img title="安全退出" id="logout" src="../../Content/picture/BackControl/logout1.png" width="92" height="34" /></td>
+                <td height="58" valign="bottom"><a href="/Home/BackHandle?type=logout"> <img title="安全退出" id="logout" src="../../Content/picture/BackControl/logout1.png" width="92" height="34" /></a></td>
                 </tr>
               <tr>
                 <td height="19">&nbsp;</td>
