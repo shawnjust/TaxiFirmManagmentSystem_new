@@ -29,7 +29,16 @@
                 return false;
             }
         }
-</script>
+
+        function submitAll() {
+            var form1 = window.document.getElementById("info_form1");
+            var form2 = window.document.getElementById("info_form2");
+            var form3 = window.document.getElementById("info_form3");
+            form1.submit();
+            form2.submit();
+            form3.submit();
+        }
+    </script>
 <body>
         <div class="container-fluid">
             <div class="row-fluid">
@@ -42,7 +51,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form name="basic_information_form" action="AddDriver.aspx">
+                            <form name="basic_information_form" id="info_form1" action="/Home/SaveDriverInfo" method="post">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
@@ -60,7 +69,7 @@
                                         <h4>司机性别</h4>
                                 </p>
                                 <p>
-                                   <small><input id="man" type="radio" checked="checked" name="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="1"/>&nbsp;&nbsp;女
+                                   <small><input id="man" type="radio" checked="checked" name="Driver_Gender" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="Driver_Gender"/>&nbsp;&nbsp;女
                                    </small>
                                 </p>
                                 <p>
@@ -79,7 +88,7 @@
                             </form>
                             </div>
                             <div class="span4">
-                            	<form>
+                            	<form id="info_form2" action="/Home/SaveDriverInfo" method="post">
                                 <br/>
                             <fieldset>
                                 <legend><h3>扩展信息</h3></legend><legend>
@@ -87,7 +96,7 @@
                                     <h4>驾驶证编号：</h4>
                                 </label>
                                 <p>
-                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{17}[\d|X]|\d{15}" title="驾驶证编号为15位数字"  onblur="if (!(/\d{17}[\d|X]|\d{15}/.test(this.value)) ){alert('驾驶证编号为15位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{15}[\d|X]|\d{12}" title="驾驶证编号为12位数字"  onblur="if (!(/\d{15}[\d|X]|\d{12}/.test(this.value)) ){alert('驾驶证编号为12位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     <h4>身份证号：</h4>
@@ -106,11 +115,11 @@
                             </div>
                             
                             <div class="span4">
-                            <form>
+                            <form id="info_form3" action="/Home/SaveDriverInfo" method="post">
                               <br/>
                             <fieldset>
                           
-                                <legend><h3>联系方式</h3></legend><legend>
+                                <legend><h3>联系方式</h3></legend>
                                 <p>
                                 <h4>联系电话</h4>
                                 </p>
