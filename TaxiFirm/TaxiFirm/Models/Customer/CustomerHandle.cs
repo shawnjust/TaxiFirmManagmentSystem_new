@@ -15,12 +15,50 @@ namespace TaxiFirm.Models.Customer
             Customer customer= new Customer();
             var table = data.getCustomerById(id);
             var col = table.First<getCustomerByIdResult>();
-            customer.Credit = (int)col.credit;
+            if (col.credit == null)
+            { customer.Credit = 0; }
+            else
+            {
+                customer.Credit = (int)col.credit;
+            }
             customer.CustomerId = col.customer_id;
             customer.Email = col.email;
             customer.NickName = col.nick_name;
             return customer;
         }
+
+
+           //通过名称分页得到客户页面
+        public List<Customer> GetCustomerByNameByPage(MyPage page,string CustomerName)
+        {
+            CustomerName="%"+CustomerName+"%";
+            page.CountPerPage = 10;
+            page.WholePage = (int)data.getCustomerByNamePageCount(page.CountPerPage,CustomerName);
+            var table = data.getCustomerByNameByPage(page.CurrentPage, page.CountPerPage,CustomerName);
+            List<Customer> customers = new List<Customer>();
+
+            foreach (var col in table)
+            {
+
+                Customer customer = new Customer();
+                customer.CustomerId = col.customer_id;
+                customer.Email=col.email;
+                customer.NickName = col.nick_name;
+                if (col.credit == null)
+                { customer.Credit = 0; }
+                else{
+                customer.Credit = (int)col.credit;
+            }
+            
+
+                customers.Add(customer);
+
+            }
+
+            return customers;
+        }
+    
+
 
         //分页得到客户页面
         public List<Customer> GetcustomerByPage(MyPage page)
@@ -37,7 +75,12 @@ namespace TaxiFirm.Models.Customer
                 customer.CustomerId = col.customer_id;
                 customer.Email=col.email;
                 customer.NickName = col.nick_name;
-                customer.Credit = (int)col.credit;
+                if (col.credit == null)
+                { customer.Credit = 0; }
+                else
+                {
+                    customer.Credit = (int)col.credit;
+                }
                 customers.Add(customer);
 
             }

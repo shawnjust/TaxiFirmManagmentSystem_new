@@ -8,7 +8,7 @@ using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.Invoice;
-using TaxiFirm.Models.Driver;
+using TaxiFirm.Models.Employee;
 namespace TaxiFirm.Controllers
 {
 
@@ -95,11 +95,64 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Customer()
         {
-            MyPage page = new MyPage();
-            page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
-            ViewData["customers"] = new CustomerHandle().GetcustomerByPage(page);
-            ViewData["page"] = page;
 
+             string type = Request.QueryString.Get("type");
+
+             if (type.Equals("search"))   //搜索类型
+             {
+                 int page1 = int.Parse(Request.QueryString.Get("page"));
+                 string NameID = Request.QueryString.Get("NameID");
+                 try
+                 {
+                     int id = int.Parse(NameID);
+                     Customer customer = new CustomerHandle().getCustomerById(id);
+                     List<Customer> customers = new List<Customer>();
+                     if (customer.NickName != null && !customer.Equals(""))
+                     {
+                         customers.Add(customer);
+                     }
+                     ViewData["type"] = "search";
+                     ViewData["customers"] = customers;
+                     MyPage page = new MyPage();
+                     page.CurrentPage = page1;
+                     page.CountPerPage = 10;
+                     page.WholePage = 1;
+                     ViewData["page"] = page;
+                     ViewData["NameID"] = NameID;
+
+
+
+
+                 }
+                 catch
+                 {
+
+                     MyPage page = new MyPage();
+
+
+                     page.CurrentPage = page1;
+
+                     List<Customer> customers = new CustomerHandle().GetCustomerByNameByPage(page, NameID);
+                     ViewData["type"] = "search";
+                     ViewData["customers"] = customers;
+                     ViewData["page"] = page;
+                     ViewData["NameID"] = NameID;
+
+
+
+
+                 }
+
+
+             }
+             else if("common".Equals(type))
+             {
+                 MyPage page = new MyPage();
+                 page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
+                 ViewData["customers"] = new CustomerHandle().GetcustomerByPage(page);
+                 ViewData["page"] = page;
+                 ViewData["type"] = "common";
+             }
             return View();
         }
         public ActionResult TaxiList()
@@ -118,17 +171,68 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+        public ActionResult NotificationContent()
+        {
+            return View();
+        }
         public ActionResult InvoiceList()
         {
-            MyPage page = new MyPage();
-            page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
-            int CustomerId = int.Parse(Request.QueryString.Get("id"));
 
-            ViewData["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(CustomerId, page);
-            ViewData["page"] = page;
-            ViewData["customer"] = new CustomerHandle().getCustomerById(CustomerId);
-            
+
+              string type = Request.QueryString.Get("type");
+              if (type.Equals("search"))   //搜索类型
+              {
+                 
+                  string NameID = Request.QueryString.Get("NameID");
+                  
+                      int id = int.Parse(NameID);
+                      Invoice invoice = new InvoiceHandle().GetInvoiceByID(id);
+                      List<Invoice> invoices = new List<Invoice>();
+                      if (invoice.CustomerId != null && !invoice.CustomerId.Equals(""))
+                      {
+                          invoices.Add(invoice);
+                      }
+                     
+                      ViewData["invoices"] = invoices;
+                      ViewData["type"] = "search";
+                      MyPage page = new MyPage();
+                      page.CurrentPage = 1;
+                      page.CountPerPage = 10;
+                 
+                      page.WholePage = 1;
+
+                      ViewData["page"] = page;
+
+
+
+
+                
+
+
+              }
+              else
+              {
+
+                  MyPage page = new MyPage();
+                  page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
+                  int CustomerId = int.Parse(Request.QueryString.Get("id"));
+
+                  ViewData["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(CustomerId, page);
+                  ViewData["page"] = page;
+                  ViewData["customer"] = new CustomerHandle().getCustomerById(CustomerId);
+                  ViewData["type"] = "common";
+              }
             return View();
+        }
+        public ActionResult EmployeeInfo()
+        {
+            int id = int.Parse(Request.QueryString.Get("id"));
+            ViewData["type"] = Request.QueryString.Get("type");
+            Employee employee = new EmployeeHandle().getEmployeeById(id);
+            ViewData["employee"] = employee;
+            return View();
+            
+        
         }
         public ActionResult ComplainList()
         {
@@ -182,10 +286,7 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
-        public ActionResult NotificationContent()
-        {
-            return View();
-        }
+       
         public ActionResult BackupList()
         {
             return View();
@@ -281,6 +382,7 @@ namespace TaxiFirm.Controllers
 
             Session["CurrentManager"] = manager;
 
+
             return RedirectToAction("ManagerSelfInfo");
         }
         public ActionResult FirmList()
@@ -327,47 +429,83 @@ namespace TaxiFirm.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveDriverInfo(string Driver_Name, string Driver_Gender, string firm_id,string Driver_Birthday, string Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
+        public ActionResult SaveDriverInfo(string Driver_Name, bool Driver_Gender, DateTime Driver_Birthday, int Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
         {
-            DriverHandle handler = new DriverHandle();
+            TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+            ViewData["Driver_Name"] = Driver_Name;
+            ViewData["Driver_ID"] = Driver_ID;
+            ViewData["Driver_Birthday"] = Driver_Birthday;
+            ViewData["Driver_Gender"] = Driver_Gender;
+            ViewData["Driver_TelePhone"] = Driver_TelePhone;
+            ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
+            ViewData["Driver_Condition"] = Driver_Condition;
+            ViewData["Driver_LicenseID"] = Driver_LicenseID;
+          //  db.addEmpolyee("1234", 1, Driver_Name, Driver_ID, Driver_Birthday, Driver_Gender, Driver_TelePhone, Driver_HomeAddress);
+           // db.addDriver(10, Driver_Condition, Driver_LicenseID);
+            return View();
+        }
 
-            ///////////////////////////////unused code///////////////////////////////////////////
-//             TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
-//             bool Gender=false;
-//             DateTime Birthday = DateTime.Parse(Driver_Birthday);
-//             int Condition = int.Parse(Driver_Condition);
-//             int Firm_id = int.Parse(firm_id);
-//             string password = Driver_ID.Substring(13, 4);
-//             ViewData["Driver_Name"] = Driver_Name;
-//             ViewData["Driver_ID"] = Driver_ID;
-//             ViewData["Driver_Birthday"] = Birthday;
-//             Gender = bool.Parse(Driver_Gender);
-//             if (Driver_Gender.Equals("true"))
-//             {
-//                 Driver_Gender = "男";
-//             }
-//             else
-//             {
-//                 Driver_Gender = "女";
-//             }
-//             if (getAgefromBirthday(Birthday)!=0)
-//             {
-//                 ViewData["Driver_Age"] = getAgefromBirthday(Birthday);
-//             }
-//             ViewData["Driver_Gender"] = Driver_Gender;
-//             ViewData["Driver_TelePhone"] = Driver_TelePhone;
-//             ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
-//             ViewData["Driver_Condition"] = Condition;
-//             ViewData["Driver_LicenseID"] = Driver_LicenseID;
-//             ViewData["firm_id"] = Firm_id;
-//             db.addEmpolyee(password, Firm_id, Driver_Name, Driver_ID, Birthday, Gender, Driver_TelePhone, Driver_HomeAddress);
-//             
-//             db.addDriver(10,Condition, Driver_LicenseID);
-            ///////////////////////////////////////////////////////////////
-            if (handler.AddDriverHandler(Driver_Name, Driver_Gender,firm_id,Driver_Birthday, Driver_Condition, Driver_LicenseID, Driver_ID, Driver_TelePhone, Driver_HomeAddress))
+        public ActionResult EmployeeList()
+        {
+
+            string type = Request.QueryString.Get("type");
+            MyPage page = new MyPage();
+            if (type.Equals("search"))   //搜索类型
             {
-                int employee_id = handler.getEmployeeIDByIDCard(Driver_ID);
-                ViewData["Driver_Info"] = handler.GetDriverByEmployeeID(employee_id);
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+                try
+                {
+                    int id = int.Parse(NameID);
+                    Employee employee = new EmployeeHandle().getEmployeeById(id);
+                    List<Employee> employees = new List<Employee>();
+                    if (employee.Name != null && !employee.Equals(""))
+                    {
+                        employees.Add(employee);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["employees"] = employees;
+                  
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+                catch
+                {
+
+                   
+
+
+                    page.CurrentPage = page1;
+
+                    List<Employee> employees = new EmployeeHandle().GetEmployeeByNameByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["employees"] = employees;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+
+
+            }
+            else
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+               
+                page.CurrentPage = page1;
+                List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
+                ViewData["type"] = "common";
+                ViewData["employees"] = employees;
+                ViewData["page"] = page;
             }
             return View();
         }
@@ -401,5 +539,6 @@ namespace TaxiFirm.Controllers
                 }
             }
         }
+
     }
 }

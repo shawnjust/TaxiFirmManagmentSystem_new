@@ -10,6 +10,7 @@ namespace TaxiFirm.Models.Manager
     {
         public string Name { get; set; }
         public  int FirmID { get; set; }
+        public string HasRight { get; set; }
         public  string IdCard { get; set; }
         public  DateTime Birthday { get; set; }
         public  string Gender { get; set; }
@@ -40,7 +41,7 @@ namespace TaxiFirm.Models.Manager
                 this.Address = col.empolyee_address;
                 this.Telephone = col.telephone;
                 this.GenderBite = (bool)col.gender;
-                
+                this.HasRight =data.getManagerTableByID(this.EmployId).First<getManagerTableByIDResult>().is_available?"是":"否";
                 this.Age = int.Parse(DateTime.Now.Year.ToString()) -int.Parse(Birthday.Year.ToString());
                 if (col.gender==null)
                 {

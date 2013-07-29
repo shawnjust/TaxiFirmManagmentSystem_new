@@ -43,7 +43,7 @@
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("司机管理","DriverList","Home") %></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车辆管理", "TaxiList", "Home")%></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车主管理","HostList","Home") %></td>
-                <td width="129" align="center" valign="middle" class="upSelect"><a href="/Home/Customer?page=1">客户管理</a></td>
+                <td width="129" align="center" valign="middle" class="upSelect"><a href="/Home/Customer?type=common&page=1">客户管理</a></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%:Html.ActionLink("信息管理","BackupList","Home")%></td>
                 <td width="129">&nbsp;</td>
               </tr>

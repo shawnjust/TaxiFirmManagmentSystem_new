@@ -51,7 +51,7 @@
                                 <h4>经理姓名:&nbsp;&nbsp; <small> <%:manager.Name %></small></h4></label>
                                 <label><h4>公司：  &nbsp;&nbsp;<small><%:manager.FirmID %></small></h4></label>
                                 <label><h4>身份证号码: &nbsp;&nbsp;<small><%:manager.IdCard %></small></h4></label>
-                                <label><h4>出生日期:&nbsp;&nbsp;  <small><%:manager.Birthday %></small></h4></label>
+                                <label><h4>出生日期:&nbsp;&nbsp;  <small><%:manager.Birthday.ToShortDateString().ToString().Replace("/","-") %></small></h4></label>
                                 <label><h4>性别:  &nbsp;&nbsp;<small><%:manager.Gender %></small></h4></label>
                                 <label><h4>年龄:  &nbsp;&nbsp;<small><%:manager.Age %></small></h4></label>
                                 
