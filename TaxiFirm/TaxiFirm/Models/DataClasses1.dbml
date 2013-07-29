@@ -598,17 +598,6 @@
       <Column Name="is_available" Type="System.Boolean" DbType="Bit NOT NULL" CanBeNull="false" />
     </ElementType>
   </Function>
-  <Function Name="dbo.getNewsByID" Method="getNewsByID" IsComposable="true">
-    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
-    <ElementType Name="getNewsByIDResult">
-      <Column Name="news_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
-      <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
-      <Column Name="publish_time" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
-      <Column Name="picture_path" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
-      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
-    </ElementType>
-  </Function>
   <Function Name="dbo.getNewsByPage" Method="getNewsByPage" IsComposable="true">
     <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
@@ -930,5 +919,17 @@
     <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getNewsByID" Method="getNewsByID" IsComposable="true">
+    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getNewsByIDResult">
+      <Column Name="news_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="title" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="publish_time" Type="System.DateTime" DbType="SmallDateTime NOT NULL" CanBeNull="false" />
+      <Column Name="picture_path" Type="System.String" DbType="NVarChar(256)" CanBeNull="true" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="news_content" Type="System.String" DbType="NText NOT NULL" CanBeNull="false" UpdateCheck="Never" />
+    </ElementType>
   </Function>
 </Database>

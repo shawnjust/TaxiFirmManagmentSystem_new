@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     新闻内容
 </asp:Content>
@@ -34,17 +34,31 @@
 							 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> <button class="btn btn-primary">Save changes</button>
 						</div>
 					</div>-->
+                    <%
+                   //预先处理page信息
+                             
+                            //TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+                            //int? pageCount = db.getNewsPageCount((int?)10);
+                            NewsAndNotice model = new NewsAndNotice(true);
+                            int this_id = Convert.ToInt32(Request.QueryString["news_id"]);
+                            getNewsByIDResult this_record = model.getNewsById(this_id).First();
+                            //判断页数
+                            
+                          
+                %>
                         <form>
                         <fieldset>
                             <legend>基本信息</legend>
                             <label>
-                                标题：</label><label>发布时间:</label><label>发布人:</label>
+                                标题：<%=this_record.title %></label>
+                                <label>发布时间:<%=this_record.publish_time %></label>
+                                <label>发布人:<%=this_record.name %></label>
                         </fieldset>
                         </form>
                         <form>
                         <fieldset>
                             <legend>内容</legend>
-                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;昨日下午5时，深圳市宝安区街头竟然难以打到一辆绿的。记者昨日走遍宝安区多个片区发现，许多绿的停在街头，车窗处都放着“暂停营业”的牌子。司机们告诉  记者，深圳绿的遭遇非法营运的伤害很大，他们早想“休息几天”。前日凌晨发生一起的哥被砍伤事件成为昨日停工的导火线，司机担忧营运时的安全问题。</font></p>	
+                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%=this_record.news_content%></font></p>	
                         </fieldset>
                         </form>
                     </div>
