@@ -8,6 +8,20 @@ namespace TaxiFirm.Models.Invoice
     public class InvoiceHandle
     {
         public DataClasses1DataContext data = new DataClasses1DataContext();
+
+        public Invoice GetInvoiceByID(int id)
+        {
+            var table = data.getInvoiceByID(id);
+            var col = table.First<getInvoiceByIDResult>();
+            Invoice invoice = new Invoice();
+            invoice.Amount = (int)col.amount;
+            invoice.CustomerId = col.customer_id;
+            invoice.InvoiceId = col.invoice_id;
+            invoice.RegisterTime = (DateTime)col.regist_time;
+            return invoice;
+
+        
+        }
         //跟据客户id得到发票的分页页面
         public List<Invoice> GetCustomerInvoiceByPage(int CustomerId,MyPage page)
         {

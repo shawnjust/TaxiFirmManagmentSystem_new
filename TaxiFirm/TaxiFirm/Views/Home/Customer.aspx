@@ -44,7 +44,20 @@ a:hover
 
 
         });
-         $(".ChangePage").click(
+        $(".btn").click(
+        function () {
+            var NameInput = document.getElementById("NameID");
+            var name = NameInput.value;
+            var form1 = document.getElementById("search_form");
+            form1.action = "/Home/Customer?type=search&NameID=" + name + "&page=1";
+            form1.submit();
+
+
+
+        }
+
+        );
+        $(".ChangePage").click(
         function () {
 
             var type = this.id;
@@ -53,14 +66,23 @@ a:hover
 
             var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
             var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
-           
+
 
             if (type == "Prev") {
                 if (CurrentPage <= 1) {
                     window.alert("已到最前页");
                 } else {
 
-                    form1.action = "/Home/Customer?page=" + (CurrentPage - 1);
+                    var type = document.getElementById("type").value;
+
+
+                    if ("common" == type) {
+                        form1.action = "/Home/Customer?type=common&page=" + (CurrentPage - 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/Customer?type=search&NameID=" + name + "&page=" + (CurrentPage - 1);
+                    }
                     form1.submit();
 
                 }
@@ -73,9 +95,17 @@ a:hover
                     window.alert("已到最后页");
 
                 } else {
-                    form1.action = "/Home/Customer?page=" + (CurrentPage + 1);
-                    form1.submit();
+                    var type = document.getElementById("type").value;
 
+
+                    if ("common" == type) {
+                        form1.action = "/Home/Customer?type=common&page=" + (CurrentPage + 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/Customer?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
+                    }
+                    form1.submit();
                 }
 
             }
@@ -88,7 +118,6 @@ a:hover
 
         );
 
-
     
 
 
@@ -99,6 +128,7 @@ a:hover
 <%
     List<Customer> customers = (List<Customer>)ViewData["customers"];
     MyPage page = (MyPage) ViewData["page"];
+    string type = (string)ViewData["type"];
     
      %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -158,9 +188,10 @@ a:hover
                     <div class="span6">
                          <p>&nbsp;</p>
                          <p>&nbsp;</p>
-                         <form class="form-search"> 
-                            <input type="text" title= "输入客户名或id" class="input-medium search-query" /> <button type="submit" class="btn">搜索</button>
+                          <form id="search_form" method="post"> 
+                            <input type="text" title= "输入客户名或id" class="input-medium search-query" id="NameID" name="NameID" /> <button type="button" class="btn">搜索</button>
                       </form>
+                       <input type="hidden" id="type" value=<%:type%> />
                 </div>
                 </div>
                 <table class="table table-hover table-bordered">
@@ -198,7 +229,7 @@ a:hover
                                 <%:customer.CustomerId %></td>
                             <td><%:customer.Credit %></td>
                             <td><%:customer.Email %></td>
-                            <td><a href="/Home/InvoiceList?id=<%:customer.CustomerId%>&page=1">查看记录</a></td>
+                            <td><a href="/Home/InvoiceList?type=common&id=<%:customer.CustomerId%>&page=1">查看记录</a></td>
                          
                         </tr>
                         <%} %>
@@ -347,7 +378,14 @@ a:hover
                 
                    <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
 
-
+     <%if ("search".Equals(type)) { 
+                 
+                 %>
+                 
+                 <input type="hidden" id="name_id" value="<%:ViewData["NameID"] %>" />
+                 <%
+                 
+                 }%>
             <div class="pagination pagination-centered">
               <ul>
                 <li> <a class="ChangePage" id="Prev">Prev</a> </li>
@@ -356,33 +394,57 @@ a:hover
                     {
                         current++;
                         if (current == page.CurrentPage)
-                        { %>
-                      <li> <a href="/Home/Customer?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
-                      <%
+                        {
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/Customer?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/Customer?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
 }
                         else if (current >= 1 && current <= page.WholePage)
-                        {%>
-                  
-                <li> <a href="/Home/Customer?page=<%:current%>"><%:current%></a> </li>
-                <%}
+                        
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/Customer?type=common&page=<%:current%>"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/Customer?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
                         else if (current < 1)
                         {
                             while (current < 1)
                             { current++; }
 
                             if (current == page.CurrentPage)
-                            { %>
-                      <li> <a href="/Home/Customer?page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
-                      <%
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/Customer?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/Customer?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
 }
                             else
-                            {%> 
-                           <li> <a href="/Home/Customer?page=<%:current%>"><%:current%></a> </li>
-                          <%
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/Customer?type=common&page=<%:current%>" ><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/Customer?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
 }
                         }
                     }%>
-            
                 <li> <a class="ChangePage" id="Next">Next</a> </li>
                   </ul>
               </div>

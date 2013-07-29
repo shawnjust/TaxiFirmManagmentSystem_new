@@ -1,8 +1,8 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-<%@ Import Namespace="TaxiFirm.Models.Manager"  %>
+<%@ Import Namespace="TaxiFirm.Models.Employee"  %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 
-<asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">角色管理</asp:Content>
+<asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">工号管理</asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
   <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
@@ -48,7 +48,7 @@ a:hover
             var NameInput = document.getElementById("NameID");
             var name = NameInput.value;
             var form1 = document.getElementById("search_form");
-            form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=1";
+            form1.action = "/Home/EmployeeList?type=search&NameID=" + name + "&page=1";
             form1.submit();
 
 
@@ -76,11 +76,11 @@ a:hover
 
 
                     if ("common" == type) {
-                        form1.action = "/Home/ManagerList?type=common&page=" + (CurrentPage - 1);
+                        form1.action = "/Home/EmployeeList?type=common&page=" + (CurrentPage - 1);
                     } else if ("search" == type) {
 
                         var name = document.getElementById("name_id").value;
-                        form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=" + (CurrentPage - 1);
+                        form1.action = "/Home/EmployeeList?type=search&NameID=" + name + "&page=" + (CurrentPage - 1);
                     }
                     form1.submit();
 
@@ -98,11 +98,11 @@ a:hover
 
 
                     if ("common" == type) {
-                        form1.action = "/Home/ManagerList?type=common&page=" + (CurrentPage + 1);
+                        form1.action = "/Home/EmployeeList?type=common&page=" + (CurrentPage + 1);
                     } else if ("search" == type) {
 
                         var name = document.getElementById("name_id").value;
-                        form1.action = "/Home/ManagerList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
+                        form1.action = "/Home/EmployeeList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
                     }
                     form1.submit();
                 }
@@ -121,7 +121,7 @@ a:hover
     });
 </script>
 
-<% List<Manager> managers = (List<Manager>)ViewData["managers"];
+<% List<Employee> employees = (List<Employee>)ViewData["employees"];
     MyPage page = (MyPage)ViewData["page"];
     string type = (string)ViewData["type"];
     %>
@@ -129,35 +129,23 @@ a:hover
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
      <tr>
-        <td width="77" height="24" align="center" valign="middle" class="UpSelect1" style="color:#06F;background-image:url(../../Content/picture/BackControl/CenterUp2Select.png);">管理者</td>
-        <td height="24">&nbsp;</td>
-        <td width="379" height="24">&nbsp;</td>
-        <td width="48" height="24" class="UpRight2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <td width="82" height="24" align="center" valign="middle" class="UpSelect1" style="color:#06F;background-image:url(../../Content/picture/BackControl/CenterUp2Select.png);">管理者</td>
+        <td width="4" height="24">&nbsp;</td>
+        <td width="402" height="24">&nbsp;</td>
+        <td width="10" height="24" class="UpRight2"><table width="43%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="38%" height="24">&nbsp;</td>
             <td width="62%" style="font-size:12px;">&nbsp;</td>
           </tr>
         </table></td>
-        <td width="48" height="24" class="UpRight">&nbsp;</td>
-        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+        <td width="38" height="24" class="UpRight">&nbsp;</td>
+        <td width="104" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="42%" align="center" valign="middle">&nbsp;</td>
-            <td width="58%" height="23" style="font-size:12px;">&nbsp;</td>
-          </tr>
+            <td width="21%" align="center" valign="middle"><input type="image" name="imageField" id="imageField" src="../../Content/picture/BackControl/add.png" /></td>
+            <td width="79%" height="23" style="font-size:12px;"><a href="/Home/Index">注册新工号</a></td>
+            </tr>
         </table></td>
-        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0"></
-          <tr>
-           
-            
-          </tr>
-        </table></td>
-        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-          
-          </tr>
-        </table></td>
-        <td width="48" height="24" class="UpRight">&nbsp;</td>
-        <td width="45" height="24">&nbsp;</td>
+        <td width="59" height="24">&nbsp;</td>
       </tr>
     </table>
   </tr>
@@ -168,7 +156,7 @@ a:hover
               <div class="row-fluid">
                     <div class="span6">
                         <div class="page-header">
-                          <h1>管理员列表</h1>
+                          <h1>工号列表</h1>
                             <h1>&nbsp;</h1>
                       </div>
               </div>
@@ -192,18 +180,18 @@ a:hover
                           <th>
                                 性别</th>
                           <th>电话</th>
-                          <th>管理权限</th>
+                          <th>工号</th>
                             <th>信息</th>
                         </tr>
                     </thead>
-                    <% if (managers != null && managers.Count != 0)
+                    <% if (employees != null && employees.Count != 0)
                        { %>
                     <tbody>
                     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
 
-                      for (int i = 0; i < managers.Count; i++)
+                      for (int i = 0; i < employees.Count; i++)
                       {
-                          Manager manager = managers[i];%>
+                          Employee employee = employees[i];%>
                        
                         <%if (i == 0 || i == 5)
                           {%>  <tr>
@@ -224,13 +212,13 @@ a:hover
                             <td>
                                 <%:num++%>
                             </td>
-                            <td><%:manager.Name%></td>
+                            <td><%:employee.Name%></td>
                             <td>
-                                <%:manager.Age%></td>
-                            <td><%:manager.Gender%></td>
-                            <td><%:manager.Telephone%></td>
-                            <td><%:manager.HasRight%></td>
-                            <td  style="color:#900" class="pointer"><a href="/Home/ManagerInfo?id=<%:manager.EmployId%>">信息管理</a></td>
+                                <%:employee.Age%></td>
+                            <td><%:employee.Gender%></td>
+                            <td><%:employee.Telephone%></td>
+                            <td><%:employee.EmployId%></td>
+                            <td  style="color:#900" class="pointer"><a href="/Home/EmployeeInfo?id=<%:employee.EmployId%>&type=Info">信息管理</a></td>
                         </tr>
                         <%}
                       
@@ -261,11 +249,11 @@ a:hover
                         {
                             if ("common".Equals(type))
                             {%>
-                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <li> <a href="/Home/EmployeeList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
                       <%}
                             else if ("search".Equals(type))
                             {%>
-                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <li> <a href="/Home/EmployeeList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
                             <%
                             }
 }
@@ -273,11 +261,11 @@ a:hover
                         
                             if ("common".Equals(type))
                             {%>
-                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>"><%:current%></a> </li>
+                      <li> <a href="/Home/EmployeeList?type=common&page=<%:current%>"><%:current%></a> </li>
                       <%}
                             else if ("search".Equals(type))
                             {%>
-                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <li> <a href="/Home/EmployeeList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
                             <%
                             }
                         else if (current < 1)
@@ -288,22 +276,22 @@ a:hover
                             if (current == page.CurrentPage)
                             {  if ("common".Equals(type))
                             {%>
-                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <li> <a href="/Home/EmployeeList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
                       <%}
                             else if ("search".Equals(type))
                             {%>
-                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <li> <a href="/Home/EmployeeList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
                             <%
                             }
 }
                             else
                             {  if ("common".Equals(type))
                             {%>
-                      <li> <a href="/Home/ManagerList?type=common&page=<%:current%>" ><%:current%></a> </li>
+                      <li> <a href="/Home/EmployeeList?type=common&page=<%:current%>" ><%:current%></a> </li>
                       <%}
                             else if ("search".Equals(type))
                             {%>
-                            <li> <a href="/Home/ManagerList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <li> <a href="/Home/EmployeeList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
                             <%
                             }
 }

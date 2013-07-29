@@ -76,6 +76,26 @@
           </tr>
         </table></td>
       </tr>
+       <tr>
+        <td width="4%" height="53"><img src="../../Content/picture/BackControl/identity.png" width="30" height="30" /></td>
+        <td width="96%"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="12">&nbsp;</td>
+            <td width="71">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td width="12">&nbsp;</td>
+            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/EmployeeList?type=common&page=1">工号管理</a></td>
+            <td>&nbsp;</td>
+          </tr>
+          <tr>
+            <td>&nbsp;</td>
+            <td width="71">&nbsp;</td>
+            <td>&nbsp;</td>
+          </tr>
+        </table></td>
+      </tr>
       <tr>
         <td height="53"><img src="../../Content/picture/BackControl/organization.png" width="29" height="29" /></td>
         <td><table width="100%" border="0" cellspacing="0" cellpadding="0">

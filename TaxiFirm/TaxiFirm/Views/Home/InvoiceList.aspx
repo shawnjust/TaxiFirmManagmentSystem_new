@@ -44,7 +44,17 @@ a:hover
 
 
         });
+        $(".btn").click(
+        function () {
+            var NameInput = document.getElementById("NameID");
+            var name = NameInput.value;
+            var form1 = document.getElementById("search_form");
+            form1.action = "/Home/InvoiceList?type=search&NameID=" + name;
+            form1.submit();
 
+
+
+        });
         $(".ChangePage").click(
         function () {
 
@@ -63,7 +73,7 @@ a:hover
                     window.alert("已到最前页");
                 } else {
 
-                    form1.action = "/Home/InvoiceList?page=" + (CurrentPage - 1)+"&id="+id;
+                    form1.action = "/Home/InvoiceList?page=" + (CurrentPage - 1) + "&id=" + id;
                     form1.submit();
 
                 }
@@ -97,7 +107,12 @@ a:hover
 <% 
     List<Invoice> invoices = (List<Invoice>) ViewData["invoices"];
     MyPage page = (MyPage) ViewData["page"];
-    Customer customer = (Customer)ViewData["customer"];
+     string type = (string)ViewData["type"];
+     Customer customer = null;
+     if ("common".Equals(type))
+     {
+         customer = (Customer)ViewData["customer"];
+     }
      %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -136,16 +151,17 @@ a:hover
             <div class="span6">
               <div class="page-header">
                 <h1>发票列表</h1>
-                <h1><small style="font-size:15px">用户： <%:customer.NickName %>&nbsp;&nbsp; 发票张数：<%:invoices.Count %>&nbsp;&nbsp; 积分<%:customer.Credit %> </small> </h1>
+                <%if ("common".Equals(type))
+                  { %>
+                <h1><small style="font-size:15px">用户： <%:customer.NickName%>&nbsp;&nbsp; 发票张数：<%:invoices.Count%>&nbsp;&nbsp; 积分<%:customer.Credit%> </small> </h1><%} %>
               </div>
             </div>
             <div class="span6">
               <p>&nbsp;</p>
               <p>&nbsp;</p>
-              <form class="form-search">
-                <input type="text" title= "输入客户名或id" class="input-medium search-query" />
-                <button type="submit" class="btn">搜索</button>
-              </form>
+               <form id="search_form" method="post"> 
+                            <input type="text" title= "输入发票号" class="input-medium search-query" id="NameID" name="NameID" /> <button type="button" class="btn">搜索</button>
+                      </form>
             </div>
           </div>
           <table class="table table-hover table-bordered">
@@ -159,7 +175,7 @@ a:hover
                 <th width="49">登记时间</th>
                 </tr>
             </thead>
-
+           
             <tbody>
             
                 <%int num=(page.CurrentPage-1)*page.CountPerPage+1;
@@ -184,96 +200,16 @@ a:hover
                                      </tr>
                         <%} %>
 
-            <!--
-              <tr>
-                <td align="center"><input name="input" type="checkbox" value="" />
-                  &nbsp;</td>
-                <td> 1 </td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td> 2014-5-28</td>
-                </tr>
-              <tr class="success">
-                <td align="center"><input name="input" type="checkbox" value="" /></td>
-                <td>2</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="error">
-                <td align="center"><input name="input2" type="checkbox" value="" /></td>
-                <td>3</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="warning">
-                <td align="center"><input name="input3" type="checkbox" value="" /></td>
-                <td>4</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="info">
-                <td align="center"><input name="input4" type="checkbox" value="" /></td>
-                <td>5</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr>
-                <td align="center"><input name="input5" type="checkbox" value="" /></td>
-                <td> 1 </td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="success">
-                <td align="center"><input name="input6" type="checkbox" value="" /></td>
-                <td>2</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="error">
-                <td align="center"><input name="input7" type="checkbox" value="" /></td>
-                <td>3</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="warning">
-                <td align="center"><input name="input8" type="checkbox" value="" /></td>
-                <td>4</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-              <tr class="info">
-                <td align="center"><input name="input9" type="checkbox" value="" /></td>
-                <td>5</td>
-                <td>1223343434</td>
-                <td>34.00 RMB</td>
-                <td>123323</td>
-                <td>2014-5-28</td>
-                </tr>
-                -->
             </tbody>
           </table>
            <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post">
            </form>
+           <%if ("common".Equals(type))
+             {%>
            <input type="hidden" value="<%:customer.CustomerId%>" id="Cid" />
-
-
+           <%} %>
+           <%if ("common".Equals(type))
+             { %>
             <div class="pagination pagination-centered">
               <ul>
                 <li> <a class="ChangePage" id="Prev">Prev</a> </li>
@@ -285,7 +221,7 @@ a:hover
                         { %>
                       <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>" style="background-color:Orange"><%:current%></a> </li>
                       <%
-}
+               }
                         else if (current >= 1 && current <= page.WholePage)
                         {%>
                   
@@ -300,18 +236,28 @@ a:hover
                             { %>
                       <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>" style="background-color:Orange"><%:current%></a> </li>
                       <%
-}
+               }
                             else
                             {%> 
                            <li> <a href="/Home/InvoiceList?page=<%:current%>&id=<%:customer.CustomerId %>"><%:current%></a> </li>
                           <%
-}
+               }
                         }
                     }%>
             
                 <li> <a class="ChangePage" id="Next">Next</a> </li>
             </ul>
           </div>
+          <%}else{ %>
+           <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="A1">Prev</a> </li>
+                 <li> <a href="#" style="background-color:Orange">1</a> </li>
+                  <li> <a class="ChangePage" id="A2">Next</a> </li>
+                </ul>
+                </div>
+
+                <%} %>
         </div>
       </div>
     </div></td>

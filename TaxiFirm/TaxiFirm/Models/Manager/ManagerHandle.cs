@@ -22,7 +22,7 @@ namespace TaxiFirm.Models.Manager
         public List<Manager> GetManagerByNameByPage(MyPage page,string name)
         {
             name = "%" + name + "%";
-            page.CountPerPage = 1;
+            page.CountPerPage = 10;
             page.WholePage = (int)data.getManagerByNamePageCount(page.CountPerPage,name);
             var table = data.getManagerByNameByPage(page.CurrentPage, page.CountPerPage,name);
             List<Manager> managers = new List<Manager>();
@@ -39,7 +39,7 @@ namespace TaxiFirm.Models.Manager
                 manager.Telephone = col.phone_number;
                 manager.firm = new TaxiFirm.Models.Firm.Firm(manager.FirmID); ;
                 manager.EmployId = col.empolyee_id;
-
+                manager.HasRight=data.getManagerTableByID(manager.EmployId).First<getManagerTableByIDResult>().is_available ? "是" : "否";
                 if (col.gender == null)
                 {
                     manager.Gender = "未知";
@@ -81,7 +81,7 @@ namespace TaxiFirm.Models.Manager
                 manager.Telephone = col.phone_number;
                 manager.firm = new TaxiFirm.Models.Firm.Firm(manager.FirmID); ;
                 manager.EmployId = col.empolyee_id;
-
+                manager.HasRight=data.getManagerTableByID(manager.EmployId).First<getManagerTableByIDResult>().is_available ? "是" : "否";
                 if (col.gender == null)
                 {
                    manager.Gender = "未知";
