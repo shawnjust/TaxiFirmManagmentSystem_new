@@ -20,7 +20,6 @@
 		    function Submit() {
 		        var form1 = document.getElementById("login_form");
 		        form1.submit();
-		        window.alert("success"); 
             }
 		</script>
     </head>

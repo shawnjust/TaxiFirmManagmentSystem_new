@@ -13,7 +13,7 @@ namespace TaxiFirm.Models.Customer
         public Customer getCustomerById(int id) 
         {
             Customer customer= new Customer();
-             var table = data.getCustomerById(id);
+            var table = data.getCustomerById(id);
             var col = table.First<getCustomerByIdResult>();
             customer.Credit = (int)col.credit;
             customer.CustomerId = col.customer_id;
@@ -38,9 +38,6 @@ namespace TaxiFirm.Models.Customer
                 customer.Email=col.email;
                 customer.NickName = col.nick_name;
                 customer.Credit = (int)col.credit;
-                
-            
-
                 customers.Add(customer);
 
             }

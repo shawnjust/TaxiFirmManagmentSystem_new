@@ -8,6 +8,7 @@ using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.Invoice;
+using TaxiFirm.Models.Driver;
 namespace TaxiFirm.Controllers
 {
 
@@ -328,25 +329,77 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult SaveDriverInfo(string Driver_Name, string Driver_Gender, string firm_id,string Driver_Birthday, string Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
         {
-            TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
-            bool Gender=false;
-            DateTime Birthday = DateTime.Parse(Driver_Birthday);
-            int Condition = int.Parse(Driver_Condition);
-            int Firm_id = int.Parse(firm_id);
-            string password = Driver_ID.Substring(13, 4);
-            ViewData["Driver_Name"] = Driver_Name;
-            ViewData["Driver_ID"] = Driver_ID;
-            ViewData["Driver_Birthday"] = Birthday;
-            ViewData["Driver_Gender"] = Driver_Gender;
-            Gender = bool.Parse(Driver_Gender);
-            ViewData["Driver_TelePhone"] = Driver_TelePhone;
-            ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
-            ViewData["Driver_Condition"] = Condition;
-            ViewData["Driver_LicenseID"] = Driver_LicenseID;
-            ViewData["firm_id"] = Firm_id;
-            db.addEmpolyee(password, Firm_id, Driver_Name, Driver_ID, Birthday, Gender, Driver_TelePhone, Driver_HomeAddress);
-            db.addDriver(10,Condition, Driver_LicenseID);
+            DriverHandle handler = new DriverHandle();
+
+            ///////////////////////////////unused code///////////////////////////////////////////
+//             TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+//             bool Gender=false;
+//             DateTime Birthday = DateTime.Parse(Driver_Birthday);
+//             int Condition = int.Parse(Driver_Condition);
+//             int Firm_id = int.Parse(firm_id);
+//             string password = Driver_ID.Substring(13, 4);
+//             ViewData["Driver_Name"] = Driver_Name;
+//             ViewData["Driver_ID"] = Driver_ID;
+//             ViewData["Driver_Birthday"] = Birthday;
+//             Gender = bool.Parse(Driver_Gender);
+//             if (Driver_Gender.Equals("true"))
+//             {
+//                 Driver_Gender = "男";
+//             }
+//             else
+//             {
+//                 Driver_Gender = "女";
+//             }
+//             if (getAgefromBirthday(Birthday)!=0)
+//             {
+//                 ViewData["Driver_Age"] = getAgefromBirthday(Birthday);
+//             }
+//             ViewData["Driver_Gender"] = Driver_Gender;
+//             ViewData["Driver_TelePhone"] = Driver_TelePhone;
+//             ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
+//             ViewData["Driver_Condition"] = Condition;
+//             ViewData["Driver_LicenseID"] = Driver_LicenseID;
+//             ViewData["firm_id"] = Firm_id;
+//             db.addEmpolyee(password, Firm_id, Driver_Name, Driver_ID, Birthday, Gender, Driver_TelePhone, Driver_HomeAddress);
+//             
+//             db.addDriver(10,Condition, Driver_LicenseID);
+            ///////////////////////////////////////////////////////////////
+            if (handler.AddDriverHandler(Driver_Name, Driver_Gender,firm_id,Driver_Birthday, Driver_Condition, Driver_LicenseID, Driver_ID, Driver_TelePhone, Driver_HomeAddress))
+            {
+                int employee_id = handler.getEmployeeIDByIDCard(Driver_ID);
+                ViewData["Driver_Info"] = handler.GetDriverByEmployeeID(employee_id);
+            }
             return View();
+        }
+        public int getAgefromBirthday(DateTime birthday)
+        {
+            int age = 0;
+            DateTime today = new DateTime();
+            today = DateTime.Now;
+            if ((birthday.Month<today.Month)||((birthday.Month==today.Month)&&(birthday.Day<today.Day)))
+            {
+                age = today.Year - birthday.Year;
+                if (age>0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                age = (today.Year - birthday.Year) - 1;
+                if (age>0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
         }
     }
 }

@@ -11,17 +11,45 @@ namespace TaxiFirm.Models.Driver
         public int Employee_id { get; set; }
         public int Health { get; set; }
         public string License_id { get; set; }
-        public bool is_avaliable { set; get; }
         //employee继承属性
-        public int password { get; set; }
+        public string password { get; set; }
         public int firm_id { get; set; }
-        public int name { get; set; }
-        public int id_card { get; set; }
-        public int birthday { get; set; }
-        public int gender { get; set; }
-        public int telephone { get; set; }
-        public int emoloyee_address { get; set; }
-
+        public string name { get; set; }
+        public string id_card { get; set; }
+        public DateTime birthday { get; set; }
+        public bool gender { get; set; }
+        public string telephone { get; set; }
+        public string emoloyee_address { get; set; }
         public Driver() { }
+        public int getAge()
+        {
+            int age = 0;
+            DateTime today = new DateTime();
+            today = DateTime.Now;
+            if ((birthday.Month < today.Month) || ((birthday.Month == today.Month) && (birthday.Day < today.Day)))
+            {
+                age = today.Year - birthday.Year;
+                if (age > 0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                age = (today.Year - birthday.Year) - 1;
+                if (age > 0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
     }
 }
