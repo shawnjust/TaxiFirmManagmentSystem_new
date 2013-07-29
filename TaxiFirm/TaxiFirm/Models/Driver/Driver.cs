@@ -20,6 +20,7 @@ namespace TaxiFirm.Models.Driver
         public bool gender { get; set; }
         public string telephone { get; set; }
         public string emoloyee_address { get; set; }
+        public TaxiFirm.Models.Firm.Firm firm { get; set; }
         public Driver() { }
         public int getAge()
         {

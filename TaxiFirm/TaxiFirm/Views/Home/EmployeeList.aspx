@@ -121,11 +121,11 @@ a:hover
     });
 </script>
 
-<% List<Employee> employees = (List<Employee>)ViewData["employees"];
+<%  List<Employee> employees = (List<Employee>)ViewData["employees"];
     MyPage page = (MyPage)ViewData["page"];
     string type = (string)ViewData["type"];
     string myType =(string)Session["subtype"];
-    %>
+%>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">

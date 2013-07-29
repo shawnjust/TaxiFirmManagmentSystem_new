@@ -9,6 +9,7 @@ using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
+using TaxiFirm.Models.Driver;
 namespace TaxiFirm.Controllers
 {
 
@@ -253,6 +254,14 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverList()
         {
+            int page1 = int.Parse(Request.QueryString.Get("page"));
+            MyPage page = new MyPage();
+            page.CurrentPage = page1;
+            page.PageWidth = 10;
+            List<Driver> drivers = new DriverHandle().getDriverByPage(page);
+            ViewData["type"] = "driver";
+            ViewData["drivers"] = drivers;
+            ViewData["page"] = page;
             return View();
         }
         public ActionResult AddDriver()

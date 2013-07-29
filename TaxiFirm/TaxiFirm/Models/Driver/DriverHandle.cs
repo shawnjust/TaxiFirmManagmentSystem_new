@@ -119,5 +119,46 @@ namespace TaxiFirm.Models.Driver
         {
             return (int)db.getEmpolyeeIdByIdCard(ID_Number);
         }
+
+        public List<Driver> getDriverByPage(MyPage page)
+        {
+            page.CountPerPage = 10;
+            page.WholePage = (int)db.getDriverPageCount(page.CountPerPage);
+            var table = db.getDriverByPage(page.CurrentPage, page.CountPerPage);
+            List<Driver> drivers = new List<Driver>();
+            foreach (var col in table)
+            {
+
+                Driver driver = new Driver();
+                driver.Employee_id = col.empolyee_id;
+                driver.emoloyee_address = col.empolyee_address;
+                driver.birthday = (DateTime)col.birthday;
+                driver.firm_id = (int)col.firm_id;
+                driver.id_card = col.id_card;
+                driver.name = col.name;
+                driver.telephone = col.telephone;
+                driver.firm = new TaxiFirm.Models.Firm.Firm(driver.firm_id); ;
+                driver.License_id = col.license_id;
+                driver.Health = (int)col.health;
+                if (col.gender == null)
+                {
+                    driver.gender = false;
+
+                }
+                else if ((bool)col.gender)
+                {
+                    driver.gender = true;
+                }
+                else
+                {
+                    driver.gender = false;
+                }
+
+                drivers.Add(driver);
+
+            }
+
+            return drivers;
+        }
     }
 }
