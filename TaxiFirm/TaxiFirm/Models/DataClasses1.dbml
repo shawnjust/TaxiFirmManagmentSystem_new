@@ -764,18 +764,6 @@
     <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
-    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
   <Function Name="dbo.addHost" Method="addHost">
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="photo" Type="System.String" DbType="NVarChar(200)" />
@@ -929,6 +917,18 @@
     <Parameter Name="rent_begin_time" Type="System.DateTime" DbType="Date" />
     <Parameter Name="rent_due_return_tiem" Type="System.DateTime" DbType="Date" />
     <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

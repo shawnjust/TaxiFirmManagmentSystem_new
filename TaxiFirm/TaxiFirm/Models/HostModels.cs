@@ -65,6 +65,11 @@ namespace TaxiFirm.Models
     {
         [Required]
         [DataType(DataType.Text)]
+        [DisplayName("Employee ID")]
+        public int employee_id { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [DisplayName("Name")]
         public string name { get; set; }
 
@@ -90,20 +95,17 @@ namespace TaxiFirm.Models
 
         [Required]
         [DataType(DataType.Text)]
+        [DisplayName("Birthday")]
+        public string birthday { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
         [DisplayName("Firm Name")]
         public string firm_name { get; set; }
 
         [DataType(DataType.Text)]
-        [DisplayName("Is Available")]
-        public bool is_available { get; set; }
-
-        [DataType(DataType.Text)]
-        [DisplayName("Plate Number")]
-        public string plate_number { get; set; }
-        
-        [DataType(DataType.Text)]
-        [DisplayName("Taxi Brand")]
-        public string taxi_brand { get; set; }
+        [DisplayName("Taxi List")]
+        public List<getAllTaxiInformationResult> taxi_list { get; set; }
 
     }
 
@@ -127,7 +129,7 @@ namespace TaxiFirm.Models
         [Required]
         [DataType(DataType.Text)]
         [DisplayName("Car ID")]
-        public int car_id { get; set; }
+        public string car_id { get; set; }
 
         [Required]
         [DataType(DataType.Text)]
@@ -137,6 +139,24 @@ namespace TaxiFirm.Models
         [DataType(DataType.Text)]
         [DisplayName("Buyer List")]
         public SelectList buyer_list { get; set; }
+    }
+
+    public class BuyTaxiModal
+    {
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Current User ID")]
+        public int now_id { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Current User Name")]
+        public string now_name { get; set; }
+
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Car ID")]
+        public string car_id { get; set; }
     }
 
     public class HostListModal

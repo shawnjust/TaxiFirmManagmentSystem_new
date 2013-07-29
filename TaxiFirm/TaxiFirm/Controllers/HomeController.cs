@@ -16,7 +16,7 @@ namespace TaxiFirm.Controllers
     public class HomeController : Controller
     {
 
-
+        DataClasses1DataContext context = new DataClasses1DataContext();
 
         public ActionResult BackHandle()
         {
@@ -267,23 +267,274 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
-        public ActionResult HostList()
+
+        public ActionResult HostList(int id = 0)
         {
+            int pageIndex = id;
+            int pageSize = 15;
+            int? count = context.getHostPageCount(pageSize);
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
+            if (pageIndex >= count) pageIndex = (int)count - 1;
+            IQueryable<getHostByPageResult> ls = context.getHostByPage(pageIndex + 1, pageSize);
+            //IQueryable<getAllHostResult> ls = context.getAllHost();
+
+            int siz = ls.Count();
+            List<HostListModal> showModel = new List<HostListModal>();
+
+            foreach (getHostByPageResult s in ls)
+            {
+                HostListModal toAdd = new HostListModal()
+                {
+                    employee_id = s.empolyee_id,
+                    age = DateTime.Now.Year - s.birthday.Year,
+                    address = s.empolyee_address,
+                    gender = s.gender,
+                    id_card = s.id_card,
+                    name = s.name,
+                    telephone = s.telephone,
+                    car_count = context.getTaxiCountByEmpolyeeId(s.empolyee_id)
+                };
+                showModel.Add(toAdd);
+            }
+            ViewData.Model = showModel;
             return View();
         }
+
+        public ActionResult HostBuyTaxi(int id)
+        {
+            BuyTaxiModal s = new BuyTaxiModal()
+            {
+                now_id = id,
+                now_name = context.getEmpolyeeById(id).First().name
+            };
+            ViewData.Model = s;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult HostBuyTaxi(int id, BuyTaxiModal modal)
+        {
+            context.setTaxiOwnerEmpolyeeId(modal.car_id, id);
+            return RedirectToAction("HostList");
+        }
+
+        [HttpGet]
+        public void getTaxiInfoByID(string comment)
+        {
+            List<getTaxiInformationByPlatenumberResult> tx = context.getTaxiInformationByPlatenumber(comment).ToList();
+            if (tx.Count() > 0)
+            {
+                Response.Write("车主: " + tx.First().host_name + "  " + tx.First().taxi_brand);
+            }
+        }
+
+        public ActionResult hostTaxiDetail(string id)
+        {
+            getTaxiInformationByPlatenumberResult s = context.getTaxiInformationByPlatenumber(id).First();
+            ViewData.Model = s;
+            return View();
+        }
+
+        public ActionResult HostTransaction(string id)
+        {
+            getTaxiInformationByPlatenumberResult l = context.getTaxiInformationByPlatenumber(id).First();
+            TransactionModal s = new TransactionModal()
+            {
+                owner_id = (int)l.host_empolyee_id,
+                owner_name = l.host_name,
+                car_id = id,
+                car_name = l.taxi_brand,
+                buyer_list = new SelectList(context.getAllHost(), "empolyee_id", "name")
+
+            };
+            ViewData.Model = s;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult HostTransaction(string id, TransactionModal modal)
+        {
+            getTaxiInformationByPlatenumberResult tx = context.getTaxiInformationByPlatenumber(id).First();
+            context.setTaxiOwnerEmpolyeeId(tx.plate_number, modal.buyer_id);
+            return RedirectToAction("HostList");
+        }
+
         public ActionResult AddHost()
         {
+            AddHostModal s = new AddHostModal();
+            s.firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name");
+            ViewData.Model = s;
             return View();
         }
+
+        [HttpPost]
+        public ActionResult AddHost(AddHostModal host)
+        {
+            try
+            {
+                // TODO: Add insert logic here
+                host.password = host.id_card.Substring(host.id_card.Length - 7);
+                int? id = 0;
+                context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
+                int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
+                context.addHost(employee_id, "");
+                return RedirectToAction("HostList");
+            }
+            catch (Exception e)
+            {
+                ViewData["errorMessage"] = "Error";
+                return View();
+            }
+        }
+
+        public ActionResult EditTaxiInfoByHost(int id)
+        {
+            return null;
+        }
+
+        public ActionResult EditHost(int id)
+        {
+            var dd = context.getEmpolyeeById(id);
+
+            getEmpolyeeByIdResult g = dd.First();
+
+            ShowHostModal detail = new ShowHostModal()
+            {
+                address = g.empolyee_address,
+                gender = g.gender,
+                id_card = g.id_card,
+                name = g.name,
+                telephone = g.telephone,
+                /*
+                is_available = t.is_available,
+                plate_number = t.plate_number,
+                taxi_brand = t.taxi_brand
+                 * */
+            };
+            ViewData.Model = detail;
+            return View();
+        }
+
+        [HttpPost]
+        public ActionResult EditHost(int id, ShowHostModal modal)
+        {
+            try
+            {
+                // TODO: Add update logic here
+                context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
+                return RedirectToAction("HostList");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult DeleteHost(int id)
+        {
+            try
+            {
+                context.deleteHostById(id);
+
+                return RedirectToAction("HostList");
+            }
+            catch
+            {
+                return View();
+            }
+        }
+
+        public ActionResult HostInfo(int id)
+        {
+            var dd = context.getEmpolyeeById(id);
+            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
+            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
+            foreach (getAllTaxiInformationResult tx in taxi)
+            {
+                if (tx.host_empolyee_id == id)
+                    taxilist.Add(tx);
+            }
+
+            getEmpolyeeByIdResult g = dd.First();
+
+            List<getAllFirmResult> firm = context.getAllFirm().ToList();
+            String firm_name = "";
+            foreach (getAllFirmResult tx in firm)
+            {
+                if (tx.firm_id == g.firm_id)
+                    firm_name = tx.firm_name;
+            }
+
+            ShowHostModal detail = new ShowHostModal()
+            {
+                employee_id = g.empolyee_id,
+                address = g.empolyee_address,
+                gender = g.gender,
+                id_card = g.id_card,
+                name = g.name,
+                telephone = g.telephone,
+                taxi_list = taxilist,
+                firm_name = firm_name,
+                birthday = g.birthday.ToShortDateString()
+                /*,
+                is_available = t.is_available,
+                plate_number = t.plate_number,
+                taxi_brand = t.taxi_brand
+                 * */
+            };
+
+            ViewData.Model = detail;
+            return View();
+        }
+
+        public ActionResult HostTaxiInfo(int id)
+        {
+            ViewData["employee_id"] = id;
+            var dd = context.getEmpolyeeById(id);
+            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
+            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
+            foreach (getAllTaxiInformationResult tx in taxi)
+            {
+                if (tx.host_empolyee_id == id)
+                    taxilist.Add(tx);
+            }
+
+
+            ViewData.Model = taxilist;
+            return View();
+        }
+
+        [HttpGet]
+        public ActionResult HostSearchResult()
+        {
+            IQueryable<getHostBySearchNameResult> ls = context.getHostBySearchName("%" + Request["query"] + "%");
+            List<HostListModal> showModel = new List<HostListModal>();
+
+            foreach (getHostBySearchNameResult s in ls)
+            {
+                HostListModal toAdd = new HostListModal()
+                {
+                    employee_id = s.empolyee_id,
+                    age = DateTime.Now.Year - s.birthday.Year,
+                    address = s.empolyee_address,
+                    gender = s.gender,
+                    id_card = s.id_card,
+                    name = s.name,
+                    telephone = s.telephone,
+                    car_count = context.getTaxiCountByEmpolyeeId(s.empolyee_id)
+                };
+                showModel.Add(toAdd);
+            }
+            ViewData.Model = showModel;
+            return View();
+        }
+
         public ActionResult AddNews()
         {
             return View();
         }
         public ActionResult ChangeNews()
-        {
-            return View();
-        }
-        public ActionResult HostInfo()
         {
             return View();
         }
