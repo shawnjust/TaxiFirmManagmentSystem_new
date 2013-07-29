@@ -16,7 +16,7 @@ namespace TaxiFirm.Models.Employee
         public string Telephone { get; set; }
         public string Address { get; set; }
         public int Age { get; set; }
-        public int EmployeeId { get; set; }
+        public int EmployId { get; set; }
         public TaxiFirm.Models.Firm.Firm firm { get; set; }
         public DataClasses1DataContext data = new DataClasses1DataContext();
         public bool GenderBite { get; set; }

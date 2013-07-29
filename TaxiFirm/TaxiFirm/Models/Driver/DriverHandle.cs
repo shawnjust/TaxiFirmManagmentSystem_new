@@ -38,6 +38,11 @@ namespace TaxiFirm.Models.Driver
             }
             return result;
         }
+        public bool IsDriver(int id)
+        {
+            return db.isDriver(id)!=0?true:false;
+        }
+        
         public bool AddDriverInDB(Driver driver)
         {
             bool result = false;

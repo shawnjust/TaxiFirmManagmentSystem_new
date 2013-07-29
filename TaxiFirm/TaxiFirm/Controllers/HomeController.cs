@@ -227,7 +227,8 @@ namespace TaxiFirm.Controllers
         public ActionResult EmployeeInfo()
         {
             int id = int.Parse(Request.QueryString.Get("id"));
-            ViewData["type"] = Request.QueryString.Get("type");
+            
+            ViewData["subtype"] = Request.QueryString.Get("subtype");
             Employee employee = new EmployeeHandle().getEmployeeById(id);
             ViewData["employee"] = employee;
             return View();
@@ -449,6 +450,11 @@ namespace TaxiFirm.Controllers
         {
 
             string type = Request.QueryString.Get("type");
+            if (Request.QueryString.Get("subtype") != null) 
+            { 
+            Session["subtype"] = Request.QueryString.Get("subtype");
+            }
+        
             MyPage page = new MyPage();
             if (type.Equals("search"))   //搜索类型
             {
@@ -503,7 +509,7 @@ namespace TaxiFirm.Controllers
                
                 page.CurrentPage = page1;
                 List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
-                ViewData["type"] = "common";
+                ViewData["type"] ="common";
                 ViewData["employees"] = employees;
                 ViewData["page"] = page;
             }

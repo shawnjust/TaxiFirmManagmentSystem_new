@@ -20,7 +20,7 @@ namespace TaxiFirm.Models.Employee
             Employee employee = new Employee();
             var table = data.getEmpolyeeById(id);
             var col = table.First<getEmpolyeeByIdResult>();
-            employee.EmployeeId = col.empolyee_id;
+            employee.EmployId = col.empolyee_id;
             employee.Address = col.empolyee_address;
             employee.Birthday = (DateTime)col.birthday;
             employee.FirmID = (int)col.firm_id;
@@ -28,7 +28,7 @@ namespace TaxiFirm.Models.Employee
             employee.Name = col.name;
             employee.Telephone = col.telephone;
             employee.firm = new TaxiFirm.Models.Firm.Firm(employee.FirmID); ;
-            employee.EmployeeId = col.empolyee_id;
+            employee.EmployId = col.empolyee_id;
 
             if (col.gender == null)
             {
@@ -59,7 +59,7 @@ namespace TaxiFirm.Models.Employee
             {
 
                 Employee employee = new Employee();
-                employee.EmployeeId = col.empolyee_id;
+                employee.EmployId = col.empolyee_id;
                 employee.Address = col.empolyee_address;
                 employee.Birthday = (DateTime)col.birthday;
                 employee.FirmID = (int)col.firm_id;
@@ -67,7 +67,7 @@ namespace TaxiFirm.Models.Employee
                 employee.Name = col.name;
                 employee.Telephone = col.telephone;
                 employee.firm = new TaxiFirm.Models.Firm.Firm(employee.FirmID); ;
-                employee.EmployeeId = col.empolyee_id;
+                employee.EmployId = col.empolyee_id;
                 
                 if (col.gender == null)
                 {
@@ -101,7 +101,7 @@ namespace TaxiFirm.Models.Employee
             {
 
                 Employee employee = new Employee();
-                employee.EmployeeId = col.empolyee_id;
+                employee.EmployId = col.empolyee_id;
                 employee.Address = col.empolyee_address;
                 employee.Birthday = (DateTime)col.birthday;
                 employee.FirmID = (int)col.firm_id;
@@ -109,7 +109,7 @@ namespace TaxiFirm.Models.Employee
                 employee.Name = col.name;
                 employee.Telephone = col.telephone;
                 employee.firm = new TaxiFirm.Models.Firm.Firm(employee.FirmID); ;
-                employee.EmployeeId = col.empolyee_id;
+                employee.EmployId = col.empolyee_id;
                 
                 if (col.gender == null)
                 {

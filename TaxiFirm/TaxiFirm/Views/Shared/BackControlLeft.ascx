@@ -86,7 +86,7 @@
           </tr>
           <tr>
             <td width="12">&nbsp;</td>
-            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/EmployeeList?type=common&page=1">工号管理</a></td>
+            <td width="71" height="29" align="center" valign="middle" class="leftSelect"><a href="/Home/EmployeeList?type=common&subtype=Info&page=1">工号管理</a></td>
             <td>&nbsp;</td>
           </tr>
           <tr>
