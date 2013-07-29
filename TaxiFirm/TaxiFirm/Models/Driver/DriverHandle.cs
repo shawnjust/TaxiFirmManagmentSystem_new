@@ -45,27 +45,40 @@ namespace TaxiFirm.Models.Driver
   //          TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
             try
             {
-                if (driver!=null)
+                if (db.isExistForEmpolyeeIdCard(driver.id_card)==0)
                 {
-                    employee_id = (int)db.getEmpolyeeIdByIdCard(driver.id_card);
-                    if (employee_id>0)
-                    {
-                        Console.WriteLine("employee exists");
-                        db.addDriver(employee_id, driver.Health, driver.License_id);
-                    }
-                    else
-                    {
-                        Console.WriteLine("start inserting data in employee");
-                        db.addEmpolyee(driver.password, driver.firm_id, driver.name,
+                    db.addEmpolyee(driver.password, driver.firm_id, driver.name,
                             driver.id_card, driver.birthday, driver.gender, driver.telephone,
                             driver.emoloyee_address,ref employee_id);
-                        db.addDriver(driver.Employee_id, driver.Health, driver.License_id);
-                    }
+                    db.addDriver(driver.Employee_id, driver.Health, driver.License_id);
+                    result = true;
                 }
                 else
                 {
-                    return false;
+                    db.addDriver(employee_id, driver.Health, driver.License_id);
+                    result = true;
                 }
+//                 if (driver!=null)
+//                 {
+//                     employee_id = (int)db.getEmpolyeeIdByIdCard(driver.id_card);
+//                     if (employee_id>0)
+//                     {
+//                         Console.WriteLine("employee exists");
+//                         db.addDriver(employee_id, driver.Health, driver.License_id);
+//                     }
+//                     else
+//                     {
+//                         Console.WriteLine("start inserting data in employee");
+//                         db.addEmpolyee(driver.password, driver.firm_id, driver.name,
+//                             driver.id_card, driver.birthday, driver.gender, driver.telephone,
+//                             driver.emoloyee_address,ref employee_id);
+//                         db.addDriver(driver.Employee_id, driver.Health, driver.License_id);
+//                     }
+//                 }
+//                 else
+//                 {
+//                     return false;
+//                 }
             }
             catch (System.Exception ex)
             {

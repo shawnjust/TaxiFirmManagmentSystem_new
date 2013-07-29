@@ -214,6 +214,12 @@ namespace TaxiFirm.Models
 			empolyee_id = ((System.Nullable<int>)(result.GetParameterValue(8)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isExistForEmpolyeeIdCard", IsComposable=true)]
+		public System.Nullable<int> isExistForEmpolyeeIdCard([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_card).ReturnValue));
+		}
 	}
 	
 	public partial class getAllFirmResult

@@ -224,4 +224,8 @@
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.isExistForEmpolyeeIdCard" Method="isExistForEmpolyeeIdCard" IsComposable="true">
+    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
+    <Return Type="System.Int32" />
+  </Function>
 </Database>
