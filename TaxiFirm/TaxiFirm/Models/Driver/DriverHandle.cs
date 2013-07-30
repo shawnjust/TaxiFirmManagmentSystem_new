@@ -115,6 +115,7 @@ namespace TaxiFirm.Models.Driver
                 var col = table.First<getDriverViewByIDResult>();
                 driver.Health = (int)col.health;
                 driver.License_id = col.license_id;
+                driver.plateNumber = col.plate_number;
             }
             catch
             {

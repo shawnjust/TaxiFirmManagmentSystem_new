@@ -110,7 +110,16 @@
                 </tr>
                 <tr>
                     <td>驾驶车辆车牌号：</td>
-                    <td>沪A D7801</td>
+                    <td><%if (driver.plateNumber == null)
+                          { %>
+                          未绑定车牌
+                          <% }
+                          else
+                          {%>
+                          <%:driver.plateNumber %>
+                          <%} %>
+                          
+                    </td>
                 </tr>
 				<tr>
 					<td>联系电话：</td>
