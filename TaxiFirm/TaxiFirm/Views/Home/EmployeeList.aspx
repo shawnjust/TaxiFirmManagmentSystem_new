@@ -143,7 +143,7 @@ a:hover
         <td width="104" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="21%" align="center" valign="middle"><input type="image" name="imageField" id="imageField" src="../../Content/picture/BackControl/add.png" /></td>
-            <td width="79%" height="23" style="font-size:12px;"><a href="/Home/Index">注册新工号</a></td>
+            <td width="79%" height="23" style="font-size:12px;"><a href="/Home/AddEmployee">注册新工号</a></td>
             </tr>
         </table></td>
         <td width="59" height="24">&nbsp;</td>
@@ -363,6 +363,9 @@ a:hover
             </div>
         </div>
     </div></td>
+
+ 
   </tr>
 </table>
 </asp:Content>
+

@@ -517,6 +517,38 @@ namespace TaxiFirm.Controllers
             }
         }
 
+        public ActionResult AddEmployee()
+        {
+            ViewData["firms"] = new FirmHandle().GetAllFirm();
+            return View();
+        
+        }
+        [HttpPost]
+        public RedirectResult AddEmployeeHandle(string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        {
+
+            try
+            {
+                int? NewID =new EmployeeHandle().AddEmployee(Employee_Name, gender, Employee_Birthday, FirmID, Employee_IDCard, Employee_TelePhone, Employee_HomeAddress);
+                if ( NewID!= -1)
+                {
+                    Session["AddEmployeeSuccess"] = "success";
+                    Session["newID"] = NewID;
+
+                }
+                else {
+
+                    Session["AddEmployeeeSuccess"] = "failed";
+                
+                }
+            }
+            catch {
+                Session["AddEmployeeeSuccess"] = "failed";
+            
+            }
+
+            return Redirect("/Home/EmployeeList?type=common&subtype=Info&page=1");
+        }
         public ActionResult HostInfo(int id)
         {
             var dd = context.getEmpolyeeById(id);
@@ -649,7 +681,28 @@ namespace TaxiFirm.Controllers
             }
             return View();
         }
-         
+        //删除工号
+        [HttpPost]
+        public RedirectResult DeleteEmployee()
+        {
+            try
+            {
+                string id = Request.QueryString.Get("id");
+                int employeeID = int.Parse(id);
+                if (new EmployeeHandle().DeleteEmployByID(employeeID))
+                {
+                    Session["DeleteEmployeeSuccess"] = "success";
+                }
+                else {
+                    Session["DeleteEmployeeSuccess"] = "failed";
+                }
+            }
+            catch {
+                Session["DeleteEmployeeSuccess"] = "failed";
+            }
+           return  Redirect("EmployeeList?type=common&subtype=Info&page=1");
+            //return View();
+        }
        
         public ActionResult ManagerList()
         {
@@ -708,6 +761,14 @@ namespace TaxiFirm.Controllers
             }
             return View();
         }
+        public ActionResult ModifyEmployee()
+        {
+            int id = int.Parse(Request.QueryString.Get("id"));
+            ViewData["employee"] = new EmployeeHandle().getEmployeeById(id);
+            ViewData["firms"] = new FirmHandle().GetAllFirm();
+                return View();
+            
+        }
         public ActionResult ModifyManager()
         {
 
@@ -742,6 +803,26 @@ namespace TaxiFirm.Controllers
 
 
             return RedirectToAction("ManagerSelfInfo");
+        }
+
+
+        [HttpPost]
+        public ActionResult GetSelfEmployeeModify(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        {
+
+            Employee employee = (Employee)Session["CurrentEmployee"];
+            employee.Name = Employee_Name;
+            employee.GenderBite = bool.Parse(gender);
+            employee.FirmID = int.Parse(FirmID);
+            employee.IdCard = Employee_IDCard;
+            employee.Address = Employee_HomeAddress;
+            employee.Telephone = Employee_TelePhone;
+            employee.Birthday = Convert.ToDateTime(Employee_Birthday);
+
+            Session["CurrentEmployee"] = employee;
+
+
+            return RedirectToAction("EmployeeSelfInfo");
         }
         public ActionResult FirmList()
         {

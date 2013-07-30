@@ -118,4 +118,76 @@
   </tr>
 </table>
 </body>
+
+<%
+        if (Session["DeleteEmployeeSuccess"] != null)
+        {
+            string success = (string)Session["DeleteEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("删除成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("删除失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("DeleteEmployeeSuccess");
+        }
+        
+         %>
+<%
+        if (Session["AddEmployeeSuccess"] != null)
+        {
+            int newID = (int)Session["newID"];
+            string success = (string)Session["AddEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("添加成功，新工号为 <%:newID%>");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("添加失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddEmployeeSuccess");
+        }
+        
+         %>
+
+   
 </html>

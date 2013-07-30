@@ -27,7 +27,7 @@
                 var con = window.confirm("是否保存更改");
                 if (con) {
                     form1.submit();
-                    window.alert("保存成功");
+                   
                 }
                 else {
                     form1.action = "/Home/ManagerSelfInfo";
