@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     通知
 </asp:Content>
@@ -10,6 +11,14 @@
 <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
+<%
+    //判断是否登陆
+    Manager CurrentManager = (Manager)Session["CurrentManager"];
+    if (CurrentManager == null)
+    {
+        Response.Redirect("../FrontPage/Login",false);
+    }
+%>
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
 <script type="text/javascript">
     $(document).ready(function () {
@@ -105,6 +114,26 @@
                       </form>
                 </div>
                 </div>
+                <%
+                   //预先处理page信息
+                             
+                            //TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+                            //int? pageCount = db.getNewsPageCount((int?)10);
+                            NewsAndNotice model = new NewsAndNotice(false);
+                            int pageCount = model.getPageCount(10);
+                            int thisPage;
+                            //判断页数
+                            if (Request.QueryString["NoticePage"] == null)
+                            {
+                                thisPage = 1;
+                            }
+                            else
+                            {
+                                thisPage = Convert.ToInt32(Request.QueryString["NoticePage"]);
+                            }
+                        
+                          
+                %>
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
@@ -119,176 +148,98 @@
                         </tr>
                     </thead>
                     <tbody>
-                        <tr>
-                          <td align="center"><input name="" type="checkbox" value="" />&nbsp;</td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                盛雯（1152733）</td>
-                            <td  style="color:#900" class="pointer"><%:Html.ActionLink("通知内容","NotificationContent","Home") %></td>
-                        </tr>
-                        <tr class="success">
-                          <td align="center"><input name="input" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                            <td><span style="color: #900"><span class="pointer" style="color:#900">通知内容</span></span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input2" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                Declined
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input3" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input4" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                Call in to confirm
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr>
-                          <td align="center"><input name="input5" type="checkbox" value="" /></td>
-                            <td>
-                                1
-                            </td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Default
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="success">
-                          <td align="center"><input name="input6" type="checkbox" value="" /></td>
-                            <td>2</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                01/04/2012
-                            </td>
-                            <td>
-                                Approved
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="error">
-                          <td align="center"><input name="input7" type="checkbox" value="" /></td>
-                            <td>3</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                02/04/2012
-                            </td>
-                            <td>
-                                Declined
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="warning">
-                          <td align="center"><input name="input8" type="checkbox" value="" /></td>
-                            <td>4</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                03/04/2012
-                            </td>
-                            <td>
-                                Pending
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        <tr class="info">
-                          <td align="center"><input name="input9" type="checkbox" value="" /></td>
-                            <td>5</td>
-                            <td>
-                                TB - Monthly
-                            </td>
-                            <td>
-                                04/04/2012
-                            </td>
-                            <td>
-                                Call in to confirm
-                            </td>
-                            <td><span class="pointer" style="color:#900">通知内容</span></td>
-                        </tr>
-                        
+                        <%
+                           IQueryable<getNoticeByPageResult> all_record= model.getNoticeRecordByPage(thisPage, 10);
+                           int count = 1;
+                           foreach(getNoticeByPageResult new_record in all_record)
+                           {
+                               string style  ;
+                               int iResult = count%5;
+                               if (iResult == 1)
+                               {
+                                   style = "center";
+                               }
+                               else if (iResult == 2)
+                               {
+                                   style = "success";
+                               }else if(iResult == 3)
+                               {
+                                   style = "error";
+                               }
+                               else if (iResult == 4)
+                               {
+                                   style = "warning";
+                               }
+                               else
+                               {
+                                   style = "info";
+                               }
+                               if (iResult == 1)
+                               {
+                                   Response.Write("<tr>");
+                               }
+                               else
+                               {
+                                   Response.Write("<tr class=\""+style+"\">");
+                               }
+                               //所有多选框的名字为checkboxForNewsID(eg checkboxForNews12)
+                               
+                               Response.Write("<td align=\"center\"><input name=\"checkboxForNews"+new_record.notice_id+"\" type=\"checkbox\" />&nbsp;</td>");
+                               //序号
+                               Response.Write("<td>"+((thisPage-1)*10+count)+"</td>");
+                               //标题
+                               Response.Write("<td>"+new_record.title+"</td>");
+                               //日期
+                               Response.Write("<td>"+new_record.publish_time+"</td>");
+                               //发布人
+                               Response.Write("<td>"+new_record.name+"</td>");
+                               //内容链接
+                               Response.Write("<td style=\"color:#900\" class=\"pointer\"><a href=\"../Home/NotificationContent?notice_id="+new_record.notice_id+"\">更多内容</a></td>");
+                               Response.Write("</tr>");
+                               count++;
+                           }
+                        %>
                     </tbody>
                 </table>
                 
                 <div class="pagination pagination-centered">
                     <ul>
-                        <li>
-                            <a href="#">Prev</a>
-                        </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
+                       <%
+                 
+                        //判断是第一页
+                        if (thisPage == 1)
+                        {
+                            Response.Write("<li><a = href=\"../Home/InformationList?NoticePage=1\">First Page</a></li>");
+                        }
+                        else {
+                            Response.Write("<li><a = href=\"../Home/InformationList?NoticePage=" + (thisPage - 1) + "\">Prev</a></li>");
+                        }
+                        for (int i = thisPage + 1; i < pageCount && i < thisPage + 6; i++)
+                        {
+                            Response.Write("<li><a = href=\"../Home/InformationList?NoticePage=" + i + "\">" + i + "</a></li>");
+                        }
+                        
+                        //判断是否是最后一页
+                        if (thisPage == pageCount)
+                        {
+                            Response.Write("<li><a = href=\"../Home/InformationList?NoticePage=" + thisPage + "\">Last Page</a></li>");
+                        }
+                        else
+                        {
+                            Response.Write("<li><a = href=\"../Home/InformationList?NoticePage=" + (thisPage + 6) + "\">Next</a></li>");
+                        }
+                        if (pageCount == null)
+                        {
+
+                            Response.Write("<br>没有任何新闻！");
+                        }
+                        else
+                        {
+
+                            Response.Write("<br>第" + Convert.ToString(thisPage) + "页");
+                        }
+         
+                    %>
                   </ul>
               </div>
             </div>

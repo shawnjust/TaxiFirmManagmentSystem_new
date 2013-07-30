@@ -92,6 +92,7 @@
     <Compile Include="Models\Invoice\Invoice.cs" />
     <Compile Include="Models\License\License.cs" />
     <Compile Include="Models\License\LicenseHandle.cs" />
+    <Compile Include="Models\NewsAndNotice.cs" />
     <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />
@@ -504,7 +505,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>57526</DevelopmentServerPort>
+          <DevelopmentServerPort>19352</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>
