@@ -582,7 +582,7 @@ namespace TaxiFirm.Controllers
         public ActionResult HostTaxiInfo(int id)
         {
             ViewData["employee_id"] = id;
-            List<getAllTaxiInformationResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
+            List<getTaxiInformationByEmpolyeeIdResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
 
             ViewData.Model = taxilist;
             return View();

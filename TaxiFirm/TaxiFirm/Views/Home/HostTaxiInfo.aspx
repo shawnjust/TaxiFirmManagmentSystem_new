@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getAllTaxiInformationResult>>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getTaxiInformationByEmpolyeeIdResult>>" %>
 
 <asp:content id="aboutTitle" contentplaceholderid="TitleContent" runat="server">
     关于我们
