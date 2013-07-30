@@ -334,7 +334,6 @@ namespace TaxiFirm.Controllers
                     }
                     ViewData["type"] = "search";
                     ViewData["drivers"] = drivers;
-
                     page.CurrentPage = page1;
                     page.CountPerPage = 10;
                     page.WholePage = 1;

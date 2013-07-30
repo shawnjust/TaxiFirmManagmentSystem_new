@@ -96,23 +96,31 @@ namespace TaxiFirm.Models.Driver
         {
             Driver driver;
             driver = new Driver();
-            //get the employee attributes in employee table
-            var em_table = db.getEmpolyeeById(Employee_ID);
-            var em_col = em_table.First<getEmpolyeeByIdResult>();
-            driver.Employee_id = (int)em_col.empolyee_id;
-            driver.name = em_col.name;
-            driver.id_card = em_col.id_card;
-            driver.birthday = em_col.birthday;
-            driver.emoloyee_address = em_col.empolyee_address;
-            driver.telephone = em_col.telephone;
-            driver.firm_id = em_col.firm_id;
-            //password is not given for safety
-            driver.password = "****";
-            //get the driver attributes in driver table
-            var table = db.getDriverViewByID(Employee_ID);
-            var col = table.First<getDriverViewByIDResult>();
-            driver.Health = (int)col.health;
-            driver.License_id = col.license_id;
+            try
+            {
+                //get the employee attributes in employee table
+                var em_table = db.getEmpolyeeById(Employee_ID);
+                var em_col = em_table.First<getEmpolyeeByIdResult>();
+                driver.Employee_id = (int)em_col.empolyee_id;
+                driver.name = em_col.name;
+                driver.id_card = em_col.id_card;
+                driver.birthday = em_col.birthday;
+                driver.emoloyee_address = em_col.empolyee_address;
+                driver.telephone = em_col.telephone;
+                driver.firm_id = em_col.firm_id;
+                //password is not given for safety
+                driver.password = "****";
+                //get the driver attributes in driver table
+                var table = db.getDriverViewByID(Employee_ID);
+                var col = table.First<getDriverViewByIDResult>();
+                driver.Health = (int)col.health;
+                driver.License_id = col.license_id;
+            }
+            catch
+            {
+
+                driver = null;
+            }
             return driver;
         }
         public int getEmployeeIDByIDCard(string ID_Number)
@@ -199,6 +207,8 @@ namespace TaxiFirm.Models.Driver
         {
             Driver driver = new Driver();
             driver.name = employee.Name;
+            driver.Employee_id = employee.EmployeeId;
+            driver.id_card = employee.IdCard;
             driver.firm_id =employee.FirmID;
             driver.birthday = employee.Birthday;
             if (employee.Gender.Equals("女"))
@@ -220,8 +230,11 @@ namespace TaxiFirm.Models.Driver
             DriverHandle driverhandler = new DriverHandle();
             for (int i = 0; i < employees.Count;i++ )
             {
-                driver = driverhandler.EmployeeToDriver(employees[i]);
-                drivers.Add(driver);
+                if (driverhandler.isDriver(employees[i].EmployeeId))
+                {
+                    driver = driverhandler.EmployeeToDriver(employees[i]);
+                    drivers.Add(driver);
+                }
             }
             return drivers;
         }
