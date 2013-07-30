@@ -181,6 +181,13 @@ a:hover
                           <th>
                                 性别</th>
                           <th>电话</th>
+                          <%if (myType.Equals("AddDriver"))
+                            {
+                               %>
+                               <th>司机</th>
+                               <%
+                            }
+                                 %>
                           <th>工号</th>
                             <th>信息</th>
                         </tr>
@@ -220,6 +227,14 @@ a:hover
                                 <%:employee.Age%></td>
                             <td><%:employee.Gender%></td>
                             <td><%:employee.Telephone%></td>
+                           <%if (myType.Equals("AddDriver"))
+                            {
+                                 
+                               %>
+                               <td>是</td>
+                               <%
+                            }
+                                 %>
                             <td><%:employee.EmployeeId%></td>
                             <td  style="color:#900" class="pointer">
                             
