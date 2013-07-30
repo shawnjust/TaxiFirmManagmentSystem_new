@@ -469,11 +469,12 @@ namespace TaxiFirm.Controllers
                 //context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
                 //int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
                 context.addHost(id, "");
+                Session["errorMsg"] = "Success";
                 return RedirectToAction("HostList");
             }
             catch (Exception e)
             {
-                ViewData["errorMessage"] = "Error";
+                Session["errorMsg"] = "Ilegal";
                 return RedirectToAction("HostList");
             }
         }

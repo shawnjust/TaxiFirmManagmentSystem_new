@@ -411,6 +411,9 @@
     <Content Include="Views\Home\HostInfo.aspx" />
     <Content Include="Views\Home\HostList.aspx" />
     <Content Include="Views\Home\HostSearchResult.aspx" />
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
+    <Content Include="Views\Home\HostTaxiInfo.aspx" />
+    <Content Include="Views\Home\HostTransaction.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />
