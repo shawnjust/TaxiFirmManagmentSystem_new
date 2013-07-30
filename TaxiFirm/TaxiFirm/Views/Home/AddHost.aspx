@@ -28,14 +28,14 @@
                                 <label>
                                     车主姓名</label>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.name) %>
+                                    <%: Html.TextBoxFor(model => model.name, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.name) %>
                                 </p>
                                 <p>
                                     公司编号
                                 </p>
                                 <p>
-                                    <%: Html.DropDownListFor(model => model.firm_id, Model.firm_list)%>
+                                    <%: Html.DropDownListFor(model => model.firm_id, Model.firm_list, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.firm_id)%>
                                 </p>
                                 <p>
@@ -43,7 +43,7 @@
                                         身份证</label>
                                 </p>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.id_card) %>
+                                    <%: Html.TextBoxFor(model => model.id_card, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.id_card)%>
                                 </p>
                                 <p>
@@ -52,7 +52,7 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.birthday, new { onclick = "WdatePicker()" })%>
+                                    <%: Html.TextBoxFor(model => model.birthday, new { onclick = "WdatePicker()", disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.birthday)%>
                                 </p>
                                 <p>
@@ -63,11 +63,11 @@
                                 <p>
                                 <label>
                                         
-                                        <%: Html.RadioButtonFor(model => model.gender, true)%>
-                                        <%: Html.Label("男") %>
+                                        <%: Html.RadioButtonFor(model => model.gender, true, new { disabled = "disabled", @readonly = "readonly" })%>
+                                        男
                                         
-                                        <%: Html.RadioButtonFor(model => model.gender, false)%>
-                                        <%: Html.Label("女") %>
+                                        <%: Html.RadioButtonFor(model => model.gender, false, new { disabled = "disabled", @readonly = "readonly" })%>
+                                        女
                                         <%: Html.ValidationMessageFor(model => model.gender)%>
                                 </label>
                                 </p>
@@ -86,7 +86,7 @@
                                     <br>
                                 </label>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.telephone)%>
+                                    <%: Html.TextBoxFor(model => model.telephone, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.telephone)%>
                                 </p>
                                 <p>
@@ -96,7 +96,7 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.address)%>
+                                    <%: Html.TextBoxFor(model => model.address, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.address)%>
                                 </p>
                                 <p>

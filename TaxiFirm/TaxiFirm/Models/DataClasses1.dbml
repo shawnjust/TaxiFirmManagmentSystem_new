@@ -982,4 +982,51 @@
     <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
+  <Function Name="dbo.getHostByNameByPage" Method="getHostByNameByPage" IsComposable="true">
+    <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="hostName" Type="System.String" DbType="NVarChar(20)" />
+    <ElementType Name="getHostByNameByPageResult">
+      <Column Name="rowNum" Type="System.Int64" DbType="BigInt" CanBeNull="true" />
+      <Column Name="empolyee_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="id_card" Type="System.String" DbType="Char(20) NOT NULL" CanBeNull="false" />
+      <Column Name="birthday" Type="System.DateTime" DbType="Date NOT NULL" CanBeNull="false" />
+      <Column Name="gender" Type="System.Boolean" DbType="Bit" CanBeNull="true" />
+      <Column Name="telephone" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="photo" Type="System.String" DbType="NVarChar(200)" CanBeNull="true" />
+      <Column Name="firm_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="firm_name" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="phone_number" Type="System.String" DbType="VarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="empolyee_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="firm_address" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
+  <Function Name="dbo.getHostByNamePageCount" Method="getHostByNamePageCount" IsComposable="true">
+    <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />
+    <Parameter Name="hostName" Type="System.String" DbType="NVarChar(20)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.getTaxiInformationByEmpolyeeId" Method="getTaxiInformationByEmpolyeeId" IsComposable="true">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <ElementType Name="getTaxiInformationByEmpolyeeIdResult">
+      <Column Name="plate_number" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="taxi_color" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="taxi_brand" Type="System.String" DbType="NVarChar(20) NOT NULL" CanBeNull="false" />
+      <Column Name="order_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="rent_begin_time" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="rent_due_return_time" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="rent_return_time" Type="System.DateTime" DbType="Date" CanBeNull="true" />
+      <Column Name="driver_empolyee_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="driver_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="driver_id_card" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="driver_telephone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="driver_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="host_empolyee_id" Type="System.Int32" DbType="Int" CanBeNull="true" />
+      <Column Name="host_name" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+      <Column Name="host_id_card" Type="System.String" DbType="Char(20)" CanBeNull="true" />
+      <Column Name="host_telephone" Type="System.String" DbType="VarChar(20)" CanBeNull="true" />
+      <Column Name="host_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
+    </ElementType>
+  </Function>
 </Database>
