@@ -1,4 +1,7 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Customer" %>
+<%@ Import Namespace="TaxiFirm.Models.Invoice" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -43,7 +46,19 @@
 
 <script src='../../google_analytics_auto.js'></script></head>
 <body>
+<script type="text/javascript">
+    function Submit() {
+        var form1 = document.getElementById("login_form");
+        form1.submit();
 
+    }
+
+    function invoiceSubmit() {
+        
+        var form1 = document.getElementById("invoiceSubmit");
+        form1.submit();
+    }
+</script>
 <!-- Wrapper / Start -->
 <div id="wrapper">
 
@@ -60,7 +75,18 @@
 	<div class="container">
 	<!-- Header -->
 	<header id="header">
-
+    <%
+        Identity current = Identity.unlegal;
+        Customer customer = null;
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"];
+      
+      if (Identity.custemer == current)
+      {
+          customer = (Customer)Session["CurrentCustomer"];
+      }
+  }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
@@ -85,13 +111,31 @@
 			<div class="clearfix"></div>
 
 			<!-- Search -->
+		<!-- Search -->
 			<nav class="top-search">
-                <a class="button gray medium" href="#">
+              <%if(current==Identity.unlegal){ %>
+                <a class="button color medium" href="#">
                 	<i class="icon-cloud white"></i>注册
                 </a>
+               
 				<a class="button color medium" href="/FrontPage/Login">
-                	<i class="icon-user white"></i>登录
-                </a>
+                	<i class="icon-user white"></i>
+                   登录
+                     </a>
+                    <%}
+                   else if (current == Identity.manager)
+                   { 
+                       %> 
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                     </a>
+               <%} %>
 			</nav>
 
 		</div>
@@ -189,7 +233,10 @@
 
 	<!-- Large Notice
 	================================================== -->
-
+    <%if (Session["Identity"] != null && (Identity)Session["Identity"] == Identity.custemer)
+      {
+          int grade = new CustomerHandle().GetCurrentGrade(customer.Credit);
+          int percent = new CustomerHandle().GetCurrentPercent(grade,customer.Credit);%>
 		<div class="eight columns">
 			
 			<!-- Headline -->
@@ -197,27 +244,76 @@
 
 			<!-- Large Notice -->
 			<div class="large-notice">
-				<h3>当前等级： 5</h3>
-                <div class="skill-bar"><div class="skill-bar-content" data-percentage="80" style="width: 80%;">
-                      80%
+				<h3>当前等级： <%:grade %></h3>
+                <div class="skill-bar"><div class="skill-bar-content" data-percentage="<%:percent %>" style="width: <%:percent%> %;">
+                      <%:percent %>%
+
                     </div><span class="skill-title">
-                      完成 80%
+                      完成  <%:percent %>%
                     </span>
                 </div>
-				<p>当前优惠： 积分满2000可换取50元话费</p>
+                <p>当前积分： <%:customer.Credit %>&nbsp;&nbsp;升级积分：<%:(50+50*grade) %></p>
+				<p>当前优惠： 积分满50可换取50元话费</p>
+                <form id="invoiceSubmit" method="post" action="/FrontPage/GetCredit">
                 <h4>发票号</h4>
                 <p>
-                <input id="invoiceNumber" type="text" style="width: 70%;" name="invoiceNumber"></input>
+                <input id="invoiceNumber" type="text" style="width: 70%;" name="invoiceNumber"/>
                 </p>
+                <% if (Session["InvoiceSuccess"] == null)
+                   { %>
                 <p>一张发票仅能作用一次</p>
-				<a href="#" class="button medium color">提交</a>
+                <%}
+                   else if(((string)Session["InvoiceSuccess"]).Equals("failed")) { 
+                   %>
+                   <p>发票已使用或不存在</p>
+                   <%
+                       
+                       Session.Remove("InvoiceSuccess");
+                   } else if(((string)Session["InvoiceSuccess"]).Equals("success")){%>
+                    <p>一张发票仅能作用一次</p>
+                    <script type="text/javascript">
+                        window.alert("发票登记成功");
+                 
+                    </script>
+                   <%
+                       Session.Remove("InvoiceSuccess");
+                   } 
+         
+          
+          %>
+				<a onclick="invoiceSubmit()" class="button medium color">提交</a>
+                </form>
 			</div>
 
 		<br /><br />
 
 		</div>
+        <%} else{%>
+        <div class="eight columns">
+			
+			<!-- Headline -->
+			<h3 class="margin-reset">乘换车优惠</h3><br />
 
+			<!-- Large Notice -->
+            <form class="login active" id="login_form" action="/Home/CustomerLoginHandle" method="post">
+			<div class="large-notice">
+				<h3>用户名</h3>
+                <input id="Text2" type="text" style="width: 70%;" name="username"/>
+                <h4>密码</h4>
+                <p>
+                <input id="Text1" type="password" style="width: 70%;" name="psword"/>
+                </p>
+                <p>登录获取优惠</p>
+                <a class="button medium color" onclick="Submit()">登录</a>
+			 
+                <a class="button medium color" href="">注册</a>
+			</div>
+            </form>
+		<br /><br />
 
+		</div>
+
+        <%} %>
 	<!-- Alert Boxes
 	================================================== -->
 
@@ -261,7 +357,11 @@
 
 	<!-- Regular Table
 	================================================== -->
-
+     <%if (Session["Identity"] != null && (Identity)Session["Identity"] == Identity.custemer)
+       {
+        List<Invoice> invoices = (List<Invoice>) Session["invoices"];
+           
+            %>
 		<div class="sixteen columns">
 			<!-- Headline -->
 			<h3 class="margin-reset">积分记录</h3><br />
@@ -275,14 +375,27 @@
 					<th>金额</th>
 				</tr>
 
-				<tr>
-					<td>1</td>
-					<td>103254352</td>
-					<td>01/04/2012</td>
-					<td>50 ￥</td>
+                <%for (int i = 0; i < 5; i++)
+                  {
+                      if (invoices!=null&&i<invoices.Count&&invoices[i] != null)
+                      {
+                      %> 
+                    	<tr>
+					<td><%:(i + 1)%></td>
+					<td><%:invoices[i].InvoiceId %></td>
+					<td><%:invoices[i].RegisterTime.ToShortDateString() %></td>
+					<td><%:invoices[i].Amount %> ￥</td>
 				</tr>
+                
+                  
+                  
+                <%}
+                  }
+                      
+                      %>
+			
 
-				<tr>
+			<!--	<tr>
 					<td>2</td>
 					<td>103242563</td>
 					<td>01/04/2012</td>
@@ -309,10 +422,11 @@
 					<td>01/04/2012</td>
 					<td>50 ￥</td>
 				</tr>
-
+                -->
 			</table>
 
 		</div>
+        <%} %>
 
 	</div>
 	<!-- 960 Container / End -->

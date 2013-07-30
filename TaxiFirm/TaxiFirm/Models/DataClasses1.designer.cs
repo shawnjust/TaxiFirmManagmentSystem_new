@@ -249,6 +249,44 @@ namespace TaxiFirm.Models
 			empolyee_id = ((System.Nullable<int>)(result.GetParameterValue(8)));
 			return ((int)(result.ReturnValue));
 		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addInvoice")]
+		public int addInvoice([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> amount)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), amount);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationByPage", IsComposable=true)]
+		public IQueryable<getBackupInformationByPageResult> getBackupInformationByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getBackupInformationByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationPageCount", IsComposable=true)]
+		public System.Nullable<int> getBackupInformationPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
+		public IQueryable<getBackupByDescriptionByPageResult> getBackupByDescriptionByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
+		{
+			return this.CreateMethodCallQuery<getBackupByDescriptionByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, description);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionPageCount", IsComposable=true)]
+		public System.Nullable<int> getBackupByDescriptionPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, description).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.backupDatabase")]
+		public int backupDatabase([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string description)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), description);
+			return ((int)(result.ReturnValue));
+		}
 	}
 	
 	public partial class getAllFirmResult
@@ -2552,6 +2590,346 @@ namespace TaxiFirm.Models
 				if ((this._empolyee_address != value))
 				{
 					this._empolyee_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getBackupInformationByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _backup_set_id;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private System.Nullable<System.DateTime> _database_creation_date;
+		
+		private System.Nullable<System.DateTime> _backup_start_date;
+		
+		private System.Nullable<System.DateTime> _backup_finish_date;
+		
+		private System.Nullable<int> _database_version;
+		
+		private System.Nullable<decimal> _backup_size;
+		
+		public getBackupInformationByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_set_id", DbType="Int NOT NULL")]
+		public int backup_set_id
+		{
+			get
+			{
+				return this._backup_set_id;
+			}
+			set
+			{
+				if ((this._backup_set_id != value))
+				{
+					this._backup_set_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(128)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(255)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_database_creation_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> database_creation_date
+		{
+			get
+			{
+				return this._database_creation_date;
+			}
+			set
+			{
+				if ((this._database_creation_date != value))
+				{
+					this._database_creation_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_start_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> backup_start_date
+		{
+			get
+			{
+				return this._backup_start_date;
+			}
+			set
+			{
+				if ((this._backup_start_date != value))
+				{
+					this._backup_start_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_finish_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> backup_finish_date
+		{
+			get
+			{
+				return this._backup_finish_date;
+			}
+			set
+			{
+				if ((this._backup_finish_date != value))
+				{
+					this._backup_finish_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_database_version", DbType="Int")]
+		public System.Nullable<int> database_version
+		{
+			get
+			{
+				return this._database_version;
+			}
+			set
+			{
+				if ((this._database_version != value))
+				{
+					this._database_version = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_size", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> backup_size
+		{
+			get
+			{
+				return this._backup_size;
+			}
+			set
+			{
+				if ((this._backup_size != value))
+				{
+					this._backup_size = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getBackupByDescriptionByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _backup_set_id;
+		
+		private string _name;
+		
+		private string _description;
+		
+		private System.Nullable<System.DateTime> _database_creation_date;
+		
+		private System.Nullable<System.DateTime> _backup_start_date;
+		
+		private System.Nullable<System.DateTime> _backup_finish_date;
+		
+		private System.Nullable<int> _database_version;
+		
+		private System.Nullable<decimal> _backup_size;
+		
+		public getBackupByDescriptionByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_set_id", DbType="Int NOT NULL")]
+		public int backup_set_id
+		{
+			get
+			{
+				return this._backup_set_id;
+			}
+			set
+			{
+				if ((this._backup_set_id != value))
+				{
+					this._backup_set_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(128)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_description", DbType="NVarChar(255)")]
+		public string description
+		{
+			get
+			{
+				return this._description;
+			}
+			set
+			{
+				if ((this._description != value))
+				{
+					this._description = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_database_creation_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> database_creation_date
+		{
+			get
+			{
+				return this._database_creation_date;
+			}
+			set
+			{
+				if ((this._database_creation_date != value))
+				{
+					this._database_creation_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_start_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> backup_start_date
+		{
+			get
+			{
+				return this._backup_start_date;
+			}
+			set
+			{
+				if ((this._backup_start_date != value))
+				{
+					this._backup_start_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_finish_date", DbType="DateTime")]
+		public System.Nullable<System.DateTime> backup_finish_date
+		{
+			get
+			{
+				return this._backup_finish_date;
+			}
+			set
+			{
+				if ((this._backup_finish_date != value))
+				{
+					this._backup_finish_date = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_database_version", DbType="Int")]
+		public System.Nullable<int> database_version
+		{
+			get
+			{
+				return this._database_version;
+			}
+			set
+			{
+				if ((this._database_version != value))
+				{
+					this._database_version = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_backup_size", DbType="Decimal(20,0)")]
+		public System.Nullable<decimal> backup_size
+		{
+			get
+			{
+				return this._backup_size;
+			}
+			set
+			{
+				if ((this._backup_size != value))
+				{
+					this._backup_size = value;
 				}
 			}
 		}

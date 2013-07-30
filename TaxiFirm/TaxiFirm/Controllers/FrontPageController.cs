@@ -10,7 +10,25 @@ namespace TaxiFirm.Controllers
     {
         //
         // GET: /FrontPage/
+        [HttpPost]
+        public ActionResult GetCredit(string invoiceNumber)
+        {
+            try {
 
+                int Inumber = int.Parse(invoiceNumber);
+              
+                Session["InvoiceSuccess"] = "success";
+            
+            }
+
+            catch {
+
+                Session["InvoiceSuccess"] = "failed";
+            
+            }
+            return RedirectToAction("Elements");
+        
+        }
         public ActionResult Index() 
         {
             return View();

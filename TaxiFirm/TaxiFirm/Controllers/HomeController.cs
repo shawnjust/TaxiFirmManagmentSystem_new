@@ -9,6 +9,7 @@ using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
+using TaxiFirm.Models.Backup;
 namespace TaxiFirm.Controllers
 {
 
@@ -17,7 +18,7 @@ namespace TaxiFirm.Controllers
     {
 
 
-
+        
         public ActionResult BackHandle()
         {
 
@@ -33,6 +34,61 @@ namespace TaxiFirm.Controllers
             }
             return RedirectToAction("Index");
         }
+        [HttpPost]
+        public ActionResult SetNewBackup(string Name)
+        {
+            try
+            {
+                if (Name.Length<200&&new BackupHandle().AddNewBackup(Name) > 0)
+                {
+                    Session["BackupSuccess"] = "success";
+                }
+                else
+                {
+                    Session["BackupSuccess"] = "success";
+                
+                }
+                return RedirectToAction("Backup");
+            }
+            catch {
+                Session["BackupSuccess"] = "failed";
+                return RedirectToAction("Backup");
+            
+            }
+        }
+        [HttpPost]
+        public ActionResult CustomerLoginHandle(string username, string psword)
+        {
+           
+            try {
+                int userid = int.Parse(username);
+                if (new DataClasses1DataContext().checkCustomerLoginPassword(userid, psword) != 0)
+                {
+                  
+                    Session["Identity"] = Identity.custemer;
+                    Customer customer = new CustomerHandle().getCustomerById(userid);
+                    Session["CurrentCustomer"] = customer;
+                    MyPage page2 = new MyPage();
+                    page2.CurrentPage = 1;
+                    Session["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId,page2);
+                    return RedirectToAction("Elements","FrontPage");
+                }
+                else {
+
+                    Response.Redirect("/FrontPage/Elements");
+                }
+            
+            }
+            catch
+            {
+                ViewData["error"] = "error";
+                Response.Redirect("/FrontPage/Elements");
+               
+            }
+            return View();
+        }
+
+
         [HttpPost]
         public ActionResult LoginHandle(string username, string psword)
         {
@@ -51,12 +107,19 @@ namespace TaxiFirm.Controllers
 
                     Session["Identity"] = Identity.manager;
                     Session["CurrentManager"] = new Manager(userid);
-
+                 
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
-                else
+                else if (Current == Identity.custemer)
                 {
+
+                    Session["Identity"] = Identity.custemer;
+                    Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(userid);
+                    return RedirectToAction("Index", "FrontPage");
+                   }
+
+                else{
                     Response.Redirect("/FrontPage/Login");
                 }
 
@@ -71,7 +134,7 @@ namespace TaxiFirm.Controllers
             }
 
 
-            Response.Redirect("/FrontPage/Login");
+        //    Response.Redirect("/FrontPage/Login");
             return View();
 
 
@@ -289,6 +352,40 @@ namespace TaxiFirm.Controllers
        
         public ActionResult BackupList()
         {
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+               
+
+                    MyPage page = new MyPage();
+
+
+                    page.CurrentPage = page1;
+
+                    List<Backup> backups = new BackupHandle().GetBackupByDescriptionByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["backups"] = backups;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                
+
+
+            }
+            else
+            {
+                
+                MyPage page = new MyPage();
+                page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
+                ViewData["backups"] = new BackupHandle().GetbackupByPage(page);
+                ViewData["page"] = page;
+                ViewData["type"] = "common";
+            }
             return View();
         }
          
@@ -407,11 +504,20 @@ namespace TaxiFirm.Controllers
         }
         public void LogOut()
         {
-
-            if (Session["CurrentManager"] != null)
+            if (Session["Identity"] != null)
             {
-                Session.Remove("CurrentManager");
-                Session.Remove("Identity");
+                Identity identity = (Identity)Session["Identity"];
+
+                if (identity.Equals(Identity.manager)&&Session["CurrentManager"] != null)
+                {
+                    Session.Remove("CurrentManager");
+                    Session.Remove("Identity");
+                }
+                else if (identity.Equals(Identity.custemer))
+                {
+                    Session.Remove("CurrentCustomer");
+                    Session.Remove("Identity");
+                }
             }
             Response.Redirect("/FrontPage/Index");
         }
