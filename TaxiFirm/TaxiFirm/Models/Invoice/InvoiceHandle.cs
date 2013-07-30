@@ -22,6 +22,8 @@ namespace TaxiFirm.Models.Invoice
 
         
         }
+
+       
         //跟据客户id得到发票的分页页面
         public List<Invoice> GetCustomerInvoiceByPage(int CustomerId,MyPage page)
         {

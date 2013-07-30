@@ -68,12 +68,13 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FrontPageController.cs" />
-    <Compile Include="Controllers\HandleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Backup\Backup.cs" />
+    <Compile Include="Models\Backup\BackupHandle.cs" />
     <Compile Include="Models\Customer\Customer.cs" />
     <Compile Include="Models\Customer\CustomerHandle.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
@@ -391,6 +392,7 @@
     <Content Include="Views\FrontPage\Notification.aspx" />
     <Content Include="Views\Home\AddCar.aspx" />
     <Content Include="Views\Home\AddDriver.aspx" />
+    <Content Include="Views\Home\AddEmployee.aspx" />
     <Content Include="Views\Home\AddHost.aspx" />
     <Content Include="Views\Home\AddNews.aspx" />
     <Content Include="Views\Home\Backup.aspx" />

@@ -27,7 +27,17 @@ namespace TaxiFirm.Models.Customer
             return customer;
         }
 
-
+        public bool RegistInvoiceToCustomer(int customerID,int invoiceID)
+        {
+            try
+            {
+                data.registInvoiceToCustomer(invoiceID, customerID);
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
            //通过名称分页得到客户页面
         public List<Customer> GetCustomerByNameByPage(MyPage page,string CustomerName)
         {
@@ -57,8 +67,28 @@ namespace TaxiFirm.Models.Customer
 
             return customers;
         }
-    
 
+        //得到当前积分等级
+        public int GetCurrentGrade(int credit)
+        {
+            int n=1;
+            while(true)
+            {
+                if ((25 * n + 50) * n > credit && (25 * (n - 1) + 50) * (n - 1) < credit)
+                {
+                    return n;
+                
+                }
+            }
+        
+        }
+        //得到当前积分里升级经验所占百分比
+        public int GetCurrentPercent(int currentGrade, int credit)
+        {
+            return 100*(credit - (25 * (currentGrade - 1) + 50) * (currentGrade - 1)) / (50 + 50 * currentGrade);
+ 
+        
+        }
 
         //分页得到客户页面
         public List<Customer> GetcustomerByPage(MyPage page)

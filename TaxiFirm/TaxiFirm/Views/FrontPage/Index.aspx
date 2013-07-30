@@ -88,7 +88,7 @@
 			<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button gray medium" href="#">
+                <a class="button color medium" href="#">
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -100,8 +100,8 @@
                    else if (current == Identity.manager)
                    { 
                        %> 
-                     <a class="button gray medium" href="/Home/IndexDS">
-                	<i class="icon-cloud white"></i>后台
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
                      </a>
                
 			
@@ -109,7 +109,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/Home/Elements">
+                	<i class="icon-user white"></i>积分
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>

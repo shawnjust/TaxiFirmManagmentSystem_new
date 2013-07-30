@@ -84,6 +84,10 @@
                             </fieldset>
                           
                             </div>
+<<<<<<< HEAD
+                        <div class="span4">
+                        <form id="info_form3" action="/Home/SaveDriverInfo" method="post">
+=======
                             <div class="span4">
                             
                                 <br/>
@@ -110,7 +114,6 @@
                                     </select>
                                 </p>
                             </fieldset>
-                            </form>
                         
                             <br/>
                             <br/>
@@ -119,10 +122,10 @@
                                                 <button class="btn btn-primary" type="button" style="alignment-adjust:middle" onclick="submitAll()">
                         提交</button>
                             </div>
-                        <div class="span4">
                             
                             <div class="span4">
                       
+>>>>>>> 186966670fd34b29df9ade95c440c6d3438275ad
                               <br/>
                             <fieldset>
                           

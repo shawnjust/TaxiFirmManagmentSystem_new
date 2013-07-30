@@ -20,7 +20,10 @@
 		    function Submit() {
 		        var form1 = document.getElementById("login_form");
 		        form1.submit();
+<<<<<<< HEAD
 		         
+=======
+>>>>>>> 186966670fd34b29df9ade95c440c6d3438275ad
             }
 		</script>
     </head>
