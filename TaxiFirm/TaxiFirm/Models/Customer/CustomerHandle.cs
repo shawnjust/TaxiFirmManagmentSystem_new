@@ -27,7 +27,17 @@ namespace TaxiFirm.Models.Customer
             return customer;
         }
 
-
+        public bool RegistInvoiceToCustomer(int customerID,int invoiceID)
+        {
+            try
+            {
+                data.registInvoiceToCustomer(invoiceID, customerID);
+                return true;
+            }
+            catch {
+                return false;
+            }
+        }
            //通过名称分页得到客户页面
         public List<Customer> GetCustomerByNameByPage(MyPage page,string CustomerName)
         {

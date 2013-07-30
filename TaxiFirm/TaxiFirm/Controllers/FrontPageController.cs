@@ -3,7 +3,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Web;
 using System.Web.Mvc;
-
+using TaxiFirm.Models.Customer;
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -14,10 +14,21 @@ namespace TaxiFirm.Controllers
         public ActionResult GetCredit(string invoiceNumber)
         {
             try {
-
+                if(Session["CurrentCustomer"]!=null)
+                {
+                Customer customer = (Customer) Session["CurrentCustomer"];
                 int Inumber = int.Parse(invoiceNumber);
-              
+                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
                 Session["InvoiceSuccess"] = "success";
+                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
+                }
+                    else{
+                        Session["InvoiceSuccess"] = "failed";
+                    }
+                }
+                else{
+                 Session["InvoiceSuccess"] = "failed";
+                }
             
             }
 

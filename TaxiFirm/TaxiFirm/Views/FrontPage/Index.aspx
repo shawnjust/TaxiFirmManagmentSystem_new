@@ -110,7 +110,7 @@
                     注销
                      </a>
                <%}else if(current==Identity.custemer) {%>
-                  <a class="button color medium"   href="/Home/Index">
+                  <a class="button color medium"   href="/Home/Elements">
                 	<i class="icon-user white"></i>积分
                      </a>
                

@@ -182,7 +182,7 @@ a:hover
                                 性别</th>
                           <th>电话</th>
                           <th>工号</th>
-                            <th>信息</th>
+                            <th>操作</th>
                         </tr>
                     </thead>
                     <%
@@ -224,6 +224,53 @@ a:hover
                             <td  style="color:#900" class="pointer">
                             
                             <a href="/Home/EmployeeInfo?id=<%:employee.EmployeeId%>&subtype=<%:myType %>">信息管理</a></td>
+                            <%if ("AddDriver".Equals(myType)) {
+                                  if (new DriverHandle().IsDriver(employee.EmployeeId))  //是司机
+                                  {%>
+                                   <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/DeleteDriver?id=<%:employee.EmployeeId%>">删除司机</a></td>
+
+                              <%    }
+                                  else    //不是司机
+                                  { %>
+
+                                  <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/AddDriver?id=<%:employee.EmployeeId%>">添加司机</a></td>
+                                  
+                                  
+                          <%        }
+                              
+                              
+                              }
+                                  
+                              else if ("AddHost".Equals(myType)) {
+                                  
+                                    if (new DriverHandle().IsDriver(employee.EmployeeId))  //是司机
+                                  {%>
+                                   <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/DeleteDriver?id=<%:employee.EmployeeId%>">删除车主</a></td>
+
+                              <%    }
+                                  else    //不是司机
+                                  { %>
+
+                                  <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/AddDriver?id=<%:employee.EmployeeId%>">添加车主</a></td>
+                                  
+                                  
+                          <%        }
+                                  
+                                  
+                              
+                              }
+                              else if ("AddManager".Equals(myType)) { 
+                              
+                              }
+                           %>
                         </tr>
                         <%}
                       
