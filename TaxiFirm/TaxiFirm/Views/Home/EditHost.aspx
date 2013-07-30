@@ -4,6 +4,9 @@
     关于我们
 </asp:content>
 <asp:content id="aboutContent" contentplaceholderid="MainContent" runat="server">
+    <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
+    </script>
     <% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
         

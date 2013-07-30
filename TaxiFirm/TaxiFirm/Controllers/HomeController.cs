@@ -318,13 +318,51 @@ namespace TaxiFirm.Controllers
         public ActionResult DriverList()
         {
             int page1 = int.Parse(Request.QueryString.Get("page"));
+            string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            page.CurrentPage = page1;
-            page.PageWidth = 10;
-            List<Driver> drivers = new DriverHandle().getDriverByPage(page);
-            ViewData["type"] = "driver";
-            ViewData["drivers"] = drivers;
-            ViewData["page"] = page;
+            if (type.Equals("search"))   //搜索类型
+            {
+                string NameID = Request.QueryString.Get("NameID");
+                try
+                {
+                    int id = int.Parse(NameID);
+                    Driver driver = new DriverHandle().GetDriverByEmployeeID(id);
+                    List<Driver> drivers = new List<Driver>();
+                    if (driver.name != null && !driver.Equals(""))
+                    {
+                        drivers.Add(driver);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["drivers"] = drivers;
+
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+                catch
+                {
+                    page.CurrentPage = page1;
+                    List<Employee> employees = new EmployeeHandle().GetEmployeeByNameByPage(page, NameID);
+                    List<Driver> drivers = new List<Driver>();
+                    ViewData["type"] = "search";
+                    drivers = new DriverHandle().EmployeesToDrivers(employees);
+                    ViewData["drivers"] = drivers;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+            }
+            else
+            {
+                page.CurrentPage = page1;
+                page.PageWidth = 10;
+                List<Driver> drivers = new DriverHandle().getDriverByPage(page);
+                ViewData["type"] = "driver";
+                ViewData["drivers"] = drivers;
+                ViewData["page"] = page;
+            }
+
             return View();
         }
         public ActionResult AddDriver()
@@ -333,6 +371,10 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverInfo()
         {
+            int employee_id = int.Parse(Request.QueryString.Get("EMID"));
+            Driver driver = new Driver();
+            driver = new DriverHandle().GetDriverByEmployeeID(employee_id);
+            ViewData["Driver"] = driver;
             return View();
         }
         public ActionResult DriverSelect()
@@ -849,36 +891,20 @@ namespace TaxiFirm.Controllers
                     page.WholePage = 1;
                     ViewData["page"] = page;
                     ViewData["NameID"] = NameID;
-
-
-
-
                 }
                 catch
                 {
-
-                   
-
-
                     page.CurrentPage = page1;
-
                     List<Employee> employees = new EmployeeHandle().GetEmployeeByNameByPage(page, NameID);
                     ViewData["type"] = "search";
                     ViewData["employees"] = employees;
                     ViewData["page"] = page;
                     ViewData["NameID"] = NameID;
-
-
-
-
                 }
-
-
             }
             else
             {
-                int page1 = int.Parse(Request.QueryString.Get("page"));
-               
+                int page1 = int.Parse(Request.QueryString.Get("page"));            
                 page.CurrentPage = page1;
                 List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
                 ViewData["type"] ="common";

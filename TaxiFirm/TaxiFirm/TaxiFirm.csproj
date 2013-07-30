@@ -403,11 +403,13 @@
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\EditHost.aspx" />
     <Content Include="Views\Home\EmployeeList.aspx" />
     <Content Include="Views\Home\FirmList.aspx" />
     <Content Include="Views\Home\EmployeeInfo.aspx" />
     <Content Include="Views\Home\HostInfo.aspx" />
     <Content Include="Views\Home\HostList.aspx" />
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />

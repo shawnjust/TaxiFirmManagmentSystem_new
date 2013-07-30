@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using TaxiFirm.Models.Employee;
 namespace TaxiFirm.Models.Driver
 {
     public class DriverHandle
@@ -138,6 +138,19 @@ namespace TaxiFirm.Models.Driver
                 return false;
             }
         }
+        public bool deleteDriver(int driver_id)
+        {
+            if (driver_id>0)
+            {
+                db.deleteDriverById(driver_id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
+        }
+
         public List<Driver> getDriverByPage(MyPage page)
         {
             page.CountPerPage = 10;
@@ -176,6 +189,40 @@ namespace TaxiFirm.Models.Driver
 
             }
 
+            return drivers;
+        }
+        public void ClearDriver(Driver driver)
+        {
+            driver = null;
+        }
+        public Driver EmployeeToDriver(Employee.Employee employee)
+        {
+            Driver driver = new Driver();
+            driver.name = employee.Name;
+            driver.firm_id =employee.FirmID;
+            driver.birthday = employee.Birthday;
+            if (employee.Gender.Equals("女"))
+            {
+                driver.gender = true;
+            }
+            else
+            {
+                driver.gender = false;
+            }
+            driver.telephone = employee.Telephone;
+            driver.emoloyee_address = employee.Address;
+            return driver;
+        }
+        public List<Driver> EmployeesToDrivers(List<Employee.Employee> employees)
+        {
+            List<Driver> drivers = new List<Driver>();
+            Driver driver = new Driver();
+            DriverHandle driverhandler = new DriverHandle();
+            for (int i = 0; i < employees.Count;i++ )
+            {
+                driver = driverhandler.EmployeeToDriver(employees[i]);
+                drivers.Add(driver);
+            }
             return drivers;
         }
     }

@@ -230,6 +230,10 @@ a:hover
                             <td><%:employee.Telephone%></td>
                            <%if (myType.Equals("AddDriver"))
                             {
+                                 if (driverHandler==null)
+                                 {
+                                     driverHandler = new DriverHandle();
+                                 }
                                 if (driverHandler.isDriver(employee.EmployeeId))
                                 {
                                    %>

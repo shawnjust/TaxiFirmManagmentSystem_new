@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Driver" %>
 <asp:Content ID="Content1" ContentPlaceHolderID="TitleContent" runat="server">
     车辆管理
 </asp:Content>
@@ -46,7 +46,9 @@
 
     });
 </script>
-
+<% 
+    Driver driver = (Driver)ViewData["driver"];
+     %>
 
 <br/>
 <br />
@@ -59,23 +61,23 @@
             <table border="0" cellspacing="5" cellpadding="5" align="center">
                 <tr>
                     <td>姓名：</td>
-					<td>王二小</td>
+					<td><%:driver.name %></td>
 				</tr>
 				<tr>
 					<td>性别：</td>
-					<td>男</td>
+					<td><%:driver.getGenderToString() %></td>
 				</tr>
                 <tr>
                      <td>年龄：</td>
-                     <td>30岁</td>
+                     <td><%:driver.getAge() %>岁</td>
                 </tr>
                 <tr>
 					 <td>出生日期：</td>
-					 <td>1983-3-20</td>
+					 <td><%:driver.birthday %></td>
 				</tr>
                 <tr>
                      <td>健康状况：</td>
-                     <td>良好</td>
+                     <td><%:driver.getConditionToString() %></td>
                 </tr>
             </table>
         </td>
@@ -93,11 +95,18 @@
             <table border="0" cellspacing="12" cellpadding="5" align="center">
                 <tr>
                     <td>员工编号：</td>
-                    <td>11111111111</td>
+                    <td><%:driver.Employee_id %></td>
                 </tr>
                 <tr>
                     <td>驾驶证编号：</td>
-                    <td>63918291212717281912</td>
+                    <td><%if (driver.License_id == null)
+                          {%>
+                          驾照被吊销
+                          <% }
+                          else
+                          {  %>
+                          <%:driver.License_id %>
+                          <%} %></td>
                 </tr>
                 <tr>
                     <td>驾驶车辆车牌号：</td>
@@ -105,11 +114,11 @@
                 </tr>
 				<tr>
 					<td>联系电话：</td>
-					<td>11234567891</td>
+					<td><%:driver.telephone %></td>
 				</tr>
 				<tr>
 					<td>家庭住址：</td>
-					<td>地球村888号</td>
+					<td><%:driver.emoloyee_address %></td>
 				</tr>
             </table>
         </td>
@@ -123,8 +132,8 @@
     <div align="center" class="container-fluid">
     <br />
     <br />
-     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify">修改</button>
-     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Delete">删除</button>
+     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify" onclick="/Home/Driver">修改</button>
+     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Delete" onclick="deleteDriver()">删除</button>
     </div>
 
 		       
