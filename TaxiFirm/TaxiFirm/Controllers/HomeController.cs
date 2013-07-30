@@ -582,15 +582,7 @@ namespace TaxiFirm.Controllers
         public ActionResult HostTaxiInfo(int id)
         {
             ViewData["employee_id"] = id;
-            var dd = context.getEmpolyeeById(id);
-            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
-            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
-            foreach (getAllTaxiInformationResult tx in taxi)
-            {
-                if (tx.host_empolyee_id == id)
-                    taxilist.Add(tx);
-            }
-
+            List<getAllTaxiInformationResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
 
             ViewData.Model = taxilist;
             return View();
