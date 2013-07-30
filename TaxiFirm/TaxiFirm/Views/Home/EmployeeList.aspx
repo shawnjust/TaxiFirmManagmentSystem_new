@@ -286,7 +286,7 @@ a:hover
 
                                   <td  style="color:#900" class="pointer">
                             
-                                   <a href="/Home/AddDriver?id=<%:employee.EmployeeId%>">添加车主</a></td>
+                                   <a href="/Home/AddHost?id=<%:employee.EmployeeId%>">添加车主</a></td>
                                   
                                   
                           <%        }

@@ -432,31 +432,49 @@ namespace TaxiFirm.Controllers
             return RedirectToAction("HostList");
         }
 
-        public ActionResult AddHost()
+        public ActionResult AddHost(int id)
         {
-            AddHostModal s = new AddHostModal();
-            s.firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name");
+
+            int? employee_id = id;
+
+            getEmpolyeeByIdResult idr = context.getEmpolyeeById(employee_id).First();
+
+            AddHostModal s = new AddHostModal()
+            {
+                address = idr.empolyee_address,
+                birthday = idr.birthday,
+                firm_id = idr.firm_id,
+
+                firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name"),
+                gender = idr.gender,
+                id_card = idr.id_card,
+                name = idr.name,
+                telephone = idr.telephone
+            };
+
+
             ViewData.Model = s;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddHost(AddHostModal host)
+        public ActionResult AddHost(int id, AddHostModal host)
         {
             try
             {
+
+                if (context.isHost(id) == 1) throw new Exception();
                 // TODO: Add insert logic here
-                host.password = host.id_card.Substring(host.id_card.Length - 7);
-                int? id = 0;
-                context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
-                int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
-                context.addHost(employee_id, "");
+                //host.password = host.id_card.Substring(host.id_card.Length - 7);
+                //context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
+                //int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
+                context.addHost(id, "");
                 return RedirectToAction("HostList");
             }
             catch (Exception e)
             {
                 ViewData["errorMessage"] = "Error";
-                return View();
+                return RedirectToAction("HostList");
             }
         }
 
@@ -578,12 +596,16 @@ namespace TaxiFirm.Controllers
         }
 
         [HttpGet]
-        public ActionResult HostSearchResult()
+        public ActionResult HostSearchResult(int id = 0)
         {
-            IQueryable<getHostBySearchNameResult> ls = context.getHostBySearchName("%" + Request["query"] + "%");
+            int? count = context.getHostByNamePageCount(15, "%"+Request["query"]+"%");
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
+            
+            IQueryable<getHostByNameByPageResult> ls = context.getHostByNameByPage(id + 1, 15, "%" + Request["query"] + "%");
             List<HostListModal> showModel = new List<HostListModal>();
 
-            foreach (getHostBySearchNameResult s in ls)
+            foreach (getHostByNameByPageResult s in ls)
             {
                 HostListModal toAdd = new HostListModal()
                 {
