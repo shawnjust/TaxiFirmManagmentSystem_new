@@ -86,7 +86,7 @@
                                     <br>
                                 </label>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.telephone)%>
+                                    <%: Html.TextBoxFor(model => model.telephone, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.telephone)%>
                                 </p>
                                 <p>
@@ -96,7 +96,7 @@
                                     </label>
                                 </p>
                                 <p>
-                                    <%: Html.TextBoxFor(model => model.address)%>
+                                    <%: Html.TextBoxFor(model => model.address, new { disabled = "disabled", @readonly = "readonly" })%>
                                     <%: Html.ValidationMessageFor(model => model.address)%>
                                 </p>
                                 <p>
