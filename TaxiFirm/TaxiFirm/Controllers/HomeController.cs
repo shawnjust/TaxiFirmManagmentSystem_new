@@ -818,7 +818,13 @@ namespace TaxiFirm.Controllers
             string type = Request.QueryString.Get("type");
             if (Request.QueryString.Get("subtype") != null) 
             { 
-            Session["subtype"] = Request.QueryString.Get("subtype");
+                Session["subtype"] = Request.QueryString.Get("subtype");
+                if (Request.QueryString.Get("subtype").Equals("AddDriver"))
+                {
+                    Driver driver = new Driver();
+                    DriverHandle driverHandler = new DriverHandle();
+                    ViewData["EM_DriverHandler"] = driverHandler;
+                }
             }
         
             MyPage page = new MyPage();

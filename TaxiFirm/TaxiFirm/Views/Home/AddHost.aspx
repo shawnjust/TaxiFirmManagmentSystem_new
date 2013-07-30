@@ -61,11 +61,15 @@
                                     </label>
                                 </p>
                                 <p>
-                                        <%: Html.Label("男") %>
+                                <label>
+                                        
                                         <%: Html.RadioButtonFor(model => model.gender, true)%>
-                                        <%: Html.Label("女") %>
+                                        <%: Html.Label("男") %>
+                                        
                                         <%: Html.RadioButtonFor(model => model.gender, false)%>
+                                        <%: Html.Label("女") %>
                                         <%: Html.ValidationMessageFor(model => model.gender)%>
+                                </label>
                                 </p>
                                 <label class="checkbox">
                                     <input type="checkbox" />

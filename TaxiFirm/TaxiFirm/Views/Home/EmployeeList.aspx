@@ -125,6 +125,7 @@ a:hover
     MyPage page = (MyPage)ViewData["page"];
     string type = (string)ViewData["type"];
     string myType =(string)Session["subtype"];
+    DriverHandle driverHandler = (DriverHandle)ViewData["EM_DriverHandler"];
 %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -229,10 +230,21 @@ a:hover
                             <td><%:employee.Telephone%></td>
                            <%if (myType.Equals("AddDriver"))
                             {
+                                if (driverHandler.isDriver(employee.EmployeeId))
+                                {
+                                   %>
+                                      <td>
+                                          是
+                                      </td>
+                                   <%                                    
+                                 }
+                                else
+                                {
                                  
                                %>
-                               <td>是</td>
+                               <td>否</td>
                                <%
+                                 }
                             }
                                  %>
                             <td><%:employee.EmployeeId%></td>

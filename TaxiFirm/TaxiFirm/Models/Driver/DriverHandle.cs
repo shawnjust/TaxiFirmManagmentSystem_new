@@ -119,7 +119,25 @@ namespace TaxiFirm.Models.Driver
         {
             return (int)db.getEmpolyeeIdByIdCard(ID_Number);
         }
-
+        public bool isDriver(int employee_id)
+        {
+/*            return true;*/
+            if (employee_id>0)
+            {
+                if (db.isDriver(employee_id) == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
         public List<Driver> getDriverByPage(MyPage page)
         {
             page.CountPerPage = 10;
