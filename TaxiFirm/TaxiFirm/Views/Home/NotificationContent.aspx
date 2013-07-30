@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace = "TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     公告内容
 </asp:Content>
@@ -7,6 +8,16 @@
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     </script>
+
+
+<%
+    //判断是否登陆
+    Manager CurrentManager = (Manager)Session["CurrentManager"];
+    if (CurrentManager == null)
+    {
+        Response.Redirect("../FrontPage/Login",false);
+    }
+%>
     <div class="container-fluid">
         <div class="row-fluid">
             <div class="span12">
