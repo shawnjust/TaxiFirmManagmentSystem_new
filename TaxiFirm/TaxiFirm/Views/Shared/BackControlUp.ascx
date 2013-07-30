@@ -40,7 +40,7 @@
             <td height="40" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
               <tr>
                 <td width="129" height="80" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("新闻公告", "NewsList", "Home")%></td>
-                <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("司机管理","DriverList","Home") %></td>
+                <td width="129" align="center" valign="middle" class="upSelect"><a href="/Home/DriverList?type=drivers&subtype=Info&page=1">司机管理</td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车辆管理", "TaxiList", "Home")%></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><%: Html.ActionLink("车主管理","HostList","Home") %></td>
                 <td width="129" align="center" valign="middle" class="upSelect"><a href="/Home/Customer?type=common&page=1">客户管理</a></td>

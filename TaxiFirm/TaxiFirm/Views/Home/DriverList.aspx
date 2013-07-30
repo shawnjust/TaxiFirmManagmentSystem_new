@@ -1,5 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Employee"  %>
+<%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Driver" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     司机列表
 </asp:Content>
@@ -41,7 +43,11 @@
 </script>
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/driver.css" rel="stylesheet" type="text/css" />
-
+<%  List<Driver> drivers = (List<Driver>)ViewData["drivers"];
+    MyPage page = (MyPage)ViewData["page"];
+    string type = (string)ViewData["type"];
+    string myType =(string)Session["subtype"];
+%>
 <table width="1100"  align="center" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -62,7 +68,7 @@
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="35%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/add.png" width="11" height="11" /></td>
-            <td width="65%" style="font-size:13px;"><%:Html.ActionLink("添加","AddDriver","Home") %></td>
+            <td width="65%" style="font-size:13px;"><a href="/Home/EmployeeList?type=common&subtype=AddDriver&page=1">添加</a></td>
           </tr>
         </table></td>
         <td width="45" height="24">&nbsp;</td>
@@ -121,115 +127,111 @@
 
         });
 
+        $(".ChangePage").click(
+        function () {
 
+            var type = this.id;
+            var form1 = document.getElementById("changepage");
+            var content = form1.title;
+
+            var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
+            var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
+
+
+            if (type == "Prev") {
+                if (CurrentPage <= 1) {
+                    window.alert("已到最前页");
+                } else {
+
+                    var type = document.getElementById("type").value;
+                        form1.action = "/Home/DriverList?page=" + (CurrentPage - 1);
+                    form1.submit();
+
+                }
+
+
+
+
+            } else if (type == "Next") {
+                if (CurrentPage >= WholePage) {
+                    window.alert("已到最后页");
+
+                } else {
+                    var type = document.getElementById("type").value;
+                    form1.action = "/Home/DriverList?page=" + (CurrentPage + 1);
+                    form1.submit();
+                }
+
+            }
+
+
+
+        }
+
+
+
+        );
 
 
     });
 </script>
 
-
+<%  if (drivers != null && drivers.Count != 0)
+    {  %>
 <ul id="grid" class="group">
+ <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+
+   for (int i = 0; i < drivers.Count; i++)
+   {
+       Driver driver = drivers[i];%>
+                       
             <li>
                 <div class="details">
-                	<h3>张晓雅</h3>
+                	<h3><%:driver.name %></h3>
                     <a class="more" href="/Home/DriverInfo">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/01.jpg" /></a>
-            </li>
-            <li>
-                <div class="details">
-                	<h3>李大仁</h3>
-                    <a class="more" href="">更多信息</a> 
                 </div>
                <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/02.jpg" /></a>
             </li>
-            <li >
-                <div class="details">
-                	<h3>戴佳佳</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/03.jpg" /></a>
-            </li>
-            <li>
-                <div class="details">
-                	<h3>王振东</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/04.jpg" /></a>
-            </li>
-            <li class="end">
-                <div class="details">
-                	<h3>陈俊</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/05.jpg" /></a>
-            </li>
-            <li>
-                <div class="details">
-                	<h3>克莱尔</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/06.jpg" /></a>
-            </li>  
-            <li>
-                <div class="details">
-                	<h3>迈克尔</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/07.jpg" /></a>
-            </li>
-            <li>
-                <div class="details">
-                	<h3>海瑟薇</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/08.png" /></a>
-            </li>
-            <li>
-                <div class="details">
-                	<h3>米勒</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/09.jpg" /></a>
-            </li>
-            <li class="end">
-                <div class="details">
-                	<h3>罗伯特</h3>
-                    <a class="more" href="">更多信息</a> 
-                </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/10.jpg" /></a>
-            </li>
+ <%} %>
+           
 </ul>
-
+<%} %>
 
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="32" align="left" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="centerButtom">
         
-                <div class="pagination pagination-centered">
-                    <ul>
-                        <li>
-                            <a href="#">Prev</a>
-                        </li>
-                        <li>
-                            <a href="#">1</a>
-                        </li>
-                        <li>
-                            <a href="#">2</a>
-                        </li>
-                        <li>
-                            <a href="#">3</a>
-                        </li>
-                        <li>
-                            <a href="#">4</a>
-                        </li>
-                        <li>
-                            <a href="#">5</a>
-                        </li>
-                        <li>
-                            <a href="#">Next</a>
-                        </li>
+                             
+               <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
+
+              
+               <%if ("search".Equals(type)) { 
+                 
+                 %>
+                 
+                 <input type="hidden" id="name_id" value="<%:ViewData["NameID"] %>" />
+                 <%
+                 
+                 }%>
+            <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="Prev">Prev</a> </li>
+                <%  int current = page.CurrentPage - 3;
+                    for (int i = 0; i < page.PageWidth; i++)
+                    {
+                        current++;
+                        if (current == page.CurrentPage)
+                        {%>
+                            
+                            <li> <a href="/Home/DriverList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                        <%
+                        }
+                    }
+                        %>
+            
+                <li> <a class="ChangePage" id="Next">Next</a> </li>
+                        
                   </ul>
               </div>
       </tr>

@@ -81,19 +81,25 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
+<<<<<<< HEAD
+    <Compile Include="Models\Driver\Driver.cs" />
+    <Compile Include="Models\Driver\DriverHandle.cs" />
+=======
+    <Compile Include="Models\Employee\Employee.cs" />
+    <Compile Include="Models\Employee\EmployeeHandle.cs" />
+>>>>>>> 32d7724cc6a2694beb5cf98b357b566530311b28
     <Compile Include="Models\Firm\Firm.cs" />
     <Compile Include="Models\Firm\FirmHandle.cs" />
     <Compile Include="Models\HostModels.cs" />
     <Compile Include="Models\IdentityHandle.cs" />
-<<<<<<< HEAD
-    <Compile Include="Models\RegexValidation.cs" />
-=======
     <Compile Include="Models\Invoice\Invoice.cs" />
+    <Compile Include="Models\License\License.cs" />
+    <Compile Include="Models\License\LicenseHandle.cs" />
+    <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />
     <Compile Include="Models\Manager\ManagerHandle.cs" />
     <Compile Include="Models\MyPage.cs" />
->>>>>>> be07edc94197120a30e6e74f0d8f279358d98876
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -397,7 +403,9 @@
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\EmployeeList.aspx" />
     <Content Include="Views\Home\FirmList.aspx" />
+    <Content Include="Views\Home\EmployeeInfo.aspx" />
     <Content Include="Views\Home\HostInfo.aspx" />
     <Content Include="Views\Home\HostList.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
@@ -409,6 +417,7 @@
     <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />
     <Content Include="Views\Home\NotificationContent.aspx" />
+    <Content Include="Views\Home\SaveDriverInfo.aspx" />
     <Content Include="Views\Home\TaxiList.aspx" />
     <Content Include="Views\Home\NewsContent.aspx" />
     <Content Include="Views\Home\DriverSelect.aspx" />
@@ -498,7 +507,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>52949</DevelopmentServerPort>
+          <DevelopmentServerPort>57526</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

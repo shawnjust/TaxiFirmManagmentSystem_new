@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <%@ Import Namespace="TaxiFirm.Models.Employee" %>
+<%@ Import Namespace="TaxiFirm.Models.Driver" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
 </asp:Content>
@@ -24,7 +25,8 @@
                 </div>
                 <%Employee employee = (Employee)ViewData["employee"];
 
-                  string type = (string)ViewData["type"];  %>
+                 
+                  string subtype = (string)ViewData["subtype"]; %>
                 <div class="row-fluid">
                     <div class="span8">
                     <div class="span4">
@@ -111,10 +113,15 @@
                                     </div>
                                 </div>
                             </li>
-                            <%if("Info".Equals(type)){ %>
+                            <%if("Info".Equals(subtype)){ %>
                             <li><a href="#">删除</a> </li>
             
                             <li><a href="/Home/ModifyEmployee">修改信息</a> </li>
+                            <%}
+                              else if ("AddDriver".Equals(subtype) && !new DriverHandle().IsDriver(employee.EmployeeId))
+                              { %>
+                               <li><a href="/Home/AddDriver?id=<%:employee.EmployeeId %>">司机授权</a> </li>
+
                             <%} %>
                         </ul>
                     </div>

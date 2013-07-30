@@ -8,9 +8,11 @@ using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.Invoice;
-using TaxiFirm.Models.Employee;
-using TaxiFirm.Models.Backup;
+<<<<<<< HEAD
 using TaxiFirm.Models.Driver;
+=======
+using TaxiFirm.Models.Employee;
+>>>>>>> 32d7724cc6a2694beb5cf98b357b566530311b28
 namespace TaxiFirm.Controllers
 {
 
@@ -18,8 +20,8 @@ namespace TaxiFirm.Controllers
     public class HomeController : Controller
     {
 
-        DataClasses1DataContext context = new DataClasses1DataContext();
-        
+
+
         public ActionResult BackHandle()
         {
 
@@ -35,61 +37,6 @@ namespace TaxiFirm.Controllers
             }
             return RedirectToAction("Index");
         }
-        [HttpPost]
-        public ActionResult SetNewBackup(string Name)
-        {
-            try
-            {
-                if (Name.Length<200&&new BackupHandle().AddNewBackup(Name) > 0)
-                {
-                    Session["BackupSuccess"] = "success";
-                }
-                else
-                {
-                    Session["BackupSuccess"] = "success";
-                
-                }
-                return RedirectToAction("Backup");
-            }
-            catch {
-                Session["BackupSuccess"] = "failed";
-                return RedirectToAction("Backup");
-            
-            }
-        }
-        [HttpPost]
-        public ActionResult CustomerLoginHandle(string username, string psword)
-        {
-           
-            try {
-                int userid = int.Parse(username);
-                if (new DataClasses1DataContext().checkCustomerLoginPassword(userid, psword) != 0)
-                {
-                  
-                    Session["Identity"] = Identity.custemer;
-                    Customer customer = new CustomerHandle().getCustomerById(userid);
-                    Session["CurrentCustomer"] = customer;
-                    MyPage page2 = new MyPage();
-                    page2.CurrentPage = 1;
-                    Session["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId,page2);
-                    return RedirectToAction("Elements","FrontPage");
-                }
-                else {
-
-                    Response.Redirect("/FrontPage/Elements");
-                }
-            
-            }
-            catch
-            {
-                ViewData["error"] = "error";
-                Response.Redirect("/FrontPage/Elements");
-               
-            }
-            return View();
-        }
-
-
         [HttpPost]
         public ActionResult LoginHandle(string username, string psword)
         {
@@ -108,19 +55,12 @@ namespace TaxiFirm.Controllers
 
                     Session["Identity"] = Identity.manager;
                     Session["CurrentManager"] = new Manager(userid);
-                 
+
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
-                else if (Current == Identity.custemer)
+                else
                 {
-
-                    Session["Identity"] = Identity.custemer;
-                    Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(userid);
-                    return RedirectToAction("Index", "FrontPage");
-                   }
-
-                else{
                     Response.Redirect("/FrontPage/Login");
                 }
 
@@ -135,7 +75,7 @@ namespace TaxiFirm.Controllers
             }
 
 
-        //    Response.Redirect("/FrontPage/Login");
+            Response.Redirect("/FrontPage/Login");
             return View();
 
 
@@ -291,8 +231,7 @@ namespace TaxiFirm.Controllers
         public ActionResult EmployeeInfo()
         {
             int id = int.Parse(Request.QueryString.Get("id"));
-            
-            ViewData["subtype"] = Request.QueryString.Get("subtype");
+            ViewData["type"] = Request.QueryString.Get("type");
             Employee employee = new EmployeeHandle().getEmployeeById(id);
             ViewData["employee"] = employee;
             return View();
@@ -317,14 +256,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverList()
         {
-            int page1 = int.Parse(Request.QueryString.Get("page"));
-            MyPage page = new MyPage();
-            page.CurrentPage = page1;
-            page.PageWidth = 10;
-            List<Driver> drivers = new DriverHandle().getDriverByPage(page);
-            ViewData["type"] = "driver";
-            ViewData["drivers"] = drivers;
-            ViewData["page"] = page;
             return View();
         }
         public ActionResult AddDriver()
@@ -339,269 +270,14 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
-
-        public ActionResult HostList(int id = 0)
+        public ActionResult HostList()
         {
-            int pageIndex = id;
-            int pageSize = 15;
-            int? count = context.getHostPageCount(pageSize);
-            ViewData["pageCount"] = id;
-            ViewData["maxPage"] = count;
-            if (pageIndex >= count) pageIndex = (int)count - 1;
-            IQueryable<getHostByPageResult> ls = context.getHostByPage(pageIndex + 1, pageSize);
-            //IQueryable<getAllHostResult> ls = context.getAllHost();
-
-            int siz = ls.Count();
-            List<HostListModal> showModel = new List<HostListModal>();
-
-            foreach (getHostByPageResult s in ls)
-            {
-                HostListModal toAdd = new HostListModal()
-                {
-                    employee_id = s.empolyee_id,
-                    age = DateTime.Now.Year - s.birthday.Year,
-                    address = s.empolyee_address,
-                    gender = s.gender,
-                    id_card = s.id_card,
-                    name = s.name,
-                    telephone = s.telephone,
-                    car_count = context.getTaxiCountByEmpolyeeId(s.empolyee_id)
-                };
-                showModel.Add(toAdd);
-            }
-            ViewData.Model = showModel;
             return View();
         }
-
-        public ActionResult HostBuyTaxi(int id)
-        {
-            BuyTaxiModal s = new BuyTaxiModal()
-            {
-                now_id = id,
-                now_name = context.getEmpolyeeById(id).First().name
-            };
-            ViewData.Model = s;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult HostBuyTaxi(int id, BuyTaxiModal modal)
-        {
-            context.setTaxiOwnerEmpolyeeId(modal.car_id, id);
-            return RedirectToAction("HostList");
-        }
-
-        [HttpGet]
-        public void getTaxiInfoByID(string comment)
-        {
-            List<getTaxiInformationByPlatenumberResult> tx = context.getTaxiInformationByPlatenumber(comment).ToList();
-            if (tx.Count() > 0)
-            {
-                Response.Write("车主: " + tx.First().host_name + "  " + tx.First().taxi_brand);
-            }
-        }
-
-        public ActionResult hostTaxiDetail(string id)
-        {
-            getTaxiInformationByPlatenumberResult s = context.getTaxiInformationByPlatenumber(id).First();
-            ViewData.Model = s;
-            return View();
-        }
-
-        public ActionResult HostTransaction(string id)
-        {
-            getTaxiInformationByPlatenumberResult l = context.getTaxiInformationByPlatenumber(id).First();
-            TransactionModal s = new TransactionModal()
-            {
-                owner_id = (int)l.host_empolyee_id,
-                owner_name = l.host_name,
-                car_id = id,
-                car_name = l.taxi_brand,
-                buyer_list = new SelectList(context.getAllHost(), "empolyee_id", "name")
-
-            };
-            ViewData.Model = s;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult HostTransaction(string id, TransactionModal modal)
-        {
-            getTaxiInformationByPlatenumberResult tx = context.getTaxiInformationByPlatenumber(id).First();
-            context.setTaxiOwnerEmpolyeeId(tx.plate_number, modal.buyer_id);
-            return RedirectToAction("HostList");
-        }
-
         public ActionResult AddHost()
         {
-            AddHostModal s = new AddHostModal();
-            s.firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name");
-            ViewData.Model = s;
             return View();
         }
-
-        [HttpPost]
-        public ActionResult AddHost(AddHostModal host)
-        {
-            try
-            {
-                // TODO: Add insert logic here
-                host.password = host.id_card.Substring(host.id_card.Length - 7);
-                int? id = 0;
-                context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
-                int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
-                context.addHost(employee_id, "");
-                return RedirectToAction("HostList");
-            }
-            catch (Exception e)
-            {
-                ViewData["errorMessage"] = "Error";
-                return View();
-            }
-        }
-
-        public ActionResult EditTaxiInfoByHost(int id)
-        {
-            return null;
-        }
-
-        public ActionResult EditHost(int id)
-        {
-            var dd = context.getEmpolyeeById(id);
-
-            getEmpolyeeByIdResult g = dd.First();
-
-            ShowHostModal detail = new ShowHostModal()
-            {
-                address = g.empolyee_address,
-                gender = g.gender,
-                id_card = g.id_card,
-                name = g.name,
-                telephone = g.telephone,
-                /*
-                is_available = t.is_available,
-                plate_number = t.plate_number,
-                taxi_brand = t.taxi_brand
-                 * */
-            };
-            ViewData.Model = detail;
-            return View();
-        }
-
-        [HttpPost]
-        public ActionResult EditHost(int id, ShowHostModal modal)
-        {
-            try
-            {
-                // TODO: Add update logic here
-                context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
-                return RedirectToAction("HostList");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult DeleteHost(int id)
-        {
-            try
-            {
-                context.deleteHostById(id);
-
-                return RedirectToAction("HostList");
-            }
-            catch
-            {
-                return View();
-            }
-        }
-
-        public ActionResult HostInfo(int id)
-        {
-            var dd = context.getEmpolyeeById(id);
-            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
-            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
-            foreach (getAllTaxiInformationResult tx in taxi)
-            {
-                if (tx.host_empolyee_id == id)
-                    taxilist.Add(tx);
-            }
-
-            getEmpolyeeByIdResult g = dd.First();
-
-            List<getAllFirmResult> firm = context.getAllFirm().ToList();
-            String firm_name = "";
-            foreach (getAllFirmResult tx in firm)
-            {
-                if (tx.firm_id == g.firm_id)
-                    firm_name = tx.firm_name;
-            }
-
-            ShowHostModal detail = new ShowHostModal()
-            {
-                employee_id = g.empolyee_id,
-                address = g.empolyee_address,
-                gender = g.gender,
-                id_card = g.id_card,
-                name = g.name,
-                telephone = g.telephone,
-                taxi_list = taxilist,
-                firm_name = firm_name,
-                birthday = g.birthday.ToShortDateString()
-                /*,
-                is_available = t.is_available,
-                plate_number = t.plate_number,
-                taxi_brand = t.taxi_brand
-                 * */
-            };
-
-            ViewData.Model = detail;
-            return View();
-        }
-
-        public ActionResult HostTaxiInfo(int id)
-        {
-            ViewData["employee_id"] = id;
-            var dd = context.getEmpolyeeById(id);
-            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
-            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
-            foreach (getAllTaxiInformationResult tx in taxi)
-            {
-                if (tx.host_empolyee_id == id)
-                    taxilist.Add(tx);
-            }
-
-
-            ViewData.Model = taxilist;
-            return View();
-        }
-
-        [HttpGet]
-        public ActionResult HostSearchResult()
-        {
-            IQueryable<getHostBySearchNameResult> ls = context.getHostBySearchName("%" + Request["query"] + "%");
-            List<HostListModal> showModel = new List<HostListModal>();
-
-            foreach (getHostBySearchNameResult s in ls)
-            {
-                HostListModal toAdd = new HostListModal()
-                {
-                    employee_id = s.empolyee_id,
-                    age = DateTime.Now.Year - s.birthday.Year,
-                    address = s.empolyee_address,
-                    gender = s.gender,
-                    id_card = s.id_card,
-                    name = s.name,
-                    telephone = s.telephone,
-                    car_count = context.getTaxiCountByEmpolyeeId(s.empolyee_id)
-                };
-                showModel.Add(toAdd);
-            }
-            ViewData.Model = showModel;
-            return View();
-        }
-
         public ActionResult AddNews()
         {
             return View();
@@ -610,43 +286,13 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+        public ActionResult HostInfo()
+        {
+            return View();
+        }
        
         public ActionResult BackupList()
         {
-            string type = Request.QueryString.Get("type");
-            if (type.Equals("search"))   //搜索类型
-            {
-                int page1 = int.Parse(Request.QueryString.Get("page"));
-                string NameID = Request.QueryString.Get("NameID");
-               
-
-                    MyPage page = new MyPage();
-
-
-                    page.CurrentPage = page1;
-
-                    List<Backup> backups = new BackupHandle().GetBackupByDescriptionByPage(page, NameID);
-                    ViewData["type"] = "search";
-                    ViewData["backups"] = backups;
-                    ViewData["page"] = page;
-                    ViewData["NameID"] = NameID;
-
-
-
-
-                
-
-
-            }
-            else
-            {
-                
-                MyPage page = new MyPage();
-                page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
-                ViewData["backups"] = new BackupHandle().GetbackupByPage(page);
-                ViewData["page"] = page;
-                ViewData["type"] = "common";
-            }
             return View();
         }
          
@@ -765,20 +411,11 @@ namespace TaxiFirm.Controllers
         }
         public void LogOut()
         {
-            if (Session["Identity"] != null)
-            {
-                Identity identity = (Identity)Session["Identity"];
 
-                if (identity.Equals(Identity.manager)&&Session["CurrentManager"] != null)
-                {
-                    Session.Remove("CurrentManager");
-                    Session.Remove("Identity");
-                }
-                else if (identity.Equals(Identity.custemer))
-                {
-                    Session.Remove("CurrentCustomer");
-                    Session.Remove("Identity");
-                }
+            if (Session["CurrentManager"] != null)
+            {
+                Session.Remove("CurrentManager");
+                Session.Remove("Identity");
             }
             Response.Redirect("/FrontPage/Index");
         }
@@ -796,6 +433,82 @@ namespace TaxiFirm.Controllers
 
 
         [HttpPost]
+<<<<<<< HEAD
+        public ActionResult SaveDriverInfo(string Driver_Name, string Driver_Gender, string firm_id,string Driver_Birthday, string Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
+        {
+            DriverHandle handler = new DriverHandle();
+
+            ///////////////////////////////unused code///////////////////////////////////////////
+//             TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
+//             bool Gender=false;
+//             DateTime Birthday = DateTime.Parse(Driver_Birthday);
+//             int Condition = int.Parse(Driver_Condition);
+//             int Firm_id = int.Parse(firm_id);
+//             string password = Driver_ID.Substring(13, 4);
+//             ViewData["Driver_Name"] = Driver_Name;
+//             ViewData["Driver_ID"] = Driver_ID;
+//             ViewData["Driver_Birthday"] = Birthday;
+//             Gender = bool.Parse(Driver_Gender);
+//             if (Driver_Gender.Equals("true"))
+//             {
+//                 Driver_Gender = "男";
+//             }
+//             else
+//             {
+//                 Driver_Gender = "女";
+//             }
+//             if (getAgefromBirthday(Birthday)!=0)
+//             {
+//                 ViewData["Driver_Age"] = getAgefromBirthday(Birthday);
+//             }
+//             ViewData["Driver_Gender"] = Driver_Gender;
+//             ViewData["Driver_TelePhone"] = Driver_TelePhone;
+//             ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
+//             ViewData["Driver_Condition"] = Condition;
+//             ViewData["Driver_LicenseID"] = Driver_LicenseID;
+//             ViewData["firm_id"] = Firm_id;
+//             db.addEmpolyee(password, Firm_id, Driver_Name, Driver_ID, Birthday, Gender, Driver_TelePhone, Driver_HomeAddress);
+//             
+//             db.addDriver(10,Condition, Driver_LicenseID);
+            ///////////////////////////////////////////////////////////////
+            if (handler.AddDriverHandler(Driver_Name, Driver_Gender,firm_id,Driver_Birthday, Driver_Condition, Driver_LicenseID, Driver_ID, Driver_TelePhone, Driver_HomeAddress))
+            {
+                int employee_id = handler.getEmployeeIDByIDCard(Driver_ID);
+                ViewData["Driver_Info"] = handler.GetDriverByEmployeeID(employee_id);
+            }
+            return View();
+        }
+        public int getAgefromBirthday(DateTime birthday)
+        {
+            int age = 0;
+            DateTime today = new DateTime();
+            today = DateTime.Now;
+            if ((birthday.Month<today.Month)||((birthday.Month==today.Month)&&(birthday.Day<today.Day)))
+            {
+                age = today.Year - birthday.Year;
+                if (age>0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+            else
+            {
+                age = (today.Year - birthday.Year) - 1;
+                if (age>0)
+                {
+                    return age;
+                }
+                else
+                {
+                    return 0;
+                }
+            }
+        }
+=======
         public ActionResult SaveDriverInfo(string Driver_Name, bool Driver_Gender, DateTime Driver_Birthday, int Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
         {
             TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
@@ -816,11 +529,6 @@ namespace TaxiFirm.Controllers
         {
 
             string type = Request.QueryString.Get("type");
-            if (Request.QueryString.Get("subtype") != null) 
-            { 
-            Session["subtype"] = Request.QueryString.Get("subtype");
-            }
-        
             MyPage page = new MyPage();
             if (type.Equals("search"))   //搜索类型
             {
@@ -875,42 +583,13 @@ namespace TaxiFirm.Controllers
                
                 page.CurrentPage = page1;
                 List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
-                ViewData["type"] ="common";
+                ViewData["type"] = "common";
                 ViewData["employees"] = employees;
                 ViewData["page"] = page;
             }
             return View();
         }
-        public int getAgefromBirthday(DateTime birthday)
-        {
-            int age = 0;
-            DateTime today = new DateTime();
-            today = DateTime.Now;
-            if ((birthday.Month<today.Month)||((birthday.Month==today.Month)&&(birthday.Day<today.Day)))
-            {
-                age = today.Year - birthday.Year;
-                if (age>0)
-                {
-                    return age;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-            else
-            {
-                age = (today.Year - birthday.Year) - 1;
-                if (age>0)
-                {
-                    return age;
-                }
-                else
-                {
-                    return 0;
-                }
-            }
-        }
 
+>>>>>>> 32d7724cc6a2694beb5cf98b357b566530311b28
     }
 }

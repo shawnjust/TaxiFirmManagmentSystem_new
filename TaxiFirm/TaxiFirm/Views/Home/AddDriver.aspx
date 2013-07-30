@@ -32,11 +32,8 @@
 
         function submitAll() {
             var form1 = window.document.getElementById("info_form1");
-            var form2 = window.document.getElementById("info_form2");
-            var form3 = window.document.getElementById("info_form3");
+          
             form1.submit();
-            form2.submit();
-            form3.submit();
         }
     </script>
 <body>
@@ -69,7 +66,7 @@
                                         <h4>性别</h4>
                                 </p>
                                 <p>
-                                   <small><input id="man" type="radio" checked="checked" name="Driver_Gender" value="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio" value="0"  name="Driver_Gender"/>&nbsp;&nbsp;女
+                                   <small><input id="man" type="radio" checked="checked" name="Driver_Gender" value="true" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio" value="false"  name="Driver_Gender"/>&nbsp;&nbsp;女
                                    </small>
                                 </p>
                                 <p>
@@ -85,10 +82,47 @@
                                     <input name="Driver_Condition" type="text" class="error" pattern="^(?:0|[1-9][0-9]?|100)$" title="健康状况需要输入100以内的数字" onBlur="if (!(/^(?:0|[1-9][0-9]?|100)$/.test(this.value)) ){alert('健康状况需要输入100以内的数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                             </fieldset>
+                          
+                            </div>
+                            <div class="span4">
+                            
+                                <br/>
+                            <fieldset>
+                                <legend><h3>扩展信息</h3></legend><legend>
+                                <label>
+                                    <h4>驾驶证编号：</h4>
+                                </label>
+                                <p>
+                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{15}[\d|X]|\d{12}" title="驾驶证编号为12位数字"  onblur="if (!(/\d{15}[\d|X]|\d{12}/.test(this.value)) ){alert('驾驶证编号为12位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                </p>
+                                <p>
+                                    <h4>身份证号：</h4>
+                                </p>
+                                <p>
+                                   <input name="Driver_ID" type="text" class="error" pattern="\d{17}[\d|X]|\d{15}" title="身份证号码为17位" onblur="if (!(/\d{17}[\d|X]|\d{15}/.test(this.value)) ){alert('身份证号码为11位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                </p>
+                                    <h4>公司：</h4>
+                                <p>
+                                   <select name="firm_id">
+                                      <option value ="1">长运公司</option>
+                                      <option value ="2">鸿运公司</option>
+                                      <option value ="3">永运公司</option>
+                                    </select>
+                                </p>
+                            </fieldset>
                             </form>
+                        
+                            <br/>
+                            <br/>
+                            <br/>
+                            <br/>
+                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle" onclick="submitAll()">
+                        提交</button>
                             </div>
                         <div class="span4">
-                        <form id="info_form3" action="/Home/SaveDriverInfo" method="post">
+                            
+                            <div class="span4">
+                      
                               <br/>
                             <fieldset>
                           

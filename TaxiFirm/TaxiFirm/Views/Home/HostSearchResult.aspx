@@ -109,7 +109,7 @@
                 <table class="table table-hover table-bordered">
                     <thead>
                         <tr>
-                          <%--<th align="center">选中</th>--%>
+                          <th align="center">选中</th>
                           <th>序号</th>
                           <th>姓名</th>
                           <th>
@@ -119,17 +119,13 @@
                           <th>电话</th>
                           <th>拥有车辆数</th>
                             <th>信息</th>
-                            <th>操作</th>
                         </tr>
                     </thead>
                     <tbody>
                     <% foreach (var item in Model)
                         { %>
                         <tr>
-                            <%--<td align="center">
-                                <input name="" type="checkbox" value="" />&nbsp;
-                            </td>--%>
-
+                          <td align="center"><input name="" type="checkbox" value="" />&nbsp;</td>
                             <td>
                                 <%: item.employee_id %>
                             </td>
@@ -145,15 +141,11 @@
                             <td>
                                 <%: item.telephone %>
                             </td>
-                            <td> 
+                            <td>
                                 <%: item.car_count %>
                             </td>
                             <td  style="color:#900" class="pointer">
                                 <%: Html.ActionLink("详细信息", "HostInfo", new { id = item.employee_id })%>
-                            </td>
-                            <td  style="color:#900" class="pointer">
-                                <%: Html.ActionLink("编辑", "EditHost", new { id = item.employee_id })%>
-                                <%: Html.ActionLink("删除", "DeleteHost", new { id = item.employee_id }, new { onclick = "if (" + item.car_count.ToString() + "!=0) { alert('这个人还有出租车呢！'); return false;} else return true" })%>
                             </td>
                         </tr>
                         <% } %>
@@ -162,22 +154,26 @@
                 
                 <div class="pagination pagination-centered">
                     <ul>
-                        <% int curPage = (int)ViewData["pageCount"];
-                           int total = (int)ViewData["maxPage"]; %>
                         <li>
-                            <%: Html.ActionLink("Prev", "HostList", new { id = Math.Max(curPage-1, 0) })%>
+                            <a href="#">Prev</a>
                         </li>
-                        <%
-                            
-                            for (int i = Math.Max(0, curPage - 2); i < Math.Min(curPage + 3, total); i++)
-                            {
-                        %>
-                            <li>
-                                <%: Html.ActionLink(i+1+"", "HostList", new { id = i })%>
-                            </li>
-                        <% } %>
                         <li>
-                            <%: Html.ActionLink("Next", "HostList", new { id = Math.Min(curPage+1, total-1) })%>
+                            <a href="#">1</a>
+                        </li>
+                        <li>
+                            <a href="#">2</a>
+                        </li>
+                        <li>
+                            <a href="#">3</a>
+                        </li>
+                        <li>
+                            <a href="#">4</a>
+                        </li>
+                        <li>
+                            <a href="#">5</a>
+                        </li>
+                        <li>
+                            <a href="#">Next</a>
                         </li>
                   </ul>
               </div>

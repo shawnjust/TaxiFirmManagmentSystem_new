@@ -1,7 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Employee"  %>
 <%@ Import Namespace="TaxiFirm.Models" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Driver" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">工号管理</asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -121,10 +121,11 @@ a:hover
     });
 </script>
 
-<% List<Employee> employees = (List<Employee>)ViewData["employees"];
+<%  List<Employee> employees = (List<Employee>)ViewData["employees"];
     MyPage page = (MyPage)ViewData["page"];
     string type = (string)ViewData["type"];
-    %>
+    string myType =(string)Session["subtype"];
+%>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
@@ -184,8 +185,10 @@ a:hover
                             <th>信息</th>
                         </tr>
                     </thead>
-                    <% if (employees != null && employees.Count != 0)
-                       { %>
+                    <%
+                        
+                            if (employees != null && employees.Count != 0)
+                            { %>
                     <tbody>
                     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
 
@@ -217,14 +220,22 @@ a:hover
                                 <%:employee.Age%></td>
                             <td><%:employee.Gender%></td>
                             <td><%:employee.Telephone%></td>
-                            <td><%:employee.EmployId%></td>
-                            <td  style="color:#900" class="pointer"><a href="/Home/EmployeeInfo?id=<%:employee.EmployId%>&type=Info">信息管理</a></td>
+                            <td><%:employee.EmployeeId%></td>
+                            <td  style="color:#900" class="pointer">
+                            
+                            <a href="/Home/EmployeeInfo?id=<%:employee.EmployeeId%>&subtype=<%:myType %>">信息管理</a></td>
                         </tr>
                         <%}
                       
                        %>
                     
-                    </tbody><%} %>
+                    </tbody><%
+                        }%>
+
+
+
+
+                     
                 </table>
                 
                <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
