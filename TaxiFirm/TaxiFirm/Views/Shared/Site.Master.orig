@@ -124,24 +124,24 @@
 
 <%
 <<<<<<< HEAD
-        if (Session["DeleteEmployeeSuccess"] != null)
-        {
-            string success = (string)Session["DeleteEmployeeSuccess"];
-=======
         if (Session["CustomerLoginSuccess"] != null)
         {
             string success = (string)Session["CustomerLoginSuccess"];
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+        if (Session["DeleteEmployeeSuccess"] != null)
+        {
+            string success = (string)Session["DeleteEmployeeSuccess"];
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
             if ("success".Equals(success))  //删除才成功
             {%>
             
             
             <script type="text/javascript">
 <<<<<<< HEAD
-                window.alert("删除成功");
-=======
                 window.alert("登录成功");
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+                window.alert("删除成功");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
             
             </script>
             <%
@@ -153,10 +153,10 @@
             
             <script type="text/javascript">
 <<<<<<< HEAD
-                window.alert("删除失败");
-=======
                 window.alert("登录失败");
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+                window.alert("删除失败");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
             
             </script>
             <%
@@ -167,10 +167,10 @@
             }
 
 <<<<<<< HEAD
-                Session.Remove("DeleteEmployeeSuccess");
-=======
                 Session.Remove("CustomerLoginSuccess");
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+                Session.Remove("DeleteEmployeeSuccess");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
         }
         
          %>
@@ -184,10 +184,10 @@
             
             
 <<<<<<< HEAD
-            <script type="text/javascript">
-=======
             <script   type="text/javascript">
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+            <script type="text/javascript">
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
                 window.alert("添加成功，新工号为 <%:newID%>");
             
             </script>
@@ -358,7 +358,6 @@
         
          %>
 <<<<<<< HEAD
-=======
 
 
 
@@ -412,6 +411,7 @@
         }
         
          %>
->>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+=======
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
    
 </html>

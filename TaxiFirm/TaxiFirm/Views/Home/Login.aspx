@@ -18,17 +18,10 @@
 
 		    function Submit() {
 		        var form1 = document.getElementById("login_form");
-		        form1.submit();  
+		        form1.submit();
 
 		    }
-		    function mySubmit() {
-		        var psword1 = document.getElementById("ps1").value;
-		        var psword2 = document.getElementById("ps2").value;
-		        if (psword1.length < 6) { window.alert("密码长度应大于6"); return; }
-		        if (psword1 != psword2) {window.alert("两次密码不一致");return; }
-		        var form1 = document.getElementById("register");
-		        form1.submit();
-            }
+		
 		</script>
     </head>
     <body>
@@ -37,42 +30,9 @@
 			<h2></h2>
 			<div class="content">
 				<div id="form_wrapper" class="form_wrapper">
-					<form class="register" id="register" method="post" action="/FrontPage/RegisterHandle">
-						<h3>注册</h3>
-						<div class="column">
-							<div>
-								<label>昵称:</label>
-								<input name="NickName" type="text" />
-								<span class="error" pattern="[\u4e00-\u9fa5]{1,2}" title="输入汉字">需要输入汉字</span>
-							</div>
-						
-							<div>
-								<label>密码:</label>
-								<input  name="Password" type="password" id="ps1"/>
-								<span class="error">This is an error</span>
-							</div>
-						</div>
-						<div class="column">
-							<div>
-								<label>Email:</label>
-								<input name="email" type="text"/> 
-								<span class="error">This is an error</span>
-							</div>
-						
-							<div>
-								<label>确认密码:</label>
-								<input name="Password2"  id="ps2" type="password"/>
-								<span class="error">密码输入错误</span>
-							</div>
-						</div>
-						<div class="bottom">
-							<input type="submit"  onclick="mySubmit()" value="注册" />
-							<a  rel="login" class="linkform">已有账户？在这登录</a>
-							<div class="clear"></div>
-						</div>
-					</form>
+			
 
-					<form class="login active" id="login_form" action="/FrontPage/CustomerLoginHandle" method="post">
+					<form class="login active" id="login_form" action="/Home/LoginHandle" method="post">
 						<h3>用户登录</h3>
 						<div>
 							<label>用户名:</label>
@@ -85,9 +45,9 @@
 							<span class="error">密码错误</span>
 						</div>
 						<div class="bottom">
-							<div class="remember"><input type="checkbox" /><span>保持登录</span></div>
+							
 							<input type="submit"  value="登录" onclick="Submit()"></input>
-							<a href="#" rel="register" class="linkform">还没账户？在这里注册</a>
+							
 							<div class="clear"></div>
 						</div>
 					</form>
@@ -188,46 +148,5 @@
 		    });
         </script>
     </body>
-    <%
-        if (Session["AddCustomerSuccess"] != null)
-        {
-            string success = (string)Session["AddCustomerSuccess"];
-            if ("success".Equals(success))  //删除才成功
-            {%>
-            
-            
-            <script type="text/javascript">
-                window.alert("注册成功");
-            
-            </script>
-            <%
-
-            }
-            else if ("failed".Equals(success))
-            { %>
-            
-            
-            <script type="text/javascript">
-                window.alert("注册失败");
-            
-            </script>
-            <%
-            
-            
-            
-            
-}
-            else if ("EmailError".Equals(success))
-            {%>
-            
-             <script type="text/javascript">
-                 window.alert("该email已经注册,注册失败");
-            
-            </script>
-            <%}
-
-                Session.Remove("AddCustomerSuccess");
-        }
-        
-         %>
 </html>
+

@@ -123,15 +123,15 @@
 </body>
 
 <%
-        if (Session["DeleteEmployeeSuccess"] != null)
+        if (Session["CustomerLoginSuccess"] != null)
         {
-            string success = (string)Session["DeleteEmployeeSuccess"];
+            string success = (string)Session["CustomerLoginSuccess"];
             if ("success".Equals(success))  //删除才成功
             {%>
             
             
             <script type="text/javascript">
-                window.alert("删除成功");
+                window.alert("登录成功");
             
             </script>
             <%
@@ -142,7 +142,7 @@
             
             
             <script type="text/javascript">
-                window.alert("删除失败");
+                window.alert("登录失败");
             
             </script>
             <%
@@ -152,7 +152,7 @@
             
             }
 
-                Session.Remove("DeleteEmployeeSuccess");
+                Session.Remove("CustomerLoginSuccess");
         }
         
          %>
@@ -165,7 +165,7 @@
             {%>
             
             
-            <script type="text/javascript">
+            <script   type="text/javascript">
                 window.alert("添加成功，新工号为 <%:newID%>");
             
             </script>
@@ -335,7 +335,7 @@
         }
         
          %>
-   
+
 
 
             <%
