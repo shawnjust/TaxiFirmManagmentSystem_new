@@ -846,15 +846,27 @@ namespace TaxiFirm.Models
 			return ((int)(result.ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateDriverById")]
-		public int updateDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
 		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), complaint_id, empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateTaxiToHostByPlatenumber")]
+		public int updateTaxiToHostByPlatenumber([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_color, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_brand, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, taxi_color, taxi_brand, owner_empolyee_id);
+			return ((int)(result.ReturnValue));
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addComplaint")]
+		public int addComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string customer_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string customer_email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Text")] string complaint_comtent)
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_name, customer_email, complaint_comtent);
+			return ((int)(result.ReturnValue));
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addDriver")]
+		public int addDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health, license_id);
 			return ((int)(result.ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateEmpolyeeById")]
 		public int updateEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string telephone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string empolyee_address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday)
+		{
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, name, gender, telephone, empolyee_address, firm_id, birthday);
 			return ((int)(result.ReturnValue));
@@ -11166,5 +11178,33 @@ namespace TaxiFirm.Models
 			}
 		}
 	}
+	public partial class getCustomerByEmailResult
+	{
+		private int _customer_id;
+		private string _nick_name;
+		private string _email;
+		private System.Nullable<int> _credit;
+		public getCustomerByEmailResult()
+		{
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_id", DbType="Int NOT NULL")]
+		public int customer_id
+				return this._customer_id;
+				if ((this._customer_id != value))
+					this._customer_id = value;
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_nick_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string nick_name
+				return this._nick_name;
+				if ((this._nick_name != value))
+					this._nick_name = value;
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string email
+				return this._email;
+				if ((this._email != value))
+					this._email = value;
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_credit", DbType="Int")]
+		public System.Nullable<int> credit
+				return this._credit;
+				if ((this._credit != value))
+					this._credit = value;
 }
 #pragma warning restore 1591

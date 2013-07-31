@@ -37,6 +37,14 @@ namespace TaxiFirm.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        //修改密码
+        public ActionResult ChangePassword()
+        {
+            return View();
+        
+        }
         [HttpPost]
         public ActionResult SetNewBackup(string Name)
         {
@@ -59,37 +67,57 @@ namespace TaxiFirm.Controllers
             
             }
         }
-        [HttpPost]
-        public ActionResult CustomerLoginHandle(string username, string psword)
-        {
-           
-            try {
-                int userid = int.Parse(username);
-                if (new DataClasses1DataContext().checkCustomerLoginPassword(userid, psword) != 0)
-                {
-                  
-                    Session["Identity"] = Identity.custemer;
-                    Customer customer = new CustomerHandle().getCustomerById(userid);
-                    Session["CurrentCustomer"] = customer;
-                    MyPage page2 = new MyPage();
-                    page2.CurrentPage = 1;
-                    Session["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId,page2);
-                    return RedirectToAction("Elements","FrontPage");
-                }
-                else {
 
-                    Response.Redirect("/FrontPage/Elements");
-                }
-            
-            }
-            catch
+        [HttpPost]
+        public RedirectResult ChangePasswordHandle(string PrePassword, string NewPassword, string NewPassword2)
+        {
+            try
             {
-                ViewData["error"] = "error";
-                Response.Redirect("/FrontPage/Elements");
-               
+              
+                Manager manager = (Manager)Session["CurrentManager"];
+                if (new EmployeeHandle().CheckPassword(manager.EmployId, PrePassword))
+                {
+                    if (NewPassword.Equals(NewPassword2))
+                    {
+
+
+                        if (new EmployeeHandle().UpdateEmployeePassword(manager.EmployId,NewPassword))
+                        {
+                            Session["ChangePasswordSuccess"] = "success";
+                        }
+                        else
+                        {
+                            Session["ChangePasswordSuccess"] = "failed";
+
+                        }
+                    }
+                    else 
+                    {
+                        Session["ChangePasswordSuccess"] = "NewpasswordError";
+
+                    }
+                }
+                else 
+                {
+                    Session["ChangePasswordSuccess"] = "PasswordError";
+                }
+
             }
-            return View();
+            catch 
+            {
+                Session["ChangePasswordSuccess"] = "failed";
+
+            }
+
+
+
+
+            return Redirect("/Home/ManagerSelfInfo");
+
+
+        
         }
+    
 
 
         [HttpPost]
@@ -114,13 +142,7 @@ namespace TaxiFirm.Controllers
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
-                else if (Current == Identity.custemer)
-                {
-
-                    Session["Identity"] = Identity.custemer;
-                    Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(userid);
-                    return RedirectToAction("Index", "FrontPage");
-                   }
+              
 
                 else{
                     Response.Redirect("/FrontPage/Login");

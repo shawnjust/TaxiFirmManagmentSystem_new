@@ -1189,6 +1189,15 @@
     <Return Type="System.Int32" />
   </Function>
   <Function Name="dbo.updateDriverById" Method="updateDriverById">
+  <Function Name="dbo.deleteComplaintById" Method="deleteComplaintById">
+    <Parameter Name="complaint_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.registInvoiceToCustomer" Method="registInvoiceToCustomer">
+    <Parameter Name="invoice_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="health" Type="System.Int32" DbType="Int" />
     <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
@@ -1230,4 +1239,25 @@
     <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
     <Return Type="System.Int32" />
   </Function>
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.hasCustomerEmail" Method="hasCustomerEmail" IsComposable="true">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(40)" />
+  <Function Name="dbo.addCustomer" Method="addCustomer">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="nick_name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+  <Function Name="dbo.getCustomerByEmail" Method="getCustomerByEmail" IsComposable="true">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(50)" />
+    <ElementType Name="getCustomerByEmailResult">
+      <Column Name="customer_id" Type="System.Int32" DbType="Int NOT NULL" CanBeNull="false" />
+      <Column Name="nick_name" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="email" Type="System.String" DbType="VarChar(50) NOT NULL" CanBeNull="false" />
+      <Column Name="credit" Type="System.Int32" DbType="Int" CanBeNull="true" />
+  <Function Name="dbo.updateCustomerPasswordByEmail" Method="updateCustomerPasswordByEmail">
+    <Parameter Name="email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
 </Database>

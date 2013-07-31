@@ -111,10 +111,11 @@
 			<div class="clearfix"></div>
 
 			<!-- Search -->
-		<!-- Search -->
+			<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button color medium" href="#">
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -135,7 +136,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>
@@ -295,7 +306,7 @@
 			<h3 class="margin-reset">乘换车优惠</h3><br />
 
 			<!-- Large Notice -->
-            <form class="login active" id="login_form" action="/Home/CustomerLoginHandle" method="post">
+            <form class="login active" id="login_form" action="/FrontPage/CustomerLoginHandle" method="post">
 			<div class="large-notice">
 				<h3>用户名</h3>
                 <input id="Text2" type="text" style="width: 70%;" name="username"/>
@@ -359,8 +370,13 @@
 	================================================== -->
      <%if (Session["Identity"] != null && (Identity)Session["Identity"] == Identity.custemer)
        {
-        List<Invoice> invoices = (List<Invoice>) Session["invoices"];
-           
+           MyPage page = new MyPage();
+           page.CurrentPage = 1;
+           List<Invoice> invoices =null;
+           if (customer.Credit > 0)
+           {
+               invoices = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId, page);
+           }
             %>
 		<div class="sixteen columns">
 			<!-- Headline -->
@@ -375,10 +391,11 @@
 					<th>金额</th>
 				</tr>
 
-                <%for (int i = 0; i < 5; i++)
-                  {
-                      if (invoices!=null&&i<invoices.Count&&invoices[i] != null)
+                <%
+                      if (invoices!=null&&invoices.Count>0)
                       {
+                          for(int i=0;i<invoices.Count&&i<5;i++ )
+                          {
                       %> 
                     	<tr>
 					<td><%:(i + 1)%></td>
@@ -594,4 +611,37 @@
 
 
 </body>
+
+
+<%
+        if (Session["CustomerLoginSuccess"] != null)
+        {
+            string success = (string)Session["CustomerLoginSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+           
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("登录失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("CustomerLoginSuccess");
+        }
+        
+         %>
 </html>

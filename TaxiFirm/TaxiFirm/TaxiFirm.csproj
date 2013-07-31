@@ -386,6 +386,7 @@
     <Content Include="Scripts\FrontPage\switcher.js" />
     <Content Include="Views\fonts\fontawesome-webfont.svg" />
     <Content Include="Views\FrontPage\About.aspx" />
+    <Content Include="Views\FrontPage\ChangerPassword.aspx" />
     <Content Include="Views\FrontPage\Complain.aspx" />
     <Content Include="Views\FrontPage\Contact.aspx" />
     <Content Include="Views\FrontPage\Elements.aspx" />
@@ -405,6 +406,7 @@
     <Content Include="Views\Home\BackupList.aspx" />
     <Content Include="Views\Home\CarDealing.aspx" />
     <Content Include="Views\Home\CarInfoDisplay.aspx" />
+    <Content Include="Views\Home\ChangePassword.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
