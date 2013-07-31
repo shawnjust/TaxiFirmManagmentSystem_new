@@ -21,7 +21,7 @@
                     </div>
                     <div class="row-fluid">
                         <div class="span8">
-                            <% using (Html.BeginForm())
+                            <% using (Html.BeginForm("EditHost/" + ViewData["id"], "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                                {%>
                             <%: Html.ValidationSummary(true) %>
                             <div class="span4">
@@ -87,12 +87,11 @@
                                                 照片</h4>
                                         </p>
                                         <p>
-                                            <input name="" type="text" />
+                                            <input name="ImgUpload" type="file" />
                                         <p>
                                             &nbsp;
                                         </p>
-                                        <button class="btn btn-primary" type="button" style="alignment-adjust: middle">
-                                            提交</button>
+                                        <input type="submit" class="btn btn-primary" value="提交"/>
                                 </fieldset>
                             </div>
                             <% } %>
