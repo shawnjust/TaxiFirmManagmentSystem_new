@@ -75,6 +75,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Backup\Backup.cs" />
     <Compile Include="Models\Backup\BackupHandle.cs" />
+    <Compile Include="Models\Complain.cs" />
     <Compile Include="Models\Customer\Customer.cs" />
     <Compile Include="Models\Customer\CustomerHandle.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
@@ -103,6 +104,7 @@
     <Compile Include="Models\Manager\Manager.cs" />
     <Compile Include="Models\Manager\ManagerHandle.cs" />
     <Compile Include="Models\MyPage.cs" />
+    <Compile Include="Models\Web.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -467,6 +469,7 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\HostPhoto\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\css\fonts\Descr.WD3" />

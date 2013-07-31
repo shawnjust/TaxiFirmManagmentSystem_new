@@ -1,5 +1,5 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-<%@ Import Namespace="TaxiFirm.Models" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ComplainModal>" %>
+
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -51,11 +51,7 @@
 
 <!-- 960 Container -->
 <div class="container">
-<%Identity current = Identity.unlegal;
-  if (Session["Identity"] != null)
-  {
-      current=(Identity)Session["Identity"]; 
-  }%>
+
 	<!-- Header -->
 	<header id="header">
 
@@ -83,31 +79,13 @@
 			<div class="clearfix"></div>
 
 			<!-- Search -->
-			<!-- Search -->
 			<nav class="top-search">
-              <%if(current==Identity.unlegal){ %>
-                <a class="button color medium" href="#">
+                <a class="button gray medium" href="#">
                 	<i class="icon-cloud white"></i>注册
                 </a>
-               
 				<a class="button color medium" href="/FrontPage/Login">
-                	<i class="icon-user white"></i>
-                   登录
-                     </a>
-                    <%}
-                   else if (current == Identity.manager)
-                   { 
-                       %> 
-                     <a class="button color medium"   href="/Home/Index">
-                	<i class="icon-user white"></i>后台
-                     </a>
-               
-			
-                   <a class="button color medium" href="/Home/BackHandle?type=logout">
-                	<i class="icon-user white"></i>
-                    注销
-                     </a>
-               <%} %>
+                	<i class="icon-user white"></i>登录
+                </a>
 			</nav>
 
 		</div>
@@ -251,31 +229,40 @@
 					<mark id="message"></mark>
 
 					<!-- Form -->
-					<form method="post" action="#" name="complainform" id="complainform">
-
+                    <% Html.EnableClientValidation(); %>
+                    <% using (Html.BeginForm())
+                       {%>
+                    <%: Html.ValidationSummary(true)%>
 						<fieldset>
 
 							<div>
 								<label for="name" accesskey="U">姓名:</label>
-								<input name="name" type="text" id="name" />
+								<%: Html.TextBoxFor(model => model.name) %>
 							</div>
 
 							<div>
 								<label for="email" accesskey="E">Email: <span>*</span></label>
-								<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
-							</div>
+                                <%: Html.TextBoxFor(model => model.email)%>
+								<%--<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />--%>
+							    <%:Html.ValidationMessageFor(model => model.email)%>
+                            </div>
 
 							<div>
 								<label for="comments" accesskey="C">意见: <span>*</span></label>
-								<textarea name="comments" cols="40" rows="3" id="comments" spellcheck="true"></textarea>
+								<%--<textarea name="comments" cols="40" rows="3" id="comments" spellcheck="true"></textarea>--%>
+                                <%: Html.TextAreaFor(model => model.content, new { name="comments", cols="40", rows="3", id="comments", spellcheck="true"})%>
 							</div>
 
 						</fieldset>
 
-						<input type="submit" class="submit" id="submit" value="提交" />
+						<input type="submit" class="submit" id="submit" value="提交"/>
 						<div class="clearfix"></div>
+                        <script type="text/javascript">
+                            <% if (Session["err"]!=null) %> alert("我们已经收到您的投诉建议，工作人员会尽快处理您的信息。");
+                            <% Session["err"]=null; %>
+                        </script>
 
-					</form>
+					<%} %>
 
 				</section>
 				<!-- Contact Form / End -->

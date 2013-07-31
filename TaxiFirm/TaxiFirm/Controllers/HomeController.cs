@@ -11,6 +11,8 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using System.Text;
+using System.IO;
 namespace TaxiFirm.Controllers
 {
 
@@ -299,10 +301,72 @@ namespace TaxiFirm.Controllers
             
         
         }
-        public ActionResult ComplainList()
+
+        public ActionResult ComplainList(int id = 0)
         {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+
+
+            int? sz = s.getNotAcceptComplaintPageCount(6);
+            IQueryable<getNotAcceptComplaintByPageResult> fs = s.getNotAcceptComplaintByPage(id + 1, 6);
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = sz;
             return View();
         }
+
+
+        public ActionResult AcceptedComplaintSearchList(int id = 0)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? count = s.getAcceptedComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
+            IQueryable<getAcceptedComplaintBySearchContentByPageResult> fs = s.getAcceptedComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
+            return View();
+        }
+
+
+
+        public ActionResult NotAcceptedComplaintSearchList(int id = 0)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? count = s.getNotAcceptComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
+            IQueryable<getNotAcceptComplaintBySearchContentByPageResult> fs = s.getNotAcceptComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
+            return View();
+        }
+
+        public ActionResult ComplainAccept(int id = 0)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            s.acceptComplaint(id, 1);
+            return RedirectToAction("ComplainList");
+        }
+
+        public ActionResult ComplainDelete(int id)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            s.deleteComplaintById(id);
+            return RedirectToAction("ComplainListAccepted");
+        }
+
+
+        public ActionResult ComplainListAccepted(int id = 0)
+        {
+
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? sz = s.getAcceptedComplaintPageCount(6);
+            IQueryable<getAcceptedComplaintByPageResult> fs = s.getAcceptedComplaintByPage(id + 1, 6);
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = sz;
+            return View();
+        }
+
         public ActionResult AddCar()
         {
             return View();
@@ -509,11 +573,28 @@ namespace TaxiFirm.Controllers
             {
 
                 if (context.isHost(id) == 1) throw new Exception();
+
+
+                StringBuilder info = new StringBuilder();
+                String bas = "";
+                
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase postFile = Request.Files[file];
+                    if (postFile.ContentLength == 0)
+                        continue;
+                    string newFilePath = Server.MapPath("/Content/HostPhoto/host");
+                    postFile.SaveAs(newFilePath + id);
+                    bas = "/Content/HostPhoto/host"+ id;
+                    info.AppendFormat("Upload File: {0}/r/n", postFile.FileName);
+                }
+                ViewData["Info"] = info;
+                
                 // TODO: Add insert logic here
                 //host.password = host.id_card.Substring(host.id_card.Length - 7);
                 //context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
                 //int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
-                context.addHost(id, "");
+                context.addHost(id, bas);
                 Session["errorMsg"] = "Success";
                 return RedirectToAction("HostList");
             }
@@ -623,7 +704,7 @@ namespace TaxiFirm.Controllers
                 if (tx.host_empolyee_id == id)
                     taxilist.Add(tx);
             }
-
+            string photo = context.getHostById(id).First().photo;
             getEmpolyeeByIdResult g = dd.First();
 
             List<getAllFirmResult> firm = context.getAllFirm().ToList();
@@ -644,7 +725,8 @@ namespace TaxiFirm.Controllers
                 telephone = g.telephone,
                 taxi_list = taxilist,
                 firm_name = firm_name,
-                birthday = g.birthday.ToShortDateString()
+                birthday = g.birthday.ToShortDateString(),
+                photo = photo
                 /*,
                 is_available = t.is_available,
                 plate_number = t.plate_number,
@@ -1055,10 +1137,28 @@ namespace TaxiFirm.Controllers
             try
             {
                 int em_id = int.Parse(Request.QueryString.Get("EMID"));
-                string photo_path = "/Content/images";
+
+
+                StringBuilder info = new StringBuilder();
+                String bas = "";
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase postFile = Request.Files[file];
+                    if (postFile.ContentLength == 0)
+                        continue;
+                    string newFilePath = Server.MapPath("/Content/picture/drivers/");
+                    postFile.SaveAs(newFilePath + em_id);
+                    bas = "/Content/picture/drivers/" + em_id;
+                    info.AppendFormat("Upload File: {0}/r/n", postFile.FileName);
+                }
+                ViewData["Info"] = info;
+
+
+                string photo_path = bas;
                 Driver driver = new Driver();
                 DriverHandle handler = new DriverHandle();
-                if (!handler.isDriver(em_id))
+                if (handler.isDriver(em_id))
                 {
                     return Redirect("DriverInfo?EMID="+em_id);
                 }
@@ -1071,7 +1171,7 @@ namespace TaxiFirm.Controllers
                 int result = context.setLicenseToDriver(em_id, Driver_LicenseID, license_date, driver.birthday, photo_path);
                 driver = new DriverHandle().GetDriverByEmployeeID(em_id);
                 ViewData["Driver"] = driver;
-                return Redirect("/Home/SaveDriverInfo?id="+em_id);
+                return Redirect("DriverInfo?EMID=" + em_id);
             }
             catch (System.Exception ex)
             {

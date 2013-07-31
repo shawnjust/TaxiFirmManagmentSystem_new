@@ -4,6 +4,7 @@ using System.Linq;
 using System.Web;
 using System.Web.Mvc;
 using TaxiFirm.Models.Customer;
+using TaxiFirm.Models;
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -77,9 +78,21 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+
         public ActionResult Complain()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Complain(ComplainModal model)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            if (ModelState.IsValid)
+            { s.addComplaint(model.name, model.email, model.content); Session["err"] = "谢谢"; return RedirectToAction("Complain"); }
+            else return View();
+
+
         }
         public ActionResult ErrorPage()
         {
