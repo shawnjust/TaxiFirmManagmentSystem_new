@@ -559,7 +559,7 @@ namespace TaxiFirm.Controllers
             try
             {
                 // TODO: Add update logic here
-                context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
+               // context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
                 return RedirectToAction("HostList");
             }
             catch
