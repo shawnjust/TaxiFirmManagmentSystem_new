@@ -27,14 +27,9 @@
                 var con = window.confirm("是否保存更改");
                 if (con) {
                     form1.submit();
-                    window.alert("保存成功");
+                  
                 }
-                else {
-                    form1.action = "/Home/EmployeeSelfInfo";
-                    form1.submit();
-
-
-                }
+               
 
             }
 
@@ -141,7 +136,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                  <input name="Employee_IDCard" type="text" value="<%:employee.IdCard %>" />
+                                  <input name="Employee_IDCard" readonly type="text" value="<%:employee.IdCard %>" />
                                 </p>
                             </fieldset>
                          

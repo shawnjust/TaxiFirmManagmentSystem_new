@@ -13,6 +13,20 @@
    
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
+    <script type="text/javascript">
+        function revokeManagerRight() {
+            var form1 = document.getElementById("dynamic");
+            var id = form1.title;
+
+            form1.action = "/Home/GetManagerRightBack?id=" + id;
+
+            if (window.confirm("确定要收回权限吗?")) {
+                form1.submit();
+
+            }
+
+        }
+    
     </script>
     <div class="container-fluid">
         <div class="row-fluid">
@@ -47,6 +61,7 @@
                         <form>
                         <fieldset>
                             <legend>基本信息</legend>
+                             <label><h4>工号：  &nbsp;&nbsp;<small><%:manager.EmployId %></small></h4></label>
                             <label>
                                 <h4>经理姓名:&nbsp;&nbsp; <small> <%:manager.Name %></small></h4></label>
                                 <label><h4>公司：  &nbsp;&nbsp;<small><%:manager.FirmID %></small></h4></label>
@@ -81,12 +96,13 @@
                        
                         </div>
                     </div>
+
+                    
                     <div class="span4">
                         <ul class="nav nav-list">
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">权限管理</a> </li>
-                            <li><a id="modal-614546" href="#modal-container-614546" data-toggle="modal">
-                                授予权限</a>
+                          
                                 <div id="modal-container-614546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-header">
@@ -109,9 +125,12 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#">收回权限</a> </li>
-                            <li class="nav-header">赋予权限 </li>
-                            <li><a href="/Home/ModifyManager">修改信息</a> </li>
+
+                                <form  title="<%:manager.EmployId %>" id="dynamic" method="post"></form>
+                            <li><a href="#" onclick ="revokeManagerRight()">收回权限</a> </li>
+                           
+                            <li><a href="/Home/ModifyManager?id=<%:manager.EmployId%>">修改信息</a> </li>
+
                         </ul>
                     </div>
                 </div>

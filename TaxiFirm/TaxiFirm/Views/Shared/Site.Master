@@ -188,6 +188,149 @@
         }
         
          %>
+         <%
+        if (Session["UpdateEmployeeSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
 
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateEmployeeSuccess");
+        }
+        
+         %>
+
+            <%
+        if (Session["UpdateSelfInfoSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateSelfInfoSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateSelfInfoSuccess");
+        }
+        
+         %>
+
+
+         <%
+        if (Session["DeleteManagerSuccess"] != null)
+        {
+            string success = (string)Session["DeleteManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限成功回收");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限回收失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("DeleteManagerSuccess");
+        }
+        
+         %>
+
+
+
+             <%
+        if (Session["AddManagerSuccess"] != null)
+        {
+            string success = (string)Session["AddManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddManagerSuccess");
+        }
+        
+         %>
    
 </html>

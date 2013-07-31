@@ -50,25 +50,25 @@ namespace TaxiFirm.Models.Employee
         }
 
         //修改信息
-        public int? UpdateEmployee(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        public bool UpdateEmployee(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
-            int? EmployeeID = -1;
+           
 
             try
             {
 
-                string password = Employee_IDCard.Substring(Employee_IDCard.Length - 7, 6);
+                int? Employeeid = int.Parse(Employee_ID);
                 int? firmID = int.Parse(FirmID);
-                DateTime Birthday = Convert.ToDateTime(Employee_Birthday);
+                DateTime? Birthday = Convert.ToDateTime(Employee_Birthday);
                 bool? Gender = bool.Parse(gender);
-               // data.updateEmpolyeeById();
-                data.addEmpolyee(password, firmID, Employee_Name, Employee_IDCard, Birthday, Gender, Employee_TelePhone, Employee_HomeAddress, ref EmployeeID);
+                data.updateEmpolyeeById(Employeeid,Employee_Name,Gender,Employee_TelePhone,Employee_HomeAddress,firmID,Birthday);
 
-                return EmployeeID;
+                return true;
+             
             }
             catch
             {
-                return -1;
+                return false;
             }
         }
 

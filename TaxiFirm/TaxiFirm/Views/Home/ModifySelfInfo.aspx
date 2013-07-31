@@ -141,7 +141,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                  <input name="Manager_IDCard" type="text" value="<%:manager.IdCard %>" />
+                                  <input name="Manager_IDCard"  readonly type="text" value="<%:manager.IdCard %>" />
                                 </p>
                             </fieldset>
                          

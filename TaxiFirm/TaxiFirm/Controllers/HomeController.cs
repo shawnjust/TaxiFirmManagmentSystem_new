@@ -494,7 +494,7 @@ namespace TaxiFirm.Controllers
             try
             {
                 // TODO: Add update logic here
-                context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
+                //context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
                 return RedirectToAction("HostList");
             }
             catch
@@ -761,6 +761,32 @@ namespace TaxiFirm.Controllers
             }
             return View();
         }
+
+        //添加经理
+        public RedirectResult AddManager()
+        {
+            try
+            {
+                int id = int.Parse(Request.QueryString.Get("id"));
+                if (new ManagerHandle().AddManager(id))
+                {
+
+                    Session["AddManagerSuccess"] = "success";
+                }
+                else {
+                    Session["AddManagerSuccess"] = "failed";
+                }
+
+
+            }
+            catch
+            {
+                Session["AddManagerSuccess"] = "failed";
+            }
+            return Redirect("/Home/ManagerList?type=common&page=1");
+        
+        }
+        //修改工号
         public ActionResult ModifyEmployee()
         {
             int id = int.Parse(Request.QueryString.Get("id"));
@@ -771,8 +797,12 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ModifyManager()
         {
-
-            return View();
+            int id = int.Parse(Request.QueryString.Get("id"));
+            ViewData["manager"] =new EmployeeHandle().getEmployeeById(id);
+            ViewData["firms"] = new FirmHandle().GetAllFirm();
+                  
+                return View();
+            
         }
         public ActionResult ManagerInfo()
         {
@@ -787,12 +817,14 @@ namespace TaxiFirm.Controllers
         }
 
         [HttpPost]
-        public ActionResult GetSelfManagerModify(string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
+        public ActionResult GetSelfManagerModify(string Manager_ID,string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
         {
+            try{
 
             Manager manager = (Manager)Session["CurrentManager"];
+                manager.EmployId=int.Parse(Manager_ID);
             manager.Name = Manager_Name;
-            manager.GenderBite = bool.Parse(gender);
+            manager.GenderBite = bool.Parse(gender)                                                                                                                                                                                                                                                                      ;
             manager.FirmID = int.Parse(FirmID);
             manager.IdCard = Manager_IDCard;
             manager.Address = Manager_HomeAddress;
@@ -801,29 +833,100 @@ namespace TaxiFirm.Controllers
 
             Session["CurrentManager"] = manager;
 
+            if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
+            {
+                Session["UpdateSelfInfoSuccess"] = "success";
+            }
+            else {
+                Session["UpdateSelfInfoSuccess"] = "failed";
+            
+            
+            }
+            }catch{
 
+                Session["UpdateSeleInfoSuccess"]="failed";
+            
+            }
             return RedirectToAction("ManagerSelfInfo");
         }
 
+        //修改经理信息
+        [HttpPost]
+        public RedirectResult GetManagerModify(string Manager_ID, string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
+        {
+            try
+            {
+                if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
+                {
+                    Session["UpdateEmployeeSuccess"] = "success";
+
+
+                }
+                else
+                {
+
+                    Session["UpdateEmployeeSuccess"] = "failed";
+                }
+            }
+            catch
+            {
+                Session["UpdateEmployeeSuccess"] = "failed";
+            }
+
+
+            return Redirect("ManagerInfo?id=" + Manager_ID + "&subtype=Info");
+        }
+        //收回经理权限
+        public RedirectResult GetManagerRightBack()
+        {
+            try
+            {
+                int id = int.Parse(Request.QueryString.Get("id"));
+                if (new ManagerHandle().DeleteManagerByID(id))
+                {
+                    Session["DeleteManagerSuccess"] = "success";
+                }
+                else
+                {
+                    Session["DeleteManagerSuccess"] = "failed";
+                }
+
+            }
+            catch 
+            {
+                Session["DeleteManagerSuccess"] = "failed";
+            
+            }
+
+            return Redirect("/Home/ManagerList?type=common&page=1");
+        
+        }
 
         [HttpPost]
-        public ActionResult GetSelfEmployeeModify(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        public RedirectResult GetSelfEmployeeModify(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
+            try{
+              if(new EmployeeHandle().UpdateEmployee(Employee_ID,Employee_Name,gender,Employee_Birthday,FirmID,Employee_IDCard,Employee_TelePhone,Employee_HomeAddress))
+              {
+                  Session["UpdateEmployeeSuccess"]="success";
+                   
+                
+                }
+                else{
+              
+              Session["UpdateEmployeeSuccess"]="failed";
+              }
+            }    
+            catch{
+               Session["UpdateEmployeeSuccess"]="failed";
+            }
 
-            Employee employee = (Employee)Session["CurrentEmployee"];
-            employee.Name = Employee_Name;
-            employee.GenderBite = bool.Parse(gender);
-            employee.FirmID = int.Parse(FirmID);
-            employee.IdCard = Employee_IDCard;
-            employee.Address = Employee_HomeAddress;
-            employee.Telephone = Employee_TelePhone;
-            employee.Birthday = Convert.ToDateTime(Employee_Birthday);
 
-            Session["CurrentEmployee"] = employee;
-
-
-            return RedirectToAction("EmployeeSelfInfo");
+            return Redirect("EmployeeInfo?id="+Employee_ID+"&subtype=Info");
         }
+
+
+
         public ActionResult FirmList()
         {
 

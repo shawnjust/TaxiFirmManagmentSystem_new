@@ -2,6 +2,7 @@
 <%@ Import Namespace="TaxiFirm.Models.Employee"  %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <%@ Import Namespace="TaxiFirm.Models.Driver" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">工号管理</asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -268,7 +269,22 @@ a:hover
                               
                               }
                               else if ("AddManager".Equals(myType)) { 
-                              
+                                 if (new ManagerHandle().IsManager(employee.EmployeeId))  //是经理
+                                  {%>
+                                   <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/GetManagerRightBack?id=<%:employee.EmployeeId%>">删除经理</a></td>
+
+                              <%    }
+                                  else    //不是司机
+                                  { %>                                                                                                                                               
+
+                                  <td  style="color:#900" class="pointer">
+                            
+                                   <a href="/Home/AddManager?id=<%:employee.EmployeeId%>">添加经理</a></td>
+                                  
+                                  
+                          <%        }
                               }
                            %>
                         </tr>
