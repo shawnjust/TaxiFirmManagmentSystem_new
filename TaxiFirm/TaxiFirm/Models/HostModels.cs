@@ -103,6 +103,11 @@ namespace TaxiFirm.Models
         [DisplayName("Firm Name")]
         public string firm_name { get; set; }
 
+        [Required]
+        [DataType(DataType.Text)]
+        [DisplayName("Photo")]
+        public string photo { get; set; }
+
         [DataType(DataType.Text)]
         [DisplayName("Taxi List")]
         public List<getAllTaxiInformationResult> taxi_list { get; set; }

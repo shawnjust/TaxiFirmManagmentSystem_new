@@ -65,7 +65,7 @@
                         <form>
                           <fieldset>
                             <legend>车主照片</legend>
-                             <img src="../../Content/picture/FrontPage/about.jpg" />
+                             <img src='<%= Model.photo %>' width="100" height="100" />
                           </fieldset>
                         </form>
                        

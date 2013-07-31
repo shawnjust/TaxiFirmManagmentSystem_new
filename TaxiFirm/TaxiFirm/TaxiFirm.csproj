@@ -68,7 +68,6 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FrontPageController.cs" />
-    <Compile Include="Controllers\HandleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
@@ -76,6 +75,7 @@
     <Compile Include="Models\AccountModels.cs" />
     <Compile Include="Models\Backup\Backup.cs" />
     <Compile Include="Models\Backup\BackupHandle.cs" />
+    <Compile Include="Models\Complain.cs" />
     <Compile Include="Models\Customer\Customer.cs" />
     <Compile Include="Models\Customer\CustomerHandle.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
@@ -95,11 +95,16 @@
     <Compile Include="Models\License\License.cs" />
     <Compile Include="Models\License\LicenseHandle.cs" />
     <Compile Include="Models\NewsAndNotice.cs" />
+    <Compile Include="Models\News\News.cs" />
+    <Compile Include="Models\News\NewsHandle.cs" />
+    <Compile Include="Models\Notice\Notice.cs" />
+    <Compile Include="Models\Notice\NoticeHandle.cs" />
     <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />
     <Compile Include="Models\Manager\ManagerHandle.cs" />
     <Compile Include="Models\MyPage.cs" />
+    <Compile Include="Models\Web.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
   <ItemGroup>
@@ -383,6 +388,7 @@
     <Content Include="Scripts\zxxFile.js" />
     <Content Include="Views\fonts\fontawesome-webfont.svg" />
     <Content Include="Views\FrontPage\About.aspx" />
+    <Content Include="Views\FrontPage\ChangerPassword.aspx" />
     <Content Include="Views\FrontPage\Complain.aspx" />
     <Content Include="Views\FrontPage\Contact.aspx" />
     <Content Include="Views\FrontPage\Elements.aspx" />
@@ -395,12 +401,14 @@
     <Content Include="Views\FrontPage\Notification.aspx" />
     <Content Include="Views\Home\AddCar.aspx" />
     <Content Include="Views\Home\AddDriver.aspx" />
+    <Content Include="Views\Home\AddEmployee.aspx" />
     <Content Include="Views\Home\AddHost.aspx" />
     <Content Include="Views\Home\AddNews.aspx" />
     <Content Include="Views\Home\Backup.aspx" />
     <Content Include="Views\Home\BackupList.aspx" />
     <Content Include="Views\Home\CarDealing.aspx" />
     <Content Include="Views\Home\CarInfoDisplay.aspx" />
+    <Content Include="Views\Home\ChangePassword.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
     <Content Include="Views\Home\AddNotice.aspx" />
     <Content Include="Views\Home\ChangeNews.aspx" />
@@ -408,16 +416,23 @@
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\EditHost.aspx" />
     <Content Include="Views\Home\EmployeeList.aspx" />
     <Content Include="Views\Home\FirmList.aspx" />
     <Content Include="Views\Home\EmployeeInfo.aspx" />
+    <Content Include="Views\Home\HostBuyTaxi.aspx" />
     <Content Include="Views\Home\HostInfo.aspx" />
     <Content Include="Views\Home\HostList.aspx" />
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
+    <Content Include="Views\Home\HostTaxiInfo.aspx" />
+    <Content Include="Views\Home\HostTransaction.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />
     <Content Include="Views\Home\ManagerList.aspx" />
     <Content Include="Views\Home\ManagerSelfInfo.aspx" />
+    <Content Include="Views\Home\ModifyEmployee.aspx" />
     <Content Include="Views\Home\ModifyManager.aspx" />
     <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />

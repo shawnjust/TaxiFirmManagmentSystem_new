@@ -126,6 +126,7 @@ namespace TaxiFirm.Models.Driver
 
                 
             }
+            }
             return driver;
         }
         public int getEmployeeIDByIDCard(string ID_Number)
@@ -184,6 +185,13 @@ namespace TaxiFirm.Models.Driver
                 driver.firm = new TaxiFirm.Models.Firm.Firm(driver.firm_id); ;
                 driver.License_id = col.license_id;
                 driver.Health = (int)col.health;
+
+                var table1 = db.getDriverViewByID(driver.Employee_id);
+                var col1 = table1.First<getDriverViewByIDResult>();
+
+                driver.license = new License.License();
+                driver.license.photo_path = col1.photo_path;
+
                 if (col.gender == null)
                 {
                     driver.gender = false;

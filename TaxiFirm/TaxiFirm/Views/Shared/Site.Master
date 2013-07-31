@@ -336,4 +336,57 @@
         
          %>
    
+
+
+            <%
+        if (Session["ChangePasswordSuccess"] != null)
+        {
+            string success = (string)Session["ChangePasswordSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("密码修改成功");
+            
+            </script>
+            <%
+
+            }else if("PasswordError".Equals(success))
+            {%>
+                <script type="text/javascript">
+                    window.alert("密码验证错误");
+            
+            </script>
+            
+            
+            <%}else if("NewpasswordError".Equals(success))
+            {%>
+            <script type="text/javascript">
+                window.alert("新密码输入不一致");
+            
+            </script>
+
+            
+            <%}
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("ChangePasswordSuccess");
+        }
+        
+         %>
+   
 </html>
