@@ -208,6 +208,12 @@ namespace TaxiFirm.Models
 			return this.CreateMethodCallQuery<getAllTaxiInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllTaxiPlatenumber", IsComposable=true)]
+		public IQueryable<getAllTaxiPlatenumberResult> getAllTaxiPlatenumber()
+		{
+			return this.CreateMethodCallQuery<getAllTaxiPlatenumberResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
 		public IQueryable<getBackupByDescriptionByPageResult> getBackupByDescriptionByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
 		{
@@ -4197,6 +4203,32 @@ namespace TaxiFirm.Models
 				if ((this._host_address != value))
 				{
 					this._host_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getAllTaxiPlatenumberResult
+	{
+		
+		private string _plate_number;
+		
+		public getAllTaxiPlatenumberResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
 				}
 			}
 		}

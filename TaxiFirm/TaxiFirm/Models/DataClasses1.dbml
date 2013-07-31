@@ -283,6 +283,11 @@
       <Column Name="host_address" Type="System.String" DbType="NVarChar(50)" CanBeNull="true" />
     </ElementType>
   </Function>
+  <Function Name="dbo.getAllTaxiPlatenumber" Method="getAllTaxiPlatenumber" IsComposable="true">
+    <ElementType Name="getAllTaxiPlatenumberResult">
+      <Column Name="plate_number" Type="System.String" DbType="NVarChar(50) NOT NULL" CanBeNull="false" />
+    </ElementType>
+  </Function>
   <Function Name="dbo.getBackupByDescriptionByPage" Method="getBackupByDescriptionByPage" IsComposable="true">
     <Parameter Name="pageNumber" Type="System.Int32" DbType="Int" />
     <Parameter Name="pageSize" Type="System.Int32" DbType="Int" />

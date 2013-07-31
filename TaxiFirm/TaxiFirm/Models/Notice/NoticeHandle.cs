@@ -21,5 +21,20 @@ namespace TaxiFirm.Models.Notice
             notice.author = col.name;
             return notice;
         }
+        public List<Notice> GetNoticeByNameByPage(MyPage page, string name)
+        {
+            name = "%" + name + "%";
+            page.CountPerPage = 10;
+            page.WholePage = (int)db.getNoticeBySearchNameAndContentPageCount(page.CountPerPage, name);
+            var table = db.getNoticeBySearchNameAndContentByPage(page.CurrentPage, page.CountPerPage, name);
+            List<Notice> Noticees = new List<Notice>();
+            foreach (var col in table)
+            {
+                Notice notice = new Notice();
+
+                newses.Add(news);
+            }
+            return newses;
+        }
     }
 }

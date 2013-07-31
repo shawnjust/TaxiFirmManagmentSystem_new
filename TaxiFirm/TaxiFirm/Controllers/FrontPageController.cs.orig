@@ -7,12 +7,15 @@ using TaxiFirm.Models.Manager;
 using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
+<<<<<<< HEAD
 using TaxiFirm.Models.News;
 using TaxiFirm.Models;
+=======
 using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+>>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller

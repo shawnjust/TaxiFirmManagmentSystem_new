@@ -1236,7 +1236,7 @@ namespace TaxiFirm.Controllers
                 string photo_path = "/Content/images";
                 Driver driver = new Driver();
                 DriverHandle handler = new DriverHandle();
-                if (!handler.isDriver(em_id))
+                if (handler.isDriver(em_id))
                 {
                     return Redirect("DriverInfo?EMID="+em_id);
                 }
