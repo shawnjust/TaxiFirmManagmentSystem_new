@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TaxiFirm.Models.License;
 
 namespace TaxiFirm.Models.Driver
 {
@@ -22,7 +23,9 @@ namespace TaxiFirm.Models.Driver
         public string emoloyee_address { get; set; }
         public TaxiFirm.Models.Firm.Firm firm { get; set; }
         public string plateNumber { get; set; }
-        public Driver() { }
+        public TaxiFirm.Models.License.License license { get; set; }
+        public Driver() {
+        }
 
         public int getAge()
         {

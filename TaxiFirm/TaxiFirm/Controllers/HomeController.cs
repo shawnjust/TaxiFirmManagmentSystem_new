@@ -366,6 +366,10 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult AddDriver()
         {
+            int employee_id = int.Parse(Request.QueryString.Get("id"));
+            Employee employee = new Employee();
+            employee = new EmployeeHandle().getEmployeeById(employee_id);
+            ViewData["Employee"] = employee;
             return View();
         }
         public ActionResult DriverInfo()

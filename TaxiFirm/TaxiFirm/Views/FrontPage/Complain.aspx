@@ -251,7 +251,7 @@
 					<mark id="message"></mark>
 
 					<!-- Form -->
-					<form method="post" action="#" name="contactform" id="contactform">
+					<form method="post" action="#" name="complainform" id="complainform">
 
 						<fieldset>
 

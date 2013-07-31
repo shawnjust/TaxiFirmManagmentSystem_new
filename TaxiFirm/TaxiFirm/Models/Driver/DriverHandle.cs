@@ -116,6 +116,10 @@ namespace TaxiFirm.Models.Driver
                 driver.Health = (int)col.health;
                 driver.License_id = col.license_id;
                 driver.plateNumber = col.plate_number;
+                driver.license.photo_path = col.photo_path;
+                driver.license.license_id = col.license_id;
+                driver.license.license_time = (DateTime)col.license_time;
+                driver.license.birthday = (DateTime)col.birthday;
             }
             catch
             {

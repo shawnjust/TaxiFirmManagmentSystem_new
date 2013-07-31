@@ -15,25 +15,25 @@
                 <div class="span12">
                     <div class="page-header">
                         <h1>
-                            修改经理信息 <small>信息管理</small>
+                            添加雇员信息 <small>信息管理</small>
                         </h1>
                     </div>
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form>
+                            <form id="employee_info">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
                                  </legend>
                                 <label>
-                                    <h4>经理姓名</h4></label>
+                                    <h4>姓名</h4></label>
                                 <p>
                                     <input name="Driver_Name" type="text"/>
                                 </p>
                                 <p>
                                     
-                                        <h4>经理性别</h4>
+                                        <h4>性别</h4>
                                 </p>
                                 <p>
                                    <small><input id="man" type="radio" checked="checked" name="1" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="1"/>&nbsp;&nbsp;女
@@ -43,19 +43,11 @@
                                         <h4>出生日期</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_Birthday" type="text" onClick="WdatePicker()" value="1994-3-27"/>
-                                </p>
-                                <p>
-                                		<h4>健康状况</h4>
-                                </p>
-                                <p>
-                                    <input name="Driver_Condition" type="text" />
+                                    <input name="Driver_Birthday" type="text" onClick="WdatePicker()" value="1993-3-27"/>
                                 </p>
                             </fieldset>
-                            </form>
                             </div>
                             <div class="span4">
-                            	<form>
                                 <br/>
                             <fieldset>
                                 <legend><h3>扩展信息</h3></legend><legend>
@@ -66,17 +58,14 @@
                                     <input name="Driver_ID" type="text" />
                                 </p>
                             </fieldset>
-                            </form>
                             <br/>
                             <br/>
                             <br/>
                             <br/>
-                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
-                        提交</button>
+                                                
                             </div>
                             
                             <div class="span4">
-                            <form>
                               <br/>
                             <fieldset>
                           
@@ -85,13 +74,13 @@
                                 <h4>联系电话</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_TelePhone" type="text" />
+                                    <input name="employee_TelePhone" type="text" class="error" pattern="^1[3|4|5|8][0-9]\d{4,8}$" title="电话号码为11位数字\" onBlur="if (!(/^1[3|4|5|8][0-9]\d{4,8}$/.test(this.value)) ){alert('联系电话为11位\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                 <h4>家庭住址</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_HomeAddress" type="text" />
+                                    <input name="employee_HomeAddress" type="text" class="error" pattern="^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+" title="地址不能为空" onBlur="if (!(/^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+/.test(this.value)) ){alert('地址不能为空\n请仔细检查您的输入'); this.value='';this.focus();}"/>
                                 </p>
                                 <p>
                                     </p>
@@ -102,9 +91,10 @@
                             </fieldset>
                             </form>
                         </div>
-                        </div>
-                        
+                        </div> 
                     </div>
+                    <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
+                        提交</button>
                 </div>
             </div>
         </div>
