@@ -1,4 +1,8 @@
+<<<<<<< HEAD
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+=======
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ComplainModal>" %>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -102,13 +106,11 @@
                 	<i class="icon-user white"></i>后台
                      </a>
                
-
-                   <a class="button color medium" href="/Home/BackHandle?type=logout">
-                	<i class="icon-user white"></i>
-                    注销
-                     </a>
-               
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
@@ -118,7 +120,11 @@
                 	<i class="icon-user white"></i>改密
                      </a>
                
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
@@ -267,10 +273,15 @@
 					<mark id="message"></mark>
 
 					<!-- Form -->
+<<<<<<< HEAD
 					<form method="post" action="#" name="complainform" id="complainform">
+
+=======
+                    <% Html.EnableClientValidation(); %>
                     <% using (Html.BeginForm())
                        {%>
                     <%: Html.ValidationSummary(true)%>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 						<fieldset>
 
 							<div>

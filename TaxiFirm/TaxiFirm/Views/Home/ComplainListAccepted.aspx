@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getNotAcceptComplaintByPageResult>>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getAcceptedComplaintByPageResult>>" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     意见管理
@@ -45,7 +45,7 @@ div a:hover{
                 </div>
             </div>
             <div class="span6">
-                <% using (Html.BeginForm("NotAcceptedComplaintSearchList", "Home", new { page = "" }, FormMethod.Get))
+                <% using (Html.BeginForm("AcceptedComplaintSearchList", "Home", new { page = "" }, FormMethod.Get))
                             {%>
                                 <%= Html.TextBox("query") %>
                                 <button type="submit" class="btn">搜索</button>
@@ -60,8 +60,8 @@ div a:hover{
             <%for (int id = 0; id < Model.Count(); id += 3)
               {
             %>
-            <div class="row-fluid">
-            <div class="span12">
+                <div class="row-fluid">
+                <div class="span12">
                 <%
                     for (int p = id; p < Math.Min(id + 3, Model.Count()); p++)
                     {
@@ -72,19 +72,24 @@ div a:hover{
                     </h4>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="47" style="font-size: 13px;">
+                            <td width="46%" style="font-size: 13px;">
                                 <small>Email：<%: Model.ElementAt(p).customer_email %>
                                 </small>
                             </td>
-                            <td width="53%" style="font-size: 13px;">
-                                <small>投诉时间：<%: Model.ElementAt(p).complaint_time %></small>
+                            <td width="54%" style="font-size: 13px;">
+                                <small>投诉时间：<%: Model.ElementAt(p).complaint_time%>
+                                </small>
+                                <small>处理时间：<%: Model.ElementAt(p).accept_time%>
+                                </small>
                             </td>
                         </tr>
                     </table>
                     <p>
                         <%: Model.ElementAt(p).complaint_content %></p>
                     <p>
-                        <%: Html.ActionLink("放入已受理", "ComplainAccept", new { id = Model.ElementAt(p).complaint_id })%>
+                    <p>
+                        <%: Html.ActionLink("删除", "ComplainDelete", new { id = Model.ElementAt(p).complaint_id })%>
+                    <p>
                     </p>
                     <div class="row-fluid">
                         <div class="span6">
@@ -107,7 +112,7 @@ div a:hover{
 
                         <li>
                         <% if (curPage>0) { %>
-                            <%: Html.ActionLink("Prev", "ComplainList", new { id = Math.Max(curPage-1, 0) })%>
+                            <%: Html.ActionLink("Prev", "ComplainListAccepted", new { id = Math.Max(curPage-1, 0) })%>
                          <% } %>
                         </li>
                         <%
@@ -116,12 +121,12 @@ div a:hover{
                             {
                         %>
                             <li>
-                                <%: Html.ActionLink(i + 1 + "", "ComplainList", new { id = i })%>
+                                <%: Html.ActionLink(i + 1 + "", "ComplainListAccepted", new { id = i })%>
                             </li>
                         <% } %>
                         <li>
                             <% if (curPage<total-1) { %>
-                            <%: Html.ActionLink("Next", "ComplainList", new { id = Math.Min(curPage + 1, total - 1) })%>
+                            <%: Html.ActionLink("Next", "ComplainListAccepted", new { id = Math.Min(curPage + 1, total - 1) })%>
                             <% } %>
                         </li>
                         </ul>

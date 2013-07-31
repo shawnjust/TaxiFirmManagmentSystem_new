@@ -29,7 +29,11 @@
                                     车主姓名</label>
                                 <p>
                                     <%: Html.TextBoxFor(model => model.name, new { disabled = "disabled", @readonly = "readonly" })%>
+<<<<<<< HEAD
+                                    <%: Html.ValidationMessageFor(model => model.name) %>
+=======
                                     <%: Html.ValidationMessageFor(model => model.name)%>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                                 </p>
                                 <p>
                                     公司编号
@@ -70,6 +74,8 @@
                                         女
                                         <%: Html.ValidationMessageFor(model => model.gender)%>
                                 </label>
+<<<<<<< HEAD
+=======
                                 </p>
 
                                 <p>
@@ -77,6 +83,7 @@
                                 </p>
                                 <p>
                                     <input name="ImgUpload" type="file" />
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                                 </p>
                                 <label class="checkbox">
                                     <input type="checkbox" />

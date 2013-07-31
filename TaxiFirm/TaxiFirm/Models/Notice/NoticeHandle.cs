@@ -21,7 +21,7 @@ namespace TaxiFirm.Models.Notice
             notice.author = col.name;
             return notice;
         }
-        //public List<Notice> GetNoticeByNameByPage(MyPage page, string name)
+        /*
         //{
         //    name = "%" + name + "%";
         //    page.CountPerPage = 10;
@@ -35,6 +35,6 @@ namespace TaxiFirm.Models.Notice
         //      //  newses.Add(news);
         //    }
         //    return newses;
-        //}
+        }*/
     }
 }
