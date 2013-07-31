@@ -16,8 +16,8 @@
 
 <!-- CSS
 ================================================== -->
-<link rel="stylesheet" href="../../Content/css/FrontPage /style.css">
-<link rel="stylesheet" href="../../Content/css/FrontPage /colors/blue.css" id="colors">
+<link rel="stylesheet" href="../../Content/css/FrontPage/style.css">
+<link rel="stylesheet" href="../../Content/css/FrontPage/colors/blue.css" id="colors">
 <link rel="shortcut icon" href="../../Content/favicon.ico" type="image/x-icon" />
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
@@ -207,7 +207,7 @@
 				<ul class="project-info">
 				<li><strong>作者:</strong> Cheng</li>
 				<li><strong>日期:</strong> Dec 2012</li>
-				<li><a href="gallery.html" class="button color launch"> 查看图片</a></li>
+				<li><a href="Gallery" class="button color launch"> 查看图片</a></li>
 			</ul>
 		</div>
 	</div>

@@ -221,7 +221,7 @@
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="80"></div><span class="skill-title">HTML / CSS 80%</span></div>
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="95"></div><span class="skill-title">ASP.NET MVC 95%</span></div>
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="70"></div><span class="skill-title">C# 70%</span></div>
-			<div class="skill-bar"><div class="skill-bar-content" data-percentage="75"></div><span class="skill-title">DBA 75%</span></div>
+			<div class="skill-bar"><div class="skill-bar-content" data-percentage="95"></div><span class="skill-title">DBA 95%</span></div>
 		</div>
 
 	</div>
@@ -258,7 +258,7 @@
 	<!-- About -->
 	<div class="one-third column">
 		<img src="../../Content/picture/FrontPage/about-03.jpg" alt=""/>
-		<div class="team-name"><h5>王成</h5> <span>队员</span></div>
+		<div class="team-name"><h5>路捷</h5> <span>队员</span></div>
 		<div class="team-about"><p>能力强，做事认真</p></div>
 	</div>
 

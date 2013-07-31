@@ -126,6 +126,7 @@ a:hover
     MyPage page = (MyPage)ViewData["page"];
     string type = (string)ViewData["type"];
     string myType =(string)Session["subtype"];
+    DriverHandle driverHandler = (DriverHandle)ViewData["EM_DriverHandler"];
 %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
@@ -182,6 +183,13 @@ a:hover
                           <th>
                                 性别</th>
                           <th>电话</th>
+                          <%if (myType.Equals("AddDriver"))
+                            {
+                               %>
+                               <th>司机</th>
+                               <%
+                            }
+                                 %>
                           <th>工号</th>
                             <th>操作</th>
                         </tr>
@@ -221,6 +229,29 @@ a:hover
                                 <%:employee.Age%></td>
                             <td><%:employee.Gender%></td>
                             <td><%:employee.Telephone%></td>
+                           <%if (myType.Equals("AddDriver"))
+                            {
+                                 if (driverHandler==null)
+                                 {
+                                     driverHandler = new DriverHandle();
+                                 }
+                                if (driverHandler.isDriver(employee.EmployeeId))
+                                {
+                                   %>
+                                      <td>
+                                          是
+                                      </td>
+                                   <%                                    
+                                 }
+                                else
+                                {
+                                 
+                               %>
+                               <td>否</td>
+                               <%
+                                 }
+                            }
+                                 %>
                             <td><%:employee.EmployeeId%></td>
                             <td  style="color:#900" class="pointer">
                             
@@ -260,7 +291,7 @@ a:hover
 
                                   <td  style="color:#900" class="pointer">
                             
-                                   <a href="/Home/AddDriver?id=<%:employee.EmployeeId%>">添加车主</a></td>
+                                   <a href="/Home/AddHost?id=<%:employee.EmployeeId%>">添加车主</a></td>
                                   
                                   
                           <%        }

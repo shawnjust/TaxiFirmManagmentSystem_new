@@ -531,12 +531,6 @@ namespace TaxiFirm.Models
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverViewByID", IsComposable=true)]
-		public IQueryable<getDriverViewByIDResult> getDriverViewByID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DriverID", DbType="Int")] System.Nullable<int> driverID)
-		{
-			return this.CreateMethodCallQuery<getDriverViewByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), driverID);
-		}
-		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByNameByPage", IsComposable=true)]
 		public IQueryable<getEmployeeByNameByPageResult> getEmployeeByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
 		{
@@ -751,6 +745,30 @@ namespace TaxiFirm.Models
 		public System.Nullable<int> isHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNameByPage", IsComposable=true)]
+		public IQueryable<getHostByNameByPageResult> getHostByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
+		{
+			return this.CreateMethodCallQuery<getHostByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, hostName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getHostByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, hostName).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiInformationByEmpolyeeId", IsComposable=true)]
+		public IQueryable<getTaxiInformationByEmpolyeeIdResult> getTaxiInformationByEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return this.CreateMethodCallQuery<getTaxiInformationByEmpolyeeIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverViewByID", IsComposable=true)]
+		public IQueryable<getDriverViewByIDResult> getDriverViewByID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DriverID", DbType="Int")] System.Nullable<int> driverID)
+		{
+			return this.CreateMethodCallQuery<getDriverViewByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), driverID);
 		}
 	}
 	
@@ -5320,23 +5338,6 @@ namespace TaxiFirm.Models
 		}
 	}
 	
-	public partial class getDriverViewByIDResult
-	{
-		
-		private int _empolyee_id;
-		
-		private string _name;
-		
-		private string _id_card;
-		
-		private System.Nullable<System.DateTime> _birthday;
-		
-		private System.Nullable<bool> _gender;
-		
-		private string _telephone;
-		
-		private System.Nullable<int> _age;
-		
 		private int _health;
 		
 		private System.Nullable<int> _firm_id;
@@ -9075,6 +9076,894 @@ namespace TaxiFirm.Models
 				if ((this._host_address != value))
 				{
 					this._host_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getHostByNameByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _empolyee_id;
+		
+		private string _name;
+		
+		private string _id_card;
+		
+		private System.DateTime _birthday;
+		
+		private System.Nullable<bool> _gender;
+		
+		private string _telephone;
+		
+		private string _photo;
+		
+		private int _firm_id;
+		
+		private string _firm_name;
+		
+		private string _phone_number;
+		
+		private string _empolyee_address;
+		
+		private string _firm_address;
+		
+		public getHostByNameByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
+		public int empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string id_card
+		{
+			get
+			{
+				return this._id_card;
+			}
+			set
+			{
+				if ((this._id_card != value))
+				{
+					this._id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date NOT NULL")]
+		public System.DateTime birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if ((this._birthday != value))
+				{
+					this._birthday = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit")]
+		public System.Nullable<bool> gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this._gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_photo", DbType="NVarChar(200)")]
+		public string photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if ((this._photo != value))
+				{
+					this._photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int NOT NULL")]
+		public int firm_id
+		{
+			get
+			{
+				return this._firm_id;
+			}
+			set
+			{
+				if ((this._firm_id != value))
+				{
+					this._firm_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string firm_name
+		{
+			get
+			{
+				return this._firm_name;
+			}
+			set
+			{
+				if ((this._firm_name != value))
+				{
+					this._firm_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string phone_number
+		{
+			get
+			{
+				return this._phone_number;
+			}
+			set
+			{
+				if ((this._phone_number != value))
+				{
+					this._phone_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string empolyee_address
+		{
+			get
+			{
+				return this._empolyee_address;
+			}
+			set
+			{
+				if ((this._empolyee_address != value))
+				{
+					this._empolyee_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string firm_address
+		{
+			get
+			{
+				return this._firm_address;
+			}
+			set
+			{
+				if ((this._firm_address != value))
+				{
+					this._firm_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getTaxiInformationByEmpolyeeIdResult
+	{
+		
+		private string _plate_number;
+		
+		private string _taxi_color;
+		
+		private string _taxi_brand;
+		
+		private System.Nullable<int> _order_id;
+		
+		private System.Nullable<System.DateTime> _rent_begin_time;
+		
+		private System.Nullable<System.DateTime> _rent_due_return_time;
+		
+		private System.Nullable<System.DateTime> _rent_return_time;
+		
+		private System.Nullable<int> _driver_empolyee_id;
+		
+		private string _driver_name;
+		
+		private string _driver_id_card;
+		
+		private string _driver_telephone;
+		
+		private string _driver_address;
+		
+		private System.Nullable<int> _host_empolyee_id;
+		
+		private string _host_name;
+		
+		private string _host_id_card;
+		
+		private string _host_telephone;
+		
+		private string _host_address;
+		
+		public getTaxiInformationByEmpolyeeIdResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_color
+		{
+			get
+			{
+				return this._taxi_color;
+			}
+			set
+			{
+				if ((this._taxi_color != value))
+				{
+					this._taxi_color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_brand
+		{
+			get
+			{
+				return this._taxi_brand;
+			}
+			set
+			{
+				if ((this._taxi_brand != value))
+				{
+					this._taxi_brand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
+		public System.Nullable<int> order_id
+		{
+			get
+			{
+				return this._order_id;
+			}
+			set
+			{
+				if ((this._order_id != value))
+				{
+					this._order_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_begin_time
+		{
+			get
+			{
+				return this._rent_begin_time;
+			}
+			set
+			{
+				if ((this._rent_begin_time != value))
+				{
+					this._rent_begin_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_due_return_time
+		{
+			get
+			{
+				return this._rent_due_return_time;
+			}
+			set
+			{
+				if ((this._rent_due_return_time != value))
+				{
+					this._rent_due_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_return_time
+		{
+			get
+			{
+				return this._rent_return_time;
+			}
+			set
+			{
+				if ((this._rent_return_time != value))
+				{
+					this._rent_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
+		public System.Nullable<int> driver_empolyee_id
+		{
+			get
+			{
+				return this._driver_empolyee_id;
+			}
+			set
+			{
+				if ((this._driver_empolyee_id != value))
+				{
+					this._driver_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
+		public string driver_name
+		{
+			get
+			{
+				return this._driver_name;
+			}
+			set
+			{
+				if ((this._driver_name != value))
+				{
+					this._driver_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
+		public string driver_id_card
+		{
+			get
+			{
+				return this._driver_id_card;
+			}
+			set
+			{
+				if ((this._driver_id_card != value))
+				{
+					this._driver_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
+		public string driver_telephone
+		{
+			get
+			{
+				return this._driver_telephone;
+			}
+			set
+			{
+				if ((this._driver_telephone != value))
+				{
+					this._driver_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
+		public string driver_address
+		{
+			get
+			{
+				return this._driver_address;
+			}
+			set
+			{
+				if ((this._driver_address != value))
+				{
+					this._driver_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
+		public System.Nullable<int> host_empolyee_id
+		{
+			get
+			{
+				return this._host_empolyee_id;
+			}
+			set
+			{
+				if ((this._host_empolyee_id != value))
+				{
+					this._host_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
+		public string host_name
+		{
+			get
+			{
+				return this._host_name;
+			}
+			set
+			{
+				if ((this._host_name != value))
+				{
+					this._host_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
+		public string host_id_card
+		{
+			get
+			{
+				return this._host_id_card;
+			}
+			set
+			{
+				if ((this._host_id_card != value))
+				{
+					this._host_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
+		public string host_telephone
+		{
+			get
+			{
+				return this._host_telephone;
+			}
+			set
+			{
+				if ((this._host_telephone != value))
+				{
+					this._host_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
+		public string host_address
+		{
+			get
+			{
+				return this._host_address;
+			}
+			set
+			{
+				if ((this._host_address != value))
+				{
+					this._host_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getDriverViewByIDResult
+	{
+		
+		private int _empolyee_id;
+		
+		private string _name;
+		
+		private string _id_card;
+		
+		private System.Nullable<System.DateTime> _birthday;
+		
+		private System.Nullable<bool> _gender;
+		
+		private string _telephone;
+		
+		private System.Nullable<int> _age;
+		
+		private int _health;
+		
+		private System.Nullable<int> _firm_id;
+		
+		private string _firm_name;
+		
+		private string _phone_number;
+		
+		private string _license_id;
+		
+		private System.Nullable<System.DateTime> _license_time;
+		
+		private string _photo_path;
+		
+		private string _firm_address;
+		
+		private string _empolyee_address;
+		
+		private System.Nullable<int> _order_id;
+		
+		private string _plate_number;
+		
+		public getDriverViewByIDResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
+		public int empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20)")]
+		public string id_card
+		{
+			get
+			{
+				return this._id_card;
+			}
+			set
+			{
+				if ((this._id_card != value))
+				{
+					this._id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date")]
+		public System.Nullable<System.DateTime> birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if ((this._birthday != value))
+				{
+					this._birthday = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit")]
+		public System.Nullable<bool> gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this._gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20)")]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int")]
+		public System.Nullable<int> age
+		{
+			get
+			{
+				return this._age;
+			}
+			set
+			{
+				if ((this._age != value))
+				{
+					this._age = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_health", DbType="Int NOT NULL")]
+		public int health
+		{
+			get
+			{
+				return this._health;
+			}
+			set
+			{
+				if ((this._health != value))
+				{
+					this._health = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int")]
+		public System.Nullable<int> firm_id
+		{
+			get
+			{
+				return this._firm_id;
+			}
+			set
+			{
+				if ((this._firm_id != value))
+				{
+					this._firm_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20)")]
+		public string firm_name
+		{
+			get
+			{
+				return this._firm_name;
+			}
+			set
+			{
+				if ((this._firm_name != value))
+				{
+					this._firm_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20)")]
+		public string phone_number
+		{
+			get
+			{
+				return this._phone_number;
+			}
+			set
+			{
+				if ((this._phone_number != value))
+				{
+					this._phone_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_license_id", DbType="VarChar(50)")]
+		public string license_id
+		{
+			get
+			{
+				return this._license_id;
+			}
+			set
+			{
+				if ((this._license_id != value))
+				{
+					this._license_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_license_time", DbType="Date")]
+		public System.Nullable<System.DateTime> license_time
+		{
+			get
+			{
+				return this._license_time;
+			}
+			set
+			{
+				if ((this._license_time != value))
+				{
+					this._license_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_photo_path", DbType="NVarChar(256)")]
+		public string photo_path
+		{
+			get
+			{
+				return this._photo_path;
+			}
+			set
+			{
+				if ((this._photo_path != value))
+				{
+					this._photo_path = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50)")]
+		public string firm_address
+		{
+			get
+			{
+				return this._firm_address;
+			}
+			set
+			{
+				if ((this._firm_address != value))
+				{
+					this._firm_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50)")]
+		public string empolyee_address
+		{
+			get
+			{
+				return this._empolyee_address;
+			}
+			set
+			{
+				if ((this._empolyee_address != value))
+				{
+					this._empolyee_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
+		public System.Nullable<int> order_id
+		{
+			get
+			{
+				return this._order_id;
+			}
+			set
+			{
+				if ((this._order_id != value))
+				{
+					this._order_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50)")]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
 				}
 			}
 		}

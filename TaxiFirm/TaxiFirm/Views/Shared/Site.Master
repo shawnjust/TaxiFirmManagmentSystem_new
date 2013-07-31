@@ -74,6 +74,9 @@
         <td width="294" id="time" style="font-size:12px;">时间：2013年07月15日 星期五 15:22:22</td>
         
         <script type="text/javascript">
+            <% if (Session["errorMsg"]=="Ilegal")  %> alert("添加失败");
+            <% else if (Session["errorMsg"]=="Success") %> alert("添加成功");
+            <% Session["errorMsg"]=null; %>
             function clock() {
 
 

@@ -197,7 +197,7 @@
 		<div class="medium-content">
 
 			<header class="meta">
-				<h2><a href="news-content.html">
+				<h2><a href="NewsContent">
 记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
 				<span><i class="halflings user"></i>By <a href="#">方志晗</a></span>
 			</header>

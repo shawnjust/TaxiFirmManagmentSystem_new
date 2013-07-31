@@ -13,14 +13,14 @@
         <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
         </script>
         <div class="container-fluid">
-            <div class="row-fluid">
+            <div class="row-fluid" align="center">
                 <fieldset>
-                    <legend>Fields</legend>
+                    <legend>详细信息</legend>
                     <table class="table table-hover table-bordered">
                         <tr>
                             <td>
                                 <div class="display-label">
-                                    plate_number</div>
+                                    车牌号码</div>
                             </td>
                             <td>
                                 <div class="display-field">
@@ -189,6 +189,7 @@
                         </tr>
                     </table>
                 </fieldset>
+                <button class="btn btn-info" type="button">返回</button>
             </div>
         </div>
 </asp:Content>

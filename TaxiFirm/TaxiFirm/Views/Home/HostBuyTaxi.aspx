@@ -4,7 +4,14 @@
     关于我们
 </asp:content>
 <asp:content id="aboutContent" contentplaceholderid="MainContent" runat="server">
+<link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../Scripts/BackControl/bootstrap.js"></script>
+<link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
+<link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
+<script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
 <body>
+    
     <script type="text/javascript">
         function getXmlHttpRequest() {
             var xhr;
@@ -45,45 +52,64 @@
             xhr.send();
         }
     </script>
-
-    <% using (Html.BeginForm()) {%>
+    
+<% using (Html.BeginForm()) {%>
         <%: Html.ValidationSummary(true) %>
-        
-        <fieldset>
-            <legend>Fields</legend>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.now_id) %>
-            </div>
-            <div class="editor-field">
-                <%: Model.now_id %>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.now_name) %>
-            </div>
-            <div class="editor-field">
-                <%: Model.now_name%>
-            </div>
-            
-            <div class="editor-label">
-                <%: Html.LabelFor(model => model.car_id) %>
-            </div>
-            <div class="editor-field">
-                <%: Html.TextBoxFor(model => model.car_id, new { id="Comment" }) %>
-                <ul id="carinfo">        
-                </ul>
-                <button type="button" onclick="getMessage()">搜索</button>
+        <div class="container-fluid">
+	<div class="row-fluid">
+		<div class="span12">
+			<h3 class="text-center text-info">
+				买入车辆
+			</h3>
+		</div>
+	</div>
+	<div class="row-fluid">
+    <legend>
+		<div class="span6" align="center">
+			<dl>
+				<dt>
+					当前用户ID
+				</dt>
+				<br/>
+				<dd>
+					<%: Model.now_id %>
+				</dd>
+				<br/>
+				<dt>
+					当前用户姓名
+				</dt>
+			</dl>
+			<h4>
+				<small><%: Model.now_name%></small>
+			</h4>
+		</div>
+        </legend>
+		<div class="span6">
+			<dl>
+				<dt>
+					<%: Html.TextBoxFor(model => model.car_id, new { id="Comment", @class="input-medium search-query" }) %>
+					<ul id="carinfo">        
+					</ul>
+					<button type="button" class="btn" onclick="getMessage()">搜索</button>
                 
-                <%: Html.ValidationMessageFor(model => model.car_id)%>
-            </div>
-            
-            <p>
-                <input type="submit" value="Save" />
-            </p>
-        </fieldset>
+					<%: Html.ValidationMessageFor(model => model.car_id)%>
+				</dt>
+				
+			</dl>
+           	<br/>
+            <br/>
+            <br/> 
+		</div>
+	</div>
+    <div class="row-fluid">
+		<div class="span12" align="center">
+		<input type="submit" class="btn btn-success" value="保存" />
+		
+		</div>
+	</div>
+</div>
+<% } %>
 
-    <% } %>
 
 </asp:content>
 

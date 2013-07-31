@@ -318,13 +318,50 @@ namespace TaxiFirm.Controllers
         public ActionResult DriverList()
         {
             int page1 = int.Parse(Request.QueryString.Get("page"));
+            string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            page.CurrentPage = page1;
-            page.PageWidth = 10;
-            List<Driver> drivers = new DriverHandle().getDriverByPage(page);
-            ViewData["type"] = "driver";
-            ViewData["drivers"] = drivers;
-            ViewData["page"] = page;
+            if (type.Equals("search"))   //搜索类型
+            {
+                string NameID = Request.QueryString.Get("NameID");
+                try
+                {
+                    int id = int.Parse(NameID);
+                    Driver driver = new DriverHandle().GetDriverByEmployeeID(id);
+                    List<Driver> drivers = new List<Driver>();
+                    if (driver.name != null && !driver.Equals(""))
+                    {
+                        drivers.Add(driver);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["drivers"] = drivers;
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+                catch
+                {
+                    page.CurrentPage = page1;
+                    List<Employee> employees = new EmployeeHandle().GetEmployeeByNameByPage(page, NameID);
+                    List<Driver> drivers = new List<Driver>();
+                    ViewData["type"] = "search";
+                    drivers = new DriverHandle().EmployeesToDrivers(employees);
+                    ViewData["drivers"] = drivers;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+            }
+            else
+            {
+                page.CurrentPage = page1;
+                page.PageWidth = 10;
+                List<Driver> drivers = new DriverHandle().getDriverByPage(page);
+                ViewData["type"] = "driver";
+                ViewData["drivers"] = drivers;
+                ViewData["page"] = page;
+            }
+
             return View();
         }
         public ActionResult AddDriver()
@@ -333,6 +370,10 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverInfo()
         {
+            int employee_id = int.Parse(Request.QueryString.Get("EMID"));
+            Driver driver = new Driver();
+            driver = new DriverHandle().GetDriverByEmployeeID(employee_id);
+            ViewData["Driver"] = driver;
             return View();
         }
         public ActionResult DriverSelect()
@@ -432,31 +473,50 @@ namespace TaxiFirm.Controllers
             return RedirectToAction("HostList");
         }
 
-        public ActionResult AddHost()
+        public ActionResult AddHost(int id)
         {
-            AddHostModal s = new AddHostModal();
-            s.firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name");
+
+            int? employee_id = id;
+
+            getEmpolyeeByIdResult idr = context.getEmpolyeeById(employee_id).First();
+
+            AddHostModal s = new AddHostModal()
+            {
+                address = idr.empolyee_address,
+                birthday = idr.birthday,
+                firm_id = idr.firm_id,
+
+                firm_list = new SelectList(context.getAllFirm(), "firm_id", "firm_name"),
+                gender = idr.gender,
+                id_card = idr.id_card,
+                name = idr.name,
+                telephone = idr.telephone
+            };
+
+
             ViewData.Model = s;
             return View();
         }
 
         [HttpPost]
-        public ActionResult AddHost(AddHostModal host)
+        public ActionResult AddHost(int id, AddHostModal host)
         {
             try
             {
+
+                if (context.isHost(id) == 1) throw new Exception();
                 // TODO: Add insert logic here
-                host.password = host.id_card.Substring(host.id_card.Length - 7);
-                int? id = 0;
-                context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
-                int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
-                context.addHost(employee_id, "");
+                //host.password = host.id_card.Substring(host.id_card.Length - 7);
+                //context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
+                //int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
+                context.addHost(id, "");
+                Session["errorMsg"] = "Success";
                 return RedirectToAction("HostList");
             }
             catch (Exception e)
             {
-                ViewData["errorMessage"] = "Error";
-                return View();
+                Session["errorMsg"] = "Ilegal";
+                return RedirectToAction("HostList");
             }
         }
 
@@ -595,27 +655,23 @@ namespace TaxiFirm.Controllers
         public ActionResult HostTaxiInfo(int id)
         {
             ViewData["employee_id"] = id;
-            var dd = context.getEmpolyeeById(id);
-            IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
-            List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
-            foreach (getAllTaxiInformationResult tx in taxi)
-            {
-                if (tx.host_empolyee_id == id)
-                    taxilist.Add(tx);
-            }
-
+            List<getTaxiInformationByEmpolyeeIdResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
 
             ViewData.Model = taxilist;
             return View();
         }
 
         [HttpGet]
-        public ActionResult HostSearchResult()
+        public ActionResult HostSearchResult(int id = 0)
         {
-            IQueryable<getHostBySearchNameResult> ls = context.getHostBySearchName("%" + Request["query"] + "%");
+            int? count = context.getHostByNamePageCount(15, "%"+Request["query"]+"%");
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
+            
+            IQueryable<getHostByNameByPageResult> ls = context.getHostByNameByPage(id + 1, 15, "%" + Request["query"] + "%");
             List<HostListModal> showModel = new List<HostListModal>();
 
-            foreach (getHostBySearchNameResult s in ls)
+            foreach (getHostByNameByPageResult s in ls)
             {
                 HostListModal toAdd = new HostListModal()
                 {
@@ -1002,7 +1058,13 @@ namespace TaxiFirm.Controllers
             string type = Request.QueryString.Get("type");
             if (Request.QueryString.Get("subtype") != null) 
             { 
-            Session["subtype"] = Request.QueryString.Get("subtype");
+                Session["subtype"] = Request.QueryString.Get("subtype");
+                if (Request.QueryString.Get("subtype").Equals("AddDriver"))
+                {
+                    Driver driver = new Driver();
+                    DriverHandle driverHandler = new DriverHandle();
+                    ViewData["EM_DriverHandler"] = driverHandler;
+                }
             }
         
             MyPage page = new MyPage();
@@ -1027,36 +1089,20 @@ namespace TaxiFirm.Controllers
                     page.WholePage = 1;
                     ViewData["page"] = page;
                     ViewData["NameID"] = NameID;
-
-
-
-
                 }
                 catch
                 {
-
-                   
-
-
                     page.CurrentPage = page1;
-
                     List<Employee> employees = new EmployeeHandle().GetEmployeeByNameByPage(page, NameID);
                     ViewData["type"] = "search";
                     ViewData["employees"] = employees;
                     ViewData["page"] = page;
                     ViewData["NameID"] = NameID;
-
-
-
-
                 }
-
-
             }
             else
             {
-                int page1 = int.Parse(Request.QueryString.Get("page"));
-               
+                int page1 = int.Parse(Request.QueryString.Get("page"));            
                 page.CurrentPage = page1;
                 List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
                 ViewData["type"] ="common";

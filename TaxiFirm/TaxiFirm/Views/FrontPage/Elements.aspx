@@ -190,7 +190,7 @@
 		<nav id="breadcrumbs">
 			<ul>
 				<li>你在:</li>
-				<li><a href="index.html">主页</a></li>
+				<li><a href="Index">主页</a></li>
 				<li>积分系统</li>
 			</ul>
 		</nav>
