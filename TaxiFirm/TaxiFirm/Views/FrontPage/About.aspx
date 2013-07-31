@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-
+<%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -54,7 +54,11 @@
 
 	<!-- Header -->
 	<header id="header">
-
+    <%Identity current = Identity.unlegal;
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"]; 
+  }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
@@ -79,13 +83,31 @@
 			<div class="clearfix"></div>
 
 			<!-- Search -->
+			<!-- Search -->
 			<nav class="top-search">
-                <a class="button gray medium" href="#">
+              <%if(current==Identity.unlegal){ %>
+                <a class="button color medium" href="#">
                 	<i class="icon-cloud white"></i>注册
                 </a>
+               
 				<a class="button color medium" href="/FrontPage/Login">
-                	<i class="icon-user white"></i>登录
-                </a>
+                	<i class="icon-user white"></i>
+                   登录
+                     </a>
+                    <%}
+                   else if (current == Identity.manager)
+                   { 
+                       %> 
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                     </a>
+               <%} %>
 			</nav>
 
 		</div>
@@ -199,7 +221,7 @@
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="80"></div><span class="skill-title">HTML / CSS 80%</span></div>
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="95"></div><span class="skill-title">ASP.NET MVC 95%</span></div>
 			<div class="skill-bar"><div class="skill-bar-content" data-percentage="70"></div><span class="skill-title">C# 70%</span></div>
-			<div class="skill-bar"><div class="skill-bar-content" data-percentage="75"></div><span class="skill-title">DBA 75%</span></div>
+			<div class="skill-bar"><div class="skill-bar-content" data-percentage="95"></div><span class="skill-title">DBA 95%</span></div>
 		</div>
 
 	</div>
@@ -236,7 +258,7 @@
 	<!-- About -->
 	<div class="one-third column">
 		<img src="../../Content/picture/FrontPage/about-03.jpg" alt=""/>
-		<div class="team-name"><h5>王成</h5> <span>队员</span></div>
+		<div class="team-name"><h5>路捷</h5> <span>队员</span></div>
 		<div class="team-about"><p>能力强，做事认真</p></div>
 	</div>
 

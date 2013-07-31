@@ -45,7 +45,7 @@
 </script>
 <%
     Driver driver = new Driver();
-    driver = (Driver)ViewData["Driver_Info"]; %>
+    driver = (Driver)ViewData["Driver"]; %>
 
 <br/>
 <br />
@@ -77,7 +77,7 @@
                 </tr>
                 <tr>
 					 <td>出生日期：</td>
-					 <td><%=driver.birthday %>></td>
+					 <td><%=driver.birthday.ToShortDateString() %></td>
 				</tr>
                 <tr>
                      <td>健康状况：</td>
@@ -129,7 +129,7 @@
     <div align="center" class="container-fluid">
     <br />
     <br />
-     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify">修改</button>
+     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify" onclick="Modify()">修改</button>
      <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Delete">删除</button>
     </div>
 </asp:Content>

@@ -68,12 +68,13 @@
   <ItemGroup>
     <Compile Include="Controllers\AccountController.cs" />
     <Compile Include="Controllers\FrontPageController.cs" />
-    <Compile Include="Controllers\HandleController.cs" />
     <Compile Include="Controllers\HomeController.cs" />
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
     <Compile Include="Models\AccountModels.cs" />
+    <Compile Include="Models\Backup\Backup.cs" />
+    <Compile Include="Models\Backup\BackupHandle.cs" />
     <Compile Include="Models\Customer\Customer.cs" />
     <Compile Include="Models\Customer\CustomerHandle.cs" />
     <Compile Include="Models\DataClasses1.designer.cs">
@@ -81,13 +82,10 @@
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-<<<<<<< HEAD
     <Compile Include="Models\Driver\Driver.cs" />
     <Compile Include="Models\Driver\DriverHandle.cs" />
-=======
     <Compile Include="Models\Employee\Employee.cs" />
     <Compile Include="Models\Employee\EmployeeHandle.cs" />
->>>>>>> 32d7724cc6a2694beb5cf98b357b566530311b28
     <Compile Include="Models\Firm\Firm.cs" />
     <Compile Include="Models\Firm\FirmHandle.cs" />
     <Compile Include="Models\HostModels.cs" />
@@ -95,6 +93,7 @@
     <Compile Include="Models\Invoice\Invoice.cs" />
     <Compile Include="Models\License\License.cs" />
     <Compile Include="Models\License\LicenseHandle.cs" />
+    <Compile Include="Models\NewsAndNotice.cs" />
     <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />
@@ -393,6 +392,7 @@
     <Content Include="Views\FrontPage\Notification.aspx" />
     <Content Include="Views\Home\AddCar.aspx" />
     <Content Include="Views\Home\AddDriver.aspx" />
+    <Content Include="Views\Home\AddEmployee.aspx" />
     <Content Include="Views\Home\AddHost.aspx" />
     <Content Include="Views\Home\AddNews.aspx" />
     <Content Include="Views\Home\Backup.aspx" />
@@ -403,11 +403,21 @@
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\EditHost.aspx" />
     <Content Include="Views\Home\EmployeeList.aspx" />
     <Content Include="Views\Home\FirmList.aspx" />
     <Content Include="Views\Home\EmployeeInfo.aspx" />
+    <Content Include="Views\Home\HostBuyTaxi.aspx" />
     <Content Include="Views\Home\HostInfo.aspx" />
     <Content Include="Views\Home\HostList.aspx" />
+<<<<<<< HEAD
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
+=======
+    <Content Include="Views\Home\HostSearchResult.aspx" />
+    <Content Include="Views\Home\hostTaxiDetail.aspx" />
+    <Content Include="Views\Home\HostTaxiInfo.aspx" />
+    <Content Include="Views\Home\HostTransaction.aspx" />
+>>>>>>> 544dc5eaa3a5d6b25921cf4650e1d9b89b192a7a
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />
@@ -507,7 +517,7 @@
         <WebProjectProperties>
           <UseIIS>False</UseIIS>
           <AutoAssignPort>True</AutoAssignPort>
-          <DevelopmentServerPort>57526</DevelopmentServerPort>
+          <DevelopmentServerPort>19352</DevelopmentServerPort>
           <DevelopmentServerVPath>/</DevelopmentServerVPath>
           <IISUrl>
           </IISUrl>

@@ -2,7 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-
+using TaxiFirm.Models.Employee;
 namespace TaxiFirm.Models.Driver
 {
     public class DriverHandle
@@ -96,28 +96,72 @@ namespace TaxiFirm.Models.Driver
         {
             Driver driver;
             driver = new Driver();
-            //get the employee attributes in employee table
-            var em_table = db.getEmpolyeeById(Employee_ID);
-            var em_col = em_table.First<getEmpolyeeByIdResult>();
-            driver.Employee_id = (int)em_col.empolyee_id;
-            driver.name = em_col.name;
-            driver.id_card = em_col.id_card;
-            driver.birthday = em_col.birthday;
-            driver.emoloyee_address = em_col.empolyee_address;
-            driver.telephone = em_col.telephone;
-            driver.firm_id = em_col.firm_id;
-            //password is not given for safety
-            driver.password = "****";
-            //get the driver attributes in driver table
-            var table = db.getDriverViewByID(Employee_ID);
-            var col = table.First<getDriverViewByIDResult>();
-            driver.Health = (int)col.health;
-            driver.License_id = col.license_id;
+            try
+            {
+                //get the employee attributes in employee table
+                var em_table = db.getEmpolyeeById(Employee_ID);
+                var em_col = em_table.First<getEmpolyeeByIdResult>();
+                driver.Employee_id = (int)em_col.empolyee_id;
+                driver.name = em_col.name;
+                driver.id_card = em_col.id_card;
+                driver.birthday = em_col.birthday;
+                driver.emoloyee_address = em_col.empolyee_address;
+                driver.telephone = em_col.telephone;
+                driver.firm_id = em_col.firm_id;
+                //password is not given for safety
+                driver.password = "****";
+                //get the driver attributes in driver table
+                var table = db.getDriverViewByID(Employee_ID);
+                var col = table.First<getDriverViewByIDResult>();
+                driver.Health = (int)col.health;
+                driver.License_id = col.license_id;
+                driver.plateNumber = col.plate_number;
+                driver.license.photo_path = col.photo_path;
+                driver.license.license_id = col.license_id;
+                driver.license.license_time = (DateTime)col.license_time;
+                driver.license.birthday = (DateTime)col.birthday;
+            }
+            catch
+            {
+
+                
+            }
             return driver;
         }
         public int getEmployeeIDByIDCard(string ID_Number)
         {
             return (int)db.getEmpolyeeIdByIdCard(ID_Number);
+        }
+        public bool isDriver(int employee_id)
+        {
+/*            return true;*/
+            if (employee_id>0)
+            {
+                if (db.isDriver(employee_id) == 1)
+                {
+                    return true;
+                }
+                else
+                {
+                    return false;
+                }
+            }
+            else
+            {
+                return false;
+            }
+        }
+        public bool deleteDriver(int driver_id)
+        {
+            if (driver_id>0)
+            {
+                db.deleteDriverById(driver_id);
+                return true;
+            }
+            else
+            {
+                return false;
+            }
         }
 
         public List<Driver> getDriverByPage(MyPage page)
@@ -158,6 +202,45 @@ namespace TaxiFirm.Models.Driver
 
             }
 
+            return drivers;
+        }
+        public void ClearDriver(Driver driver)
+        {
+            driver = null;
+        }
+        public Driver EmployeeToDriver(Employee.Employee employee)
+        {
+            Driver driver = new Driver();
+            driver.name = employee.Name;
+            driver.Employee_id = employee.EmployeeId;
+            driver.id_card = employee.IdCard;
+            driver.firm_id =employee.FirmID;
+            driver.birthday = employee.Birthday;
+            if (employee.Gender.Equals("女"))
+            {
+                driver.gender = true;
+            }
+            else
+            {
+                driver.gender = false;
+            }
+            driver.telephone = employee.Telephone;
+            driver.emoloyee_address = employee.Address;
+            return driver;
+        }
+        public List<Driver> EmployeesToDrivers(List<Employee.Employee> employees)
+        {
+            List<Driver> drivers = new List<Driver>();
+            Driver driver = new Driver();
+            DriverHandle driverhandler = new DriverHandle();
+            for (int i = 0; i < employees.Count;i++ )
+            {
+                if (driverhandler.isDriver(employees[i].EmployeeId))
+                {
+                    driver = driverhandler.EmployeeToDriver(employees[i]);
+                    drivers.Add(driver);
+                }
+            }
             return drivers;
         }
     }

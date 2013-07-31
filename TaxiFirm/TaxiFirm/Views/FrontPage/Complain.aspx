@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-
+<%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -51,7 +51,11 @@
 
 <!-- 960 Container -->
 <div class="container">
-
+<%Identity current = Identity.unlegal;
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"]; 
+  }%>
 	<!-- Header -->
 	<header id="header">
 
@@ -80,12 +84,40 @@
 
 			<!-- Search -->
 			<nav class="top-search">
-                <a class="button gray medium" href="#">
+              <%if(current==Identity.unlegal){ %>
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
+               
 				<a class="button color medium" href="/FrontPage/Login">
-                	<i class="icon-user white"></i>登录
-                </a>
+                	<i class="icon-user white"></i>
+                   登录
+                     </a>
+                    <%}
+                   else if (current == Identity.manager)
+                   { 
+                       %> 
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                     </a>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>
@@ -229,7 +261,7 @@
 					<mark id="message"></mark>
 
 					<!-- Form -->
-					<form method="post" action="#" name="contactform" id="contactform">
+					<form method="post" action="#" name="complainform" id="complainform">
 
 						<fieldset>
 

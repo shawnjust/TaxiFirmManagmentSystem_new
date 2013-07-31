@@ -2,6 +2,7 @@
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
+using TaxiFirm.Models.License;
 
 namespace TaxiFirm.Models.Driver
 {
@@ -21,7 +22,11 @@ namespace TaxiFirm.Models.Driver
         public string telephone { get; set; }
         public string emoloyee_address { get; set; }
         public TaxiFirm.Models.Firm.Firm firm { get; set; }
-        public Driver() { }
+        public string plateNumber { get; set; }
+        public TaxiFirm.Models.License.License license { get; set; }
+        public Driver() {
+        }
+
         public int getAge()
         {
             int age = 0;
@@ -50,6 +55,32 @@ namespace TaxiFirm.Models.Driver
                 {
                     return 0;
                 }
+            }
+        }
+        public string getGenderToString()
+        {
+            if (gender)
+            {
+                return "男";
+            }
+            else
+            {
+                return "女";
+            }
+        }
+        public string getConditionToString()
+        {
+            if (Health<=60)
+            {
+                return "危险";
+            }
+            else if (Health<=80)
+            {
+                return "良好";
+            }
+            else
+            {
+                return "健康";
             }
         }
     }

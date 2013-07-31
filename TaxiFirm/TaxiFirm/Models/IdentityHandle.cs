@@ -37,10 +37,11 @@ namespace TaxiFirm.Models
                 else return Identity.unlegal;
 
             }
-
-
             return Identity.unlegal;
-
         }
+
+       
+
+       
     }
 }

@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-<%@ Import Namespace="TaxiFirm.Models.Manager" %>
+<%@ Import Namespace="TaxiFirm.Models.Employee" %>
 <%@ Import Namespace="TaxiFirm.Models.Firm" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
    信息修改
@@ -27,14 +27,9 @@
                 var con = window.confirm("是否保存更改");
                 if (con) {
                     form1.submit();
-                   
+                  
                 }
-                else {
-                    form1.action = "/Home/ManagerSelfInfo";
-                    form1.submit();
-
-
-                }
+               
 
             }
 
@@ -42,7 +37,7 @@
         });
     
     </script>
-     <% Manager manager=(Manager)Session["CurrentManager"];
+     <% Employee employee=(Employee)ViewData["employee"];
         List<Firm> firms = (List<Firm>)ViewData["firms"];
          %>
         <div class="container-fluid">
@@ -50,39 +45,39 @@
                 <div class="span12">
                     <div class="page-header">
                         <h1>
-                            修改经理信息 <small>信息管理</small>
+                            修改工号 <small>工号管理</small>
                         </h1>
                     </div>
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                           <form id="form1" method="post" action="/Home/GetSelfManagerModify">
+                           <form id="form1" method="post" action="/Home/GetSelfEmployeeModify">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
                                  </legend>
                                      <p>
-                                        <h4>经理编号</h4>
+                                        <h4>工号</h4>
                                 </p>
                                 <p>
-                                    <input name="Manager_ID" type="text" readonly value="<%:manager.EmployId%>"/>
+                                    <input name="Employee_ID" type="text" readonly value="<%:employee.EmployeeId%>"/>
                                 </p>
                                 <label>
-                                    <h4>经理姓名</h4></label>
+                                    <h4>姓名</h4></label>
                                 <p>
-                                    <input name="Manager_Name"  value="<%:manager.Name%>" type="text" />
+                                    <input name="Employee_Name"  value="<%:employee.Name%>" type="text" />
                                 </p>
                                 <p>
                                     
-                                        <h4>经理性别</h4>
+                                        <h4>性别</h4>
                                 </p>
                                 <p>
-                                <%if (manager.Gender == "男")
+                                <%if (employee.Gender == "男")
                                   { %>
                                    <small><input id="man" type="radio" checked="checked" name="gender" value="true" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="woman" type="radio"  name="gender" value="false"/>&nbsp;&nbsp;女
                                    </small>
                                    <%}
-                                  else if (manager.Gender == "女")
+                                  else if (employee.Gender == "女")
                                   { %>
                                      <small><input id="Radio1" type="radio" name="gender" value="true" />&nbsp;&nbsp;男 &nbsp;&nbsp;<input id="Radio2" type="radio"  checked="checked"  name="gender" value="false"/>&nbsp;&nbsp;女
                                    </small>
@@ -97,7 +92,7 @@
                                         <h4>出生日期</h4>
                                 </p>
                                 <p>
-                                    <input name="Manager_Birthday" type="text" onClick="WdatePicker()" value="<%:manager.Birthday.ToShortDateString().ToString().Replace("/","-")%>"/>
+                                    <input name="Employee_Birthday" type="text" onClick="WdatePicker()" value="<%:employee.Birthday.ToShortDateString().ToString().Replace("/","-")%>"/>
                                 </p>
                                 <p>
                                         <h4>公司</h4>
@@ -106,7 +101,7 @@
                                   <select name="FirmID" size="1" id="select">
                                   <% for (int i = 0; i < firms.Count(); i++)
                                      {
-                                         if (firms[i].FirmID == manager.FirmID)
+                                         if (firms[i].FirmID == employee.FirmID)
                                          { 
                                          
                                          
@@ -141,7 +136,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                  <input name="Manager_IDCard"  readonly type="text" value="<%:manager.IdCard %>" />
+                                  <input name="Employee_IDCard" readonly type="text" value="<%:employee.IdCard %>" />
                                 </p>
                             </fieldset>
                          
@@ -163,13 +158,13 @@
                                 <h4>联系电话</h4>
                                 </p>
                                 <p>
-                                    <input name="Manager_TelePhone" type="text" value="<%:manager.Telephone%>"/>
+                                    <input name="Employee_TelePhone" type="text" value="<%:employee.Telephone%>"/>
                                 </p>
                                 <p>
                                 <h4>家庭住址</h4>
                                 </p>
                                 <p>
-                                    <input name="Manager_HomeAddress" type="text" value="<%:manager.Address %>"/>
+                                    <input name="Employee_HomeAddress" type="text" value="<%:employee.Address %>"/>
                                 </p>
                                 <p>
                                     </p>

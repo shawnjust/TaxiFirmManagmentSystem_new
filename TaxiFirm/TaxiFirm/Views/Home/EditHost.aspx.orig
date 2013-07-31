@@ -2,11 +2,27 @@
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
-</asp:Content>
-<asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
+<<<<<<< HEAD
+</asp:content>
+<asp:content id="aboutContent" contentplaceholderid="MainContent" runat="server">
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     </script>
+    <% using (Html.BeginForm()) {%>
+        <%: Html.ValidationSummary(true) %>
+        
+        <fieldset>
+            <legend>Fields</legend>
+            
+            <div class="editor-label">
+                <%: Html.LabelFor(model => model.name) %>
+=======
+</asp:Content>
+<asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
+    <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+    <script type="text/javascript" src="../../Scripts/BackControl/bootstrap.js"></script>
+    <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet"
+        type="text/css" />
     <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
@@ -99,6 +115,7 @@
                         </div>
                     </div>
                 </div>
+>>>>>>> 544dc5eaa3a5d6b25921cf4650e1d9b89b192a7a
             </div>
         </div>
 </asp:Content>

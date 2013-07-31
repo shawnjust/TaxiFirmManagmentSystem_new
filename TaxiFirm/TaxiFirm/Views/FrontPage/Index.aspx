@@ -88,7 +88,8 @@
 			<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button gray medium" href="#">
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -100,8 +101,8 @@
                    else if (current == Identity.manager)
                    { 
                        %> 
-                     <a class="button gray medium" href="/Home/IndexDS">
-                	<i class="icon-cloud white"></i>后台
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
                      </a>
                
 			
@@ -109,7 +110,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>
@@ -591,8 +602,60 @@
 	<div id="reset"><a href="#" class="button color blue">重置</a></div>
 
 </section>
+</body>
 <!-- Style Switcher / End -->
 
+<%
+    if (Session["ChangeCustomerPassword"] != null)
+    {
+        string success = (string)Session["ChangeCustomerPassword"];
+        if ("success".Equals(success))  //删除才成功
+        {
+          
+          
+            %>
+            
+              <script type="text/javascript">
+                  window.alert("修改密码成功");
+            
+            </script>
+           
+            <%
+             
 
-</body>
+    }
+        else if ("failed".Equals(success))
+        { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改密码失败");
+            
+            </script>
+            <%
+            
+           
+    }
+        else if ("PrePassword".Equals(success))
+        {%>
+             <script type="text/javascript">
+                 window.alert("密码验证错误");
+            
+            </script>
+            
+           <% }
+        else if ("NewPassword".Equals(success))
+        {%>
+              <script type="text/javascript">
+                  window.alert("新密码不一致");
+            
+            </script>
+                
+            <%}
+
+        Session.Remove("ChangeCustomerPassword");
+       
+     
+    }%>
+
 </html>

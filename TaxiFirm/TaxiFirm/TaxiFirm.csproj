@@ -401,6 +401,8 @@
     <Content Include="Views\Home\CarInfoDisplay.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
     <Content Include="Views\Home\AddNotice.aspx" />
+    <Content Include="Views\Home\ChangeNews.aspx" />
+    <Content Include="Views\Home\ChangeNotice.aspx" />
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
