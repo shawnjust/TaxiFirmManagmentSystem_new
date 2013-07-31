@@ -58,7 +58,7 @@
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="35%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/add.png" width="11" height="11" /></td>
-            <td width="65%" style="font-size:12px;"><%:Html.ActionLink("添加","AddHost","Home")%></td>
+            <td width="65%" style="font-size:12px;"> <a href="/Home/EmployeeList?type=common&subtype=AddHost&page=1">添加</a> </td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
