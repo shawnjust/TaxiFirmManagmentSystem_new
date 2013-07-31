@@ -188,7 +188,6 @@
     <td height="32" align="left" valign="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
       <tr class="centerButtom">
         
-                             
           <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>"
           method="post">
           </form>

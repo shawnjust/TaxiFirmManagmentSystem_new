@@ -682,8 +682,9 @@ namespace TaxiFirm.Controllers
             {
                 page.CurrentPage = page1;
                 page.PageWidth = 10;
+                page.WholePage = (int)context.getDriverPageCount(10);
                 List<Driver> drivers = new DriverHandle().getDriverByPage(page);
-                ViewData["type"] = "driver";
+                ViewData["type"] = "common";
                 ViewData["drivers"] = drivers;
                 ViewData["page"] = page;
             }
@@ -900,6 +901,7 @@ namespace TaxiFirm.Controllers
                  * */
             };
             ViewData.Model = detail;
+            ViewData["id"] = id + "";
             return View();
         }
 
@@ -909,6 +911,20 @@ namespace TaxiFirm.Controllers
             if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
+                StringBuilder info = new StringBuilder();
+                String bas = "";
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase postFile = Request.Files[file];
+                    if (postFile.ContentLength == 0)
+                        continue;
+                    string newFilePath = Server.MapPath("/Content/HostPhoto/host");
+                    postFile.SaveAs(newFilePath + id);
+                    bas = "/Content/HostPhoto/host" + id;
+                    info.AppendFormat("Upload File: {0}/r/n", postFile.FileName);
+                }
+                context.setHostPhoto(id, bas);
                 // TODO: Add update logic here
                 return RedirectToAction("HostList");
             }
