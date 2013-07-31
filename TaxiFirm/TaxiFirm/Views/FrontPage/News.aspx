@@ -237,7 +237,7 @@
 				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id)%></a></span>
 			</header>
 
-			<p><%:newsHandler.GetPartOfContent(news.content)%></p>
+			<p><%Response.Write(news.content.Substring(0,200>news.content.Length?news.content.Length:200)+"..."); %></p>
 			
 			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
 

@@ -243,7 +243,7 @@ c
     if (news != null)
     { %>
 	<div class="twelve columns">
-		<p><%:news.content %></p>
+		<p><%Response.Write(news.content); %></p>
     </div>
 
 	<div class="four columns">

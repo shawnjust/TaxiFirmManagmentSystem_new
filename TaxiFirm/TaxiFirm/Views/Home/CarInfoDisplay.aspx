@@ -81,11 +81,11 @@
                             <br />
                             <br />
                             <strong>开始日期:</strong>
-                            <%= Html.Encode(Model.rent_begin_time) %>
+                            <%:Model.rent_begin_time == null ? "无" : ((DateTime)Model.rent_begin_time).ToShortDateString()%>
                             <br />
                             <br />
                             <strong>还车日期:</strong>
-                            <%= Html.Encode(Model.rent_due_return_time) %>
+                            <%:Model.rent_due_return_time==null?"无":((DateTime)Model.rent_due_return_time).ToShortDateString() %>
                             <br />
                             <br />
                         </fieldset>

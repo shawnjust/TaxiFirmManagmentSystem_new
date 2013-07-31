@@ -24,7 +24,8 @@
                             <legend>基本信息</legend>
 
                             <lable>车牌号:</lable>
-                            <%=Html.DropDownList("plate_number", ViewData["plate_numbers"] as SelectList, "--请选择--")%>
+                          <!--  <%//Html.DropDownList("plate_number", ViewData["plate_numbers"] as SelectList, "--请选择--")%> -->
+                            <input type="text" "plate_number" readonly value="<%:Model.plate_number %>" />
                             <br />
                             <br />
                             <lable>颜色:</lable>
