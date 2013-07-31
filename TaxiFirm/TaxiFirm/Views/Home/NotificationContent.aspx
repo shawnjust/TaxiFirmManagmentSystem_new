@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace = "TaxiFirm.Models" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager" %>
+<%@ Import Namespace="System.Text" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     公告内容
 </asp:Content>
@@ -55,7 +56,7 @@
                         <form>
                         <fieldset>
                             <legend>内容</legend>
-                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%=this_record.notice_content %></font></p>	
+                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%= HttpUtility.HtmlDecode(this_record.notice_content)%></font></p>	
                         </fieldset>
                         </form>
                     </div>

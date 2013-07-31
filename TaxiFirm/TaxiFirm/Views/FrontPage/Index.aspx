@@ -86,7 +86,7 @@
 			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
 			    <tr>
 			      <td width="63%">&nbsp;</td>
-			      <td width="37%" align="right">我的TaxiServer</td>
+			      <td width="37%" align="right"><a href="/Home/Login">我的TaxiServer</a></td>
 		        </tr>
 		      </table>
 		  </div>

@@ -229,7 +229,7 @@
 <div class="container" style="margin-top: 30px;">
 
 	<div class="twelve columns">
-		<p><%:notice.notice_content %></p>
+		<p><%Response.Write(notice.notice_content); %></p>
 	</div>
 
 	<div class="four columns">

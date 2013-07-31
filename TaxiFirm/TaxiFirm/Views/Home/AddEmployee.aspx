@@ -90,7 +90,7 @@
                                      {
                                         
                                      %>
-                                       <option value="<%:firms[i].FirmID%>"><%:firms[i].FirmID%></option>
+                                       <option value="<%:firms[i].FirmID%>" title="<%:firms[i].FirmName %>"><%:firms[i].FirmID%></option>
                                      
                                          
                                        

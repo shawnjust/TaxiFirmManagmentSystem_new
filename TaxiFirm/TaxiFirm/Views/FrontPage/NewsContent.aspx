@@ -14,7 +14,7 @@
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+c
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="../../Content/css/FrontPage/style.css">
@@ -187,18 +187,18 @@
                 {
                     index = 0;
                     prev_id = id_list[index];
-                    next_id = id_list[index + 1];
+                    next_id = id_list[index < id_list.Count-1 ? index + 1 : id_list.Count-1];
                 }
                 else if (index>(id_list.Count))
                 {
                     index = id_list.Count;
-                    prev_id = id_list[index - 1];
+                    prev_id = id_list[index>0?index - 1:0];
                     next_id = id_list[index];
                 }
                 else
                 {
-                    prev_id = id_list[index - 1];
-                    next_id = id_list[index + 1];
+                    prev_id = id_list[index > 0 ? index - 1 : 0];
+                    next_id = id_list[index<id_list.Count-1?index+ 1:id_list.Count-1];
                 }
 
                  %>
@@ -243,7 +243,7 @@
     if (news != null)
     { %>
 	<div class="twelve columns">
-		<p><%:news.content %></p>
+		<p><%Response.Write(news.content); %></p>
     </div>
 
 	<div class="four columns">

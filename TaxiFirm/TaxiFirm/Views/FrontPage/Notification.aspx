@@ -221,7 +221,7 @@
 				<span><i class="halflings user"></i>By <a href="NotificationContent?NOID=<%:notice.notice_id %>"><%:notice.author %></a></span>
 			</header>
 
-			<p><%:notice.notice_content %></p>
+			<p><%Response.Write(notice.notice_content.Substring(0,200>notice.notice_content.Length?notice.notice_content.Length:200)+"..."); %></p>
 			
 			<a href="NotificationContent?NOID=<%:notice.notice_id %>" class="button color">Read More</a>
 
