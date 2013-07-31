@@ -8,13 +8,13 @@ using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 <<<<<<< HEAD
-using TaxiFirm.Models;
-=======
 using TaxiFirm.Models.Invoice;
+=======
+using TaxiFirm.Models;
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
->>>>>>> ec4df095eab5738702af28ed929adb3518bcd055
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -182,6 +182,7 @@ namespace TaxiFirm.Controllers
             return RedirectToAction("Login");
         
         }
+<<<<<<< HEAD
 
 
         [HttpPost]
@@ -208,6 +209,34 @@ namespace TaxiFirm.Controllers
 
             catch {
 
+=======
+
+
+        [HttpPost]
+        public ActionResult GetCredit(string invoiceNumber)
+        {
+            try {
+                if(Session["CurrentCustomer"]!=null)
+                {
+                Customer customer = (Customer) Session["CurrentCustomer"];
+                int Inumber = int.Parse(invoiceNumber);
+                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
+                Session["InvoiceSuccess"] = "success";
+                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
+                }
+                    else{
+                        Session["InvoiceSuccess"] = "failed";
+                    }
+                }
+                else{
+                 Session["InvoiceSuccess"] = "failed";
+                }
+            
+            }
+
+            catch {
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                 Session["InvoiceSuccess"] = "failed";
             
             }

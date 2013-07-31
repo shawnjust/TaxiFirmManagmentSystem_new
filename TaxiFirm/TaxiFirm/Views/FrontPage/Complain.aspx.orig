@@ -1,5 +1,9 @@
+<<<<<<< HEAD
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+=======
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ComplainModal>" %>
-
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+<%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -51,7 +55,11 @@
 
 <!-- 960 Container -->
 <div class="container">
-
+<%Identity current = Identity.unlegal;
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"]; 
+  }%>
 	<!-- Header -->
 	<header id="header">
 
@@ -68,7 +76,7 @@
 		<div class="six columns">
 
 			<!-- Social Icons -->
-	
+
 
 			<div class="clearfix"></div>
 			<br/>
@@ -80,20 +88,13 @@
 
 			<!-- Search -->
 			<nav class="top-search">
-<<<<<<< HEAD
-                <a class="button gray medium" href="#">
-=======
               <%if(current==Identity.unlegal){ %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
->>>>>>> ec4df095eab5738702af28ed929adb3518bcd055
                 	<i class="icon-cloud white"></i>注册
                 </a>
+               
 				<a class="button color medium" href="/FrontPage/Login">
-<<<<<<< HEAD
-                	<i class="icon-user white"></i>登录
-                </a>
-=======
                 	<i class="icon-user white"></i>
                    登录
                      </a>
@@ -105,7 +106,11 @@
                 	<i class="icon-user white"></i>后台
                      </a>
                
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
@@ -115,13 +120,16 @@
                 	<i class="icon-user white"></i>改密
                      </a>
                
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
                     </a>
                <%}%>
->>>>>>> ec4df095eab5738702af28ed929adb3518bcd055
 			</nav>
 
 		</div>
@@ -265,10 +273,15 @@
 					<mark id="message"></mark>
 
 					<!-- Form -->
+<<<<<<< HEAD
+					<form method="post" action="#" name="complainform" id="complainform">
+
+=======
                     <% Html.EnableClientValidation(); %>
                     <% using (Html.BeginForm())
                        {%>
                     <%: Html.ValidationSummary(true)%>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 						<fieldset>
 
 							<div>
