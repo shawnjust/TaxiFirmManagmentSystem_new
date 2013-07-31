@@ -94,6 +94,10 @@
     <Compile Include="Models\License\License.cs" />
     <Compile Include="Models\License\LicenseHandle.cs" />
     <Compile Include="Models\NewsAndNotice.cs" />
+    <Compile Include="Models\News\News.cs" />
+    <Compile Include="Models\News\NewsHandle.cs" />
+    <Compile Include="Models\Notice\Notice.cs" />
+    <Compile Include="Models\Notice\NoticeHandle.cs" />
     <Compile Include="Models\RegexValidation.cs" />
     <Compile Include="Models\Invoice\InvoiceHandle.cs" />
     <Compile Include="Models\Manager\Manager.cs" />

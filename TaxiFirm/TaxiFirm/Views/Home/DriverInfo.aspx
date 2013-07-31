@@ -141,12 +141,28 @@
     <div align="center" class="container-fluid">
     <br />
     <br />
-     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Modify" onclick="/Home/Driver">修改</button>
-     <button class="btn btn-primary" type="button" style="alignment-adjust:middle" name="Driver_Delete" onclick="deleteDriver()">删除</button>
+
+     <button class="btn" type="button" style="alignment-adjust:middle" name="Driver_Modify" onclick="UpdateDriver()">修改</button>
+     <button class="btn" type="button" style="alignment-adjust:middle" name="Driver_Delete" onclick="DeleteDriver()">删除</button>
     </div>
+    <form id="myForm" method="post" title="<%:driver.Employee_id%>"></form>
+		   <script type="text/javascript">
 
-		       
+		       function DeleteDriver() {
 
+		           var form1 = document.getElementById("myForm");
+		           form1.action = "/Home/EmployeeList?type=common&subtype=AddDriver&page=1";
+		           if (window.confirm("确认要删除司机" + form1.title + "吗?")) {
+		               form1.submit();
+		           }
+           }
+           function UpdateDriver() {
+
+               var form1 = document.getElementById("myForm");
+               form1.action = "/Home/AddDriver?id=" + form1.title;              
+               form1.submit();
+           }
+           </script>
 </asp:Content>
 
 

@@ -7,7 +7,6 @@
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     </script>
-        type="text/css" />
     <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
     <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
     <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
