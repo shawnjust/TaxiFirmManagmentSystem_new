@@ -457,6 +457,7 @@
     <Content Include="Views\FrontPage\News.aspx" />
     <Content Include="Views\FrontPage\NewsContent.aspx" />
     <Content Include="Views\FrontPage\Notification.aspx" />
+    <Content Include="Views\FrontPage\NotificationContent.aspx" />
     <Content Include="Views\Home\AcceptedComplaintSearchList.aspx" />
     <Content Include="Views\Home\AddCar.aspx" />
     <Content Include="Views\Home\AddDriver.aspx" />
