@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-<%@ Import Namespace="TaxiFirm.Models.News" %>
+<%@ Import Namespace="TaxiFirm.Models.Notice" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -23,7 +23,6 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
 <!-- Java Script
 ================================================== -->
 <script src="../../Scripts/FrontPage/jquery.min.js"></script>
@@ -41,26 +40,10 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
-<script type="text/javascript">
-    function mySubmit()
-     {
-
-        var form1 = document.getElementById("form1");
-        var name =document.getElementById("NameID");
-        form1.action = "/FrontPage/News?type=search&page=1&NameID=" + name.value;
-        form1.submit();
-
-    }
-
-</script>
-<%try
-  {
-      List<News> newses = (List<News>)ViewData["newses"];
-      MyPage page = (MyPage)ViewData["page"];
-      string type = (string)ViewData["type"];
-      string myType = (string)Session["subtype"];
-      NewsHandle newsHandler = new NewsHandle();
-    %>
+<%
+    Notice notice = (Notice)ViewData["notice"];
+    NoticeHandle handler = new NoticeHandle();
+     %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -76,14 +59,14 @@
 	<!-- Header -->
 	<header id="header">
     <%Identity current = Identity.unlegal;
-      if (Session["Identity"] != null)
-      {
-          current = (Identity)Session["Identity"];
-      }%>
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"]; 
+  }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
-				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="TF Server" height="62" /></a></h1>
+				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="Nevia Premium Template" height="62" /></a></h1>
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
@@ -103,10 +86,9 @@
 
 			<div class="clearfix"></div>
 
-				<!-- Search -->
+			<!-- Search -->
 			<nav class="top-search">
-              <%if (current == Identity.unlegal)
-                { %>
+              <%if(current==Identity.unlegal){ %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
                 	<i class="icon-cloud white"></i>注册
@@ -117,8 +99,8 @@
                    登录
                      </a>
                     <%}
-                else if (current == Identity.manager)
-                { 
+                   else if (current == Identity.manager)
+                   { 
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
@@ -129,9 +111,7 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%}
-                else if (current == Identity.custemer)
-                {%>
+               <%}else if(current==Identity.custemer) {%>
                   <a class="button color medium"   href="/FrontPage/ChangerPassword">
                 	<i class="icon-user white"></i>改密
                      </a>
@@ -163,11 +143,11 @@
 
 <ul class="menu" id="responsive">
 
-	<li><a href="/FrontPage/Index"><i class="halflings white home"></i> 主页</a></li>
+<li><a href="/FrontPage/Index"><i class="halflings white home"></i> 主页</a></li>
 
-	<li><a href="/FrontPage/News" id="current"><i class="halflings white file"></i> 新闻</a>
+	<li><a href="/FrontPage/News"><i class="halflings white file"></i> 新闻</a>
 	</li>
-	<li><a href="/FrontPage/Notification"><i class="halflings white bullhorn"></i> 通知</a>
+	<li><a href="/FrontPage/Notification" id="current"><i class="halflings white bullhorn"></i> 通知</a>
     </li>
     <li><a href="/FrontPage/Complain"><i class="halflings white hdd"></i> 评价</a>
 	</li>
@@ -180,165 +160,65 @@
 </ul>
 </nav>
 <div class="clearfix"></div>
+
 <!-- Content
 ================================================== -->
-<div id="content">
 
+<div id="content">
 
 <!-- 960 Container -->
 <div class="container floated">
 
 	<div class="sixteen floated page-title">
 
-		<h2>Taxi Firm新闻</h2>
+		<h2>通知内容 <span>/ 详细信息</span></h2>
 
-		<nav id="breadcrumbs">
+		<!-- Portfolio Navi -->
+		<div id="portfolio-navi">
 			<ul>
-				<li>你在这:</li>
-				<li><a href="/FrontPage/Index">主页</a></li>
-				<li>新闻</li>
+				<li><a class="prev" href="#"><b>←</b> 上一页</a></li>
+				<li><a class="next" href="#">下一页 <b>→</b></a></li>
 			</ul>
-		</nav>
+		</div>
+		<div class="clearfix"></div>
 
 	</div>
 
 </div>
 <!-- 960 Container / End -->
 
+<!-- Page Content -->
+<div class="page-content">
+
+<%
+    if (notice != null)
+    { %>
 
 <!-- 960 Container -->
-<div class="container floated">
-    <%
-    if (newses != null && newses.Count != 0)
-    { %>
-	<!-- Page Content -->
-	<div class="eleven floated">
-     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+<div class="container" style="margin-top: 30px;">
 
-       for (int i = 0; i < newses.Count; i++)
-       {
-           News news = newses[i];%>
-		<!-- Post -->
-		<article class="post medium">
+	<div class="twelve columns">
+		<p><%:notice.notice_content %></p>
+	</div>
 
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="#"><img src="<%:news.picture_path %>" alt="" /></a>
-			</figure>
-		</div>
-		<section class="date">
-			<span class="day"><%:newsHandler.getNewsDay(news)%></span>
-			<span class="month"><%:newsHandler.getNewsMonth(news)%></span>
-		</section>
-		<div class="medium-content">
-	    <header class="meta">
-				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
-<%:news.Title%></a></h2>
-				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id)%></a></span>
-			</header>
-
-			<p><%:newsHandler.GetPartOfContent(news.content)%></p>
-			
-			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-		<!-- Divider -->
-		<div class="line"></div>
-        <%}
-    } %>
-
-	
-
-
-		<!-- Pagination -->
-		<nav class="pagination">
-
-			<ul>
-            <%   if (page.CurrentPage > 1)
-                 {%>
-                 <li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage-1 %>">Pre</a></li>
-            <%} %>
-                <%for (int i = (page.CurrentPage - 1) > 1 ? (page.CountCurrentPage - 1) : 1; i < page.CurrentPage + 1&&i<=page.WholePage; i++)
-                  {
-                      if (page.CurrentPage == i)
-                      {%> 
-				<li><a href="/FrontPage/News?type=common&page=<%:i %>" class="current"><%:i %></a></li>
-                <%}
-                      else
-                      { %>
-                	 <li><a href="/FrontPage/News?type=common&page=<%:i %>"><%:i %></a></li>
-                <%}
-                  }%>
-				
-              <%if (page.CurrentPage < page.WholePage)
-                { %>
-				<li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage+1 %>">Next</a></li>
-                <%} %>
+	<div class="four columns">
+		<div class="project-info-container">
+				<ul class="project-info">
+				<li><strong>作者:</strong> <%:notice.author %></li>
+				<li><strong>日期:</strong> <%:handler.getNoticeMonth(notice)%> <%:handler.getNoticeDay(notice)%></li>
 			</ul>
-			<div class="clearfix"></div>
-		</nav>
-
+		</div>
 	</div>
-	<!-- Content / End -->
+    <%} %>
+</div>
+<!-- End 960 Container -->
 
 
-	<!-- Sidebar -->
-	<div class="four floated sidebar right">
-		<aside class="sidebar">
+<div class="line" style="margin: 20px 0 37px 0;"></div>
 
-			<!-- Search -->
-			<nav class="widget-search">
-				<form  method="post" id="form1">
-					<button class="search-btn-widget" id="button1" onclick="mySubmit()"></button>
-					<input class="search-field" type="text" id="NameID" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
-				</form>
-			</nav>
-			<div class="clearfix"></div>
-
-			<!-- Categories -->
-			<nav class="widget">
-				<h4>分类</h4>
-				<ul class="categories">
-					<li><a href="#">公司</a></li>
-					<li><a href="#">最近新闻</a></li>
-					<li><a href="#">客户相关</a></li>
-					<li><a href="#">司机相关</a></li>
-					<li><a href="#">其他</a></li>
-				</ul>
-			</nav>
-
-			<!-- Tags -->
-			<div class="widget">
-				<h4>标签</h4>
-				<nav class="tags">
-					<a href="#">出租车</a>
-					<a href="#">油价</a>
-					<a href="#">乱收费</a>
-					<a href="#">天然气</a>
-					<a href="#">政策改革</a>
-					<a href="#">客流量高峰</a>
-					<a href="#">租赁</a>
-					<a href="#">乘客</a>
-				</nav>
-			</div>
-			<!-- Archives -->
-			<nav class="widget">
-				<h4>时间轴</h4>
-				<ul class="categories">
-					<li><a href="#">October 2012</a></li>
-					<li><a href="#">November 2012</a></li>
-					<li><a href="#">December 2012</a></li>
-				</ul>
-			</nav>
-		</aside>
-	</div>
-	<!-- Page Content / End -->
 
 </div>
-<!-- 960 Container / End -->
+<!-- Page Content / End -->
 
 </div>
 <!-- Content / End -->
@@ -497,10 +377,4 @@
 </section>
 <!-- Style Switcher / End -->
 </body>
-<%}
-  catch {
-
-      Response.Redirect("/FrontPage/ErrorPage");
-  }%>
-
 </html>

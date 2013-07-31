@@ -205,27 +205,26 @@
 	</div>
 </div>
 
-
 <!-- 960 Container -->
 <div class="container" style="margin-top: 30px;">
 
+<%
+    if (news != null)
+    { %>
 	<div class="twelve columns">
-		<p>上周，当我乘坐旧金山的航班抵达洛杉矶机场时，一下飞机就往出租车站赶，但到了那里，等了十分钟才打上车。就在我打算上车的时候，司机和调度员却因谁该将我的手提箱放到出租车上争吵起来。见他们炒得没完没了，我只好自己动手，将手提箱放到后备箱。当出租车最终启动时，我发现里面脏兮兮的，还散发着像香烟一样的味道。</p>
-		<p>这一经历也让我再次思考一个问题，那就是出租车行业到了该彻底颠覆的时候了。硅谷的一些创业公司，如Uber、Lyft、Sidecar等，正在将这种想法付诸于行动。同另外两家打车服务一样，Uber也没有自己的车队，该公司与现有豪华车服务商联手，通过移动应用为提前预订的客户提供租车服务，而自己的角色就像“数字调度员”。 </p>
-        <p>虽然Uber定价方式与出租车公司一样，同样以时间和里程计算费用，但服务价格只是普通出租车的50%。Uber提供的另一项服务“UberX”，则可以让用户乘坐混合动力车出行，价格上与传统出租车差不多。</p>
-        <p>不过，Uber这样的创业公司仍然面临不少发展障碍，如政府的官僚作风、出租车司机和调度员的抵制，以及州和政府不同的监管制度等。最新的障碍则来自于洛杉矶，Uber从今年3月开始进军这座城市。</p>
-	</div>
+		<p><%:news.content %></p>
+    </div>
 
 	<div class="four columns">
 		<div class="project-info-container">
 				<ul class="project-info">
-				<li><strong>作者:</strong> Cheng</li>
-				<li><strong>日期:</strong> Dec 2012</li>
+				<li><strong>作者:</strong> <%:news.author %></li>
+				<li><strong>日期:</strong> <%:handler.getNewsMonth(news) %> <%:handler.getNewsDay(news) %></li>
 				<li><a href="Gallery" class="button color launch"> 查看图片</a></li>
 			</ul>
 		</div>
 	</div>
-
+    <%} %>
 </div>
 <!-- End 960 Container -->
 
@@ -395,7 +394,7 @@
 
 <!-- Style Switcher
 ================================================== -->
-<link rel="stylesheet" href="../../Content/css/FrontPage /switcher.css">
+<link rel="stylesheet" href="../../Content/css/FrontPage/switcher.css">
 <script src="../../Scripts/FrontPage/switcher.js"></script>
 
 <section id="style-switcher">
@@ -456,7 +455,5 @@
 
 </section>
 <!-- Style Switcher / End -->
-
-
 </body>
 </html>

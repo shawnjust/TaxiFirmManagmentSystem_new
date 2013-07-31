@@ -233,8 +233,13 @@
 		<div class="medium-content">
 	    <header class="meta">
 				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
+<<<<<<< HEAD
+<%:news.Title %></a></h2>
+				<span><i class="halflings user"></i>By <a href="NewsContent?NWID=<%:news.NewsId %>"><%:newsHandler.GetNewsAuthor(news.employee_id) %></a></span>
+=======
 <%:news.Title%></a></h2>
 				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id)%></a></span>
+>>>>>>> e5202034cdbe1763038809ab21d81616ec7ad092
 			</header>
 
 			<p><%:newsHandler.GetPartOfContent(news.content)%></p>
