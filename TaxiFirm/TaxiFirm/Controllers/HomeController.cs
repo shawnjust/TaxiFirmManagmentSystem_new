@@ -1027,6 +1027,16 @@ namespace TaxiFirm.Controllers
             Response.Redirect("/FrontPage/Index");
         }
         //分页转到经理页面
+        public RedirectResult DeleteDriver()
+        {
+            int employee_id = int.Parse(Request.QueryString.Get("id"));
+            DriverHandle handler = new DriverHandle();
+            if (handler.deleteDriver(employee_id))
+            {
+                return Redirect("/Home/EmployeeList?type=common&page=1");
+            }
+            return Redirect("/Home");
+        }
         public void GoManagerList(int pagecount)
         {
             MyPage page = new MyPage();
@@ -1040,20 +1050,38 @@ namespace TaxiFirm.Controllers
 
 
         [HttpPost]
-        public ActionResult SaveDriverInfo(string Driver_Name, bool Driver_Gender, DateTime Driver_Birthday, int Driver_Condition, string Driver_LicenseID, string Driver_ID, string Driver_TelePhone, string Driver_HomeAddress)
+        public RedirectResult SaveDriver(string Driver_Condition, string Driver_LicenseID,string License_Date)
         {
-            TaxiFirm.Models.DataClasses1DataContext db = new TaxiFirm.Models.DataClasses1DataContext();
-            ViewData["Driver_Name"] = Driver_Name;
-            ViewData["Driver_ID"] = Driver_ID;
-            ViewData["Driver_Birthday"] = Driver_Birthday;
-            ViewData["Driver_Gender"] = Driver_Gender;
-            ViewData["Driver_TelePhone"] = Driver_TelePhone;
-            ViewData["Driver_HomeAddress"] = Driver_HomeAddress;
-            ViewData["Driver_Condition"] = Driver_Condition;
-            ViewData["Driver_LicenseID"] = Driver_LicenseID;
-          //  db.addEmpolyee("1234", 1, Driver_Name, Driver_ID, Driver_Birthday, Driver_Gender, Driver_TelePhone, Driver_HomeAddress);
-           // db.addDriver(10, Driver_Condition, Driver_LicenseID);
-            return View();
+            try
+            {
+                int em_id = int.Parse(Request.QueryString.Get("EMID"));
+                string photo_path = "/Content/images";
+                Driver driver = new Driver();
+                DriverHandle handler = new DriverHandle();
+                if (!handler.isDriver(em_id))
+                {
+                    return Redirect("DriverInfo?EMID="+em_id);
+                }
+                driver = new DriverHandle().GetDriverByEmployeeID(em_id);
+                int health = int.Parse(Driver_Condition);
+                DateTime license_date = DateTime.Parse(License_Date);
+                context.addLicense(Driver_LicenseID, license_date, driver.birthday, photo_path);
+                context.addDriver(em_id, health, Driver_LicenseID);
+                //             context.setDriverHealth(em_id,health);
+                int result = context.setLicenseToDriver(em_id, Driver_LicenseID, license_date, driver.birthday, photo_path);
+                driver = new DriverHandle().GetDriverByEmployeeID(em_id);
+                ViewData["Driver"] = driver;
+                return Redirect("/Home/SaveDriverInfo?id="+em_id);
+            }
+            catch (System.Exception ex)
+            {
+                Console.WriteLine(ex.Message);
+            }
+            return Redirect("DriverList?type=drivers&subtype=Info&page=1");
+        }
+        public ActionResult SaveDriverInfo()
+        {
+            return View();   
         }
 
         public ActionResult EmployeeList()

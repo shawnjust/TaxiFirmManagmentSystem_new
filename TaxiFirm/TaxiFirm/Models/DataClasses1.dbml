@@ -1,5 +1,207 @@
 ﻿<?xml version="1.0" encoding="utf-8"?><Database Name="taxiserver" Class="DataClasses1DataContext" xmlns="http://schemas.microsoft.com/linqtosql/dbml/2007">
   <Connection Mode="WebSettings" ConnectionString="Data Source=10.60.36.5;Initial Catalog=taxiserver;Persist Security Info=True;User ID=sa" SettingsObjectName="System.Configuration.ConfigurationManager.ConnectionStrings" SettingsPropertyName="taxiserverConnectionString" Provider="System.Data.SqlClient" />
+  <Function Name="dbo.acceptComplaint" Method="acceptComplaint">
+    <Parameter Name="complaint_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateTaxiToHostByPlatenumber" Method="updateTaxiToHostByPlatenumber">
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="taxi_color" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="taxi_brand" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addComplaint" Method="addComplaint">
+    <Parameter Name="customer_name" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="customer_email" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="complaint_comtent" Type="System.String" DbType="Text" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addDriver" Method="addDriver">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="health" Type="System.Int32" DbType="Int" />
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addHost" Method="addHost">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="photo" Type="System.String" DbType="NVarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addInvoice" Method="addInvoice">
+    <Parameter Name="amount" Type="System.Decimal" DbType="Money" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addLicense" Method="addLicense">
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="license_time" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="photo_path" Type="System.String" DbType="NVarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addManager" Method="addManager">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addNews" Method="addNews">
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="content" Type="System.String" DbType="NText" />
+    <Parameter Name="picture_path" Type="System.String" DbType="NVarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addNotice" Method="addNotice">
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="content" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addOrder" Method="addOrder">
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="rent_begin_time" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="rent_due_return_time" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.addTaxiBelongToHost" Method="addTaxiBelongToHost">
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="taxi_color" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="taxi_brand" Type="System.String" DbType="NVarChar(20)" />
+    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.backupDatabase" Method="backupDatabase">
+    <Parameter Name="description" Type="System.String" DbType="NVarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteComplaintById" Method="deleteComplaintById">
+    <Parameter Name="complaint_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteDriverById" Method="deleteDriverById">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteEmpolyeeById" Method="deleteEmpolyeeById">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteHostById" Method="deleteHostById">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteLicenseByLicenseId" Method="deleteLicenseByLicenseId">
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteManagerById" Method="deleteManagerById">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteNewsByID" Method="deleteNewsByID">
+    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteNoticeByID" Method="deleteNoticeByID">
+    <Parameter Name="notice_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.deleteTaxi" Method="deleteTaxi">
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.registInvoiceToCustomer" Method="registInvoiceToCustomer">
+    <Parameter Name="invoice_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.returnCar" Method="returnCar">
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setDriverHealth" Method="setDriverHealth">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="health" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setHostPhoto" Method="setHostPhoto">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="photo" Type="System.String" DbType="NVarChar(200)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setLicenseToDriver" Method="setLicenseToDriver">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
+    <Parameter Name="license_time" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="photo_path" Type="System.String" DbType="NVarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setNewsPicturePathByID" Method="setNewsPicturePathByID">
+    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="picture_path" Type="System.String" DbType="NVarChar(256)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.setTaxiOwnerEmpolyeeId" Method="setTaxiOwnerEmpolyeeId">
+    <Parameter Name="plate_number" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateCustomerPassword" Method="updateCustomerPassword">
+    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateEmpolyeeById" Method="updateEmpolyeeById">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
+    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
+    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateEmpolyeePassword" Method="updateEmpolyeePassword">
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateNewsContentByID" Method="updateNewsContentByID">
+    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="news_content" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateNoticeContentByID" Method="updateNoticeContentByID">
+    <Parameter Name="notice_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="notice_content" Type="System.String" DbType="NText" />
+    <Return Type="System.Int32" />
+  </Function>
+  <Function Name="dbo.updateOrderById" Method="updateOrderById">
+    <Parameter Name="order_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
+    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
+    <Parameter Name="rent_begin_time" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="rent_due_return_tiem" Type="System.DateTime" DbType="Date" />
+    <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
+    <Return Type="System.Int32" />
+  </Function>
   <Function Name="dbo.checkCustomerLoginPassword" Method="checkCustomerLoginPassword" IsComposable="true">
     <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
@@ -886,206 +1088,10 @@
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
     <Return Type="System.Int32" />
   </Function>
-  <Function Name="dbo.acceptComplaint" Method="acceptComplaint">
-    <Parameter Name="complaint_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateTaxiToHostByPlatenumber" Method="updateTaxiToHostByPlatenumber">
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="taxi_color" Type="System.String" DbType="NVarChar(20)" />
-    <Parameter Name="taxi_brand" Type="System.String" DbType="NVarChar(20)" />
-    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addComplaint" Method="addComplaint">
-    <Parameter Name="customer_name" Type="System.String" DbType="NVarChar(20)" />
-    <Parameter Name="customer_email" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="complaint_comtent" Type="System.String" DbType="Text" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addDriver" Method="addDriver">
+  <Function Name="dbo.updateDriverById" Method="updateDriverById">
     <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
     <Parameter Name="health" Type="System.Int32" DbType="Int" />
     <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addEmpolyee" Method="addEmpolyee">
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="id_card" Type="System.String" DbType="Char(20)" />
-    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" Direction="InOut" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addHost" Method="addHost">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="photo" Type="System.String" DbType="NVarChar(200)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addInvoice" Method="addInvoice">
-    <Parameter Name="amount" Type="System.Decimal" DbType="Money" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addLicense" Method="addLicense">
-    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="license_time" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="photo_path" Type="System.String" DbType="NVarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addManager" Method="addManager">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addNews" Method="addNews">
-    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="content" Type="System.String" DbType="NText" />
-    <Parameter Name="picture_path" Type="System.String" DbType="NVarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addNotice" Method="addNotice">
-    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="content" Type="System.String" DbType="NText" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addOrder" Method="addOrder">
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="rent_begin_time" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="rent_due_return_time" Type="System.DateTime" DbType="Date" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.addTaxiBelongToHost" Method="addTaxiBelongToHost">
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="taxi_color" Type="System.String" DbType="NVarChar(20)" />
-    <Parameter Name="taxi_brand" Type="System.String" DbType="NVarChar(20)" />
-    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.backupDatabase" Method="backupDatabase">
-    <Parameter Name="description" Type="System.String" DbType="NVarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteComplaintById" Method="deleteComplaintById">
-    <Parameter Name="complaint_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteDriverById" Method="deleteDriverById">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteEmpolyeeById" Method="deleteEmpolyeeById">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteHostById" Method="deleteHostById">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteLicenseByLicenseId" Method="deleteLicenseByLicenseId">
-    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteManagerById" Method="deleteManagerById">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteNewsByID" Method="deleteNewsByID">
-    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteNoticeByID" Method="deleteNoticeByID">
-    <Parameter Name="notice_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.deleteTaxi" Method="deleteTaxi">
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.registInvoiceToCustomer" Method="registInvoiceToCustomer">
-    <Parameter Name="invoice_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.returnCar" Method="returnCar">
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setDriverHealth" Method="setDriverHealth">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="health" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setHostPhoto" Method="setHostPhoto">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="photo" Type="System.String" DbType="NVarChar(200)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setLicenseToDriver" Method="setLicenseToDriver">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="license_id" Type="System.String" DbType="VarChar(50)" />
-    <Parameter Name="license_time" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="photo_path" Type="System.String" DbType="NVarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setNewsPicturePathByID" Method="setNewsPicturePathByID">
-    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="picture_path" Type="System.String" DbType="NVarChar(256)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.setTaxiOwnerEmpolyeeId" Method="setTaxiOwnerEmpolyeeId">
-    <Parameter Name="plate_number" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="owner_empolyee_id" Type="System.Int32" DbType="Int" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateCustomerPassword" Method="updateCustomerPassword">
-    <Parameter Name="customer_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateEmpolyeeById" Method="updateEmpolyeeById">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="name" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="gender" Type="System.Boolean" DbType="Bit" />
-    <Parameter Name="telephone" Type="System.String" DbType="VarChar(20)" />
-    <Parameter Name="empolyee_address" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="firm_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="birthday" Type="System.DateTime" DbType="Date" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateEmpolyeePassword" Method="updateEmpolyeePassword">
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="password" Type="System.String" DbType="VarChar(50)" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateNewsContentByID" Method="updateNewsContentByID">
-    <Parameter Name="news_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="news_content" Type="System.String" DbType="NText" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateNoticeContentByID" Method="updateNoticeContentByID">
-    <Parameter Name="notice_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="title" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="notice_content" Type="System.String" DbType="NText" />
-    <Return Type="System.Int32" />
-  </Function>
-  <Function Name="dbo.updateOrderById" Method="updateOrderById">
-    <Parameter Name="order_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="plate_number" Type="System.String" DbType="NVarChar(50)" />
-    <Parameter Name="empolyee_id" Type="System.Int32" DbType="Int" />
-    <Parameter Name="rent_begin_time" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="rent_due_return_tiem" Type="System.DateTime" DbType="Date" />
-    <Parameter Name="rent_return_time" Type="System.DateTime" DbType="Date" />
     <Return Type="System.Int32" />
   </Function>
 </Database>

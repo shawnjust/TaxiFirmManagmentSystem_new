@@ -32,12 +32,17 @@
 
         function submitAll() {
             var form1 = window.document.getElementById("info_form1");
-          
+            var con = window.confirm("是否确认更改");   
+            if (con) {
+                form1.submit();
+            }
             form1.submit();
         }
         function SaveAll() {
-            var for,1 = window.document.getElementById("info_form1");
+            var form1 = window.document.getElementById("info_form1");
             window.alert("保存成功");
+            history.go(-1);
+ 
         }
     </script>
     <%Employee employee = (Employee)ViewData["Employee"];
@@ -51,10 +56,13 @@
                             添加司机 <small>工号管理</small>
                         </h1>
                     </div>
+                                            <%int em_id = employee.EmployeeId; %>
+                    <form name="basic_information_form" id="info_form1" action="/Home/SaveDriver?EMID=<%:em_id%>" method="post">
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form name="basic_information_form" id="info_form1" action="/Home/SaveDriverInfo" method="post">
+
+                            
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
@@ -80,7 +88,7 @@
                                         <h4>出生日期</h4>
                                 </p>
                                 <p>
-                                    <%value = employee.Birthday.ToShortDateString(); %>
+                                    <%value = employee.Birthday.ToShortDateString();%>
                                     <input name="Driver_Birthday" type="text" onClick="WdatePicker()" value="<%:value %>" disabled/>
                                 </p>
                                 <p>
@@ -101,7 +109,13 @@
                                     <h4>驾驶证编号：</h4>
                                 </label>
                                 <p>
-                                    <input name="Driver_DriverNumber" type="text" class="error" pattern="\d{15}[\d|X]|\d{12}" title="驾驶证编号为12位数字"  onblur="if (!(/\d{15}[\d|X]|\d{12}/.test(this.value)) ){alert('驾驶证编号为12位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                    <input name="Driver_LicenseID" type="text" class="error" pattern="\d{15}[\d|X]|\d{12}" title="驾驶证编号为12位数字"  onblur="if (!(/\d{15}[\d|X]|\d{12}/.test(this.value)) ){alert('驾驶证编号为12位数字\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+                                </p>
+                                <label>
+                                    <h4>驾驶证日期：</h4>
+                                </label>
+                                <p>
+                                    <input name="License_Date" type="text" onClick="WdatePicker()"/>
                                 </p>
                                 <p>
                                     <h4>身份证号：</h4>
@@ -116,7 +130,6 @@
                                     <input type="text" class="error" value="<%:value %>" disabled/>
                                 </p>
                             </fieldset>
-                            </form>
                         
                             <br/>
                             <br/>
@@ -157,7 +170,7 @@
                         <br />
                         <br />
                      <button class="btn btn-large btn-success" type="button" style="alignment-adjust:middle" onclick="SaveAll()">
-                        保存</button>
+                       保存</button>
                 </div>
             </div>
            

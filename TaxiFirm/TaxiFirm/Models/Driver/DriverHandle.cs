@@ -124,7 +124,7 @@ namespace TaxiFirm.Models.Driver
             catch
             {
 
-                driver = null;
+                
             }
             return driver;
         }
