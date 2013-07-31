@@ -7,7 +7,6 @@ using TaxiFirm.Models.Manager;
 using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
-using TaxiFirm.Models;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
@@ -183,57 +182,39 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult GetCredit(string invoiceNumber)
         {
-            try {
-                if(Session["CurrentCustomer"]!=null)
+            try
+            {
+                if (Session["CurrentCustomer"] != null)
                 {
-                Customer customer = (Customer) Session["CurrentCustomer"];
-                int Inumber = int.Parse(invoiceNumber);
-                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
-                Session["InvoiceSuccess"] = "success";
-                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
-                }
-                    else{
+                    Customer customer = (Customer)Session["CurrentCustomer"];
+                    int Inumber = int.Parse(invoiceNumber);
+                    if (new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber))
+                    {
+                        Session["InvoiceSuccess"] = "success";
+                        Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
+                    }
+                    else
+                    {
                         Session["InvoiceSuccess"] = "failed";
                     }
                 }
-                else{
-                 Session["InvoiceSuccess"] = "failed";
+                else
+                {
+                    Session["InvoiceSuccess"] = "failed";
                 }
-            
+
             }
 
-            catch {
-
-                Session["InvoiceSuccess"] = "failed";
-            
-            }
-            return RedirectToAction("Elements");
-        
-        }
-                Customer customer = (Customer) Session["CurrentCustomer"];
-                int Inumber = int.Parse(invoiceNumber);
-                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
-                Session["InvoiceSuccess"] = "success";
-                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
-                }
-                    else{
-                        Session["InvoiceSuccess"] = "failed";
-                    }
-                }
-                else{
-                 Session["InvoiceSuccess"] = "failed";
-                }
-            
-            }
-
-            catch {
+            catch
+            {
 
                 Session["InvoiceSuccess"] = "failed";
-            
+
             }
             return RedirectToAction("Elements");
-        
+
         }
+
         public ActionResult Index() 
         {
             return View();

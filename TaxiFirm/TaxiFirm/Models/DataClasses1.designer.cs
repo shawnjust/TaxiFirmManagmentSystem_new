@@ -62,278 +62,12 @@ namespace TaxiFirm.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.acceptComplaint")]
-		public int acceptComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> complaint_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		public System.Data.Linq.Table<View_taxi> View_taxi
 		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), complaint_id, empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateTaxiToHostByPlatenumber")]
-		public int updateTaxiToHostByPlatenumber([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_color, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_brand, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, taxi_color, taxi_brand, owner_empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addComplaint")]
-		public int addComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string customer_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string customer_email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Text")] string complaint_comtent)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_name, customer_email, complaint_comtent);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addDriver")]
-		public int addDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health, license_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addEmpolyee")]
-		public int addEmpolyee([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string telephone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string empolyee_address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), password, firm_id, name, id_card, birthday, gender, telephone, empolyee_address, empolyee_id);
-			empolyee_id = ((System.Nullable<int>)(result.GetParameterValue(8)));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addHost")]
-		public int addHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(200)")] string photo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, photo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addInvoice")]
-		public int addInvoice([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> amount)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), amount);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addLicense")]
-		public int addLicense([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> license_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string photo_path)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), license_id, license_time, birthday, photo_path);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addManager")]
-		public int addManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addNews")]
-		public int addNews([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string content, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string picture_path)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), title, empolyee_id, content, picture_path);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addNotice")]
-		public int addNotice([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string content)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), title, empolyee_id, content);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addOrder")]
-		public int addOrder([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_begin_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_due_return_time)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, empolyee_id, rent_begin_time, rent_due_return_time);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addTaxiBelongToHost")]
-		public int addTaxiBelongToHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_color, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_brand, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, taxi_color, taxi_brand, owner_empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.backupDatabase")]
-		public int backupDatabase([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string description)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), description);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComplaintById")]
-		public int deleteComplaintById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> complaint_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), complaint_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteDriverById")]
-		public int deleteDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteEmpolyeeById")]
-		public int deleteEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteHostById")]
-		public int deleteHostById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteLicenseByLicenseId")]
-		public int deleteLicenseByLicenseId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), license_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteManagerById")]
-		public int deleteManagerById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteNewsByID")]
-		public int deleteNewsByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteNoticeByID")]
-		public int deleteNoticeByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteTaxi")]
-		public int deleteTaxi([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.registInvoiceToCustomer")]
-		public int registInvoiceToCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoice_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoice_id, customer_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.returnCar")]
-		public int returnCar([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_return_time)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, rent_return_time);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setDriverHealth")]
-		public int setDriverHealth([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setHostPhoto")]
-		public int setHostPhoto([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(200)")] string photo)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, photo);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setLicenseToDriver")]
-		public int setLicenseToDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> license_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string photo_path)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, license_id, license_time, birthday, photo_path);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setNewsPicturePathByID")]
-		public int setNewsPicturePathByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string picture_path)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id, picture_path);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setTaxiOwnerEmpolyeeId")]
-		public int setTaxiOwnerEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, owner_empolyee_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateCustomerPassword")]
-		public int updateCustomerPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateDriverById")]
-		public int updateDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health, license_id);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateEmpolyeeById")]
-		public int updateEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string telephone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string empolyee_address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, name, gender, telephone, empolyee_address, firm_id, birthday);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateEmpolyeePassword")]
-		public int updateEmpolyeePassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, password);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateNewsContentByID")]
-		public int updateNewsContentByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string news_content)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id, title, news_content);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateNoticeContentByID")]
-		public int updateNoticeContentByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string notice_content)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id, title, notice_content);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateOrderById")]
-		public int updateOrderById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> order_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_begin_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_due_return_tiem, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_return_time)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), order_id, plate_number, empolyee_id, rent_begin_time, rent_due_return_tiem, rent_return_time);
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPassword", IsComposable=true)]
-		public System.Nullable<int> checkCustomerLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password).ReturnValue));
-			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateOrderById")]
-		public int updateOrderById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> order_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_begin_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_due_return_tiem, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_return_time)
-		{
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), order_id, plate_number, empolyee_id, rent_begin_time, rent_due_return_tiem, rent_return_time);
-			return ((int)(result.ReturnValue));
+			get
+			{
+				return this.GetTable<View_taxi>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPassword", IsComposable=true)]
@@ -472,6 +206,12 @@ namespace TaxiFirm.Models
 		public IQueryable<getAllTaxiInformationResult> getAllTaxiInformation()
 		{
 			return this.CreateMethodCallQuery<getAllTaxiInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllTaxiPlatenumber", IsComposable=true)]
+		public IQueryable<getAllTaxiPlatenumberResult> getAllTaxiPlatenumber()
+		{
+			return this.CreateMethodCallQuery<getAllTaxiPlatenumberResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
@@ -887,15 +627,595 @@ namespace TaxiFirm.Models
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
 		}
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateCustomerPasswordByEmail")]
-		public int updateCustomerPasswordByEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password);
-	}
-	
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.acceptComplaint")]
+		public int acceptComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> complaint_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), complaint_id, empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateTaxiToHostByPlatenumber")]
+		public int updateTaxiToHostByPlatenumber([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_color, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_brand, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, taxi_color, taxi_brand, owner_empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addComplaint")]
+		public int addComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string customer_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string customer_email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Text")] string complaint_comtent)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_name, customer_email, complaint_comtent);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addCustomer")]
 		public int addCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string nick_name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-	{
+		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, nick_name, password);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addDriver")]
+		public int addDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health, license_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addEmpolyee")]
+		public int addEmpolyee([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string telephone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string empolyee_address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] ref System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), password, firm_id, name, id_card, birthday, gender, telephone, empolyee_address, empolyee_id);
+			empolyee_id = ((System.Nullable<int>)(result.GetParameterValue(8)));
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addHost")]
+		public int addHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(200)")] string photo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, photo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addInvoice")]
+		public int addInvoice([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Money")] System.Nullable<decimal> amount)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), amount);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addLicense")]
+		public int addLicense([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> license_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string photo_path)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), license_id, license_time, birthday, photo_path);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addManager")]
+		public int addManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addNews")]
+		public int addNews([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string content, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string picture_path)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), title, empolyee_id, content, picture_path);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addNotice")]
+		public int addNotice([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string content)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), title, empolyee_id, content);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addOrder")]
+		public int addOrder([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_begin_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_due_return_time)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, empolyee_id, rent_begin_time, rent_due_return_time);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.addTaxiBelongToHost")]
+		public int addTaxiBelongToHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_color, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string taxi_brand, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, taxi_color, taxi_brand, owner_empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.backupDatabase")]
+		public int backupDatabase([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string description)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), description);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteComplaintById")]
+		public int deleteComplaintById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> complaint_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), complaint_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteDriverById")]
+		public int deleteDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteEmpolyeeById")]
+		public int deleteEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteHostById")]
+		public int deleteHostById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteLicenseByLicenseId")]
+		public int deleteLicenseByLicenseId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), license_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteManagerById")]
+		public int deleteManagerById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteNewsByID")]
+		public int deleteNewsByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteNoticeByID")]
+		public int deleteNoticeByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.deleteTaxi")]
+		public int deleteTaxi([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.registInvoiceToCustomer")]
+		public int registInvoiceToCustomer([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoice_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoice_id, customer_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.returnCar")]
+		public int returnCar([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_return_time)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, rent_return_time);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setDriverHealth")]
+		public int setDriverHealth([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setHostPhoto")]
+		public int setHostPhoto([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(200)")] string photo)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, photo);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setLicenseToDriver")]
+		public int setLicenseToDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> license_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string photo_path)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, license_id, license_time, birthday, photo_path);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setNewsPicturePathByID")]
+		public int setNewsPicturePathByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(256)")] string picture_path)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id, picture_path);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.setTaxiOwnerEmpolyeeId")]
+		public int setTaxiOwnerEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> owner_empolyee_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number, owner_empolyee_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateCustomerPassword")]
+		public int updateCustomerPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateCustomerPasswordByEmail")]
+		public int updateCustomerPasswordByEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateDriverById")]
+		public int updateDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, health, license_id);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateEmpolyeeById")]
+		public int updateEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string name, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Bit")] System.Nullable<bool> gender, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string telephone, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string empolyee_address, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> birthday)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, name, gender, telephone, empolyee_address, firm_id, birthday);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateEmpolyeePassword")]
+		public int updateEmpolyeePassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, password);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateNewsContentByID")]
+		public int updateNewsContentByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string news_content)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id, title, news_content);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateNoticeContentByID")]
+		public int updateNoticeContentByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string title, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NText")] string notice_content)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id, title, notice_content);
+			return ((int)(result.ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateOrderById")]
+		public int updateOrderById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> order_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plate_number, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_begin_time, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_due_return_tiem, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Date")] System.Nullable<System.DateTime> rent_return_time)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), order_id, plate_number, empolyee_id, rent_begin_time, rent_due_return_tiem, rent_return_time);
+			return ((int)(result.ReturnValue));
+		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_taxi")]
+	public partial class View_taxi
+	{
+		
+		private string _plate_number;
+		
+		private string _taxi_color;
+		
+		private string _taxi_brand;
+		
+		private System.Nullable<int> _order_id;
+		
+		private System.Nullable<System.DateTime> _rent_begin_time;
+		
+		private System.Nullable<System.DateTime> _rent_due_return_time;
+		
+		private System.Nullable<System.DateTime> _rent_return_time;
+		
+		private System.Nullable<int> _driver_empolyee_id;
+		
+		private string _driver_name;
+		
+		private string _driver_id_card;
+		
+		private string _driver_telephone;
+		
+		private string _driver_address;
+		
+		private System.Nullable<int> _host_empolyee_id;
+		
+		private string _host_name;
+		
+		private string _host_id_card;
+		
+		private string _host_telephone;
+		
+		private string _host_address;
+		
+		public View_taxi()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_color
+		{
+			get
+			{
+				return this._taxi_color;
+			}
+			set
+			{
+				if ((this._taxi_color != value))
+				{
+					this._taxi_color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_brand
+		{
+			get
+			{
+				return this._taxi_brand;
+			}
+			set
+			{
+				if ((this._taxi_brand != value))
+				{
+					this._taxi_brand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
+		public System.Nullable<int> order_id
+		{
+			get
+			{
+				return this._order_id;
+			}
+			set
+			{
+				if ((this._order_id != value))
+				{
+					this._order_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_begin_time
+		{
+			get
+			{
+				return this._rent_begin_time;
+			}
+			set
+			{
+				if ((this._rent_begin_time != value))
+				{
+					this._rent_begin_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_due_return_time
+		{
+			get
+			{
+				return this._rent_due_return_time;
+			}
+			set
+			{
+				if ((this._rent_due_return_time != value))
+				{
+					this._rent_due_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_return_time
+		{
+			get
+			{
+				return this._rent_return_time;
+			}
+			set
+			{
+				if ((this._rent_return_time != value))
+				{
+					this._rent_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
+		public System.Nullable<int> driver_empolyee_id
+		{
+			get
+			{
+				return this._driver_empolyee_id;
+			}
+			set
+			{
+				if ((this._driver_empolyee_id != value))
+				{
+					this._driver_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
+		public string driver_name
+		{
+			get
+			{
+				return this._driver_name;
+			}
+			set
+			{
+				if ((this._driver_name != value))
+				{
+					this._driver_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
+		public string driver_id_card
+		{
+			get
+			{
+				return this._driver_id_card;
+			}
+			set
+			{
+				if ((this._driver_id_card != value))
+				{
+					this._driver_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
+		public string driver_telephone
+		{
+			get
+			{
+				return this._driver_telephone;
+			}
+			set
+			{
+				if ((this._driver_telephone != value))
+				{
+					this._driver_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
+		public string driver_address
+		{
+			get
+			{
+				return this._driver_address;
+			}
+			set
+			{
+				if ((this._driver_address != value))
+				{
+					this._driver_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
+		public System.Nullable<int> host_empolyee_id
+		{
+			get
+			{
+				return this._host_empolyee_id;
+			}
+			set
+			{
+				if ((this._host_empolyee_id != value))
+				{
+					this._host_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
+		public string host_name
+		{
+			get
+			{
+				return this._host_name;
+			}
+			set
+			{
+				if ((this._host_name != value))
+				{
+					this._host_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
+		public string host_id_card
+		{
+			get
+			{
+				return this._host_id_card;
+			}
+			set
+			{
+				if ((this._host_id_card != value))
+				{
+					this._host_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
+		public string host_telephone
+		{
+			get
+			{
+				return this._host_telephone;
+			}
+			set
+			{
+				if ((this._host_telephone != value))
+				{
+					this._host_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
+		public string host_address
+		{
+			get
+			{
+				return this._host_address;
+			}
+			set
+			{
+				if ((this._host_address != value))
+				{
+					this._host_address = value;
+				}
+			}
+		}
 	}
 	
 	public partial class getAcceptedComplaintByPageResult
@@ -918,13 +1238,14 @@ namespace TaxiFirm.Models
 		private string _name;
 		
 		private System.Nullable<System.DateTime> _accept_time;
+		
 		public getAcceptedComplaintByPageResult()
-			{
-			}
-			set
+		{
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
 		public System.Nullable<long> rowNum
-			{
+		{
 			get
 			{
 				return this._rowNum;
@@ -936,9 +1257,11 @@ namespace TaxiFirm.Models
 					this._rowNum = value;
 				}
 			}
+		}
+		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_id", DbType="Int NOT NULL")]
 		public int complaint_id
-			{
+		{
 			get
 			{
 				return this._complaint_id;
@@ -3880,6 +4203,32 @@ namespace TaxiFirm.Models
 				if ((this._host_address != value))
 				{
 					this._host_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getAllTaxiPlatenumberResult
+	{
+		
+		private string _plate_number;
+		
+		public getAllTaxiPlatenumberResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
 				}
 			}
 		}

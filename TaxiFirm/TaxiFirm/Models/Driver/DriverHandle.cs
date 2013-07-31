@@ -126,7 +126,6 @@ namespace TaxiFirm.Models.Driver
 
                 
             }
-            }
             return driver;
         }
         public int getEmployeeIDByIDCard(string ID_Number)

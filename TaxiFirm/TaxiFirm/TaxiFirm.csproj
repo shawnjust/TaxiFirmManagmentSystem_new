@@ -72,38 +72,96 @@
     <Compile Include="Global.asax.cs">
       <DependentUpon>Global.asax</DependentUpon>
     </Compile>
-    <Compile Include="Models\AccountModels.cs" />
-    <Compile Include="Models\Backup\Backup.cs" />
-    <Compile Include="Models\Backup\BackupHandle.cs" />
-    <Compile Include="Models\Complain.cs" />
-    <Compile Include="Models\Customer\Customer.cs" />
-    <Compile Include="Models\Customer\CustomerHandle.cs" />
+    <Compile Include="Models\AccountModels.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Backup\Backup.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Backup\BackupHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Complain.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Customer\Customer.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Customer\CustomerHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
     <Compile Include="Models\DataClasses1.designer.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
       <DependentUpon>DataClasses1.dbml</DependentUpon>
     </Compile>
-    <Compile Include="Models\Driver\Driver.cs" />
-    <Compile Include="Models\Driver\DriverHandle.cs" />
-    <Compile Include="Models\Employee\Employee.cs" />
-    <Compile Include="Models\Employee\EmployeeHandle.cs" />
-    <Compile Include="Models\Firm\Firm.cs" />
-    <Compile Include="Models\Firm\FirmHandle.cs" />
-    <Compile Include="Models\HostModels.cs" />
-    <Compile Include="Models\IdentityHandle.cs" />
-    <Compile Include="Models\Invoice\Invoice.cs" />
-    <Compile Include="Models\License\License.cs" />
-    <Compile Include="Models\License\LicenseHandle.cs" />
-    <Compile Include="Models\NewsAndNotice.cs" />
-    <Compile Include="Models\News\News.cs" />
-    <Compile Include="Models\News\NewsHandle.cs" />
-    <Compile Include="Models\Notice\Notice.cs" />
-    <Compile Include="Models\Notice\NoticeHandle.cs" />
-    <Compile Include="Models\RegexValidation.cs" />
-    <Compile Include="Models\Invoice\InvoiceHandle.cs" />
-    <Compile Include="Models\Manager\Manager.cs" />
-    <Compile Include="Models\Manager\ManagerHandle.cs" />
-    <Compile Include="Models\MyPage.cs" />
+    <Compile Include="Models\Driver\Driver.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Driver\DriverHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Employee\Employee.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Employee\EmployeeHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Firm\Firm.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Firm\FirmHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\HostModels.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\IdentityHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Invoice\Invoice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Invoice\InvoiceHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\License\License.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\License\LicenseHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Manager\Manager.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Manager\ManagerHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\MyPage.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\NewsAndNotice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\News\News.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\News\NewsHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Notice\Notice.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\Notice\NoticeHandle.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\PaginatedList.cs" />
+    <Compile Include="Models\RegexValidation.cs">
+      <SubType>Code</SubType>
+    </Compile>
+    <Compile Include="Models\TaxiRepository.cs" />
+    <Compile Include="Models\Taxi\Taxi.cs" />
+    <Compile Include="Models\Taxi\TaxiHandle.cs" />
     <Compile Include="Models\Web.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>
@@ -493,11 +551,17 @@
     <None Include="Content\css\images\social\Descr.WD3" />
     <None Include="Content\css\images\social\Thumbs.db" />
     <None Include="Content\picture\drivers\Thumbs.db" />
+    <None Include="Models\Customer\CustomerHandle.cs.orig" />
     <None Include="Models\DataClasses1.dbml">
       <Generator>MSLinqToSQLGenerator</Generator>
       <LastGenOutput>DataClasses1.designer.cs</LastGenOutput>
       <SubType>Designer</SubType>
     </None>
+    <None Include="Models\DataClasses1.dbml.orig" />
+    <None Include="Models\DataClasses1.designer.cs.orig" />
+    <None Include="Models\DataClasses1.designer.cs.orig.orig" />
+    <None Include="Models\Driver\DriverHandle.cs.orig" />
+    <None Include="Models\Invoice\InvoiceHandle.cs.orig" />
     <None Include="Scripts\BackControl\My97DatePicker\skin\whyGreen\Thumbs.db" />
     <None Include="Scripts\BackControl\My97DatePicker\WdatePicker.js.bak" />
     <None Include="Views\fonts\Descr.WD3" />
