@@ -1596,7 +1596,7 @@ namespace TaxiFirm.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-   /*     public ActionResult AddCar(View_taxi Taxi)
+       public ActionResult AddCar(View_taxi Taxi)
         {
             if (ModelState.IsValid)
             {
@@ -1618,7 +1618,7 @@ namespace TaxiFirm.Controllers
             }
             return View(Taxi);
         }
-   */
+ 
         public ActionResult RentOutTaxi(string id)
         {
             if (Session["Identity"] == null) { return RedirectToAction("login"); }

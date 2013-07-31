@@ -168,7 +168,7 @@ a:hover
               <div class="row-fluid">
                     <div class="span6">
                         <div class="page-header">
-                          <h1>管理员列表</h1>
+                          <h1>车辆列表</h1>
                             <h1>&nbsp;</h1>
                       </div>
               </div>
@@ -237,7 +237,7 @@ a:hover
                             <%:(int)taxi.OwenerID%>
                             <%}%></td>
                             
-                            <td  style="color:#900" class="pointer"><a href="/Home/TaxiInfo?id=<%:taxi.PlateNumber%>">信息管理</a></td>
+                            <td  style="color:#900" class="pointer"><a href="/Home/CarInfoDisplay?id=<%:taxi.PlateNumber%>">信息管理</a></td>
                         </tr>
                         <%}
                       
