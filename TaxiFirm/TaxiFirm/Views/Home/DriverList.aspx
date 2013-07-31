@@ -130,11 +130,11 @@
 
 
                     if ("common" == type) {
-                        form1.action = "/Home/EmployeeList?type=common&page=" + (CurrentPage + 1);
+                        form1.action = "/Home/DriverList?type=common&page=" + (CurrentPage + 1);
                     } else if ("search" == type) {
 
                         var name = document.getElementById("name_id").value;
-                        form1.action = "/Home/EmployeeList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
+                        form1.action = "/Home/DriverList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
                     }
                     form1.submit();
                 }
