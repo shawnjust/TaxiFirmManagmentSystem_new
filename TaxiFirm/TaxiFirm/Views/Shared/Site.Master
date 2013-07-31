@@ -121,4 +121,219 @@
   </tr>
 </table>
 </body>
+
+<%
+        if (Session["DeleteEmployeeSuccess"] != null)
+        {
+            string success = (string)Session["DeleteEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("删除成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("删除失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("DeleteEmployeeSuccess");
+        }
+        
+         %>
+<%
+        if (Session["AddEmployeeSuccess"] != null)
+        {
+            int newID = (int)Session["newID"];
+            string success = (string)Session["AddEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("添加成功，新工号为 <%:newID%>");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("添加失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddEmployeeSuccess");
+        }
+        
+         %>
+         <%
+        if (Session["UpdateEmployeeSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateEmployeeSuccess");
+        }
+        
+         %>
+
+            <%
+        if (Session["UpdateSelfInfoSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateSelfInfoSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateSelfInfoSuccess");
+        }
+        
+         %>
+
+
+         <%
+        if (Session["DeleteManagerSuccess"] != null)
+        {
+            string success = (string)Session["DeleteManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限成功回收");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限回收失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("DeleteManagerSuccess");
+        }
+        
+         %>
+
+
+
+             <%
+        if (Session["AddManagerSuccess"] != null)
+        {
+            string success = (string)Session["AddManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddManagerSuccess");
+        }
+        
+         %>
+   
 </html>

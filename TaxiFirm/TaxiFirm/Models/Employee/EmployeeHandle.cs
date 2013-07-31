@@ -13,6 +13,64 @@ namespace TaxiFirm.Models.Employee
 
         public DataClasses1DataContext data = new DataClasses1DataContext();
 
+        public bool DeleteEmployByID(int employeeID)
+        {
+            try
+            {
+                data.deleteEmpolyeeById(employeeID);
+                return true;
+            }
+            catch
+            {
+                return false;
+            
+            }
+        
+        }
+        //添加工号
+        public int? AddEmployee(string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        {
+            int? EmployeeID = -1;
+          
+            try
+            {
+
+                string password = Employee_IDCard.Substring(Employee_IDCard.Length - 7,6);
+                int? firmID = int.Parse(FirmID);
+                DateTime Birthday = Convert.ToDateTime(Employee_Birthday);
+                bool? Gender  = bool.Parse(gender);
+
+                data.addEmpolyee(password,firmID,Employee_Name,Employee_IDCard, Birthday, Gender, Employee_TelePhone, Employee_HomeAddress,ref EmployeeID);
+
+                return EmployeeID;
+            }
+            catch {
+                return -1;
+            }
+        }
+
+        //修改信息
+        public bool UpdateEmployee(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        {
+           
+
+            try
+            {
+
+                int? Employeeid = int.Parse(Employee_ID);
+                int? firmID = int.Parse(FirmID);
+                DateTime? Birthday = Convert.ToDateTime(Employee_Birthday);
+                bool? Gender = bool.Parse(gender);
+                data.updateEmpolyeeById(Employeeid,Employee_Name,Gender,Employee_TelePhone,Employee_HomeAddress,firmID,Birthday);
+
+                return true;
+             
+            }
+            catch
+            {
+                return false;
+            }
+        }
 
         //通过id得到工号
         public Employee getEmployeeById(int id)

@@ -27,7 +27,7 @@
                 var con = window.confirm("是否保存更改");
                 if (con) {
                     form1.submit();
-                    window.alert("保存成功");
+                   
                 }
                 else {
                     form1.action = "/Home/ManagerSelfInfo";
@@ -141,7 +141,7 @@
                                     <h4>身份证号：</h4>
                                 </p>
                                 <p>
-                                  <input name="Manager_IDCard" type="text" value="<%:manager.IdCard %>" />
+                                  <input name="Manager_IDCard"  readonly type="text" value="<%:manager.IdCard %>" />
                                 </p>
                             </fieldset>
                          

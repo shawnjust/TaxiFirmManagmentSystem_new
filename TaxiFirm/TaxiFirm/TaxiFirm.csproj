@@ -423,6 +423,7 @@
     <Content Include="Views\Home\ManagerInfo.aspx" />
     <Content Include="Views\Home\ManagerList.aspx" />
     <Content Include="Views\Home\ManagerSelfInfo.aspx" />
+    <Content Include="Views\Home\ModifyEmployee.aspx" />
     <Content Include="Views\Home\ModifyManager.aspx" />
     <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />

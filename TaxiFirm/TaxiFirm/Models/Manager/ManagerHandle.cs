@@ -18,6 +18,41 @@ namespace TaxiFirm.Models.Manager
             return col.name;
 
         }
+
+        //添加经理
+        public bool AddManager(int id)
+        {
+
+            try {
+                data.addManager(id);
+                return true;
+            }
+            catch{
+                return false;
+                }
+        }
+
+        //判断是否为经理
+        public bool IsManager(int id)
+        {
+            return data.isManager(id) == 0 ? false : true;
+        }
+
+        //删除经理
+
+        public bool DeleteManagerByID(int ID)
+        {
+            try
+            {
+                data.deleteManagerById(ID);
+                return true;
+            }
+            catch 
+            {
+                return false;
+
+            }
+        }
         //分页得到搜索的经理页面
         public List<Manager> GetManagerByNameByPage(MyPage page,string name)
         {
