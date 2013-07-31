@@ -52,12 +52,15 @@
                             int this_id = Convert.ToInt32(Request.QueryString["news_id"]);
                             getNewsByIDResult this_record = model.getNewsById(this_id).First();
                             //判断页数
-                            
+                            string path = this_record.picture_path;
                           
                 %>
                         <form>
                         <fieldset>
-                            <legend>基本信息</legend>
+                            <legend>基本信息<small><%
+                                                   if (Request.QueryString["hint_msg"] != null)
+                                                       Response.Write("删除失败！"+Request.QueryString["hint_msg"]);
+                                                   %></small></legend>
                             <label>
                                 标题：<%=this_record.title %></label>
                                 <label>发布时间:<%=this_record.publish_time %></label>
@@ -67,7 +70,8 @@
                         <form>
                         <fieldset>
                             <legend>内容</legend>
-                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%=this_record.news_content%></font></p>	
+                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;
+                        <%=this_record.news_content%></font></p>	
                         </fieldset>
                         </form>
                     </div>
@@ -75,8 +79,7 @@
                         <ul class="nav nav-list">
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">新闻展示</a> </li>
-                            <li><a id="modal-614546" href="" data-toggle="modal">
-                               删除</a>
+                            <li><%Response.Write("<a href=\"../Home/deleteNews?news_id="+Request.QueryString["news_id"]+"\">删除</a>"); %>
                                 <div id="modal-container-614546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-header">
@@ -103,11 +106,16 @@
                             <li><a href="#">修改</a> </li>
                           
                             <li class="nav-header">图片信息 </li>
-                            <li><a href="#">图片</a></li>
+                            <li><a href="#" >图片</a></li>
+                            
                             <li class="divider"></li>
                             <li>   <p style="TEXT-ALIGN: center" align="center">
-  <img style="BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px;width:200px; height:100px;" id="{AEA937E9-2595-4B9A-B701-A4E75A28B282}" title=""  border="0" hspace="0" align="center"  src="../../Content/picture/FrontPage/blog-02a-large.jpg"/></p></li>
+                            <% 
+  Response.Write("<img style=\"BORDER-RIGHT-WIDTH: 0px; BORDER-TOP-WIDTH: 0px; BORDER-BOTTOM-WIDTH: 0px; BORDER-LEFT-WIDTH: 0px;width:200px; height:100px;\"   border=\"0\" hspace=\"0\" align=\"center\"  src=\""+this_record.picture_path+"\"/></p>");
+                       %>
+                       </li>
                         </ul>
+                        
                     </div>
                 </div>
             </div>

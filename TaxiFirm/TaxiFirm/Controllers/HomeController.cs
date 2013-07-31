@@ -12,16 +12,21 @@ using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
 using TaxiFirm.Models.Taxi;
+
 namespace TaxiFirm.Controllers
 {
 
     [HandleError]
+    
+   
     public class HomeController : Controller
     {
 
         DataClasses1DataContext context = new DataClasses1DataContext();
         TaxiRepository taxiRepository = new TaxiRepository();
         
+
+
         public ActionResult BackHandle()
         {
 
@@ -171,6 +176,128 @@ namespace TaxiFirm.Controllers
 
 
 
+        }
+
+
+       
+        public ActionResult AddNotice()
+        {
+            return View();
+        }
+        //存一个新闻
+        public void SaveNewNews()
+        {
+            string msg = "发送失败，不能为空或输入html代码！";
+            try { 
+                
+                string title = Request.Form["title_str"];
+                string content=Request.Form["content_str"];
+                Manager manager = (Manager)Session["CurrentManager"];
+                int id = manager.EmployId;
+                msg = "图片上传不能为空";
+                HttpPostedFileBase postFile = Request.Files.Get(0);
+                msg = "上传图片的类型必须为jpg或png";
+                string type = postFile.ContentType;
+                string type1 = "image/jpeg";;
+                string type2 = "image/png";
+                if(!type.Equals(type1)&&!type.Equals(type2))
+                {
+                    throw new Exception();
+                }
+                msg = "上传图片失败！";
+                string newFilePath = Server.MapPath("~/Content/NewsIMG/");
+               // string newFilePath = @"C:/pictures/NewsIMG/";
+                string path =newFilePath+Path.GetFileName(postFile.FileName);
+                postFile.SaveAs(path);
+                msg = "数据库存储出问题！";
+                path = "../../Content/NewsIMG/"+ Path.GetFileName(postFile.FileName);
+                NewsAndNotice model = new NewsAndNotice(true);
+                model.sendNewNews(title, id, content, path);
+                msg = "上传一则新闻！";
+                Response.Redirect("../Home/AddNews?hint_message=\"发送成功！" + msg + "\"");
+                return;
+                    
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/AddNews?hint_message=\"发送失败！"+msg+"\"");
+                return;
+            }
+        }
+        public void SaveNewNotice()
+        { //为处理的数据
+            try {
+              string title = Request.Form["title_str"];
+            string content = Request.Form["content_str"];
+            Manager manager = (Manager)Session["CurrentManager"];
+           
+            int id = manager.EmployId;
+          //处理数据
+            title = HttpUtility.HtmlEncode(title);
+            content = HttpUtility.HtmlEncode(content);
+          //发送通告，并检查返回值
+            //测试发送错误
+            
+                NewsAndNotice model = new NewsAndNotice(false);
+                model.sendNewNotice(title, id, content);
+            }
+            catch (Exception ex)
+            { 
+                Response.Redirect("../Home/AddNotice?hint_message=\"发送失败！请勿输入html代码或为空\"");
+                return;
+            }
+            Response.Redirect("../Home/AddNotice?hint_message=\"发送成功！\"");
+            
+        }
+       
+        //}
+       
+        public void deleteNews()
+        {
+            string msg="该条新闻不存在！";
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            try { 
+                
+                NewsAndNotice model = new NewsAndNotice(true);
+                IQueryable<getNewsByIDResult> result = model.getNewsById(news_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+                string path = result.First().picture_path;
+                path = path.Substring(3,path.Length-3);
+                msg = "新闻删除过程中冲突！";
+                model.deleteNews(news_id);
+                msg = "删除新闻图片失败！";
+                path = Server.MapPath(path);
+                msg = "新闻删除成功";
+                Response.Redirect("../Home/Newslist");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?news_id="+news_id+"&hint_msg="+msg);
+                return;
+            }
+        }
+        public void deleteNotice()
+        {
+            string msg = "该通告不存在！";
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try{
+                NewsAndNotice model = new NewsAndNotice(false);
+                IQueryable<getNoticeByIDResult> result = model.getNoticeById(notice_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+
+                msg = "删除通告过程失败";
+                model.deleteNotice(notice_id);
+                Response.Redirect("../Home/InformationList");
+                return;
+            }
+            catch(Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?notice_id="+notice_id+"&hint_msg="+msg);
+                return;
+            }
         }
         public ActionResult Index()
         {

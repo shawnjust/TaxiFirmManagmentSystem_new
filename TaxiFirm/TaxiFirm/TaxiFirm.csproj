@@ -353,6 +353,7 @@
     <Content Include="Scripts\BackControl\bootstrap.js" />
     <Content Include="Scripts\BackControl\bootstrap.min.js" />
     <Content Include="Scripts\BackControl\date.js" />
+    <Content Include="Scripts\BackControl\jquery.form.js" />
     <Content Include="Scripts\BackControl\jquery.js" />
     <Content Include="Scripts\BackControl\My97DatePicker\calendar.js" />
     <Content Include="Scripts\BackControl\My97DatePicker\lang\en.js" />
@@ -386,6 +387,7 @@
     <Content Include="Scripts\FrontPage\jquery.selectnav.js" />
     <Content Include="Scripts\FrontPage\jquery.twitter.js" />
     <Content Include="Scripts\FrontPage\switcher.js" />
+    <Content Include="Scripts\zxxFile.js" />
     <Content Include="Views\fonts\fontawesome-webfont.svg" />
     <Content Include="Views\FrontPage\About.aspx" />
     <Content Include="Views\FrontPage\ChangerPassword.aspx" />
@@ -410,6 +412,9 @@
     <Content Include="Views\Home\CarInfoDisplay.aspx" />
     <Content Include="Views\Home\ChangePassword.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
+    <Content Include="Views\Home\AddNotice.aspx" />
+    <Content Include="Views\Home\ChangeNews.aspx" />
+    <Content Include="Views\Home\ChangeNotice.aspx" />
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DeleteTaxi.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
@@ -480,6 +485,8 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="App_Data\" />
+    <Folder Include="Content\NewsImg\" />
+    <Folder Include="Content\picture\App_LocalResources\" />
   </ItemGroup>
   <ItemGroup>
     <None Include="Content\css\fonts\Descr.WD3" />
