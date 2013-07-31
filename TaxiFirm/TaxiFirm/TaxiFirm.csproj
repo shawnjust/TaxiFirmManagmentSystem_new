@@ -491,6 +491,7 @@
     <Content Include="Views\Home\HostTransaction.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
+    <Content Include="Views\Home\Login.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />
     <Content Include="Views\Home\ManagerList.aspx" />
     <Content Include="Views\Home\ManagerSelfInfo.aspx" />
