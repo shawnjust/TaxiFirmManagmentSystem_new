@@ -57,7 +57,10 @@
                 %>
                         <form>
                         <fieldset>
-                            <legend>基本信息</legend>
+                            <legend>基本信息<small><%
+                                                   if (Request.QueryString["hint_msg"] != null)
+                                                       Response.Write("删除失败！"+Request.QueryString["hint_msg"]);
+                                                   %></small></legend>
                             <label>
                                 标题：<%=this_record.title %></label>
                                 <label>发布时间:<%=this_record.publish_time %></label>
@@ -76,8 +79,7 @@
                         <ul class="nav nav-list">
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">新闻展示</a> </li>
-                            <li><a id="modal-614546" href="" data-toggle="modal">
-                               删除</a>
+                            <li><%Response.Write("<a href=\"../Home/deleteNews?news_id="+Request.QueryString["news_id"]+"\">删除</a>"); %>
                                 <div id="modal-container-614546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-header">

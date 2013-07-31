@@ -79,6 +79,16 @@ namespace TaxiFirm.Models
             db.addNews(title, id, content, picPath);
             
         }
+        //删除新闻
+        public void deleteNews(int id)
+        {
+            db.deleteNewsByID(id);
+        }
+        //删除通告
+        public void deleteNotice(int id)
+        {
+            db.deleteNoticeByID(id);
+        }
 
 
     }

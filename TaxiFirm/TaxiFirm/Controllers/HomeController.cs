@@ -119,10 +119,10 @@ namespace TaxiFirm.Controllers
                 string path =newFilePath+Path.GetFileName(postFile.FileName);
                 postFile.SaveAs(path);
                 msg = "数据库存储出问题！";
-                path = "../../Content/NewsIMG/" + Path.GetFileName(postFile.FileName);
+                path = "../../Content/NewsIMG/"+ Path.GetFileName(postFile.FileName);
                 NewsAndNotice model = new NewsAndNotice(true);
                 model.sendNewNews(title, id, content, path);
-                msg = "上传一则新新闻！";
+                msg = "上传一则新闻！";
                 Response.Redirect("../Home/AddNews?hint_message=\"发送成功！" + msg + "\"");
                 return;
                     
@@ -158,39 +158,56 @@ namespace TaxiFirm.Controllers
             Response.Redirect("../Home/AddNotice?hint_message=\"发送成功！\"");
             
         }
-        //**************处理新闻图片上传***********
-        //[HttpPost]
-        //public JsonResult Upload(HttpPostedFileBase upImg) {
-        //    string fileName = System.IO.Path.GetFileName(upImg.FileName);
-        //    //文件夹的地址
-        //    string sourceFolder = Server.MapPath("~/~/Content/NewsImg/"+news_id);
-            
-        //    //返回上传是否成功的信息
-        //    string pic="";
-        //    string error="";
-        //    //处理图片文件夹是否已经存在
-            
-        //    if(System.IO.Directory.Exists(sourceFolder))
-        //    {
-        //        System.IO.Directory.Delete(sourceFolder,true);
-        //    }
-        //    else{
-        //        System.IO.Directory.CreateDirectory(sourceFolder);
-        //    }
-        //    string filePhysicalPath = Server.MapPath(sourceFolder+"/"+fileName);
-        //    try{
-        //        upImg.SaveAs(filePhysicalPath);
-        //        pic = "NewsImg/" + news_id + "/" + fileName;
-        //    }catch(Exception e){
-        //        error = e.Message;
-        //    };
-        //    return Json(new {
-        //        pic = pic,
-        //        error = error
-        //    });
-
+       
         //}
-        
+       
+        public void deleteNews()
+        {
+            string msg="该条新闻不存在！";
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            try { 
+                
+                NewsAndNotice model = new NewsAndNotice(true);
+                IQueryable<getNewsByIDResult> result = model.getNewsById(news_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+                string path = result.First().picture_path;
+                path = path.Substring(3,path.Length-3);
+                msg = "新闻删除过程中冲突！";
+                model.deleteNews(news_id);
+                msg = "删除新闻图片失败！";
+                path = Server.MapPath(path);
+                msg = "新闻删除成功";
+                Response.Redirect("../Home/Newslist");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?news_id="+news_id+"&hint_msg="+msg);
+                return;
+            }
+        }
+        public void deleteNotice()
+        {
+            string msg = "该通告不存在！";
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try{
+                NewsAndNotice model = new NewsAndNotice(false);
+                IQueryable<getNoticeByIDResult> result = model.getNoticeById(notice_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+
+                msg = "删除通告过程失败";
+                model.deleteNotice(notice_id);
+                Response.Redirect("../Home/InformationList");
+                return;
+            }
+            catch(Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?notice_id="+notice_id+"&hint_msg="+msg);
+                return;
+            }
+        }
         public ActionResult Index()
         {
             return View();
