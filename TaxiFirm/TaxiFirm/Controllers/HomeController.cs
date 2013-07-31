@@ -12,6 +12,7 @@ using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
 using TaxiFirm.Models.Taxi;
+using System.IO;
 
 namespace TaxiFirm.Controllers
 {
@@ -1445,7 +1446,7 @@ namespace TaxiFirm.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-        public ActionResult AddCar(View_taxi Taxi)
+   /*     public ActionResult AddCar(View_taxi Taxi)
         {
             if (ModelState.IsValid)
             {
@@ -1467,7 +1468,7 @@ namespace TaxiFirm.Controllers
             }
             return View(Taxi);
         }
-
+   */
         public ActionResult RentOutTaxi(string id)
         {
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
