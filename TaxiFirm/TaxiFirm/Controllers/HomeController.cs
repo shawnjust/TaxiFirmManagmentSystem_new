@@ -11,6 +11,7 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using TaxiFirm.Models.Taxi;
 namespace TaxiFirm.Controllers
 {
 
@@ -19,6 +20,7 @@ namespace TaxiFirm.Controllers
     {
 
         DataClasses1DataContext context = new DataClasses1DataContext();
+        TaxiRepository taxiRepository = new TaxiRepository();
         
         public ActionResult BackHandle()
         {
@@ -116,7 +118,12 @@ namespace TaxiFirm.Controllers
         
         }
     
+        //登录页面
+        public ActionResult Login()
+        {
+            return View();
 
+        }
 
         [HttpPost]
         public ActionResult LoginHandle(string username, string psword)
@@ -243,6 +250,41 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult TaxiList()
         {
+
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+              
+
+                    MyPage page = new MyPage();
+
+
+                    page.CurrentPage = page1;
+
+                    List<Taxi> Taxis = new TaxiHandle().GetTaxiByPlateNumberByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["Taxis"] = Taxis;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+
+
+            else
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                MyPage page = new MyPage();
+                page.CurrentPage = page1;
+                List<Taxi> taxis = new TaxiHandle().GetTaxiByPage(page);
+                ViewData["type"] = "common";
+                ViewData["taxis"] = taxis;
+                ViewData["page"] = page;
+            }
             return View();
         }
         public ActionResult NewsList()
@@ -325,18 +367,7 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
-        public ActionResult AddCar()
-        {
-            return View();
-        }
-        public ActionResult CarDealing()
-        {
-            return View();
-        }
-        public ActionResult CarInfoDisplay()
-        {
-            return View();
-        }
+       
         public ActionResult DriverList()
         {
             int page1 = int.Parse(Request.QueryString.Get("page"));
@@ -546,10 +577,7 @@ namespace TaxiFirm.Controllers
             }
         }
 
-        public ActionResult EditTaxiInfoByHost(int id)
-        {
-            return null;
-        }
+        
 
         public ActionResult EditHost(int id)
         {
@@ -1194,6 +1222,232 @@ namespace TaxiFirm.Controllers
                     return 0;
                 }
             }
+        }
+/*
+        public ActionResult TaxiList(int? page)
+        {
+            //TaxiRepository taxiRepository = new TaxiRepository();
+            const int pageSize = 10;
+
+            var Taxis = taxiRepository.FindAllTaxis();
+
+            var paginatedTaxis = new PaginatedList<getAllTaxiInformationResult>(Taxis, page ?? 0, pageSize);
+
+            if (Taxis == null)
+                return View("Error");
+            else
+                return View(paginatedTaxis);
+        }
+        */
+        public ActionResult CarInfoDisplay(string id)
+        {
+            //TaxiRepository taxiRepository = new TaxiRepository();
+
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+        public ActionResult EditCarInfo(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditCarInfo(string id, FormCollection formValues)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            // try
+            //{
+            Taxi.plate_number = Request.Form["plate_number"];
+            Taxi.taxi_color = Request.Form["taxi_color"];
+            Taxi.taxi_brand = Request.Form["taxi_brand"];
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            taxiRepository.UpdateTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+            //}
+
+        }
+
+        public ActionResult AddCar()
+        {
+            View_taxi Taxi = new View_taxi();
+
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AddCar(View_taxi Taxi)
+        {
+            if (ModelState.IsValid)
+            {
+                // try
+                //{
+                Taxi.plate_number = Request.Form["plate_number"];
+                Taxi.taxi_color = Request.Form["taxi_color"];
+                Taxi.taxi_brand = Request.Form["taxi_brand"];
+                Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+                taxiRepository.AddTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+
+                return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+                // }
+                // catch
+                // {
+                //ModelState.AddRuleViolations(dinner.GetRuleViolations());
+                // }
+            }
+            return View(Taxi);
+        }
+
+        public ActionResult RentOutTaxi(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult RentOutTaxi(string id, FormCollection formValues)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = int.Parse(Request.Form["order_id"]);
+            Taxi.driver_empolyee_id = int.Parse(Request.Form["driver_employee_id"]);
+            Taxi.rent_begin_time = DateTime.Parse(Request.Form["rent_begin_time"]);
+            Taxi.rent_due_return_time = DateTime.Parse(Request.Form["rent_due_return_time"]);
+
+            //UpdateModel(Taxi);
+
+
+            taxiRepository.RentOutTaxi(Taxi.plate_number, Taxi.driver_empolyee_id, Taxi.rent_begin_time, Taxi.rent_due_return_time);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+        }
+
+        public ActionResult ReturnCar(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = null;
+            Taxi.rent_begin_time = null;
+            Taxi.rent_due_return_time = null;
+            Taxi.rent_return_time = DateTime.Now.AddDays(7);
+
+            taxiRepository.ReturnCar(id, Taxi.rent_return_time);
+
+            return View(Taxi);
+        }
+
+        public ActionResult CarDealing(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CarDealing(string id, string confirmButton)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+
+        }
+
+        public ActionResult DeleteTaxi(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DeleteTaxi(string id, string confirmButton)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            taxiRepository.DeleteTaxi(Taxi.plate_number);
+            return View("TaxiDeleted");
         }
 
     }

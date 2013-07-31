@@ -32,7 +32,7 @@ namespace TaxiFirm.Models.Invoice
                 page.CountPerPage = 10;
                 page.WholePage = (int)data.getCustomerInvoicePageCount(page.CountPerPage, CustomerId);
                 var table = data.getCustomerInvoiceByPage(page.CurrentPage, page.CountPerPage, CustomerId);
-                if (table.ToArray<getCustomerInvoiceByPageResult>().Length <= 0) return null;
+              
                 List<Invoice> invoices = new List<Invoice>();
 
 
