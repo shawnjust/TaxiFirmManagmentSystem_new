@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Import Namespace="TaxiFirm.Models.News" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -22,7 +23,6 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
 <!-- Java Script
 ================================================== -->
 <script src="../../Scripts/FrontPage/jquery.min.js"></script>
@@ -40,6 +40,10 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%
+    News news = (News)ViewData["news"];
+    NewsHandle handler = new NewsHandle();
+     %>
 <body>
 
 <!-- Wrapper / Start -->
