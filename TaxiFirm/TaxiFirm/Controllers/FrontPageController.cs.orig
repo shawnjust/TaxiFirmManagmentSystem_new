@@ -10,13 +10,14 @@ using TaxiFirm.Models.Customer;
 using TaxiFirm.Models.News;
 using TaxiFirm.Models;
 <<<<<<< HEAD
+=======
 using TaxiFirm.Models.Notice;
 using TaxiFirm.Models.Invoice;
-=======
->>>>>>> e5202034cdbe1763038809ab21d81616ec7ad092
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using TaxiFirm.Models.Notice;
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -236,10 +237,15 @@ namespace TaxiFirm.Controllers
         {
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
+<<<<<<< HEAD
+            if (type!=null)
+            {
+=======
             if (type == null)
             {
                 type = "common";
             }
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
                 if (type.Equals("search"))   //搜索类型
                 {
                     int page1 = int.Parse(Request.QueryString.Get("page"));
@@ -272,7 +278,11 @@ namespace TaxiFirm.Controllers
                         ViewData["NameID"] = NameID;
                     }
                 }
+<<<<<<< HEAD
+            }
+=======
             
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
             else
             {
                 int page1;
@@ -296,6 +306,9 @@ namespace TaxiFirm.Controllers
                 }
 
             }
+<<<<<<< HEAD
+            return View();
+=======
             try
             {
                 return View();
@@ -303,46 +316,49 @@ namespace TaxiFirm.Controllers
             catch {
                 return RedirectToAction("ErrorPage");
             }
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
         }
         public ActionResult Notification()
         {
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            if (type != null)
+            if (type == null)
             {
-                if (type.Equals("search"))   //搜索类型
+                type = "common";
+            }
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+                try
                 {
-                    int page1 = int.Parse(Request.QueryString.Get("page"));
-                    string NameID = Request.QueryString.Get("NameID");
-                    try
+                    int id = int.Parse(NameID);
+                    Notice notice = new NoticeHandle().getNoticeByID(id);
+                    List<Notice> notices = new List<Notice>();
+                    if (notice.notice_title != null && !notice.Equals(""))
                     {
-                        int id = int.Parse(NameID);
-                        News news = new NewsHandle().getNewsById(id);
-                        List<News> newses = new List<News>();
-                        if (news.Title != null && !news.Equals(""))
-                        {
-                            newses.Add(news);
-                        }
-                        ViewData["type"] = "search";
-                        ViewData["newses"] = newses;
+                        notices.Add(notice);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["notices"] = notices;
 
-                        page.CurrentPage = page1;
-                        page.CountPerPage = 10;
-                        page.WholePage = 1;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
-                    catch
-                    {
-                        page.CurrentPage = page1;
-                        List<Notice> notices = new NoticeHandle().GetNoticeByNameByPage(page, NameID);
-                        ViewData["type"] = "search";
-                        ViewData["notice"] = notices;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+                catch
+                {
+                    page.CurrentPage = page1;
+                    List<Notice> notices = new NoticeHandle().GetNoticeByNameByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["notices"] = notices;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
                 }
             }
+
             else
             {
                 int page1;
@@ -364,8 +380,16 @@ namespace TaxiFirm.Controllers
                     ViewData["notices"] = notices;
                     ViewData["page"] = page;
                 }
+
             }
-            return View();
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
         }
         public ActionResult Gallery()
         {
@@ -389,8 +413,16 @@ namespace TaxiFirm.Controllers
             int news_id = int.Parse(Request.QueryString.Get("NWID"));
             News news = new News();
             NewsHandle handler = new NewsHandle();
+<<<<<<< HEAD
             news = handler.getNewsById(news_id);
             ViewData["news"] = news;
+=======
+            List<int> id_set = handler.getNewsIdSet();
+            news = handler.getNewsById(news_id);
+            ViewData["Current_news_id"] = news_id;
+            ViewData["news"] = news;
+            ViewData["news_id_set"] = id_set;
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
             return View();
         }
         public ActionResult Contact()
@@ -410,8 +442,6 @@ namespace TaxiFirm.Controllers
             if (ModelState.IsValid)
             { s.addComplaint(model.name, model.email, model.content); Session["err"] = "谢谢"; return RedirectToAction("Complain"); }
             else return View();
-
-
         }
         public ActionResult ErrorPage()
         {
@@ -419,6 +449,16 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult NotificationContent()
         {
+            int noti_id = int.Parse(Request.QueryString.Get("NOID"));
+            Notice notice= new Notice();
+            List<int> id_list = new List<int>();
+            NoticeHandle handler = new NoticeHandle();
+            id_list = handler.getNoticeIdSet();
+            notice = handler.getNoticeByID(noti_id);
+            ViewData["Current_Notice_id"] = noti_id;
+            ViewData["notice"] = notice;
+            ViewData["notice_id_list"] = id_list;
+            int index = id_list.IndexOf(noti_id);
             return View();
         }
     }
