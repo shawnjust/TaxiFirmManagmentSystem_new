@@ -62,6 +62,486 @@ namespace TaxiFirm.Models
 			OnCreated();
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPassword", IsComposable=true)]
+		public System.Nullable<int> checkCustomerLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isManager", IsComposable=true)]
+		public System.Nullable<int> isManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPasswordByEmail", IsComposable=true)]
+		public System.Nullable<int> checkCustomerLoginPasswordByEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkEmpolyeeLoginPassword", IsComposable=true)]
+		public System.Nullable<int> checkEmpolyeeLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, password).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAcceptedComplaintByPage", IsComposable=true)]
+		public IQueryable<getAcceptedComplaintByPageResult> getAcceptedComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getAcceptedComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAcceptedComplaintPageCount", IsComposable=true)]
+		public System.Nullable<int> getAcceptedComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllAcceptedComplaint", IsComposable=true)]
+		public IQueryable<getAllAcceptedComplaintResult> getAllAcceptedComplaint()
+		{
+			return this.CreateMethodCallQuery<getAllAcceptedComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllBackupInformation", IsComposable=true)]
+		public IQueryable<getAllBackupInformationResult> getAllBackupInformation()
+		{
+			return this.CreateMethodCallQuery<getAllBackupInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaint", IsComposable=true)]
+		public IQueryable<getAllComplaintResult> getAllComplaint()
+		{
+			return this.CreateMethodCallQuery<getAllComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaintByPage", IsComposable=true)]
+		public IQueryable<getAllComplaintByPageResult> getAllComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getAllComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaintPageCount", IsComposable=true)]
+		public System.Nullable<int> getAllComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllCustomer", IsComposable=true)]
+		public IQueryable<getAllCustomerResult> getAllCustomer()
+		{
+			return this.CreateMethodCallQuery<getAllCustomerResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllDriver", IsComposable=true)]
+		public IQueryable<getAllDriverResult> getAllDriver()
+		{
+			return this.CreateMethodCallQuery<getAllDriverResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllFirm", IsComposable=true)]
+		public IQueryable<getAllFirmResult> getAllFirm()
+		{
+			return this.CreateMethodCallQuery<getAllFirmResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllFirmView", IsComposable=true)]
+		public IQueryable<getAllFirmViewResult> getAllFirmView()
+		{
+			return this.CreateMethodCallQuery<getAllFirmViewResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllHost", IsComposable=true)]
+		public IQueryable<getAllHostResult> getAllHost()
+		{
+			return this.CreateMethodCallQuery<getAllHostResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNews", IsComposable=true)]
+		public IQueryable<getAllNewsResult> getAllNews()
+		{
+			return this.CreateMethodCallQuery<getAllNewsResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNotAcceptComplaint", IsComposable=true)]
+		public IQueryable<getAllNotAcceptComplaintResult> getAllNotAcceptComplaint()
+		{
+			return this.CreateMethodCallQuery<getAllNotAcceptComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNotice", IsComposable=true)]
+		public IQueryable<getAllNoticeResult> getAllNotice()
+		{
+			return this.CreateMethodCallQuery<getAllNoticeResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllOrder", IsComposable=true)]
+		public IQueryable<getAllOrderResult> getAllOrder()
+		{
+			return this.CreateMethodCallQuery<getAllOrderResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllTaxiInformation", IsComposable=true)]
+		public IQueryable<getAllTaxiInformationResult> getAllTaxiInformation()
+		{
+			return this.CreateMethodCallQuery<getAllTaxiInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
+		public IQueryable<getBackupByDescriptionByPageResult> getBackupByDescriptionByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
+		{
+			return this.CreateMethodCallQuery<getBackupByDescriptionByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, description);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionPageCount", IsComposable=true)]
+		public System.Nullable<int> getBackupByDescriptionPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, description).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationByPage", IsComposable=true)]
+		public IQueryable<getBackupInformationByPageResult> getBackupInformationByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getBackupInformationByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationPageCount", IsComposable=true)]
+		public System.Nullable<int> getBackupInformationPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComplaintBySearchContentByPage", IsComposable=true)]
+		public IQueryable<getComplaintBySearchContentByPageResult> getComplaintBySearchContentByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string content)
+		{
+			return this.CreateMethodCallQuery<getComplaintBySearchContentByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, content);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComplaintBySearchContentPageCount", IsComposable=true)]
+		public System.Nullable<int> getComplaintBySearchContentPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string content)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, content).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComplaintBySearchNameByPage", IsComposable=true)]
+		public IQueryable<getComplaintBySearchNameByPageResult> getComplaintBySearchNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
+		{
+			return this.CreateMethodCallQuery<getComplaintBySearchNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, employeeName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getComplaintBySearchNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getComplaintBySearchNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string customer_name)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, customer_name).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCurrentOrder", IsComposable=true)]
+		public IQueryable<getCurrentOrderResult> getCurrentOrder()
+		{
+			return this.CreateMethodCallQuery<getCurrentOrderResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomePageCount", IsComposable=true)]
+		public System.Nullable<int> getCustomePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerById", IsComposable=true)]
+		public IQueryable<getCustomerByIdResult> getCustomerById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
+		{
+			return this.CreateMethodCallQuery<getCustomerByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByNameByPage", IsComposable=true)]
+		public IQueryable<getCustomerByNameByPageResult> getCustomerByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string customerName)
+		{
+			return this.CreateMethodCallQuery<getCustomerByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, customerName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getCustomerByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string customerName)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, customerName).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByPage", IsComposable=true)]
+		public IQueryable<getCustomerByPageResult> getCustomerByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getCustomerByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoiceById", IsComposable=true)]
+		public IQueryable<getCustomerInvoiceByIdResult> getCustomerInvoiceById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoiceId)
+		{
+			return this.CreateMethodCallQuery<getCustomerInvoiceByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, invoiceId);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoiceByPage", IsComposable=true)]
+		public IQueryable<getCustomerInvoiceByPageResult> getCustomerInvoiceByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
+		{
+			return this.CreateMethodCallQuery<getCustomerInvoiceByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, customer_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoicePageCount", IsComposable=true)]
+		public System.Nullable<int> getCustomerInvoicePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, customer_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverByPage", IsComposable=true)]
+		public IQueryable<getDriverByPageResult> getDriverByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getDriverByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverPageCount", IsComposable=true)]
+		public System.Nullable<int> getDriverPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverViewByID", IsComposable=true)]
+		public IQueryable<getDriverViewByIDResult> getDriverViewByID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DriverID", DbType="Int")] System.Nullable<int> driverID)
+		{
+			return this.CreateMethodCallQuery<getDriverViewByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), driverID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByNameByPage", IsComposable=true)]
+		public IQueryable<getEmployeeByNameByPageResult> getEmployeeByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
+		{
+			return this.CreateMethodCallQuery<getEmployeeByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, employeeName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getEmployeeByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, employeeName).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByPage", IsComposable=true)]
+		public IQueryable<getEmployeeByPageResult> getEmployeeByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getEmployeeByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeePageCount", IsComposable=true)]
+		public System.Nullable<int> getEmployeePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmpolyeeById", IsComposable=true)]
+		public IQueryable<getEmpolyeeByIdResult> getEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return this.CreateMethodCallQuery<getEmpolyeeByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmpolyeeIdByIdCard", IsComposable=true)]
+		public System.Nullable<int> getEmpolyeeIdByIdCard([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_card).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmByID", IsComposable=true)]
+		public IQueryable<getFirmByIDResult> getFirmByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id)
+		{
+			return this.CreateMethodCallQuery<getFirmByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firm_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmViewByPage", IsComposable=true)]
+		public IQueryable<getFirmViewByPageResult> getFirmViewByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getFirmViewByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmViewPageCount", IsComposable=true)]
+		public System.Nullable<int> getFirmViewPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostById", IsComposable=true)]
+		public IQueryable<getHostByIdResult> getHostById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return this.CreateMethodCallQuery<getHostByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNameByPage", IsComposable=true)]
+		public IQueryable<getHostByNameByPageResult> getHostByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
+		{
+			return this.CreateMethodCallQuery<getHostByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, hostName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getHostByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, hostName).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByPage", IsComposable=true)]
+		public IQueryable<getHostByPageResult> getHostByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getHostByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostBySearchName", IsComposable=true)]
+		public IQueryable<getHostBySearchNameResult> getHostBySearchName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string name)
+		{
+			return this.CreateMethodCallQuery<getHostBySearchNameResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostPageCount", IsComposable=true)]
+		public System.Nullable<int> getHostPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getInvoiceByID", IsComposable=true)]
+		public IQueryable<getInvoiceByIDResult> getInvoiceByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoiceID)
+		{
+			return this.CreateMethodCallQuery<getInvoiceByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoiceID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByNameByPage", IsComposable=true)]
+		public IQueryable<getManagerByNameByPageResult> getManagerByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string managerName)
+		{
+			return this.CreateMethodCallQuery<getManagerByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, managerName);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByNamePageCount", IsComposable=true)]
+		public System.Nullable<int> getManagerByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string managerName)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, managerName).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByPage", IsComposable=true)]
+		public IQueryable<getManagerByPageResult> getManagerByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getManagerByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerPageCount", IsComposable=true)]
+		public System.Nullable<int> getManagerPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerTableByID", IsComposable=true)]
+		public IQueryable<getManagerTableByIDResult> getManagerTableByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> managerID)
+		{
+			return this.CreateMethodCallQuery<getManagerTableByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), managerID);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByID", IsComposable=true)]
+		public IQueryable<getNewsByIDResult> getNewsByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id)
+		{
+			return this.CreateMethodCallQuery<getNewsByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByPage", IsComposable=true)]
+		public IQueryable<getNewsByPageResult> getNewsByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getNewsByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsPageCount", IsComposable=true)]
+		public System.Nullable<int> getNewsPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNotAcceptComplaintByPage", IsComposable=true)]
+		public IQueryable<getNotAcceptComplaintByPageResult> getNotAcceptComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getNotAcceptComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNotAcceptComplaintPageCount", IsComposable=true)]
+		public System.Nullable<int> getNotAcceptComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticeByID", IsComposable=true)]
+		public IQueryable<getNoticeByIDResult> getNoticeByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id)
+		{
+			return this.CreateMethodCallQuery<getNoticeByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticeByPage", IsComposable=true)]
+		public IQueryable<getNoticeByPageResult> getNoticeByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getNoticeByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticePageCount", IsComposable=true)]
+		public System.Nullable<int> getNoticePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiByPage", IsComposable=true)]
+		public IQueryable<getTaxiByPageResult> getTaxiByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getTaxiByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiCountByEmpolyeeId", IsComposable=true)]
+		public System.Nullable<int> getTaxiCountByEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiInformationByEmpolyeeId", IsComposable=true)]
+		public IQueryable<getTaxiInformationByEmpolyeeIdResult> getTaxiInformationByEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return this.CreateMethodCallQuery<getTaxiInformationByEmpolyeeIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiInformationByPlatenumber", IsComposable=true)]
+		public IQueryable<getTaxiInformationByPlatenumberResult> getTaxiInformationByPlatenumber([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string plate_number)
+		{
+			return this.CreateMethodCallQuery<getTaxiInformationByPlatenumberResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiPageCount", IsComposable=true)]
+		public System.Nullable<int> getTaxiPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isDriver", IsComposable=true)]
+		public System.Nullable<int> isDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isEmpolyee", IsComposable=true)]
+		public System.Nullable<int> isEmpolyee([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isExistForCustomerEmail", IsComposable=true)]
+		public System.Nullable<int> isExistForCustomerEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isExistForEmpolyeeIdCard", IsComposable=true)]
+		public System.Nullable<int> isExistForEmpolyeeIdCard([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_card).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isHost", IsComposable=true)]
+		public System.Nullable<int> isHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.acceptComplaint")]
 		public int acceptComplaint([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> complaint_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
 		{
@@ -313,462 +793,6 @@ namespace TaxiFirm.Models
 		{
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), order_id, plate_number, empolyee_id, rent_begin_time, rent_due_return_tiem, rent_return_time);
 			return ((int)(result.ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPassword", IsComposable=true)]
-		public System.Nullable<int> checkCustomerLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isManager", IsComposable=true)]
-		public System.Nullable<int> isManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPasswordByEmail", IsComposable=true)]
-		public System.Nullable<int> checkCustomerLoginPasswordByEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkEmpolyeeLoginPassword", IsComposable=true)]
-		public System.Nullable<int> checkEmpolyeeLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id, password).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAcceptedComplaintByPage", IsComposable=true)]
-		public IQueryable<getAcceptedComplaintByPageResult> getAcceptedComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getAcceptedComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAcceptedComplaintPageCount", IsComposable=true)]
-		public System.Nullable<int> getAcceptedComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllAcceptedComplaint", IsComposable=true)]
-		public IQueryable<getAllAcceptedComplaintResult> getAllAcceptedComplaint()
-		{
-			return this.CreateMethodCallQuery<getAllAcceptedComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllBackupInformation", IsComposable=true)]
-		public IQueryable<getAllBackupInformationResult> getAllBackupInformation()
-		{
-			return this.CreateMethodCallQuery<getAllBackupInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaint", IsComposable=true)]
-		public IQueryable<getAllComplaintResult> getAllComplaint()
-		{
-			return this.CreateMethodCallQuery<getAllComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaintByPage", IsComposable=true)]
-		public IQueryable<getAllComplaintByPageResult> getAllComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getAllComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllComplaintPageCount", IsComposable=true)]
-		public System.Nullable<int> getAllComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllCustomer", IsComposable=true)]
-		public IQueryable<getAllCustomerResult> getAllCustomer()
-		{
-			return this.CreateMethodCallQuery<getAllCustomerResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllDriver", IsComposable=true)]
-		public IQueryable<getAllDriverResult> getAllDriver()
-		{
-			return this.CreateMethodCallQuery<getAllDriverResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllFirm", IsComposable=true)]
-		public IQueryable<getAllFirmResult> getAllFirm()
-		{
-			return this.CreateMethodCallQuery<getAllFirmResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllFirmView", IsComposable=true)]
-		public IQueryable<getAllFirmViewResult> getAllFirmView()
-		{
-			return this.CreateMethodCallQuery<getAllFirmViewResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllHost", IsComposable=true)]
-		public IQueryable<getAllHostResult> getAllHost()
-		{
-			return this.CreateMethodCallQuery<getAllHostResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNews", IsComposable=true)]
-		public IQueryable<getAllNewsResult> getAllNews()
-		{
-			return this.CreateMethodCallQuery<getAllNewsResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNotAcceptComplaint", IsComposable=true)]
-		public IQueryable<getAllNotAcceptComplaintResult> getAllNotAcceptComplaint()
-		{
-			return this.CreateMethodCallQuery<getAllNotAcceptComplaintResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNotice", IsComposable=true)]
-		public IQueryable<getAllNoticeResult> getAllNotice()
-		{
-			return this.CreateMethodCallQuery<getAllNoticeResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllOrder", IsComposable=true)]
-		public IQueryable<getAllOrderResult> getAllOrder()
-		{
-			return this.CreateMethodCallQuery<getAllOrderResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllTaxiInformation", IsComposable=true)]
-		public IQueryable<getAllTaxiInformationResult> getAllTaxiInformation()
-		{
-			return this.CreateMethodCallQuery<getAllTaxiInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
-		public IQueryable<getBackupByDescriptionByPageResult> getBackupByDescriptionByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
-		{
-			return this.CreateMethodCallQuery<getBackupByDescriptionByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, description);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionPageCount", IsComposable=true)]
-		public System.Nullable<int> getBackupByDescriptionPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(200)")] string description)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, description).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationByPage", IsComposable=true)]
-		public IQueryable<getBackupInformationByPageResult> getBackupInformationByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getBackupInformationByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupInformationPageCount", IsComposable=true)]
-		public System.Nullable<int> getBackupInformationPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCurrentOrder", IsComposable=true)]
-		public IQueryable<getCurrentOrderResult> getCurrentOrder()
-		{
-			return this.CreateMethodCallQuery<getCurrentOrderResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomePageCount", IsComposable=true)]
-		public System.Nullable<int> getCustomePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerById", IsComposable=true)]
-		public IQueryable<getCustomerByIdResult> getCustomerById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
-		{
-			return this.CreateMethodCallQuery<getCustomerByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByNameByPage", IsComposable=true)]
-		public IQueryable<getCustomerByNameByPageResult> getCustomerByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string customerName)
-		{
-			return this.CreateMethodCallQuery<getCustomerByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, customerName);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByNamePageCount", IsComposable=true)]
-		public System.Nullable<int> getCustomerByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string customerName)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, customerName).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerByPage", IsComposable=true)]
-		public IQueryable<getCustomerByPageResult> getCustomerByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getCustomerByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoiceById", IsComposable=true)]
-		public IQueryable<getCustomerInvoiceByIdResult> getCustomerInvoiceById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customerID, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoiceId)
-		{
-			return this.CreateMethodCallQuery<getCustomerInvoiceByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customerID, invoiceId);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoiceByPage", IsComposable=true)]
-		public IQueryable<getCustomerInvoiceByPageResult> getCustomerInvoiceByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
-		{
-			return this.CreateMethodCallQuery<getCustomerInvoiceByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, customer_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getCustomerInvoicePageCount", IsComposable=true)]
-		public System.Nullable<int> getCustomerInvoicePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, customer_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverByPage", IsComposable=true)]
-		public IQueryable<getDriverByPageResult> getDriverByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getDriverByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverPageCount", IsComposable=true)]
-		public System.Nullable<int> getDriverPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByNameByPage", IsComposable=true)]
-		public IQueryable<getEmployeeByNameByPageResult> getEmployeeByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
-		{
-			return this.CreateMethodCallQuery<getEmployeeByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, employeeName);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByNamePageCount", IsComposable=true)]
-		public System.Nullable<int> getEmployeeByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string employeeName)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, employeeName).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeeByPage", IsComposable=true)]
-		public IQueryable<getEmployeeByPageResult> getEmployeeByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getEmployeeByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmployeePageCount", IsComposable=true)]
-		public System.Nullable<int> getEmployeePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmpolyeeById", IsComposable=true)]
-		public IQueryable<getEmpolyeeByIdResult> getEmpolyeeById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return this.CreateMethodCallQuery<getEmpolyeeByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getEmpolyeeIdByIdCard", IsComposable=true)]
-		public System.Nullable<int> getEmpolyeeIdByIdCard([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_card).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmByID", IsComposable=true)]
-		public IQueryable<getFirmByIDResult> getFirmByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> firm_id)
-		{
-			return this.CreateMethodCallQuery<getFirmByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), firm_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmViewByPage", IsComposable=true)]
-		public IQueryable<getFirmViewByPageResult> getFirmViewByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getFirmViewByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getFirmViewPageCount", IsComposable=true)]
-		public System.Nullable<int> getFirmViewPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostById", IsComposable=true)]
-		public IQueryable<getHostByIdResult> getHostById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return this.CreateMethodCallQuery<getHostByIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByPage", IsComposable=true)]
-		public IQueryable<getHostByPageResult> getHostByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getHostByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostBySearchName", IsComposable=true)]
-		public IQueryable<getHostBySearchNameResult> getHostBySearchName([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(20)")] string name)
-		{
-			return this.CreateMethodCallQuery<getHostBySearchNameResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), name);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostPageCount", IsComposable=true)]
-		public System.Nullable<int> getHostPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getInvoiceByID", IsComposable=true)]
-		public IQueryable<getInvoiceByIDResult> getInvoiceByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> invoiceID)
-		{
-			return this.CreateMethodCallQuery<getInvoiceByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), invoiceID);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByNameByPage", IsComposable=true)]
-		public IQueryable<getManagerByNameByPageResult> getManagerByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string managerName)
-		{
-			return this.CreateMethodCallQuery<getManagerByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, managerName);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByNamePageCount", IsComposable=true)]
-		public System.Nullable<int> getManagerByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string managerName)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, managerName).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerByPage", IsComposable=true)]
-		public IQueryable<getManagerByPageResult> getManagerByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getManagerByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerPageCount", IsComposable=true)]
-		public System.Nullable<int> getManagerPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getManagerTableByID", IsComposable=true)]
-		public IQueryable<getManagerTableByIDResult> getManagerTableByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> managerID)
-		{
-			return this.CreateMethodCallQuery<getManagerTableByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), managerID);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByID", IsComposable=true)]
-		public IQueryable<getNewsByIDResult> getNewsByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> news_id)
-		{
-			return this.CreateMethodCallQuery<getNewsByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByPage", IsComposable=true)]
-		public IQueryable<getNewsByPageResult> getNewsByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getNewsByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsPageCount", IsComposable=true)]
-		public System.Nullable<int> getNewsPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNotAcceptComplaintByPage", IsComposable=true)]
-		public IQueryable<getNotAcceptComplaintByPageResult> getNotAcceptComplaintByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getNotAcceptComplaintByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNotAcceptComplaintPageCount", IsComposable=true)]
-		public System.Nullable<int> getNotAcceptComplaintPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticeByID", IsComposable=true)]
-		public IQueryable<getNoticeByIDResult> getNoticeByID([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> notice_id)
-		{
-			return this.CreateMethodCallQuery<getNoticeByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), notice_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticeByPage", IsComposable=true)]
-		public IQueryable<getNoticeByPageResult> getNoticeByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getNoticeByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNoticePageCount", IsComposable=true)]
-		public System.Nullable<int> getNoticePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiByPage", IsComposable=true)]
-		public IQueryable<getTaxiByPageResult> getTaxiByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return this.CreateMethodCallQuery<getTaxiByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiCountByEmpolyeeId", IsComposable=true)]
-		public System.Nullable<int> getTaxiCountByEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiInformationByPlatenumber", IsComposable=true)]
-		public IQueryable<getTaxiInformationByPlatenumberResult> getTaxiInformationByPlatenumber([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string plate_number)
-		{
-			return this.CreateMethodCallQuery<getTaxiInformationByPlatenumberResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), plate_number);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiPageCount", IsComposable=true)]
-		public System.Nullable<int> getTaxiPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isDriver", IsComposable=true)]
-		public System.Nullable<int> isDriver([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isEmpolyee", IsComposable=true)]
-		public System.Nullable<int> isEmpolyee([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isExistForCustomerEmail", IsComposable=true)]
-		public System.Nullable<int> isExistForCustomerEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isExistForEmpolyeeIdCard", IsComposable=true)]
-		public System.Nullable<int> isExistForEmpolyeeIdCard([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Char(20)")] string id_card)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), id_card).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isHost", IsComposable=true)]
-		public System.Nullable<int> isHost([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNameByPage", IsComposable=true)]
-		public IQueryable<getHostByNameByPageResult> getHostByNameByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
-		{
-			return this.CreateMethodCallQuery<getHostByNameByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, hostName);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getHostByNamePageCount", IsComposable=true)]
-		public System.Nullable<int> getHostByNamePageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(20)")] string hostName)
-		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, hostName).ReturnValue));
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiInformationByEmpolyeeId", IsComposable=true)]
-		public IQueryable<getTaxiInformationByEmpolyeeIdResult> getTaxiInformationByEmpolyeeId([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
-		{
-			return this.CreateMethodCallQuery<getTaxiInformationByEmpolyeeIdResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id);
-		}
-		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getDriverViewByID", IsComposable=true)]
-		public IQueryable<getDriverViewByIDResult> getDriverViewByID([global::System.Data.Linq.Mapping.ParameterAttribute(Name="DriverID", DbType="Int")] System.Nullable<int> driverID)
-		{
-			return this.CreateMethodCallQuery<getDriverViewByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), driverID);
 		}
 	}
 	
@@ -3914,6 +3938,346 @@ namespace TaxiFirm.Models
 		}
 	}
 	
+	public partial class getComplaintBySearchContentByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _complaint_id;
+		
+		private string _customer_name;
+		
+		private string _customer_email;
+		
+		private string _complaint_content;
+		
+		private System.DateTime _complaint_time;
+		
+		private System.Nullable<int> _empolyee_id;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _accept_time;
+		
+		public getComplaintBySearchContentByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_id", DbType="Int NOT NULL")]
+		public int complaint_id
+		{
+			get
+			{
+				return this._complaint_id;
+			}
+			set
+			{
+				if ((this._complaint_id != value))
+				{
+					this._complaint_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_name", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string customer_name
+		{
+			get
+			{
+				return this._customer_name;
+			}
+			set
+			{
+				if ((this._customer_name != value))
+				{
+					this._customer_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string customer_email
+		{
+			get
+			{
+				return this._customer_email;
+			}
+			set
+			{
+				if ((this._customer_email != value))
+				{
+					this._customer_email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_content", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string complaint_content
+		{
+			get
+			{
+				return this._complaint_content;
+			}
+			set
+			{
+				if ((this._complaint_content != value))
+				{
+					this._complaint_content = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_time", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime complaint_time
+		{
+			get
+			{
+				return this._complaint_time;
+			}
+			set
+			{
+				if ((this._complaint_time != value))
+				{
+					this._complaint_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int")]
+		public System.Nullable<int> empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accept_time", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> accept_time
+		{
+			get
+			{
+				return this._accept_time;
+			}
+			set
+			{
+				if ((this._accept_time != value))
+				{
+					this._accept_time = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getComplaintBySearchNameByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _complaint_id;
+		
+		private string _customer_name;
+		
+		private string _customer_email;
+		
+		private string _complaint_content;
+		
+		private System.DateTime _complaint_time;
+		
+		private System.Nullable<int> _empolyee_id;
+		
+		private string _name;
+		
+		private System.Nullable<System.DateTime> _accept_time;
+		
+		public getComplaintBySearchNameByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_id", DbType="Int NOT NULL")]
+		public int complaint_id
+		{
+			get
+			{
+				return this._complaint_id;
+			}
+			set
+			{
+				if ((this._complaint_id != value))
+				{
+					this._complaint_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_name", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string customer_name
+		{
+			get
+			{
+				return this._customer_name;
+			}
+			set
+			{
+				if ((this._customer_name != value))
+				{
+					this._customer_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_customer_email", DbType="VarChar(50) NOT NULL", CanBeNull=false)]
+		public string customer_email
+		{
+			get
+			{
+				return this._customer_email;
+			}
+			set
+			{
+				if ((this._customer_email != value))
+				{
+					this._customer_email = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_content", DbType="Text NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string complaint_content
+		{
+			get
+			{
+				return this._complaint_content;
+			}
+			set
+			{
+				if ((this._complaint_content != value))
+				{
+					this._complaint_content = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_complaint_time", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime complaint_time
+		{
+			get
+			{
+				return this._complaint_time;
+			}
+			set
+			{
+				if ((this._complaint_time != value))
+				{
+					this._complaint_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int")]
+		public System.Nullable<int> empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_accept_time", DbType="SmallDateTime")]
+		public System.Nullable<System.DateTime> accept_time
+		{
+			get
+			{
+				return this._accept_time;
+			}
+			set
+			{
+				if ((this._accept_time != value))
+				{
+					this._accept_time = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getCurrentOrderResult
 	{
 		
@@ -5338,6 +5702,23 @@ namespace TaxiFirm.Models
 		}
 	}
 	
+	public partial class getDriverViewByIDResult
+	{
+		
+		private int _empolyee_id;
+		
+		private string _name;
+		
+		private string _id_card;
+		
+		private System.Nullable<System.DateTime> _birthday;
+		
+		private System.Nullable<bool> _gender;
+		
+		private string _telephone;
+		
+		private System.Nullable<int> _age;
+		
 		private int _health;
 		
 		private System.Nullable<int> _firm_id;
@@ -6496,6 +6877,248 @@ namespace TaxiFirm.Models
 		
 		public getHostByIdResult()
 		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
+		public int empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20) NOT NULL", CanBeNull=false)]
+		public string id_card
+		{
+			get
+			{
+				return this._id_card;
+			}
+			set
+			{
+				if ((this._id_card != value))
+				{
+					this._id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date NOT NULL")]
+		public System.DateTime birthday
+		{
+			get
+			{
+				return this._birthday;
+			}
+			set
+			{
+				if ((this._birthday != value))
+				{
+					this._birthday = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit")]
+		public System.Nullable<bool> gender
+		{
+			get
+			{
+				return this._gender;
+			}
+			set
+			{
+				if ((this._gender != value))
+				{
+					this._gender = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string telephone
+		{
+			get
+			{
+				return this._telephone;
+			}
+			set
+			{
+				if ((this._telephone != value))
+				{
+					this._telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_photo", DbType="NVarChar(200)")]
+		public string photo
+		{
+			get
+			{
+				return this._photo;
+			}
+			set
+			{
+				if ((this._photo != value))
+				{
+					this._photo = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int NOT NULL")]
+		public int firm_id
+		{
+			get
+			{
+				return this._firm_id;
+			}
+			set
+			{
+				if ((this._firm_id != value))
+				{
+					this._firm_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string firm_name
+		{
+			get
+			{
+				return this._firm_name;
+			}
+			set
+			{
+				if ((this._firm_name != value))
+				{
+					this._firm_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
+		public string phone_number
+		{
+			get
+			{
+				return this._phone_number;
+			}
+			set
+			{
+				if ((this._phone_number != value))
+				{
+					this._phone_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string empolyee_address
+		{
+			get
+			{
+				return this._empolyee_address;
+			}
+			set
+			{
+				if ((this._empolyee_address != value))
+				{
+					this._empolyee_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string firm_address
+		{
+			get
+			{
+				return this._firm_address;
+			}
+			set
+			{
+				if ((this._firm_address != value))
+				{
+					this._firm_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getHostByNameByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _empolyee_id;
+		
+		private string _name;
+		
+		private string _id_card;
+		
+		private System.DateTime _birthday;
+		
+		private System.Nullable<bool> _gender;
+		
+		private string _telephone;
+		
+		private string _photo;
+		
+		private int _firm_id;
+		
+		private string _firm_name;
+		
+		private string _phone_number;
+		
+		private string _empolyee_address;
+		
+		private string _firm_address;
+		
+		public getHostByNameByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
@@ -8767,562 +9390,6 @@ namespace TaxiFirm.Models
 		}
 	}
 	
-	public partial class getTaxiInformationByPlatenumberResult
-	{
-		
-		private string _plate_number;
-		
-		private string _taxi_color;
-		
-		private string _taxi_brand;
-		
-		private System.Nullable<int> _order_id;
-		
-		private System.Nullable<System.DateTime> _rent_begin_time;
-		
-		private System.Nullable<System.DateTime> _rent_due_return_time;
-		
-		private System.Nullable<System.DateTime> _rent_return_time;
-		
-		private System.Nullable<int> _driver_empolyee_id;
-		
-		private string _driver_name;
-		
-		private string _driver_id_card;
-		
-		private string _driver_telephone;
-		
-		private string _driver_address;
-		
-		private System.Nullable<int> _host_empolyee_id;
-		
-		private string _host_name;
-		
-		private string _host_id_card;
-		
-		private string _host_telephone;
-		
-		private string _host_address;
-		
-		public getTaxiInformationByPlatenumberResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string plate_number
-		{
-			get
-			{
-				return this._plate_number;
-			}
-			set
-			{
-				if ((this._plate_number != value))
-				{
-					this._plate_number = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string taxi_color
-		{
-			get
-			{
-				return this._taxi_color;
-			}
-			set
-			{
-				if ((this._taxi_color != value))
-				{
-					this._taxi_color = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string taxi_brand
-		{
-			get
-			{
-				return this._taxi_brand;
-			}
-			set
-			{
-				if ((this._taxi_brand != value))
-				{
-					this._taxi_brand = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
-		public System.Nullable<int> order_id
-		{
-			get
-			{
-				return this._order_id;
-			}
-			set
-			{
-				if ((this._order_id != value))
-				{
-					this._order_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
-		public System.Nullable<System.DateTime> rent_begin_time
-		{
-			get
-			{
-				return this._rent_begin_time;
-			}
-			set
-			{
-				if ((this._rent_begin_time != value))
-				{
-					this._rent_begin_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
-		public System.Nullable<System.DateTime> rent_due_return_time
-		{
-			get
-			{
-				return this._rent_due_return_time;
-			}
-			set
-			{
-				if ((this._rent_due_return_time != value))
-				{
-					this._rent_due_return_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
-		public System.Nullable<System.DateTime> rent_return_time
-		{
-			get
-			{
-				return this._rent_return_time;
-			}
-			set
-			{
-				if ((this._rent_return_time != value))
-				{
-					this._rent_return_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
-		public System.Nullable<int> driver_empolyee_id
-		{
-			get
-			{
-				return this._driver_empolyee_id;
-			}
-			set
-			{
-				if ((this._driver_empolyee_id != value))
-				{
-					this._driver_empolyee_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
-		public string driver_name
-		{
-			get
-			{
-				return this._driver_name;
-			}
-			set
-			{
-				if ((this._driver_name != value))
-				{
-					this._driver_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
-		public string driver_id_card
-		{
-			get
-			{
-				return this._driver_id_card;
-			}
-			set
-			{
-				if ((this._driver_id_card != value))
-				{
-					this._driver_id_card = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
-		public string driver_telephone
-		{
-			get
-			{
-				return this._driver_telephone;
-			}
-			set
-			{
-				if ((this._driver_telephone != value))
-				{
-					this._driver_telephone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
-		public string driver_address
-		{
-			get
-			{
-				return this._driver_address;
-			}
-			set
-			{
-				if ((this._driver_address != value))
-				{
-					this._driver_address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
-		public System.Nullable<int> host_empolyee_id
-		{
-			get
-			{
-				return this._host_empolyee_id;
-			}
-			set
-			{
-				if ((this._host_empolyee_id != value))
-				{
-					this._host_empolyee_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
-		public string host_name
-		{
-			get
-			{
-				return this._host_name;
-			}
-			set
-			{
-				if ((this._host_name != value))
-				{
-					this._host_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
-		public string host_id_card
-		{
-			get
-			{
-				return this._host_id_card;
-			}
-			set
-			{
-				if ((this._host_id_card != value))
-				{
-					this._host_id_card = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
-		public string host_telephone
-		{
-			get
-			{
-				return this._host_telephone;
-			}
-			set
-			{
-				if ((this._host_telephone != value))
-				{
-					this._host_telephone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
-		public string host_address
-		{
-			get
-			{
-				return this._host_address;
-			}
-			set
-			{
-				if ((this._host_address != value))
-				{
-					this._host_address = value;
-				}
-			}
-		}
-	}
-	
-	public partial class getHostByNameByPageResult
-	{
-		
-		private System.Nullable<long> _rowNum;
-		
-		private int _empolyee_id;
-		
-		private string _name;
-		
-		private string _id_card;
-		
-		private System.DateTime _birthday;
-		
-		private System.Nullable<bool> _gender;
-		
-		private string _telephone;
-		
-		private string _photo;
-		
-		private int _firm_id;
-		
-		private string _firm_name;
-		
-		private string _phone_number;
-		
-		private string _empolyee_address;
-		
-		private string _firm_address;
-		
-		public getHostByNameByPageResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
-		public System.Nullable<long> rowNum
-		{
-			get
-			{
-				return this._rowNum;
-			}
-			set
-			{
-				if ((this._rowNum != value))
-				{
-					this._rowNum = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
-		public int empolyee_id
-		{
-			get
-			{
-				return this._empolyee_id;
-			}
-			set
-			{
-				if ((this._empolyee_id != value))
-				{
-					this._empolyee_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20) NOT NULL", CanBeNull=false)]
-		public string id_card
-		{
-			get
-			{
-				return this._id_card;
-			}
-			set
-			{
-				if ((this._id_card != value))
-				{
-					this._id_card = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date NOT NULL")]
-		public System.DateTime birthday
-		{
-			get
-			{
-				return this._birthday;
-			}
-			set
-			{
-				if ((this._birthday != value))
-				{
-					this._birthday = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit")]
-		public System.Nullable<bool> gender
-		{
-			get
-			{
-				return this._gender;
-			}
-			set
-			{
-				if ((this._gender != value))
-				{
-					this._gender = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string telephone
-		{
-			get
-			{
-				return this._telephone;
-			}
-			set
-			{
-				if ((this._telephone != value))
-				{
-					this._telephone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_photo", DbType="NVarChar(200)")]
-		public string photo
-		{
-			get
-			{
-				return this._photo;
-			}
-			set
-			{
-				if ((this._photo != value))
-				{
-					this._photo = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int NOT NULL")]
-		public int firm_id
-		{
-			get
-			{
-				return this._firm_id;
-			}
-			set
-			{
-				if ((this._firm_id != value))
-				{
-					this._firm_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
-		public string firm_name
-		{
-			get
-			{
-				return this._firm_name;
-			}
-			set
-			{
-				if ((this._firm_name != value))
-				{
-					this._firm_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20) NOT NULL", CanBeNull=false)]
-		public string phone_number
-		{
-			get
-			{
-				return this._phone_number;
-			}
-			set
-			{
-				if ((this._phone_number != value))
-				{
-					this._phone_number = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string empolyee_address
-		{
-			get
-			{
-				return this._empolyee_address;
-			}
-			set
-			{
-				if ((this._empolyee_address != value))
-				{
-					this._empolyee_address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string firm_address
-		{
-			get
-			{
-				return this._firm_address;
-			}
-			set
-			{
-				if ((this._firm_address != value))
-				{
-					this._firm_address = value;
-				}
-			}
-		}
-	}
-	
 	public partial class getTaxiInformationByEmpolyeeIdResult
 	{
 		
@@ -9637,301 +9704,91 @@ namespace TaxiFirm.Models
 		}
 	}
 	
-	public partial class getDriverViewByIDResult
+	public partial class getTaxiInformationByPlatenumberResult
 	{
-		
-		private int _empolyee_id;
-		
-		private string _name;
-		
-		private string _id_card;
-		
-		private System.Nullable<System.DateTime> _birthday;
-		
-		private System.Nullable<bool> _gender;
-		
-		private string _telephone;
-		
-		private System.Nullable<int> _age;
-		
-		private int _health;
-		
-		private System.Nullable<int> _firm_id;
-		
-		private string _firm_name;
-		
-		private string _phone_number;
-		
-		private string _license_id;
-		
-		private System.Nullable<System.DateTime> _license_time;
-		
-		private string _photo_path;
-		
-		private string _firm_address;
-		
-		private string _empolyee_address;
-		
-		private System.Nullable<int> _order_id;
 		
 		private string _plate_number;
 		
-		public getDriverViewByIDResult()
+		private string _taxi_color;
+		
+		private string _taxi_brand;
+		
+		private System.Nullable<int> _order_id;
+		
+		private System.Nullable<System.DateTime> _rent_begin_time;
+		
+		private System.Nullable<System.DateTime> _rent_due_return_time;
+		
+		private System.Nullable<System.DateTime> _rent_return_time;
+		
+		private System.Nullable<int> _driver_empolyee_id;
+		
+		private string _driver_name;
+		
+		private string _driver_id_card;
+		
+		private string _driver_telephone;
+		
+		private string _driver_address;
+		
+		private System.Nullable<int> _host_empolyee_id;
+		
+		private string _host_name;
+		
+		private string _host_id_card;
+		
+		private string _host_telephone;
+		
+		private string _host_address;
+		
+		public getTaxiInformationByPlatenumberResult()
 		{
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
-		public int empolyee_id
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
 		{
 			get
 			{
-				return this._empolyee_id;
+				return this._plate_number;
 			}
 			set
 			{
-				if ((this._empolyee_id != value))
+				if ((this._plate_number != value))
 				{
-					this._empolyee_id = value;
+					this._plate_number = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
-		public string name
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_color
 		{
 			get
 			{
-				return this._name;
+				return this._taxi_color;
 			}
 			set
 			{
-				if ((this._name != value))
+				if ((this._taxi_color != value))
 				{
-					this._name = value;
+					this._taxi_color = value;
 				}
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_id_card", DbType="Char(20)")]
-		public string id_card
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_brand
 		{
 			get
 			{
-				return this._id_card;
+				return this._taxi_brand;
 			}
 			set
 			{
-				if ((this._id_card != value))
+				if ((this._taxi_brand != value))
 				{
-					this._id_card = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_birthday", DbType="Date")]
-		public System.Nullable<System.DateTime> birthday
-		{
-			get
-			{
-				return this._birthday;
-			}
-			set
-			{
-				if ((this._birthday != value))
-				{
-					this._birthday = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_gender", DbType="Bit")]
-		public System.Nullable<bool> gender
-		{
-			get
-			{
-				return this._gender;
-			}
-			set
-			{
-				if ((this._gender != value))
-				{
-					this._gender = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_telephone", DbType="VarChar(20)")]
-		public string telephone
-		{
-			get
-			{
-				return this._telephone;
-			}
-			set
-			{
-				if ((this._telephone != value))
-				{
-					this._telephone = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_age", DbType="Int")]
-		public System.Nullable<int> age
-		{
-			get
-			{
-				return this._age;
-			}
-			set
-			{
-				if ((this._age != value))
-				{
-					this._age = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_health", DbType="Int NOT NULL")]
-		public int health
-		{
-			get
-			{
-				return this._health;
-			}
-			set
-			{
-				if ((this._health != value))
-				{
-					this._health = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_id", DbType="Int")]
-		public System.Nullable<int> firm_id
-		{
-			get
-			{
-				return this._firm_id;
-			}
-			set
-			{
-				if ((this._firm_id != value))
-				{
-					this._firm_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_name", DbType="NVarChar(20)")]
-		public string firm_name
-		{
-			get
-			{
-				return this._firm_name;
-			}
-			set
-			{
-				if ((this._firm_name != value))
-				{
-					this._firm_name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_phone_number", DbType="VarChar(20)")]
-		public string phone_number
-		{
-			get
-			{
-				return this._phone_number;
-			}
-			set
-			{
-				if ((this._phone_number != value))
-				{
-					this._phone_number = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_license_id", DbType="VarChar(50)")]
-		public string license_id
-		{
-			get
-			{
-				return this._license_id;
-			}
-			set
-			{
-				if ((this._license_id != value))
-				{
-					this._license_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_license_time", DbType="Date")]
-		public System.Nullable<System.DateTime> license_time
-		{
-			get
-			{
-				return this._license_time;
-			}
-			set
-			{
-				if ((this._license_time != value))
-				{
-					this._license_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_photo_path", DbType="NVarChar(256)")]
-		public string photo_path
-		{
-			get
-			{
-				return this._photo_path;
-			}
-			set
-			{
-				if ((this._photo_path != value))
-				{
-					this._photo_path = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_firm_address", DbType="NVarChar(50)")]
-		public string firm_address
-		{
-			get
-			{
-				return this._firm_address;
-			}
-			set
-			{
-				if ((this._firm_address != value))
-				{
-					this._firm_address = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_address", DbType="NVarChar(50)")]
-		public string empolyee_address
-		{
-			get
-			{
-				return this._empolyee_address;
-			}
-			set
-			{
-				if ((this._empolyee_address != value))
-				{
-					this._empolyee_address = value;
+					this._taxi_brand = value;
 				}
 			}
 		}
@@ -9952,18 +9809,210 @@ namespace TaxiFirm.Models
 			}
 		}
 		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50)")]
-		public string plate_number
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_begin_time
 		{
 			get
 			{
-				return this._plate_number;
+				return this._rent_begin_time;
 			}
 			set
 			{
-				if ((this._plate_number != value))
+				if ((this._rent_begin_time != value))
 				{
-					this._plate_number = value;
+					this._rent_begin_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_due_return_time
+		{
+			get
+			{
+				return this._rent_due_return_time;
+			}
+			set
+			{
+				if ((this._rent_due_return_time != value))
+				{
+					this._rent_due_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_return_time
+		{
+			get
+			{
+				return this._rent_return_time;
+			}
+			set
+			{
+				if ((this._rent_return_time != value))
+				{
+					this._rent_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
+		public System.Nullable<int> driver_empolyee_id
+		{
+			get
+			{
+				return this._driver_empolyee_id;
+			}
+			set
+			{
+				if ((this._driver_empolyee_id != value))
+				{
+					this._driver_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
+		public string driver_name
+		{
+			get
+			{
+				return this._driver_name;
+			}
+			set
+			{
+				if ((this._driver_name != value))
+				{
+					this._driver_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
+		public string driver_id_card
+		{
+			get
+			{
+				return this._driver_id_card;
+			}
+			set
+			{
+				if ((this._driver_id_card != value))
+				{
+					this._driver_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
+		public string driver_telephone
+		{
+			get
+			{
+				return this._driver_telephone;
+			}
+			set
+			{
+				if ((this._driver_telephone != value))
+				{
+					this._driver_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
+		public string driver_address
+		{
+			get
+			{
+				return this._driver_address;
+			}
+			set
+			{
+				if ((this._driver_address != value))
+				{
+					this._driver_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
+		public System.Nullable<int> host_empolyee_id
+		{
+			get
+			{
+				return this._host_empolyee_id;
+			}
+			set
+			{
+				if ((this._host_empolyee_id != value))
+				{
+					this._host_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
+		public string host_name
+		{
+			get
+			{
+				return this._host_name;
+			}
+			set
+			{
+				if ((this._host_name != value))
+				{
+					this._host_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
+		public string host_id_card
+		{
+			get
+			{
+				return this._host_id_card;
+			}
+			set
+			{
+				if ((this._host_id_card != value))
+				{
+					this._host_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
+		public string host_telephone
+		{
+			get
+			{
+				return this._host_telephone;
+			}
+			set
+			{
+				if ((this._host_telephone != value))
+				{
+					this._host_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
+		public string host_address
+		{
+			get
+			{
+				return this._host_address;
+			}
+			set
+			{
+				if ((this._host_address != value))
+				{
+					this._host_address = value;
 				}
 			}
 		}
