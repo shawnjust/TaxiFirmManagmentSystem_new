@@ -142,7 +142,7 @@ a:hover
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="42%" align="center" valign="middle"><input type="image" name="imageField" id="imageField" src="../../Content/picture/BackControl/add.png" /></td>
-            <td width="58%" height="23" style="font-size:12px;"><a href="/Home/EmployeeList?type=common&subtype=AddTaxi&page=1">增加</a></td>
+            <td width="58%" height="23" style="font-size:12px;"><a href="/Home/AddCar">增加</a></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0"></

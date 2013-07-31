@@ -72,6 +72,9 @@ namespace TaxiFirm.Models
         {
             db.deleteTaxi(plate_number);
         }
-
+        public IQueryable<getAllTaxiPlatenumberResult> GetAllPlateNumbers()
+        {
+            return db.getAllTaxiPlatenumber();
+        }
     }
 }
