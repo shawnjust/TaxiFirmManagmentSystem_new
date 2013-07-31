@@ -57,7 +57,7 @@
                         </h1>
                     </div>
                                             <%int em_id = employee.EmployeeId; %>
-                    <form name="basic_information_form" id="info_form1" action="/Home/SaveDriver?EMID=<%:em_id%>" method="post">
+                    <form name="basic_information_form" id="info_form1" action="/Home/SaveDriver?EMID=<%:em_id%>" method="post" enctype = "multipart/form-data">
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
