@@ -1,0 +1,417 @@
+﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<html xmlns="http://www.w3.org/1999/xhtml">
+<head>
+<meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
+<title><asp:ContentPlaceHolder ID="TitleContent" runat="server" /></title>
+<link href="../../Content/css/BackControl/UpBackgoundMain.css" rel="stylesheet" type="text/css" />
+
+
+<script type="text/javascript">
+    function displayLeft() {
+
+        for (var i = 1; i <= 3; i++) {
+
+            var id = "left" + i;
+            var left = window.document.getElementById(id);
+            if (left.style.display == "block") {
+
+                left.style.display = "none";
+
+
+            }
+            else {
+                left.style.display = "block";
+            }
+
+        }
+
+        var seft = window.document.getElementById("controlLeft");
+        if (left.style.display == "block") {
+
+            seft.innerHTML = "<<";
+            seft.title = "收起左列";
+
+        }
+        else {
+            seft.innerHTML = ">>";
+            seft.title = "展开左列";
+        }
+
+    }
+
+</script>
+</head>
+
+<body>
+<table  width="1366" border="0" align="center" cellpadding="0" cellspacing="0">
+  <tr>
+    <td height="128" colspan="3" valign="middle"><% Html.RenderPartial("BackControlUp"); %></td>
+  </tr>
+  <tr>
+    <td width="220" id="left1"   style="display:block;" height="23" class="LeftUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="17%" height="24">&nbsp;</td>
+        <td width="83%" height="22"><img src="../../Content/picture/BackControl/LeftUpCenter.png" width="149" height="22" /></td>
+      </tr>
+    </table></td>
+    <td width="8" height="23" align="center" class="control" id="controlLeft" style="cursor:pointer; background-image:url(../../Content/picture/BackControl/LeftUp.png)" title="收起左列" onclick="displayLeft()">&lt;&lt;</td>
+    <td width="1138" rowspan="3" align="left" valign="top"><asp:ContentPlaceHolder ID="MainContent" runat="server" /> </td>
+  </tr>
+  <tr>
+    <td id="left2" width="220" height="543" valign="top" style="display:block;"><% Html.RenderPartial("BackControlLeft"); %></td>
+    <td height="543" rowspan="2" valign="top" class="control">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="22" id="left3"  style="display:block;" class="LeftBottom">&nbsp;</td>
+  </tr>
+  <tr>
+    <td height="19" colspan="3" class="bottom"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+      <tr>
+        <td width="150" height="23">&nbsp;</td>
+        <td width="95">&nbsp;</td>
+        <td width="810">当前登录用户：<%:Session["name"] %></td>
+        <td width="17" height="22"><img src="../../Content/picture/BackControl/date.png" width="12" height="22" /></td>
+        <td width="294" id="time" style="font-size:12px;">时间：2013年07月15日 星期五 15:22:22</td>
+        
+        <script type="text/javascript">
+            <% if (Session["errorMsg"]=="Ilegal")  %> alert("添加失败");
+            <% else if (Session["errorMsg"]=="Success") %> alert("添加成功");
+            <% Session["errorMsg"]=null; %>
+            function clock() {
+
+
+                var today = new Date();
+
+                switch (today.getDay()) {
+                    case 0: day = "日"; break;
+                    case 1: day = "一"; break;
+                    case 2: day = "二"; break;
+                    case 3: day = "三"; break;
+                    case 4: day = "四"; break;
+                    case 5: day = "五"; break;
+                    case 6: day = "六"; break;
+                }
+
+                var date = "时间: " + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + (today.getDate()) + "日  星期" + day + " " + today.getHours() +
+"时" + today.getMinutes() + "分" + today.getSeconds() + "秒";
+                mydate.innerHTML = date;
+
+            }
+            var mydate = window.document.getElementById("time");
+            var today = new Date();
+            var day;
+            switch (today.getDay()) {
+                case 0: day = "日"; break;
+                case 1: day = "一"; break;
+                case 2: day = "二"; break;
+                case 3: day = "三"; break;
+                case 4: day = "四"; break;
+                case 5: day = "五"; break;
+                case 6: day = "六"; break;
+            }
+            var date = "时间: " + today.getFullYear() + "年" + (today.getMonth() + 1) + "月" + (today.getDate()) + "日  星期" + day + " " + today.getHours() +
+"时" + today.getMinutes() + "分" + today.getSeconds() + "秒";
+
+            mydate.innerHTML = date;
+            window.setInterval("clock()", 1000);
+</script>
+
+      </tr>
+    </table></td>
+  </tr>
+</table>
+</body>
+
+<%
+<<<<<<< HEAD
+        if (Session["CustomerLoginSuccess"] != null)
+        {
+            string success = (string)Session["CustomerLoginSuccess"];
+=======
+        if (Session["DeleteEmployeeSuccess"] != null)
+        {
+            string success = (string)Session["DeleteEmployeeSuccess"];
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+<<<<<<< HEAD
+                window.alert("登录成功");
+=======
+                window.alert("删除成功");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+<<<<<<< HEAD
+                window.alert("登录失败");
+=======
+                window.alert("删除失败");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+<<<<<<< HEAD
+                Session.Remove("CustomerLoginSuccess");
+=======
+                Session.Remove("DeleteEmployeeSuccess");
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+        }
+        
+         %>
+<%
+        if (Session["AddEmployeeSuccess"] != null)
+        {
+            int newID = (int)Session["newID"];
+            string success = (string)Session["AddEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+<<<<<<< HEAD
+            <script   type="text/javascript">
+=======
+            <script type="text/javascript">
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+                window.alert("添加成功，新工号为 <%:newID%>");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("添加失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddEmployeeSuccess");
+        }
+        
+         %>
+         <%
+        if (Session["UpdateEmployeeSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateEmployeeSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateEmployeeSuccess");
+        }
+        
+         %>
+
+            <%
+        if (Session["UpdateSelfInfoSuccess"] != null)
+        {
+           
+            string success = (string)Session["UpdateSelfInfoSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("UpdateSelfInfoSuccess");
+        }
+        
+         %>
+
+
+         <%
+        if (Session["DeleteManagerSuccess"] != null)
+        {
+            string success = (string)Session["DeleteManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限成功回收");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("权限回收失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("DeleteManagerSuccess");
+        }
+        
+         %>
+
+
+
+             <%
+        if (Session["AddManagerSuccess"] != null)
+        {
+            string success = (string)Session["AddManagerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("授权失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("AddManagerSuccess");
+        }
+        
+         %>
+<<<<<<< HEAD
+
+
+
+            <%
+        if (Session["ChangePasswordSuccess"] != null)
+        {
+            string success = (string)Session["ChangePasswordSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("密码修改成功");
+            
+            </script>
+            <%
+
+            }else if("PasswordError".Equals(success))
+            {%>
+                <script type="text/javascript">
+                    window.alert("密码验证错误");
+            
+            </script>
+            
+            
+            <%}else if("NewpasswordError".Equals(success))
+            {%>
+            <script type="text/javascript">
+                window.alert("新密码输入不一致");
+            
+            </script>
+
+            
+            <%}
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("ChangePasswordSuccess");
+        }
+        
+         %>
+=======
+>>>>>>> 0982da429a8c9c58dfb78d5e365133461584db38
+   
+</html>

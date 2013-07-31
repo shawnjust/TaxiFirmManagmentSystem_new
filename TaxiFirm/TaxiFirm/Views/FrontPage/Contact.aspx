@@ -82,12 +82,42 @@
 
 			<div class="clearfix"></div>
 
-			<!-- Search -->
+				<!-- Search -->
 			<nav class="top-search">
-				<form action="404-page.html" method="get">
-					<button class="search-btn"></button>
-					<input class="search-field" type="text" onblur="if(this.value=='')this.value='Search';" onfocus="if(this.value=='Search')this.value='';" value="搜索" />
-				</form>
+              <%if(current==Identity.unlegal){ %>
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
+                	<i class="icon-cloud white"></i>注册
+                </a>
+               
+				<a class="button color medium" href="/FrontPage/Login">
+                	<i class="icon-user white"></i>
+                   登录
+                     </a>
+                    <%}
+                   else if (current == Identity.manager)
+                   { 
+                       %> 
+                     <a class="button color medium"   href="/Home/Index">
+                	<i class="icon-user white"></i>后台
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                     </a>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>

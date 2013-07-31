@@ -82,11 +82,11 @@
 
 			<div class="clearfix"></div>
 
-			<!-- Search -->
-			<!-- Search -->
+				<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button color medium" href="#">
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -107,7 +107,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>

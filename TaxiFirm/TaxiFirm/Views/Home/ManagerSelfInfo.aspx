@@ -25,7 +25,7 @@
                 <% Manager manager = (Manager)Session["CurrentManager"];   %>
                 <div class="row-fluid">
                     <div class="span8">
-                    <div class="span4">
+                    <div class="span4" style="width:300px">
                      <!--<a id="A1" href="#modal-container-614546" role="button" class="btn" data-toggle="modal">Launch demo modal</a>
 					
 					<div id="Div1" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
@@ -47,6 +47,7 @@
                         <form>
                         <fieldset>
                             <legend>基本信息</legend>
+                             <label><h4>工号：  &nbsp;&nbsp;<small><%:manager.EmployId %></small></h4></label>
                             <label>
                                 <h4>经理姓名:&nbsp;&nbsp; <small> <%:manager.Name %></small></h4></label>
                                 <label><h4>公司：  &nbsp;&nbsp;<small><%:manager.FirmID %></small></h4></label>
@@ -66,7 +67,7 @@
                         </fieldset>
                         </form>
                         </div>
-                        <div class="span4" style="width:400px">
+                        <div class="span4" style="width:380px">
                             <form>
                         <fieldset>
                             <legend>公司信息</legend>
@@ -85,6 +86,7 @@
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">我的信息</a> </li>
                             <li><a href="/Home/ModifySelfInfo">修改信息</a> </li>
+                             <li><a href="/Home/ChangePassword">修改密码</a> </li>
                             
                         </ul>
                     </div>

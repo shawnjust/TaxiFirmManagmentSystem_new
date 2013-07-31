@@ -11,15 +11,23 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using TaxiFirm.Models.Taxi;
+using System.IO;
+
 namespace TaxiFirm.Controllers
 {
 
     [HandleError]
+    
+   
     public class HomeController : Controller
     {
 
         DataClasses1DataContext context = new DataClasses1DataContext();
+        TaxiRepository taxiRepository = new TaxiRepository();
         
+
+
         public ActionResult BackHandle()
         {
 
@@ -34,6 +42,14 @@ namespace TaxiFirm.Controllers
 
             }
             return RedirectToAction("Index");
+        }
+
+
+        //修改密码
+        public ActionResult ChangePassword()
+        {
+            return View();
+        
         }
         [HttpPost]
         public ActionResult SetNewBackup(string Name)
@@ -57,38 +73,63 @@ namespace TaxiFirm.Controllers
             
             }
         }
+
         [HttpPost]
-        public ActionResult CustomerLoginHandle(string username, string psword)
+        public RedirectResult ChangePasswordHandle(string PrePassword, string NewPassword, string NewPassword2)
         {
-           
-            try {
-                int userid = int.Parse(username);
-                if (new DataClasses1DataContext().checkCustomerLoginPassword(userid, psword) != 0)
-                {
-                  
-                    Session["Identity"] = Identity.custemer;
-                    Customer customer = new CustomerHandle().getCustomerById(userid);
-                    Session["CurrentCustomer"] = customer;
-                    MyPage page2 = new MyPage();
-                    page2.CurrentPage = 1;
-                    Session["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId,page2);
-                    return RedirectToAction("Elements","FrontPage");
-                }
-                else {
-
-                    Response.Redirect("/FrontPage/Elements");
-                }
-            
-            }
-            catch
+            try
             {
-                ViewData["error"] = "error";
-                Response.Redirect("/FrontPage/Elements");
-               
-            }
-            return View();
-        }
+              
+                Manager manager = (Manager)Session["CurrentManager"];
+                if (new EmployeeHandle().CheckPassword(manager.EmployId, PrePassword))
+                {
+                    if (NewPassword.Equals(NewPassword2))
+                    {
 
+
+                        if (new EmployeeHandle().UpdateEmployeePassword(manager.EmployId,NewPassword))
+                        {
+                            Session["ChangePasswordSuccess"] = "success";
+                        }
+                        else
+                        {
+                            Session["ChangePasswordSuccess"] = "failed";
+
+                        }
+                    }
+                    else 
+                    {
+                        Session["ChangePasswordSuccess"] = "NewpasswordError";
+
+                    }
+                }
+                else 
+                {
+                    Session["ChangePasswordSuccess"] = "PasswordError";
+                }
+
+            }
+            catch 
+            {
+                Session["ChangePasswordSuccess"] = "failed";
+
+            }
+
+
+
+
+            return Redirect("/Home/ManagerSelfInfo");
+
+
+        
+        }
+    
+        //登录页面
+        public ActionResult Login()
+        {
+            return View();
+
+        }
 
         [HttpPost]
         public ActionResult LoginHandle(string username, string psword)
@@ -112,13 +153,7 @@ namespace TaxiFirm.Controllers
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
-                else if (Current == Identity.custemer)
-                {
-
-                    Session["Identity"] = Identity.custemer;
-                    Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(userid);
-                    return RedirectToAction("Index", "FrontPage");
-                   }
+              
 
                 else{
                     Response.Redirect("/FrontPage/Login");
@@ -142,6 +177,128 @@ namespace TaxiFirm.Controllers
 
 
 
+        }
+
+
+       
+        public ActionResult AddNotice()
+        {
+            return View();
+        }
+        //存一个新闻
+        public void SaveNewNews()
+        {
+            string msg = "发送失败，不能为空或输入html代码！";
+            try { 
+                
+                string title = Request.Form["title_str"];
+                string content=Request.Form["content_str"];
+                Manager manager = (Manager)Session["CurrentManager"];
+                int id = manager.EmployId;
+                msg = "图片上传不能为空";
+                HttpPostedFileBase postFile = Request.Files.Get(0);
+                msg = "上传图片的类型必须为jpg或png";
+                string type = postFile.ContentType;
+                string type1 = "image/jpeg";;
+                string type2 = "image/png";
+                if(!type.Equals(type1)&&!type.Equals(type2))
+                {
+                    throw new Exception();
+                }
+                msg = "上传图片失败！";
+                string newFilePath = Server.MapPath("~/Content/NewsIMG/");
+               // string newFilePath = @"C:/pictures/NewsIMG/";
+                string path =newFilePath+Path.GetFileName(postFile.FileName);
+                postFile.SaveAs(path);
+                msg = "数据库存储出问题！";
+                path = "../../Content/NewsIMG/"+ Path.GetFileName(postFile.FileName);
+                NewsAndNotice model = new NewsAndNotice(true);
+                model.sendNewNews(title, id, content, path);
+                msg = "上传一则新闻！";
+                Response.Redirect("../Home/AddNews?hint_message=\"发送成功！" + msg + "\"");
+                return;
+                    
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/AddNews?hint_message=\"发送失败！"+msg+"\"");
+                return;
+            }
+        }
+        public void SaveNewNotice()
+        { //为处理的数据
+            try {
+              string title = Request.Form["title_str"];
+            string content = Request.Form["content_str"];
+            Manager manager = (Manager)Session["CurrentManager"];
+           
+            int id = manager.EmployId;
+          //处理数据
+            title = HttpUtility.HtmlEncode(title);
+            content = HttpUtility.HtmlEncode(content);
+          //发送通告，并检查返回值
+            //测试发送错误
+            
+                NewsAndNotice model = new NewsAndNotice(false);
+                model.sendNewNotice(title, id, content);
+            }
+            catch (Exception ex)
+            { 
+                Response.Redirect("../Home/AddNotice?hint_message=\"发送失败！请勿输入html代码或为空\"");
+                return;
+            }
+            Response.Redirect("../Home/AddNotice?hint_message=\"发送成功！\"");
+            
+        }
+       
+        //}
+       
+        public void deleteNews()
+        {
+            string msg="该条新闻不存在！";
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            try { 
+                
+                NewsAndNotice model = new NewsAndNotice(true);
+                IQueryable<getNewsByIDResult> result = model.getNewsById(news_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+                string path = result.First().picture_path;
+                path = path.Substring(3,path.Length-3);
+                msg = "新闻删除过程中冲突！";
+                model.deleteNews(news_id);
+                msg = "删除新闻图片失败！";
+                path = Server.MapPath(path);
+                msg = "新闻删除成功";
+                Response.Redirect("../Home/Newslist");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?news_id="+news_id+"&hint_msg="+msg);
+                return;
+            }
+        }
+        public void deleteNotice()
+        {
+            string msg = "该通告不存在！";
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try{
+                NewsAndNotice model = new NewsAndNotice(false);
+                IQueryable<getNoticeByIDResult> result = model.getNoticeById(notice_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+
+                msg = "删除通告过程失败";
+                model.deleteNotice(notice_id);
+                Response.Redirect("../Home/InformationList");
+                return;
+            }
+            catch(Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?notice_id="+notice_id+"&hint_msg="+msg);
+                return;
+            }
         }
         public ActionResult Index()
         {
@@ -221,6 +378,41 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult TaxiList()
         {
+
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+              
+
+                    MyPage page = new MyPage();
+
+
+                    page.CurrentPage = page1;
+
+                    List<Taxi> Taxis = new TaxiHandle().GetTaxiByPlateNumberByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["Taxis"] = Taxis;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+
+
+            else
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                MyPage page = new MyPage();
+                page.CurrentPage = page1;
+                List<Taxi> taxis = new TaxiHandle().GetTaxiByPage(page);
+                ViewData["type"] = "common";
+                ViewData["taxis"] = taxis;
+                ViewData["page"] = page;
+            }
             return View();
         }
         public ActionResult NewsList()
@@ -303,18 +495,7 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
-        public ActionResult AddCar()
-        {
-            return View();
-        }
-        public ActionResult CarDealing()
-        {
-            return View();
-        }
-        public ActionResult CarInfoDisplay()
-        {
-            return View();
-        }
+       
         public ActionResult DriverList()
         {
             int page1 = int.Parse(Request.QueryString.Get("page"));
@@ -524,10 +705,7 @@ namespace TaxiFirm.Controllers
             }
         }
 
-        public ActionResult EditTaxiInfoByHost(int id)
-        {
-            return null;
-        }
+        
 
         public ActionResult EditHost(int id)
         {
@@ -1172,6 +1350,232 @@ namespace TaxiFirm.Controllers
                     return 0;
                 }
             }
+        }
+/*
+        public ActionResult TaxiList(int? page)
+        {
+            //TaxiRepository taxiRepository = new TaxiRepository();
+            const int pageSize = 10;
+
+            var Taxis = taxiRepository.FindAllTaxis();
+
+            var paginatedTaxis = new PaginatedList<getAllTaxiInformationResult>(Taxis, page ?? 0, pageSize);
+
+            if (Taxis == null)
+                return View("Error");
+            else
+                return View(paginatedTaxis);
+        }
+        */
+        public ActionResult CarInfoDisplay(string id)
+        {
+            //TaxiRepository taxiRepository = new TaxiRepository();
+
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+        public ActionResult EditCarInfo(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditCarInfo(string id, FormCollection formValues)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            // try
+            //{
+            Taxi.plate_number = Request.Form["plate_number"];
+            Taxi.taxi_color = Request.Form["taxi_color"];
+            Taxi.taxi_brand = Request.Form["taxi_brand"];
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            taxiRepository.UpdateTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+            //}
+
+        }
+
+        public ActionResult AddCar()
+        {
+            View_taxi Taxi = new View_taxi();
+
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+   /*     public ActionResult AddCar(View_taxi Taxi)
+        {
+            if (ModelState.IsValid)
+            {
+                // try
+                //{
+                Taxi.plate_number = Request.Form["plate_number"];
+                Taxi.taxi_color = Request.Form["taxi_color"];
+                Taxi.taxi_brand = Request.Form["taxi_brand"];
+                Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+                taxiRepository.AddTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+
+                return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+                // }
+                // catch
+                // {
+                //ModelState.AddRuleViolations(dinner.GetRuleViolations());
+                // }
+            }
+            return View(Taxi);
+        }
+   */
+        public ActionResult RentOutTaxi(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult RentOutTaxi(string id, FormCollection formValues)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = int.Parse(Request.Form["order_id"]);
+            Taxi.driver_empolyee_id = int.Parse(Request.Form["driver_employee_id"]);
+            Taxi.rent_begin_time = DateTime.Parse(Request.Form["rent_begin_time"]);
+            Taxi.rent_due_return_time = DateTime.Parse(Request.Form["rent_due_return_time"]);
+
+            //UpdateModel(Taxi);
+
+
+            taxiRepository.RentOutTaxi(Taxi.plate_number, Taxi.driver_empolyee_id, Taxi.rent_begin_time, Taxi.rent_due_return_time);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+        }
+
+        public ActionResult ReturnCar(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = null;
+            Taxi.rent_begin_time = null;
+            Taxi.rent_due_return_time = null;
+            Taxi.rent_return_time = DateTime.Now.AddDays(7);
+
+            taxiRepository.ReturnCar(id, Taxi.rent_return_time);
+
+            return View(Taxi);
+        }
+
+        public ActionResult CarDealing(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CarDealing(string id, string confirmButton)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+
+        }
+
+        public ActionResult DeleteTaxi(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DeleteTaxi(string id, string confirmButton)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            taxiRepository.DeleteTaxi(Taxi.plate_number);
+            return View("TaxiDeleted");
         }
 
     }
