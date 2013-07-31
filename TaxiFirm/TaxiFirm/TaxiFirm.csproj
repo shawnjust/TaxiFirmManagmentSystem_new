@@ -473,8 +473,6 @@
     <Content Include="Views\Home\ChangePassword.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
     <Content Include="Views\Home\AddNotice.aspx" />
-    <Content Include="Views\Home\ChangeNews.aspx" />
-    <Content Include="Views\Home\ChangeNotice.aspx" />
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
@@ -492,6 +490,7 @@
     <Content Include="Views\Home\HostTransaction.aspx" />
     <Content Include="Views\Home\InformationList.aspx" />
     <Content Include="Views\Home\InvoiceList.aspx" />
+    <Content Include="Views\Home\Login.aspx" />
     <Content Include="Views\Home\ManagerInfo.aspx" />
     <Content Include="Views\Home\ManagerList.aspx" />
     <Content Include="Views\Home\ManagerSelfInfo.aspx" />

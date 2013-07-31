@@ -122,40 +122,7 @@
 </table>
 </body>
 
-<%
-        if (Session["CustomerLoginSuccess"] != null)
-        {
-            string success = (string)Session["CustomerLoginSuccess"];
-            if ("success".Equals(success))  //删除才成功
-            {%>
-            
-            
-            <script type="text/javascript">
-                window.alert("登录成功");
-            
-            </script>
-            <%
 
-            }
-            else if ("failed".Equals(success))
-            { %>
-            
-            
-            <script type="text/javascript">
-                window.alert("登录失败");
-            
-            </script>
-            <%
-            
-            
-            
-            
-            }
-
-                Session.Remove("CustomerLoginSuccess");
-        }
-        
-         %>
 <%
         if (Session["AddEmployeeSuccess"] != null)
         {
