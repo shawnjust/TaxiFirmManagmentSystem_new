@@ -414,6 +414,7 @@
     <Content Include="Views\Home\DeleteTaxi.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
+    <Content Include="Views\Home\EditCarInfo.aspx" />
     <Content Include="Views\Home\EditHost.aspx" />
     <Content Include="Views\Home\EmployeeList.aspx" />
     <Content Include="Views\Home\FirmList.aspx" />
