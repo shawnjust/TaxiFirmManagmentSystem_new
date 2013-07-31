@@ -14,7 +14,7 @@
 <!-- Mobile Specific Metas
 ================================================== -->
 <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
-
+c
 <!-- CSS
 ================================================== -->
 <link rel="stylesheet" href="../../Content/css/FrontPage/style.css">
@@ -42,8 +42,12 @@
 <script src='../../google_analytics_auto.js'></script></head>
 <%
     News news = (News)ViewData["news"];
-    NewsHandle handler = new NewsHandle();
-     %>
+    NewsHandle handler = new NewsHandle(); 
+    int news_id = (int)ViewData["Current_news_id"];
+    List<int> id_list = (List<int>)ViewData["news_id_set"];
+    int prev_id;
+    int next_id;
+      %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -70,7 +74,7 @@
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
-		</div>
+		</div> 
 
 		<!-- Social / Contact -->
 		<div class="six columns">
@@ -87,10 +91,10 @@
 			<div class="clearfix"></div>
 
 			<!-- Search -->
-			<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button color medium" href="#">
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -111,7 +115,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>
@@ -166,8 +180,35 @@
 		<!-- Portfolio Navi -->
 		<div id="portfolio-navi">
 			<ul>
-				<li><a class="prev" href="#"><b>←</b> 上一页</a></li>
-				<li><a class="next" href="#">下一页 <b>→</b></a></li>
+				            <%
+
+                int index = id_list.IndexOf(news_id);
+                if (index<1)
+                {
+                    index = 0;
+                    prev_id = id_list[index];
+                    next_id = id_list[index + 1];
+                }
+                else if (index>(id_list.Count))
+                {
+                    index = id_list.Count;
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index];
+                }
+                else
+                {
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index + 1];
+                }
+
+                 %>
+                 <%if (index > 0)
+                   {%>
+				<li><a class="prev" href="NewsContent?NWID=<%:prev_id %>"><b>←</b> 上一页</a></li>
+                <%} if (index < id_list.Count-2)
+                   {%>
+				<li><a class="next" href="NewsContent?NWID=<%:next_id %>">下一页 <b>→</b></a></li>
+                <%} %>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
@@ -195,27 +236,26 @@
 	</div>
 </div>
 
-
 <!-- 960 Container -->
 <div class="container" style="margin-top: 30px;">
 
+<%
+    if (news != null)
+    { %>
 	<div class="twelve columns">
-		<p>上周，当我乘坐旧金山的航班抵达洛杉矶机场时，一下飞机就往出租车站赶，但到了那里，等了十分钟才打上车。就在我打算上车的时候，司机和调度员却因谁该将我的手提箱放到出租车上争吵起来。见他们炒得没完没了，我只好自己动手，将手提箱放到后备箱。当出租车最终启动时，我发现里面脏兮兮的，还散发着像香烟一样的味道。</p>
-		<p>这一经历也让我再次思考一个问题，那就是出租车行业到了该彻底颠覆的时候了。硅谷的一些创业公司，如Uber、Lyft、Sidecar等，正在将这种想法付诸于行动。同另外两家打车服务一样，Uber也没有自己的车队，该公司与现有豪华车服务商联手，通过移动应用为提前预订的客户提供租车服务，而自己的角色就像“数字调度员”。 </p>
-        <p>虽然Uber定价方式与出租车公司一样，同样以时间和里程计算费用，但服务价格只是普通出租车的50%。Uber提供的另一项服务“UberX”，则可以让用户乘坐混合动力车出行，价格上与传统出租车差不多。</p>
-        <p>不过，Uber这样的创业公司仍然面临不少发展障碍，如政府的官僚作风、出租车司机和调度员的抵制，以及州和政府不同的监管制度等。最新的障碍则来自于洛杉矶，Uber从今年3月开始进军这座城市。</p>
-	</div>
+		<p><%:news.content %></p>
+    </div>
 
 	<div class="four columns">
 		<div class="project-info-container">
 				<ul class="project-info">
-				<li><strong>作者:</strong> Cheng</li>
-				<li><strong>日期:</strong> Dec 2012</li>
+				<li><strong>作者:</strong> <%:news.author %></li>
+				<li><strong>日期:</strong> <%:handler.getNewsMonth(news) %> <%:handler.getNewsDay(news) %></li>
 				<li><a href="Gallery" class="button color launch"> 查看图片</a></li>
 			</ul>
 		</div>
 	</div>
-
+    <%} %>
 </div>
 <!-- End 960 Container -->
 
@@ -385,7 +425,7 @@
 
 <!-- Style Switcher
 ================================================== -->
-<link rel="stylesheet" href="../../Content/css/FrontPage /switcher.css">
+<link rel="stylesheet" href="../../Content/css/FrontPage/switcher.css">
 <script src="../../Scripts/FrontPage/switcher.js"></script>
 
 <section id="style-switcher">
@@ -446,7 +486,5 @@
 
 </section>
 <!-- Style Switcher / End -->
-
-
 </body>
 </html>

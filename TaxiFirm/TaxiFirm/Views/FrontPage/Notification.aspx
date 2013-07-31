@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
+<%@ Import Namespace="TaxiFirm.Models.Notice" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
 <!--[if (gte IE 9)|!(IE)]><!--><html lang="en"> <!--<![endif]-->
@@ -40,6 +41,12 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%List<Notice> notices = (List<Notice>)ViewData["notices"]; 
+     MyPage page = (MyPage)ViewData["page"];
+      string type = (string)ViewData["type"];
+      string myType = (string)Session["subtype"];
+      NoticeHandle noticeHandler = new NoticeHandle();
+    %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -82,11 +89,11 @@
 
 			<div class="clearfix"></div>
 
-			<!-- Search -->
-			<!-- Search -->
+				<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
-                <a class="button color medium" href="#">
+                <a class="button color medium" href="/FrontPage/Login"  rel="register" >
+                
                 	<i class="icon-cloud white"></i>注册
                 </a>
                
@@ -107,7 +114,17 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%} %>
+               <%}else if(current==Identity.custemer) {%>
+                  <a class="button color medium"   href="/FrontPage/ChangerPassword">
+                	<i class="icon-user white"></i>改密
+                     </a>
+               
+			
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
+                    </a>
+               <%}%>
 			</nav>
 
 		</div>
@@ -176,29 +193,37 @@
 
 <!-- 960 Container -->
 <div class="container floated">
-
+<%
+    if (notices != null && notices.Count != 0)
+    { %>
 	<!-- Page Content -->
 	<div class="eleven floated">
 
+    <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+
+       for (int i = 0; i < notices.Count; i++)
+       {
+           Notice notice = notices[i];%>
 		<!-- Post -->
 		<article class="post medium">
 
 		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
+			<span class="day"><%:noticeHandler.getNoticeDay(notice)%></span>
+			<span class="month"><%:noticeHandler.getNoticeDay(notice)%></span>
 		</section>
 			
 		<div class="medium-notification">
 
 			<header class="meta">
-				<h2><a href="#">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="#">方志晗</a></span>
+				<h2><a href="NotificationContent?NOID=<%:notice.notice_id %>">
+<%:notice.notice_title %> </a></h2>
+
+				<span><i class="halflings user"></i>By <a href="NotificationContent?NOID=<%:notice.notice_id %>"><%:notice.author %></a></span>
 			</header>
 
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
+			<p><%:notice.notice_content %></p>
 			
-			<a href="#" class="button color">Read More</a>
+			<a href="NotificationContent?NOID=<%:notice.notice_id %>" class="button color">Read More</a>
 
 		</div>
 
@@ -207,99 +232,37 @@
 		<!-- Divider -->
 		<div class="line"></div>
 
-
-		<!-- Post -->
-		<article class="post medium">
-
-
-		<section class="date">
-			<span class="day">25</span>
-			<span class="month">Jun</span>
-		</section>
-
-		<div class="medium-notification">
-			<header class="meta">
-				<h2><a href="#">淮南加气站大面积停业 出租车营运影响严重</a></h2>
-				<span><i class="halflings user"></i>By <a href="#">程冉</a></span>
-			</header>
-
-			<p>连日来，淮南市区14座加气站9座停业，导致出租车纷纷涌向仅剩的几座加气站排队加气，加一罐气要等几个小时，营运秩序受到较大影响。记者调查中，歇业的气站表示，因供货企业私自抬价，他们没有利润可赚只有停业，而该市物价部门认为价格并非问题的根源。</p>
-				
-			<a href="#" class="button color">Read More</a>
-
-		</div>
-
-		</article>
+                <%}
+    } %>
 
 
-		<!-- Divider -->
-		<div class="line"></div>
+		
 
 
-		<!-- Post -->
-		<article class="post medium">
-		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
-		</section>
-			
-		<div class="medium-notification">
-
-			<header class="meta">
-				<h2><a href="#">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="#">方志晗</a></span>
-			</header>
-
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
-			
-			<a href="#" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-
-		<!-- Divider -->
-		<div class="line"></div>
-
-
-		<!-- Post -->
-		<article class="post medium">
-
-
-		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
-		</section>
-			
-		<div class="medium-notification">
-
-			<header class="meta">
-				<h2><a href="#">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="#">方志晗</a></span>
-			</header>
-
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
-			
-			<a href="#" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-
-		<!-- Divider -->
-		<div class="line"></div>
-
-
-		<!-- Pagination -->
+<!-- Pagination -->
 		<nav class="pagination">
+
 			<ul>
-				<li><a href="#" class="current">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">Next</a></li>
+            <%   if (page.CurrentPage > 1)
+                 {%>
+                 <li><a href="/FrontPage/Notification?type=common&page=<%:page.CurrentPage-1 %>">Pre</a></li>
+            <%} %>
+                <%for (int i = (page.CurrentPage - 1) > 1 ? (page.CountCurrentPage - 1) : 1; i < page.CurrentPage + 1&&i<=page.WholePage; i++)
+                  {
+                      if (page.CurrentPage == i)
+                      {%> 
+				<li><a href="/FrontPage/Notification?type=common&page=<%:i %>" class="current"><%:i %></a></li>
+                <%}
+                      else
+                      { %>
+                	 <li><a href="/FrontPage/Notification?type=common&page=<%:i %>"><%:i %></a></li>
+                <%}
+                  }%>
+				
+              <%if (page.CurrentPage < page.WholePage)
+                { %>
+				<li><a href="/FrontPage/Notification?type=common&page=<%:page.CurrentPage+1 %>">Next</a></li>
+                <%} %>
 			</ul>
 			<div class="clearfix"></div>
 		</nav>
@@ -312,11 +275,11 @@
 	<div class="four floated sidebar right">
 		<aside class="sidebar">
 
-			<!-- Search -->
+		    <!-- Search -->
 			<nav class="widget-search">
-				<form action="http://vasterad.com/themes/nevia/404-page.html" method="get">
-					<button class="search-btn-widget"></button>
-					<input class="search-field" type="text" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
+				<form  method="post" id="form1">
+					<button class="search-btn-widget" id="button1" onclick="mySubmit()"></button>
+					<input class="search-field" type="text" id="NameID" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
 				</form>
 			</nav>
 			<div class="clearfix"></div>

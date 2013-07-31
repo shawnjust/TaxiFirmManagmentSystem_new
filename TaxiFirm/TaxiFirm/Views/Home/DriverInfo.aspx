@@ -84,7 +84,7 @@
         <td>
             <table border="0" cellspacing="0" cellpadding="5" width="100%">
             	<tr>
-            		<td rowspan="5"><img  src="../../Content/picture/driver.jpg" alt="photo" width="170px" height="170px" /> </td>
+            		<td rowspan="5"><img  src='<%= driver.license.photo_path %>' alt="photo" width="170px" height="170px" /> </td>
             	</tr>
             </table>
         </td>

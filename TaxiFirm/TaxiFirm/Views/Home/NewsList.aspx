@@ -3,6 +3,7 @@
 <%@ Import Namespace = "TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
    新闻列表
+   <% Session["upselect"] = "news"; %>
 </asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
@@ -16,7 +17,7 @@
     Manager CurrentManager = (Manager)Session["CurrentManager"];
     if (CurrentManager == null)
     {
-        Response.Redirect("../FrontPage/Login",false);
+        Response.Redirect("../Home/Login",false);
     }
 %>
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>

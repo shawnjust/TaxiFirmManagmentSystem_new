@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
 </asp:Content>
@@ -10,6 +10,14 @@
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     <script language="javascript" type="text/javascript" src="My97DatePicker/WdatePicker.js"></script>
     <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+    <%
+    //判断是否登陆
+    Manager CurrentManager = (Manager)Session["CurrentManager"];
+    if (CurrentManager == null)
+    {
+        Response.Redirect("../Home/Login",false);
+    }
+%>
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
     </script>
     <style type="text/css">
@@ -41,7 +49,9 @@
             <div class="span12">
                 <div class="page-header">
                     <h1>
-                        发布新闻<small>新闻公告</small></h1>
+                        发布新闻<small><%if (Request.QueryString["hint_message"] != null)
+                                         Response.Write(Request.QueryString["hint_message"]);
+                                          %></small></h1>
                 </div>
                 <div class="row-fluid">
                     <div class="span8">
@@ -63,25 +73,33 @@
 							 <button class="btn" data-dismiss="modal" aria-hidden="true">Close</button> <button class="btn btn-primary">Save changes</button>
 						</div>
 					</div>-->
-   <form>
+  <%-- <form id="form_upload" action="" method="post">--%>
+  <form action="../Home/SaveNewNews" method="post" enctype="multipart/form-data">
                           <fieldset>
                                 <legend>基本内容 </legend>
                                 <label>
                                                                 
-                            <h4>新闻标题：&nbsp;&nbsp;</h4></label> <br/><input type="text" align="middle" class="span10"/>
+                            <h4>新闻标题：&nbsp;&nbsp;</h4></label> <br/>
+                            <input type="text" align="middle" name="title_str" class="span10"/>
 
                                
                                     <label><h4>新闻图片： &nbsp;&nbsp;</h4></label>
-                                    <input name="image" type="file" />
+                                     
+                                    <input id="uploadPic" name="imageFile" type="file" />
+                                   <%-- //预留出展示图片的地方--%>
+                                    
+                                    
                                    <br/>
                                    <label>
                                    <br/>
                             <h4>新闻内容：</h4>
-                            <textarea name="contents" cols="800" rows="10" spellcheck="true" class="span12"></textarea>
+                            <textarea name="content_str" cols="800" rows="10" spellcheck="true" class="span12"></textarea>
+
                             <br/>
    	   &nbsp;&nbsp;
    	   </label>
    	   </h4>
+       <input type="submit" value="发送新闻" />
        </fieldset>
        </form>
        </div>
@@ -92,7 +110,7 @@
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">新闻操作
                             </a> </li>
-                            <li><a id="modal-614546" href="#modal-container-614546" data-toggle="modal">
+                            <li><a id="modal-614546" href="../Home/Newslist" data-toggle="modal">
                                 其他新闻</a>
                                 <div id="modal-container-614546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
@@ -116,8 +134,45 @@
                                     </div>
                                 </div>
                             </li>
-                            <li><a href="#">预览新闻</a> </li>
-                            <li><a href="#">保存新闻</a> </li>
+                            
+                           
                         </ul>
                     </div>
+                  
+<script src="../../Scripts/BackControl/jquery.js" type="text/javascript" ></script>
+<script src="../../Scripts/BackControl/jquery.form.js" type="text/javascript" ></script>
+<%--<script type ="text/javascript">
+    $(function () {
+        $("#btn_show").bind("click", function () {
+            //预览图片
+            var picPath = $("#uploadPic").attr("val");
+            if (picPath == "") {
+                alert("未上传图片！");
+                return;
+            } else {
+                alert(picPath);
+                $("#pic_result").attr("src", picPath);
+                $("#pic_result").show();
+            }
+        });
+    });
+
+    
+            //            var options = {
+            //                success: function (responseText, statusText, xhr, $form) {
+            //                    var picPath = responseText.pic;
+            //                    if (picPath == "") {
+            //                        alert(responseText.error);
+            //                    } else {
+            //                        $("#pic_result").attr("src", picPath).show();
+            //                    }
+            //                },
+            //                error: function (XMLHttpRequest, textStatux, errorThrown) {
+            //                    alert(errorThrown + " status:" + textStatux);
+            //                }
+            //            };
+            //            $("#form_upload").ajaxForm(options);
+//        });--%>
+<%--//    });--%>
+</script>
 </asp:Content>

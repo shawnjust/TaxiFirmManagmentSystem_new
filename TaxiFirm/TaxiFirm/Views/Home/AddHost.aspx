@@ -17,9 +17,9 @@
                             添加车主 <small>车主管理</small>
                         </h1>
                     </div>
-                    <% using (Html.BeginForm())
+                    <% using (Html.BeginForm("AddHost/"+Request["id"], "Home", FormMethod.Post, new { enctype = "multipart/form-data" }))
                        {%>
-                    <%: Html.ValidationSummary(true) %>
+                    <%: Html.ValidationSummary(true)%>
                     <div class="row-fluid">
                         <div class="span8">
                             
@@ -29,7 +29,7 @@
                                     车主姓名</label>
                                 <p>
                                     <%: Html.TextBoxFor(model => model.name, new { disabled = "disabled", @readonly = "readonly" })%>
-                                    <%: Html.ValidationMessageFor(model => model.name) %>
+                                    <%: Html.ValidationMessageFor(model => model.name)%>
                                 </p>
                                 <p>
                                     公司编号
@@ -70,6 +70,13 @@
                                         女
                                         <%: Html.ValidationMessageFor(model => model.gender)%>
                                 </label>
+                                </p>
+
+                                <p>
+                                    照片
+                                </p>
+                                <p>
+                                    <input name="ImgUpload" type="file" />
                                 </p>
                                 <label class="checkbox">
                                     <input type="checkbox" />

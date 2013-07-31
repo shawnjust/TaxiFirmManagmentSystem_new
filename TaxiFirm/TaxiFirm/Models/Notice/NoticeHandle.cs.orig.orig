@@ -1,0 +1,109 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Web;
+
+namespace TaxiFirm.Models.Notice
+{
+    public class NoticeHandle
+    {
+        DataClasses1DataContext db = new DataClasses1DataContext();
+        public Notice getNoticeByID(int notice_id)
+        {
+            Notice notice = new Notice();
+            var table = db.getNoticeByID(notice_id);
+            var col = table.First<getNoticeByIDResult>();
+            notice.notice_id = col.notice_id;
+            notice.notice_title = col.title;
+            notice.employee_id = col.empolyee_id;
+            notice.publish_time = col.publish_time;
+            notice.notice_content = col.notice_content;
+            notice.author = col.name;
+            return notice;
+        }
+<<<<<<< HEAD
+<<<<<<< HEAD
+        //public List<Notice> GetNoticeByNameByPage(MyPage page, string name)
+=======
+        public List<Notice> GetNoticeByNameByPage(MyPage page, string name)
+        {
+            name = "%" + name + "%";
+            page.CountPerPage = 10;
+            page.WholePage = (int)db.getNoticeBySearchNameAndContentPageCount(page.CountPerPage, name);
+            var table = db.getNoticeBySearchNameAndContentByPage(page.CurrentPage, page.CountPerPage, name);
+            List<Notice> notices = new List<Notice>();
+            foreach (var col in table)
+            {
+                Notice notice = new Notice();
+                notice.notice_title = col.title;
+                notice.notice_id = col.notice_id;
+                notice.publish_time = col.publish_time;
+                notice.employee_id = col.empolyee_id;
+                notice.author = col.name;
+                notice.notice_content = col.notice_content;
+                notices.Add(notice);
+            }
+            return notices;
+        }
+        //分页得到经理页面
+        public List<Notice> GetNoticeByPage(MyPage page)
+        {
+            page.CountPerPage = 4;
+            page.WholePage = (int)db.getNoticePageCount(page.CountPerPage);
+            var table = db.getNoticeByPage(page.CurrentPage, page.CountPerPage);
+            List<Notice> notices = new List<Notice>();
+            foreach (var col in table)
+            {
+                Notice notice = new Notice();
+                notice.notice_title = col.title;
+                notice.notice_id = col.notice_id;
+                notice.publish_time = col.publish_time;
+                notice.employee_id = col.empolyee_id;
+                notice.author = col.name;
+                notice.notice_content = col.notice_content;
+                notices.Add(notice);
+            }
+            return notices;
+        }
+=======
+        /*
+>>>>>>> 66c6cc80de120cd4385dd35361345e510dbc585e
+        //{
+        //    name = "%" + name + "%";
+        //    page.CountPerPage = 10;
+        //    page.WholePage = (int)db.getNoticeBySearchNameAndContentPageCount(page.CountPerPage, name);
+        //    var table = db.getNoticeBySearchNameAndContentByPage(page.CurrentPage, page.CountPerPage, name);
+        //    List<Notice> Noticees = new List<Notice>();
+        //    foreach (var col in table)
+        //    {
+        //        Notice notice = new Notice();
+
+        //      //  newses.Add(news);
+        //    }
+        //    return newses;
+<<<<<<< HEAD
+        //}
+=======
+        /*
+        public List<Notice> GetNoticeByNameByPage(MyPage page, string name)
+        {
+            name = "%" + name + "%";
+            page.CountPerPage = 10;
+            page.WholePage = (int)db.getNoticeBySearchNameAndContentPageCount(page.CountPerPage, name);
+            var table = db.getNoticeBySearchNameAndContentByPage(page.CurrentPage, page.CountPerPage, name);
+            List<Notice> Noticees = new List<Notice>();
+            foreach (var col in table)
+            {
+                Notice notice = new Notice();
+
+                newses.Add(news);
+            }
+            return newses;
+        }*/
+>>>>>>> f1b2c880b65ce7513a5e5021097cc026d36ec0fd
+=======
+        }*/
+>>>>>>> e5202034cdbe1763038809ab21d81616ec7ad092
+>>>>>>> 66c6cc80de120cd4385dd35361345e510dbc585e
+    }
+}

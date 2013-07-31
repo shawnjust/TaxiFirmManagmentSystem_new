@@ -68,13 +68,39 @@ namespace TaxiFirm.Models.Customer
             return customers;
         }
 
+        //通过邮箱得到客户
+        public Customer GetCustomerByEmail(string email)
+        {
+            try
+            {
+                Customer customer = new Customer();
+                var table = data.getCustomerByEmail(email);
+                var col = table.First<getCustomerByEmailResult>();
+                if (col.credit == null)
+                { customer.Credit = 0; }
+                else
+                {
+                    customer.Credit = (int)col.credit;
+                }
+                customer.CustomerId = col.customer_id;
+                customer.Email = col.email;
+                customer.NickName = col.nick_name;
+                return customer;
+
+            }
+            catch 
+            {
+                return null;
+            }
+        }
+
         //得到当前积分等级
         public int GetCurrentGrade(int credit)
         {
             int n=1;
             while(true)
             {
-                if ((25 * n + 50) * n > credit && (25 * (n - 1) + 50) * (n - 1) < credit)
+                if ((25 * n + 50) * n > credit && (25 * (n - 1) + 50) * (n - 1) <=credit)
                 {
                     return n;
                 
@@ -116,6 +142,54 @@ namespace TaxiFirm.Models.Customer
             }
 
             return customers;
+        }
+
+        //修改密码
+        public bool ChangePassword(int customerID, string password)
+        {
+            try
+            {
+
+                data.updateCustomerPassword(customerID, password);
+                return true;
+            }
+            catch 
+            {
+                return false;
+            }
+        }
+
+
+        //判断邮箱是否已经注册
+        public bool hasEmailAlready(string email)
+        {
+            try
+            {
+
+                return data.hasCustomerEmail(email) == 0 ? false : true;
+            }
+            catch 
+            {
+                return false;
+            }
+
+        }
+
+        //加入新的客户
+        public bool addNewCustomer(string email, string password,string NickName)
+        {
+            try
+            {
+
+                data.addCustomer(email, NickName, password);
+                return true;
+               
+            }
+            catch 
+            {
+                return false;
+            }
+        
         }
     }
 

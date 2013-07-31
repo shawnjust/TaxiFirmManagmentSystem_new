@@ -26,7 +26,7 @@
             function () {
                 var form1 = document.getElementById("form1");
 
-                window.alert("");
+                form1.action = "/Home/AddEmployeeHandle";
                 form1.submit();
 
 
@@ -52,7 +52,7 @@
                     <div class="row-fluid">
                         <div class="span8">
                         <div class="span4">
-                            <form id="employee_info">
+                            <form id="form1" method="post">
                             <br/>
                             <fieldset>
                                 <legend><h3>基本信息<h3>
@@ -63,7 +63,7 @@
                                 <label>
                                     <h4>姓名</h4></label>
                                 <p>
-                                    <input name="Driver_Name" type="text"/>
+                                    <input name="Employee_Name" type="text"/>
                                 </p>
                                 <p>
                                     
@@ -85,12 +85,12 @@
                                         <h4>公司</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_Condition" type="text" />
+                                    <select name="FirmID">
                                   <% for (int i = 0; i < firms.Count(); i++)
                                      {
                                         
                                      %>
-                                       <option value="<%:firms[i].FirmID%>"><%:firms[i].FirmID%></option>
+                                       <option value="<%:firms[i].FirmID%>" title="<%:firms[i].FirmName %>"><%:firms[i].FirmID%></option>
                                      
                                          
                                        
@@ -102,11 +102,11 @@
                                 </p>
                               
                             </fieldset>
-                            </form>
+                           
                            
                             </div>
                                <div class="span4">
-                            	<form>
+                            	
                                 <br/>
                             <fieldset>
                                 <legend><h3>扩展信息</h3></legend><legend>
@@ -117,17 +117,17 @@
                                   <input name="Employee_IDCard" type="text"  />
                                 </p>
                             </fieldset>
-                            </form>
+                            
                             <br/>
                             <br/>
                             <br/>
                             <br/>
-                                                <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
+                                                <button class="btn btn-primary" type="button" id="button1" style="alignment-adjust:middle">
                         提交</button>
                             </div>
                             
                             <div class="span4">
-                            <form>
+                   
                               <br/>
                             <fieldset>
                           
@@ -136,7 +136,7 @@
                                 <h4>联系电话</h4>
                                 </p>
                                 <p>
-                                    <input name="Driver_TelePhone" type="text" />
+                                    <input name="Employee_TelePhone" type="text" />
                                 </p>
                                 <p>
                                 <h4>家庭住址</h4>
@@ -155,8 +155,7 @@
                         </div>
                         </div> 
                     </div>
-                    <button class="btn btn-primary" type="button" style="alignment-adjust:middle">
-                        提交</button>
+                   
                 </div>
             </div>
         </div>

@@ -16,7 +16,8 @@
     Manager CurrentManager = (Manager)Session["CurrentManager"];
     if (CurrentManager == null)
     {
-        Response.Redirect("../FrontPage/Login",false);
+        Response.Redirect("../Home/Login",false);
+        
     }
 %>
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
@@ -69,7 +70,7 @@
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
             <td width="35%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/add.png" width="11" height="11" /></td>
-            <td width="65%" style="font-size:12px;">添加</td>
+            <td width="65%" style="font-size:12px;"><%:Html.ActionLink("添加公告","AddNotice","Home") %></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">

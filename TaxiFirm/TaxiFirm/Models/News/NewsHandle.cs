@@ -12,15 +12,24 @@ namespace TaxiFirm.Models.News
         public News getNewsById(int news_id)
         {
             News news = new News();
-            var table = db.getNewsByID(news_id);
-            var col = table.First<getNewsByIDResult>();
-            news.NewsId = col.news_id;
-            news.employee_id = col.empolyee_id;
-            news.publish_time = col.publish_time;
-            news.Title = col.title;
-            news.content = col.news_content;
-            news.picture_path = col.picture_path;
-            news.author = col.name;
+            try
+            {
+                
+                var table = db.getNewsByID(news_id);
+                var col = table.First<getNewsByIDResult>();
+                news.NewsId = col.news_id;
+                news.employee_id = col.empolyee_id;
+                news.publish_time = col.publish_time;
+                news.Title = col.title;
+                news.content = col.news_content;
+                news.picture_path = col.picture_path;
+                news.author = col.name;
+                return news;
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
             return news;
         }
         public List<News> GetNewsByNameByPage(MyPage page, string name)
@@ -70,7 +79,20 @@ namespace TaxiFirm.Models.News
             var table = db.getEmpolyeeById(Employee_id);
             var col = table.First<getEmpolyeeByIdResult>();
             return col.name;
-
+        }
+        public string GetPartOfTitle(string content)
+        {
+            if (content.Length<12)
+            {
+                string subContent = content;
+                return subContent;
+            }
+            else
+            {
+                string subContent = content.Substring(0, 13);
+                subContent = subContent + "...";
+                return subContent;
+            }
         }
         public string GetPartOfContent(string content)
         {
@@ -130,6 +152,94 @@ namespace TaxiFirm.Models.News
             }
             return news_group;
         }
-       
+        public string getNewsDay(News news)
+        {
+            return news.publish_time.Day.ToString();
+        }
+        public string getNewsMonth(News news)
+        {
+            string month = news.publish_time.Month.ToString();
+            if (month.Equals("1"))
+            {
+                return "Jan";
+            }
+            else if (month.Equals("2"))
+            {
+                return "Feb";
+            }
+            else if (month.Equals("3"))
+            {
+                return "Mar";
+            }
+            else if (month.Equals("4"))
+            {
+                return "Apr";
+            }
+            else if (month.Equals("5"))
+            {
+                return "May";
+            }
+            else if (month.Equals("6"))
+            {
+                return "Jun";
+            }
+            else if (month.Equals("7"))
+            {
+                return "Jul";
+            }
+            else if (month.Equals("8"))
+            {
+                return "Aug";
+            }
+            else if (month.Equals("9"))
+            {
+                return "Sep";
+            }
+            else if (month.Equals("10"))
+            {
+                return "Oct";
+            }
+            else if (month.Equals("11"))
+            {
+                return "Nov";
+            }
+            else if (month.Equals("12"))
+            {
+                return "Dec";
+            }
+            else
+            {
+                return "WTF";
+            }
+        }
+        public List<int> getNewsIdSet()
+        {
+            var table = db.getAllNews();
+            List<int> id_list = new List<int>();
+            foreach(var col in table)
+            {
+                int news_id = col.news_id;
+                id_list.Add(news_id);
+            }
+            return id_list;
+        }
+        public List<News> getAllNews()
+        {
+            List<News> newses = new List<News>();
+            var table = db.getAllNews();
+            foreach (var col in table)
+            {
+                News news = new News();
+                news.Title = col.title;
+                news.publish_time = col.publish_time;
+                news.employee_id = col.empolyee_id;
+                news.NewsId = col.news_id;
+                news.content = col.news_content;
+                news.picture_path = col.picture_path;
+                news.author = col.name;
+                newses.Add(news);
+            }
+            return newses;
+        }
     }
 }

@@ -122,40 +122,7 @@
 </table>
 </body>
 
-<%
-        if (Session["DeleteEmployeeSuccess"] != null)
-        {
-            string success = (string)Session["DeleteEmployeeSuccess"];
-            if ("success".Equals(success))  //删除才成功
-            {%>
-            
-            
-            <script type="text/javascript">
-                window.alert("删除成功");
-            
-            </script>
-            <%
 
-            }
-            else if ("failed".Equals(success))
-            { %>
-            
-            
-            <script type="text/javascript">
-                window.alert("删除失败");
-            
-            </script>
-            <%
-            
-            
-            
-            
-            }
-
-                Session.Remove("DeleteEmployeeSuccess");
-        }
-        
-         %>
 <%
         if (Session["AddEmployeeSuccess"] != null)
         {
@@ -165,7 +132,7 @@
             {%>
             
             
-            <script type="text/javascript">
+            <script   type="text/javascript">
                 window.alert("添加成功，新工号为 <%:newID%>");
             
             </script>
@@ -332,6 +299,59 @@
             }
 
                 Session.Remove("AddManagerSuccess");
+        }
+        
+         %>
+
+
+
+            <%
+        if (Session["ChangePasswordSuccess"] != null)
+        {
+            string success = (string)Session["ChangePasswordSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("密码修改成功");
+            
+            </script>
+            <%
+
+            }else if("PasswordError".Equals(success))
+            {%>
+                <script type="text/javascript">
+                    window.alert("密码验证错误");
+            
+            </script>
+            
+            
+            <%}else if("NewpasswordError".Equals(success))
+            {%>
+            <script type="text/javascript">
+                window.alert("新密码输入不一致");
+            
+            </script>
+
+            
+            <%}
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("修改失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+            }
+
+                Session.Remove("ChangePasswordSuccess");
         }
         
          %>

@@ -11,15 +11,23 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using System.IO;
+using System.Text;
+using TaxiFirm.Models.Taxi;
 namespace TaxiFirm.Controllers
 {
 
     [HandleError]
+
+
     public class HomeController : Controller
     {
 
         DataClasses1DataContext context = new DataClasses1DataContext();
-        
+        TaxiRepository taxiRepository = new TaxiRepository();
+
+
+
         public ActionResult BackHandle()
         {
 
@@ -35,60 +43,94 @@ namespace TaxiFirm.Controllers
             }
             return RedirectToAction("Index");
         }
+
+
+        //修改密码
+        public ActionResult ChangePassword()
+        {
+            return View();
+
+        }
         [HttpPost]
         public ActionResult SetNewBackup(string Name)
         {
             try
             {
-                if (Name.Length<200&&new BackupHandle().AddNewBackup(Name) > 0)
+                if (Name.Length < 200 && new BackupHandle().AddNewBackup(Name) > 0)
                 {
                     Session["BackupSuccess"] = "success";
                 }
                 else
                 {
                     Session["BackupSuccess"] = "success";
-                
-                }
-                return RedirectToAction("Backup");
-            }
-            catch {
-                Session["BackupSuccess"] = "failed";
-                return RedirectToAction("Backup");
-            
-            }
-        }
-        [HttpPost]
-        public ActionResult CustomerLoginHandle(string username, string psword)
-        {
-           
-            try {
-                int userid = int.Parse(username);
-                if (new DataClasses1DataContext().checkCustomerLoginPassword(userid, psword) != 0)
-                {
-                  
-                    Session["Identity"] = Identity.custemer;
-                    Customer customer = new CustomerHandle().getCustomerById(userid);
-                    Session["CurrentCustomer"] = customer;
-                    MyPage page2 = new MyPage();
-                    page2.CurrentPage = 1;
-                    Session["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId,page2);
-                    return RedirectToAction("Elements","FrontPage");
-                }
-                else {
 
-                    Response.Redirect("/FrontPage/Elements");
                 }
-            
+                return RedirectToAction("Backup");
             }
             catch
             {
-                ViewData["error"] = "error";
-                Response.Redirect("/FrontPage/Elements");
-               
+                Session["BackupSuccess"] = "failed";
+                return RedirectToAction("Backup");
+
             }
-            return View();
         }
 
+        [HttpPost]
+        public RedirectResult ChangePasswordHandle(string PrePassword, string NewPassword, string NewPassword2)
+        {
+            try
+            {
+
+                Manager manager = (Manager)Session["CurrentManager"];
+                if (new EmployeeHandle().CheckPassword(manager.EmployId, PrePassword))
+                {
+                    if (NewPassword.Equals(NewPassword2))
+                    {
+
+
+                        if (new EmployeeHandle().UpdateEmployeePassword(manager.EmployId, NewPassword))
+                        {
+                            Session["ChangePasswordSuccess"] = "success";
+                        }
+                        else
+                        {
+                            Session["ChangePasswordSuccess"] = "failed";
+
+                        }
+                    }
+                    else
+                    {
+                        Session["ChangePasswordSuccess"] = "NewpasswordError";
+
+                    }
+                }
+                else
+                {
+                    Session["ChangePasswordSuccess"] = "PasswordError";
+                }
+
+            }
+            catch
+            {
+                Session["ChangePasswordSuccess"] = "failed";
+
+            }
+
+
+
+
+            return Redirect("/Home/ManagerSelfInfo");
+
+
+
+        }
+
+        //登录页面
+        public ActionResult Login()
+        {
+            return View();
+
+        }
 
         [HttpPost]
         public ActionResult LoginHandle(string username, string psword)
@@ -108,19 +150,14 @@ namespace TaxiFirm.Controllers
 
                     Session["Identity"] = Identity.manager;
                     Session["CurrentManager"] = new Manager(userid);
-                 
+
                     //TempData["Name"] =  
                     return RedirectToAction("Index");
                 }
-                else if (Current == Identity.custemer)
+
+
+                else
                 {
-
-                    Session["Identity"] = Identity.custemer;
-                    Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(userid);
-                    return RedirectToAction("Index", "FrontPage");
-                   }
-
-                else{
                     Response.Redirect("/FrontPage/Login");
                 }
 
@@ -135,7 +172,7 @@ namespace TaxiFirm.Controllers
             }
 
 
-        //    Response.Redirect("/FrontPage/Login");
+            //    Response.Redirect("/FrontPage/Login");
             return View();
 
 
@@ -143,8 +180,205 @@ namespace TaxiFirm.Controllers
 
 
         }
+
+
+
+        public ActionResult AddNotice()
+        {
+            if (Session["Identity"] == null) return RedirectToAction("login");
+            return View();
+        }
+        //存一个新闻
+        public void SaveNewNews()
+        {
+            if (Session["Identity"] == null) return;
+            string msg = "发送失败，不能为空或输入html代码！";
+            try
+            {
+
+                string title = Request.Form["title_str"];
+                string content = Request.Form["content_str"].Replace("\n", "<br>").Replace(" ", "&nbsp");
+                Manager manager = (Manager)Session["CurrentManager"];
+                int id = manager.EmployId;
+                msg = "图片上传不能为空";
+                HttpPostedFileBase postFile = Request.Files.Get(0);
+                msg = "上传图片的类型必须为jpg或png";
+                string type = postFile.ContentType;
+                string type1 = "image/jpeg"; ;
+                string type2 = "image/png";
+                if (!type.Equals(type1) && !type.Equals(type2))
+                {
+                    throw new Exception();
+                }
+                msg = "上传图片失败！";
+                string newFilePath = Server.MapPath("~/Content/NewsIMG/");
+                // string newFilePath = @"C:/pictures/NewsIMG/";
+                string path = newFilePath + Path.GetFileName(postFile.FileName);
+                postFile.SaveAs(path);
+                msg = "数据库存储出问题！";
+                path = "../../Content/NewsIMG/" + Path.GetFileName(postFile.FileName);
+                NewsAndNotice model = new NewsAndNotice(true);
+                model.sendNewNews(title, id, content, path);
+                msg = "上传一则新闻！";
+                Response.Redirect("../Home/AddNews?hint_message=\"发送成功！" + msg + "\"");
+                return;
+
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/AddNews?hint_message=\"发送失败！" + msg + "\"");
+                return;
+            }
+        }
+        public void SaveNewNotice()
+        {
+            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
+            //为处理的数据
+            try
+            {
+                string title = Request.Form["title_str"];
+                string content = Request.Form["content_str"].Replace("\n", "<br>").Replace(" ", "&nbsp;");
+                Manager manager = (Manager)Session["CurrentManager"];
+
+                int id = manager.EmployId;
+                //处理数据
+                // title = HttpUtility.HtmlEncode(title);
+                // content = HttpUtility.HtmlEncode(content);
+                //发送通告，并检查返回值
+                //测试发送错误
+
+                NewsAndNotice model = new NewsAndNotice(false);
+                model.sendNewNotice(title, id, content);
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/AddNotice?hint_message=\"发送失败！请勿输入html代码或为空\"");
+                return;
+            }
+            Response.Redirect("../Home/AddNotice?hint_message=\"发送成功！\"");
+
+        }
+
+        //}
+        public void SaveChangeNotice()
+        {
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try
+            {
+                string title = Request.Form["title_str"];
+                string content = Request.Form["Content_str"].Replace("\n", "<br>").Replace(" ", "&nbsp"); ;
+                NewsAndNotice model = new NewsAndNotice(false);
+                model.UpdateNotice(notice_id, title, content);
+                Response.Redirect("../Home/InformationList");
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/InformationList");
+            }
+        }
+        public void SaveChangeNews()
+        {
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            string msg = "发送失败，不能为空或输入html代码！";
+            try
+            {
+
+                string title = Request.Form["title_str"];
+                string content = Request.Form["content_str"].Replace("\n", "<br>").Replace(" ", "&nbsp"); ;
+
+                msg = "图片上传不能为空";
+                HttpPostedFileBase postFile = Request.Files.Get(0);
+                msg = "上传图片的类型必须为jpg或png";
+                string type = postFile.ContentType;
+                string type1 = "image/jpeg"; ;
+                string type2 = "image/png";
+                if (!type.Equals(type1) && !type.Equals(type2))
+                {
+                    throw new Exception();
+                }
+                msg = "上传图片失败！";
+                string newFilePath = Server.MapPath("~/Content/NewsIMG/");
+                // string newFilePath = @"C:/pictures/NewsIMG/";
+                string path = newFilePath + Path.GetFileName(postFile.FileName);
+                postFile.SaveAs(path);
+                msg = "数据库存储出问题！";
+                path = "../../Content/NewsIMG/" + Path.GetFileName(postFile.FileName);
+                NewsAndNotice model = new NewsAndNotice(true);
+                model.UpdateNews(news_id, title, content, path);
+                msg = "上传一则新闻！";
+                Response.Redirect("../Home/NewsList");
+                return;
+
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsList");
+                return;
+            }
+
+        }
+        public ActionResult ChangeNews()
+        {
+            return View();
+        }
+        public ActionResult ChangeNotice()
+        {
+            return View();
+        }
+        public void deleteNews()
+        {
+            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
+            string msg = "该条新闻不存在！";
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            try
+            {
+
+                NewsAndNotice model = new NewsAndNotice(true);
+                IQueryable<getNewsByIDResult> result = model.getNewsById(news_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+                string path = result.First().picture_path;
+                path = path.Substring(3, path.Length - 3);
+                msg = "新闻删除过程中冲突！";
+                model.deleteNews(news_id);
+                msg = "删除新闻图片失败！";
+                path = Server.MapPath(path);
+                msg = "新闻删除成功";
+                Response.Redirect("../Home/Newslist");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?news_id=" + news_id + "&hint_msg=" + msg);
+                return;
+            }
+        }
+        public void deleteNotice()
+        {
+            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
+            string msg = "该通告不存在！";
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try
+            {
+                NewsAndNotice model = new NewsAndNotice(false);
+                IQueryable<getNoticeByIDResult> result = model.getNoticeById(notice_id);
+                if (result.Count() < 0)
+                    throw new Exception();
+
+                msg = "删除通告过程失败";
+                model.deleteNotice(notice_id);
+                Response.Redirect("../Home/InformationList");
+                return;
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsContent?notice_id=" + notice_id + "&hint_msg=" + msg);
+                return;
+            }
+        }
         public ActionResult Index()
         {
+            if (Session["Identity"] == null) return RedirectToAction("login");
             return View();
         }
 
@@ -159,68 +393,103 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Customer()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            string type = Request.QueryString.Get("type");
 
-             string type = Request.QueryString.Get("type");
-
-             if (type.Equals("search"))   //搜索类型
-             {
-                 int page1 = int.Parse(Request.QueryString.Get("page"));
-                 string NameID = Request.QueryString.Get("NameID");
-                 try
-                 {
-                     int id = int.Parse(NameID);
-                     Customer customer = new CustomerHandle().getCustomerById(id);
-                     List<Customer> customers = new List<Customer>();
-                     if (customer.NickName != null && !customer.Equals(""))
-                     {
-                         customers.Add(customer);
-                     }
-                     ViewData["type"] = "search";
-                     ViewData["customers"] = customers;
-                     MyPage page = new MyPage();
-                     page.CurrentPage = page1;
-                     page.CountPerPage = 10;
-                     page.WholePage = 1;
-                     ViewData["page"] = page;
-                     ViewData["NameID"] = NameID;
-
-
-
-
-                 }
-                 catch
-                 {
-
-                     MyPage page = new MyPage();
-
-
-                     page.CurrentPage = page1;
-
-                     List<Customer> customers = new CustomerHandle().GetCustomerByNameByPage(page, NameID);
-                     ViewData["type"] = "search";
-                     ViewData["customers"] = customers;
-                     ViewData["page"] = page;
-                     ViewData["NameID"] = NameID;
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+                try
+                {
+                    int id = int.Parse(NameID);
+                    Customer customer = new CustomerHandle().getCustomerById(id);
+                    List<Customer> customers = new List<Customer>();
+                    if (customer.NickName != null && !customer.Equals(""))
+                    {
+                        customers.Add(customer);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["customers"] = customers;
+                    MyPage page = new MyPage();
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
 
 
 
 
-                 }
+                }
+                catch
+                {
+
+                    MyPage page = new MyPage();
 
 
-             }
-             else if("common".Equals(type))
-             {
-                 MyPage page = new MyPage();
-                 page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
-                 ViewData["customers"] = new CustomerHandle().GetcustomerByPage(page);
-                 ViewData["page"] = page;
-                 ViewData["type"] = "common";
-             }
+                    page.CurrentPage = page1;
+
+                    List<Customer> customers = new CustomerHandle().GetCustomerByNameByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["customers"] = customers;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+
+
+
+
+                }
+
+
+            }
+            else if ("common".Equals(type))
+            {
+                MyPage page = new MyPage();
+                page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
+                ViewData["customers"] = new CustomerHandle().GetcustomerByPage(page);
+                ViewData["page"] = page;
+                ViewData["type"] = "common";
+            }
             return View();
         }
         public ActionResult TaxiList()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+
+
+                MyPage page = new MyPage();
+
+
+                page.CurrentPage = page1;
+
+                List<Taxi> Taxis = new TaxiHandle().GetTaxiByPlateNumberByPage(page, NameID);
+                ViewData["type"] = "search";
+                ViewData["Taxis"] = Taxis;
+                ViewData["page"] = page;
+                ViewData["NameID"] = NameID;
+
+
+
+
+            }
+
+
+            else
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                MyPage page = new MyPage();
+                page.CurrentPage = page1;
+                List<Taxi> taxis = new TaxiHandle().GetTaxiByPage(page);
+                ViewData["type"] = "common";
+                ViewData["taxis"] = taxis;
+                ViewData["page"] = page;
+            }
             return View();
         }
         public ActionResult NewsList()
@@ -242,81 +511,138 @@ namespace TaxiFirm.Controllers
         public ActionResult InvoiceList()
         {
 
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            string type = Request.QueryString.Get("type");
+            if (type.Equals("search"))   //搜索类型
+            {
 
-              string type = Request.QueryString.Get("type");
-              if (type.Equals("search"))   //搜索类型
-              {
-                 
-                  string NameID = Request.QueryString.Get("NameID");
-                  
-                      int id = int.Parse(NameID);
-                      Invoice invoice = new InvoiceHandle().GetInvoiceByID(id);
-                      List<Invoice> invoices = new List<Invoice>();
-                      if (invoice.CustomerId != null && !invoice.CustomerId.Equals(""))
-                      {
-                          invoices.Add(invoice);
-                      }
-                     
-                      ViewData["invoices"] = invoices;
-                      ViewData["type"] = "search";
-                      MyPage page = new MyPage();
-                      page.CurrentPage = 1;
-                      page.CountPerPage = 10;
-                 
-                      page.WholePage = 1;
+                string NameID = Request.QueryString.Get("NameID");
 
-                      ViewData["page"] = page;
+                int id = int.Parse(NameID);
+                Invoice invoice = new InvoiceHandle().GetInvoiceByID(id);
+                List<Invoice> invoices = new List<Invoice>();
+                if (invoice.CustomerId != null && !invoice.CustomerId.Equals(""))
+                {
+                    invoices.Add(invoice);
+                }
 
+                ViewData["invoices"] = invoices;
+                ViewData["type"] = "search";
+                MyPage page = new MyPage();
+                page.CurrentPage = 1;
+                page.CountPerPage = 10;
 
+                page.WholePage = 1;
+
+                ViewData["page"] = page;
 
 
-                
 
 
-              }
-              else
-              {
 
-                  MyPage page = new MyPage();
-                  page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
-                  int CustomerId = int.Parse(Request.QueryString.Get("id"));
 
-                  ViewData["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(CustomerId, page);
-                  ViewData["page"] = page;
-                  ViewData["customer"] = new CustomerHandle().getCustomerById(CustomerId);
-                  ViewData["type"] = "common";
-              }
+
+            }
+            else
+            {
+
+                MyPage page = new MyPage();
+                page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
+                int CustomerId = int.Parse(Request.QueryString.Get("id"));
+
+                ViewData["invoices"] = new InvoiceHandle().GetCustomerInvoiceByPage(CustomerId, page);
+                ViewData["page"] = page;
+                ViewData["customer"] = new CustomerHandle().getCustomerById(CustomerId);
+                ViewData["type"] = "common";
+            }
             return View();
         }
         public ActionResult EmployeeInfo()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
-            
+
             ViewData["subtype"] = Request.QueryString.Get("subtype");
             Employee employee = new EmployeeHandle().getEmployeeById(id);
             ViewData["employee"] = employee;
             return View();
-            
-        
+
+
         }
-        public ActionResult ComplainList()
+
+        public ActionResult ComplainList(int id = 0)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+
+
+            int? sz = s.getNotAcceptComplaintPageCount(6);
+            IQueryable<getNotAcceptComplaintByPageResult> fs = s.getNotAcceptComplaintByPage(id + 1, 6);
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = sz;
             return View();
         }
-        public ActionResult AddCar()
+
+
+        public ActionResult AcceptedComplaintSearchList(int id = 0)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? count = s.getAcceptedComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
+            IQueryable<getAcceptedComplaintBySearchContentByPageResult> fs = s.getAcceptedComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
             return View();
         }
-        public ActionResult CarDealing()
+
+
+
+        public ActionResult NotAcceptedComplaintSearchList(int id = 0)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? count = s.getNotAcceptComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
+            IQueryable<getNotAcceptComplaintBySearchContentByPageResult> fs = s.getNotAcceptComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = count;
             return View();
         }
-        public ActionResult CarInfoDisplay()
+
+        public ActionResult ComplainAccept(int id = 0)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            s.acceptComplaint(id, 1);
+            return RedirectToAction("ComplainList");
+        }
+
+        public ActionResult ComplainDelete(int id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            s.deleteComplaintById(id);
+            return RedirectToAction("ComplainListAccepted");
+        }
+
+
+        public ActionResult ComplainListAccepted(int id = 0)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            int? sz = s.getAcceptedComplaintPageCount(6);
+            IQueryable<getAcceptedComplaintByPageResult> fs = s.getAcceptedComplaintByPage(id + 1, 6);
+            ViewData.Model = fs;
+            ViewData["pageCount"] = id;
+            ViewData["maxPage"] = sz;
             return View();
         }
+
         public ActionResult DriverList()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int page1 = int.Parse(Request.QueryString.Get("page"));
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
@@ -366,6 +692,7 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult AddDriver()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int employee_id = int.Parse(Request.QueryString.Get("id"));
             Employee employee = new Employee();
             employee = new EmployeeHandle().getEmployeeById(employee_id);
@@ -374,6 +701,7 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverInfo()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int employee_id = int.Parse(Request.QueryString.Get("EMID"));
             Driver driver = new Driver();
             driver = new DriverHandle().GetDriverByEmployeeID(employee_id);
@@ -387,6 +715,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostList(int id = 0)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int pageIndex = id;
             int pageSize = 15;
             int? count = context.getHostPageCount(pageSize);
@@ -420,6 +749,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostBuyTaxi(int id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             BuyTaxiModal s = new BuyTaxiModal()
             {
                 now_id = id,
@@ -432,6 +762,7 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult HostBuyTaxi(int id, BuyTaxiModal modal)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             context.setTaxiOwnerEmpolyeeId(modal.car_id, id);
             return RedirectToAction("HostList");
         }
@@ -439,6 +770,7 @@ namespace TaxiFirm.Controllers
         [HttpGet]
         public void getTaxiInfoByID(string comment)
         {
+            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             List<getTaxiInformationByPlatenumberResult> tx = context.getTaxiInformationByPlatenumber(comment).ToList();
             if (tx.Count() > 0)
             {
@@ -448,6 +780,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult hostTaxiDetail(string id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult s = context.getTaxiInformationByPlatenumber(id).First();
             ViewData.Model = s;
             return View();
@@ -455,6 +788,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostTransaction(string id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult l = context.getTaxiInformationByPlatenumber(id).First();
             TransactionModal s = new TransactionModal()
             {
@@ -472,6 +806,7 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult HostTransaction(string id, TransactionModal modal)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult tx = context.getTaxiInformationByPlatenumber(id).First();
             context.setTaxiOwnerEmpolyeeId(tx.plate_number, modal.buyer_id);
             return RedirectToAction("HostList");
@@ -479,7 +814,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddHost(int id)
         {
-
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int? employee_id = id;
 
             getEmpolyeeByIdResult idr = context.getEmpolyeeById(employee_id).First();
@@ -505,15 +840,33 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult AddHost(int id, AddHostModal host)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
 
                 if (context.isHost(id) == 1) throw new Exception();
+
+
+                StringBuilder info = new StringBuilder();
+                String bas = "";
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase postFile = Request.Files[file];
+                    if (postFile.ContentLength == 0)
+                        continue;
+                    string newFilePath = Server.MapPath("/Content/HostPhoto/host");
+                    postFile.SaveAs(newFilePath + id);
+                    bas = "/Content/HostPhoto/host" + id;
+                    info.AppendFormat("Upload File: {0}/r/n", postFile.FileName);
+                }
+                ViewData["Info"] = info;
+
                 // TODO: Add insert logic here
                 //host.password = host.id_card.Substring(host.id_card.Length - 7);
                 //context.addEmpolyee(host.password, host.firm_id, host.name, host.id_card, host.birthday, host.gender, host.telephone, host.address, ref id);
                 //int? employee_id = context.getEmpolyeeIdByIdCard(host.id_card);
-                context.addHost(id, "");
+                context.addHost(id, bas);
                 Session["errorMsg"] = "Success";
                 return RedirectToAction("HostList");
             }
@@ -524,13 +877,11 @@ namespace TaxiFirm.Controllers
             }
         }
 
-        public ActionResult EditTaxiInfoByHost(int id)
-        {
-            return null;
-        }
+
 
         public ActionResult EditHost(int id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             var dd = context.getEmpolyeeById(id);
 
             getEmpolyeeByIdResult g = dd.First();
@@ -555,10 +906,10 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult EditHost(int id, ShowHostModal modal)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
                 // TODO: Add update logic here
-                //context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
                 return RedirectToAction("HostList");
             }
             catch
@@ -569,6 +920,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult DeleteHost(int id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
                 context.deleteHostById(id);
@@ -583,38 +935,42 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddEmployee()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["firms"] = new FirmHandle().GetAllFirm();
             return View();
-        
+
         }
         [HttpPost]
         public RedirectResult AddEmployeeHandle(string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
-
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
-                int? NewID =new EmployeeHandle().AddEmployee(Employee_Name, gender, Employee_Birthday, FirmID, Employee_IDCard, Employee_TelePhone, Employee_HomeAddress);
-                if ( NewID!= -1)
+                int? NewID = new EmployeeHandle().AddEmployee(Employee_Name, gender, Employee_Birthday, FirmID, Employee_IDCard, Employee_TelePhone, Employee_HomeAddress);
+                if (NewID != -1)
                 {
                     Session["AddEmployeeSuccess"] = "success";
                     Session["newID"] = NewID;
 
                 }
-                else {
+                else
+                {
 
                     Session["AddEmployeeeSuccess"] = "failed";
-                
+
                 }
             }
-            catch {
+            catch
+            {
                 Session["AddEmployeeeSuccess"] = "failed";
-            
+
             }
 
             return Redirect("/Home/EmployeeList?type=common&subtype=Info&page=1");
         }
         public ActionResult HostInfo(int id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             var dd = context.getEmpolyeeById(id);
             IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
             List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
@@ -623,7 +979,7 @@ namespace TaxiFirm.Controllers
                 if (tx.host_empolyee_id == id)
                     taxilist.Add(tx);
             }
-
+            string photo = context.getHostById(id).First().photo;
             getEmpolyeeByIdResult g = dd.First();
 
             List<getAllFirmResult> firm = context.getAllFirm().ToList();
@@ -644,7 +1000,8 @@ namespace TaxiFirm.Controllers
                 telephone = g.telephone,
                 taxi_list = taxilist,
                 firm_name = firm_name,
-                birthday = g.birthday.ToShortDateString()
+                birthday = g.birthday.ToShortDateString(),
+                photo = photo
                 /*,
                 is_available = t.is_available,
                 plate_number = t.plate_number,
@@ -658,6 +1015,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostTaxiInfo(int id)
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["employee_id"] = id;
             List<getTaxiInformationByEmpolyeeIdResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
 
@@ -668,10 +1026,11 @@ namespace TaxiFirm.Controllers
         [HttpGet]
         public ActionResult HostSearchResult(int id = 0)
         {
-            int? count = context.getHostByNamePageCount(15, "%"+Request["query"]+"%");
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            int? count = context.getHostByNamePageCount(15, "%" + Request["query"] + "%");
             ViewData["pageCount"] = id;
             ViewData["maxPage"] = count;
-            
+
             IQueryable<getHostByNameByPageResult> ls = context.getHostByNameByPage(id + 1, 15, "%" + Request["query"] + "%");
             List<HostListModal> showModel = new List<HostListModal>();
 
@@ -696,43 +1055,46 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddNews()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
-        public ActionResult ChangeNews()
-        {
-            return View();
-        }
-       
+        //public ActionResult ChangeNews()
+        //{
+        //    if (Session["Identity"] == null) { return RedirectToAction("login"); }
+        //    return View();
+        //}
+
         public ActionResult BackupList()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             string type = Request.QueryString.Get("type");
             if (type.Equals("search"))   //搜索类型
             {
                 int page1 = int.Parse(Request.QueryString.Get("page"));
                 string NameID = Request.QueryString.Get("NameID");
-               
-
-                    MyPage page = new MyPage();
 
 
-                    page.CurrentPage = page1;
-
-                    List<Backup> backups = new BackupHandle().GetBackupByDescriptionByPage(page, NameID);
-                    ViewData["type"] = "search";
-                    ViewData["backups"] = backups;
-                    ViewData["page"] = page;
-                    ViewData["NameID"] = NameID;
+                MyPage page = new MyPage();
 
 
+                page.CurrentPage = page1;
+
+                List<Backup> backups = new BackupHandle().GetBackupByDescriptionByPage(page, NameID);
+                ViewData["type"] = "search";
+                ViewData["backups"] = backups;
+                ViewData["page"] = page;
+                ViewData["NameID"] = NameID;
 
 
-                
+
+
+
 
 
             }
             else
             {
-                
+
                 MyPage page = new MyPage();
                 page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
                 ViewData["backups"] = new BackupHandle().GetbackupByPage(page);
@@ -745,6 +1107,7 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult DeleteEmployee()
         {
+            if (Session["Identity"] == null) { RedirectToAction("login"); }
             try
             {
                 string id = Request.QueryString.Get("id");
@@ -753,20 +1116,22 @@ namespace TaxiFirm.Controllers
                 {
                     Session["DeleteEmployeeSuccess"] = "success";
                 }
-                else {
+                else
+                {
                     Session["DeleteEmployeeSuccess"] = "failed";
                 }
             }
-            catch {
+            catch
+            {
                 Session["DeleteEmployeeSuccess"] = "failed";
             }
-           return  Redirect("EmployeeList?type=common&subtype=Info&page=1");
+            return Redirect("EmployeeList?type=common&subtype=Info&page=1");
             //return View();
         }
-       
+
         public ActionResult ManagerList()
         {
-
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             string type = Request.QueryString.Get("type");
             if (type.Equals("search"))   //搜索类型
             {
@@ -777,7 +1142,7 @@ namespace TaxiFirm.Controllers
                     int id = int.Parse(NameID);
                     Manager manager = new Manager(id);
                     List<Manager> managers = new List<Manager>();
-                    if (manager.Name != null&&!manager.Equals(""))
+                    if (manager.Name != null && !manager.Equals(""))
                     {
                         managers.Add(manager);
                     }
@@ -787,21 +1152,22 @@ namespace TaxiFirm.Controllers
                     page.CurrentPage = page1;
                     page.CountPerPage = 10;
                     page.WholePage = 1;
-                    ViewData["page"]=page;
+                    ViewData["page"] = page;
                     ViewData["NameID"] = NameID;
 
 
 
 
                 }
-                catch {
+                catch
+                {
 
                     MyPage page = new MyPage();
 
-                   
+
                     page.CurrentPage = page1;
 
-                    List<Manager> managers = new ManagerHandle().GetManagerByNameByPage(page,NameID);
+                    List<Manager> managers = new ManagerHandle().GetManagerByNameByPage(page, NameID);
                     ViewData["type"] = "search";
                     ViewData["managers"] = managers;
                     ViewData["page"] = page;
@@ -809,7 +1175,7 @@ namespace TaxiFirm.Controllers
 
 
 
-                
+
                 }
 
 
@@ -825,6 +1191,7 @@ namespace TaxiFirm.Controllers
         //添加经理
         public RedirectResult AddManager()
         {
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int id = int.Parse(Request.QueryString.Get("id"));
@@ -833,7 +1200,8 @@ namespace TaxiFirm.Controllers
 
                     Session["AddManagerSuccess"] = "success";
                 }
-                else {
+                else
+                {
                     Session["AddManagerSuccess"] = "failed";
                 }
 
@@ -844,28 +1212,31 @@ namespace TaxiFirm.Controllers
                 Session["AddManagerSuccess"] = "failed";
             }
             return Redirect("/Home/ManagerList?type=common&page=1");
-        
+
         }
         //修改工号
         public ActionResult ModifyEmployee()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             ViewData["employee"] = new EmployeeHandle().getEmployeeById(id);
             ViewData["firms"] = new FirmHandle().GetAllFirm();
-                return View();
-            
+            return View();
+
         }
         public ActionResult ModifyManager()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
-            ViewData["manager"] =new EmployeeHandle().getEmployeeById(id);
+            ViewData["manager"] = new EmployeeHandle().getEmployeeById(id);
             ViewData["firms"] = new FirmHandle().GetAllFirm();
-                  
-                return View();
-            
+
+            return View();
+
         }
         public ActionResult ManagerInfo()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             Manager manager = new Manager(id);
             ViewData["manager"] = manager;
@@ -873,39 +1244,45 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ManagerSelfInfo()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
 
         [HttpPost]
-        public ActionResult GetSelfManagerModify(string Manager_ID,string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
+        public ActionResult GetSelfManagerModify(string Manager_ID, string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
         {
-            try{
-
-            Manager manager = (Manager)Session["CurrentManager"];
-                manager.EmployId=int.Parse(Manager_ID);
-            manager.Name = Manager_Name;
-            manager.GenderBite = bool.Parse(gender)                                                                                                                                                                                                                                                                      ;
-            manager.FirmID = int.Parse(FirmID);
-            manager.IdCard = Manager_IDCard;
-            manager.Address = Manager_HomeAddress;
-            manager.Telephone = Manager_TelePhone;
-            manager.Birthday = Convert.ToDateTime(Manager_Birthday);
-
-            Session["CurrentManager"] = manager;
-
-            if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            try
             {
-                Session["UpdateSelfInfoSuccess"] = "success";
-            }
-            else {
-                Session["UpdateSelfInfoSuccess"] = "failed";
-            
-            
-            }
-            }catch{
 
-                Session["UpdateSeleInfoSuccess"]="failed";
-            
+                Manager manager = (Manager)Session["CurrentManager"];
+                manager.EmployId = int.Parse(Manager_ID);
+                manager.Name = Manager_Name;
+                manager.GenderBite = bool.Parse(gender);
+                manager.FirmID = int.Parse(FirmID);
+                manager.IdCard = Manager_IDCard;
+                manager.Address = Manager_HomeAddress;
+                manager.Telephone = Manager_TelePhone;
+                manager.Birthday = Convert.ToDateTime(Manager_Birthday);
+
+                Session["CurrentManager"] = manager;
+
+                if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
+                {
+                    Session["UpdateSelfInfoSuccess"] = "success";
+                }
+                else
+                {
+                    Session["UpdateSelfInfoSuccess"] = "failed";
+
+
+                }
+            }
+            catch
+            {
+
+                Session["UpdateSeleInfoSuccess"] = "failed";
+
             }
             return RedirectToAction("ManagerSelfInfo");
         }
@@ -914,6 +1291,7 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult GetManagerModify(string Manager_ID, string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
         {
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
@@ -939,6 +1317,7 @@ namespace TaxiFirm.Controllers
         //收回经理权限
         public RedirectResult GetManagerRightBack()
         {
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int id = int.Parse(Request.QueryString.Get("id"));
@@ -952,44 +1331,48 @@ namespace TaxiFirm.Controllers
                 }
 
             }
-            catch 
+            catch
             {
                 Session["DeleteManagerSuccess"] = "failed";
-            
+
             }
 
             return Redirect("/Home/ManagerList?type=common&page=1");
-        
+
         }
 
         [HttpPost]
-        public RedirectResult GetSelfEmployeeModify(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
+        public RedirectResult GetSelfEmployeeModify(string Employee_ID, string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
-            try{
-              if(new EmployeeHandle().UpdateEmployee(Employee_ID,Employee_Name,gender,Employee_Birthday,FirmID,Employee_IDCard,Employee_TelePhone,Employee_HomeAddress))
-              {
-                  Session["UpdateEmployeeSuccess"]="success";
-                   
-                
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
+            try
+            {
+                if (new EmployeeHandle().UpdateEmployee(Employee_ID, Employee_Name, gender, Employee_Birthday, FirmID, Employee_IDCard, Employee_TelePhone, Employee_HomeAddress))
+                {
+                    Session["UpdateEmployeeSuccess"] = "success";
+
+
                 }
-                else{
-              
-              Session["UpdateEmployeeSuccess"]="failed";
-              }
-            }    
-            catch{
-               Session["UpdateEmployeeSuccess"]="failed";
+                else
+                {
+
+                    Session["UpdateEmployeeSuccess"] = "failed";
+                }
+            }
+            catch
+            {
+                Session["UpdateEmployeeSuccess"] = "failed";
             }
 
 
-            return Redirect("EmployeeInfo?id="+Employee_ID+"&subtype=Info");
+            return Redirect("EmployeeInfo?id=" + Employee_ID + "&subtype=Info");
         }
 
 
 
         public ActionResult FirmList()
         {
-
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             MyPage page = new MyPage();
 
             page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
@@ -1000,10 +1383,12 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Backup()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
         public ActionResult ModifySelfInfo()
         {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["firms"] = new FirmHandle().GetAllFirm();
             return View();
         }
@@ -1013,7 +1398,7 @@ namespace TaxiFirm.Controllers
             {
                 Identity identity = (Identity)Session["Identity"];
 
-                if (identity.Equals(Identity.manager)&&Session["CurrentManager"] != null)
+                if (identity.Equals(Identity.manager) && Session["CurrentManager"] != null)
                 {
                     Session.Remove("CurrentManager");
                     Session.Remove("Identity");
@@ -1029,6 +1414,7 @@ namespace TaxiFirm.Controllers
         //分页转到经理页面
         public RedirectResult DeleteDriver()
         {
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             int employee_id = int.Parse(Request.QueryString.Get("id"));
             DriverHandle handler = new DriverHandle();
             if (handler.deleteDriver(employee_id))
@@ -1039,6 +1425,7 @@ namespace TaxiFirm.Controllers
         }
         public void GoManagerList(int pagecount)
         {
+            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             MyPage page = new MyPage();
             page.CurrentPage = pagecount;
             List<Manager> managers = new ManagerHandle().GetManagerByPage(page);
@@ -1050,17 +1437,36 @@ namespace TaxiFirm.Controllers
 
 
         [HttpPost]
-        public RedirectResult SaveDriver(string Driver_Condition, string Driver_LicenseID,string License_Date)
+        public RedirectResult SaveDriver(string Driver_Condition, string Driver_LicenseID, string License_Date)
         {
+            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int em_id = int.Parse(Request.QueryString.Get("EMID"));
-                string photo_path = "/Content/images";
+
+
+                StringBuilder info = new StringBuilder();
+                String bas = "";
+
+                foreach (string file in Request.Files)
+                {
+                    HttpPostedFileBase postFile = Request.Files[file];
+                    if (postFile.ContentLength == 0)
+                        continue;
+                    string newFilePath = Server.MapPath("/Content/picture/drivers/");
+                    postFile.SaveAs(newFilePath + em_id);
+                    bas = "/Content/picture/drivers/" + em_id;
+                    info.AppendFormat("Upload File: {0}/r/n", postFile.FileName);
+                }
+                ViewData["Info"] = info;
+
+
+                string photo_path = bas;
                 Driver driver = new Driver();
                 DriverHandle handler = new DriverHandle();
                 if (handler.isDriver(em_id))
                 {
-                    return Redirect("DriverInfo?EMID="+em_id);
+                    return Redirect("DriverInfo?EMID=" + em_id);
                 }
                 driver = new DriverHandle().GetDriverByEmployeeID(em_id);
                 int health = int.Parse(Driver_Condition);
@@ -1071,7 +1477,7 @@ namespace TaxiFirm.Controllers
                 int result = context.setLicenseToDriver(em_id, Driver_LicenseID, license_date, driver.birthday, photo_path);
                 driver = new DriverHandle().GetDriverByEmployeeID(em_id);
                 ViewData["Driver"] = driver;
-                return Redirect("/Home/SaveDriverInfo?id="+em_id);
+                return Redirect("DriverInfo?EMID=" + em_id);
             }
             catch (System.Exception ex)
             {
@@ -1081,15 +1487,16 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult SaveDriverInfo()
         {
-            return View();   
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            return View();
         }
 
         public ActionResult EmployeeList()
         {
-
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             string type = Request.QueryString.Get("type");
-            if (Request.QueryString.Get("subtype") != null) 
-            { 
+            if (Request.QueryString.Get("subtype") != null)
+            {
                 Session["subtype"] = Request.QueryString.Get("subtype");
                 if (Request.QueryString.Get("subtype").Equals("AddDriver"))
                 {
@@ -1098,7 +1505,7 @@ namespace TaxiFirm.Controllers
                     ViewData["EM_DriverHandler"] = driverHandler;
                 }
             }
-        
+
             MyPage page = new MyPage();
             if (type.Equals("search"))   //搜索类型
             {
@@ -1115,7 +1522,7 @@ namespace TaxiFirm.Controllers
                     }
                     ViewData["type"] = "search";
                     ViewData["employees"] = employees;
-                  
+
                     page.CurrentPage = page1;
                     page.CountPerPage = 10;
                     page.WholePage = 1;
@@ -1134,10 +1541,10 @@ namespace TaxiFirm.Controllers
             }
             else
             {
-                int page1 = int.Parse(Request.QueryString.Get("page"));            
+                int page1 = int.Parse(Request.QueryString.Get("page"));
                 page.CurrentPage = page1;
                 List<Employee> employees = new EmployeeHandle().GetEmployeeByPage(page);
-                ViewData["type"] ="common";
+                ViewData["type"] = "common";
                 ViewData["employees"] = employees;
                 ViewData["page"] = page;
             }
@@ -1148,10 +1555,10 @@ namespace TaxiFirm.Controllers
             int age = 0;
             DateTime today = new DateTime();
             today = DateTime.Now;
-            if ((birthday.Month<today.Month)||((birthday.Month==today.Month)&&(birthday.Day<today.Day)))
+            if ((birthday.Month < today.Month) || ((birthday.Month == today.Month) && (birthday.Day < today.Day)))
             {
                 age = today.Year - birthday.Year;
-                if (age>0)
+                if (age > 0)
                 {
                     return age;
                 }
@@ -1163,7 +1570,7 @@ namespace TaxiFirm.Controllers
             else
             {
                 age = (today.Year - birthday.Year) - 1;
-                if (age>0)
+                if (age > 0)
                 {
                     return age;
                 }
@@ -1172,6 +1579,249 @@ namespace TaxiFirm.Controllers
                     return 0;
                 }
             }
+        }
+        /*
+                public ActionResult TaxiList(int? page)
+                {
+                    //TaxiRepository taxiRepository = new TaxiRepository();
+                    const int pageSize = 10;
+
+                    var Taxis = taxiRepository.FindAllTaxis();
+
+                    var paginatedTaxis = new PaginatedList<getAllTaxiInformationResult>(Taxis, page ?? 0, pageSize);
+
+                    if (Taxis == null)
+                        return View("Error");
+                    else
+                        return View(paginatedTaxis);
+                }
+                */
+        public ActionResult CarInfoDisplay(string id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            //TaxiRepository taxiRepository = new TaxiRepository();
+
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+        public ActionResult EditCarInfo(string id)
+        {
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+            IQueryable<getAllTaxiPlatenumberResult> plateNos = taxiRepository.GetAllPlateNumbers();
+
+            List<int> hosts_id = new List<int>();
+            List<string> plate_numbers = new List<string>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+            foreach (var plate_number in plateNos)
+            {
+                plate_numbers.Add(plate_number.plate_number);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+            ViewData["plate_numbers"] = new SelectList(plate_numbers, Taxi.plate_number);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult EditCarInfo(string id, FormCollection formValues)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            // try
+            //{
+            Taxi.plate_number = Request.Form["plate_number"];
+            Taxi.taxi_color = Request.Form["taxi_color"];
+            Taxi.taxi_brand = Request.Form["taxi_brand"];
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            taxiRepository.UpdateTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+            //}
+
+        }
+
+        public ActionResult AddCar()
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            View_taxi Taxi = new View_taxi();
+
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult AddCar(View_taxi Taxi)
+        {
+            if (ModelState.IsValid)
+            {
+                // try
+                //{
+                Taxi.plate_number = Request.Form["plate_number"];
+                Taxi.taxi_color = Request.Form["taxi_color"];
+                Taxi.taxi_brand = Request.Form["taxi_brand"];
+                Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+                taxiRepository.AddTaxi(Taxi.plate_number, Taxi.taxi_color, Taxi.taxi_brand, Taxi.host_empolyee_id);
+
+                return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+                // }
+                // catch
+                // {
+                //ModelState.AddRuleViolations(dinner.GetRuleViolations());
+                // }
+            }
+            return View(Taxi);
+        }
+
+        public ActionResult RentOutTaxi(string id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
+
+            List<int> drivers_id = new List<int>();
+
+            foreach (var Driver in Drivers)
+            {
+                drivers_id.Add(Driver.empolyee_id);
+            }
+
+            ViewData["drivers"] = new SelectList(drivers_id, Taxi.driver_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult RentOutTaxi(string id, FormCollection formValues)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = int.Parse(Request.Form["order_id"]);
+            Taxi.driver_empolyee_id = int.Parse(Request.Form["driver_employee_id"]);
+            Taxi.rent_begin_time = DateTime.Parse(Request.Form["rent_begin_time"]);
+            Taxi.rent_due_return_time = DateTime.Parse(Request.Form["rent_due_return_time"]);
+
+            //UpdateModel(Taxi);
+
+
+            taxiRepository.RentOutTaxi(Taxi.plate_number, Taxi.driver_empolyee_id, Taxi.rent_begin_time, Taxi.rent_due_return_time);
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+        }
+
+        public ActionResult ReturnCar(string id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            Taxi.order_id = null;
+            Taxi.rent_begin_time = null;
+            Taxi.rent_due_return_time = null;
+            Taxi.rent_return_time = DateTime.Now.AddDays(7);
+
+            taxiRepository.ReturnCar(id, Taxi.rent_return_time);
+
+            return View(Taxi);
+        }
+
+        public ActionResult CarDealing(string id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+            IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
+
+            List<int> hosts_id = new List<int>();
+
+            foreach (var Host in Hosts)
+            {
+                hosts_id.Add(Host.empolyee_id);
+            }
+
+            ViewData["hosts"] = new SelectList(hosts_id, Taxi.host_empolyee_id);
+
+            if (Taxi == null)
+                return View("Error");
+            else
+                return View(Taxi);
+
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult CarDealing(string id, string confirmButton)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            Taxi.host_empolyee_id = int.Parse(Request.Form["host_employee_id"]);
+
+            return RedirectToAction("CarInfoDisplay", new { id = Taxi.plate_number });
+
+        }
+
+        public ActionResult DeleteTaxi(string id)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+            else
+                return View(Taxi);
+        }
+
+        [AcceptVerbs(HttpVerbs.Post)]
+        public ActionResult DeleteTaxi(string id, string confirmButton)
+        {
+            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+            getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
+
+            if (Taxi == null)
+                return View("NotFound");
+
+            taxiRepository.DeleteTaxi(Taxi.plate_number);
+            return View("TaxiDeleted");
         }
 
     }

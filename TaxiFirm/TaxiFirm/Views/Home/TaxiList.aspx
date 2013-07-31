@@ -1,16 +1,25 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
-<asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
-   车辆列表
-</asp:Content>
+<%@ Import Namespace="TaxiFirm.Models.Taxi"  %>
+<%@ Import Namespace="TaxiFirm.Models" %>
+
+<asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">车辆管理</asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">
-<link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
+  <link href="../../Content/css/BackControl/bootstrap.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../Scripts/BackControl/bootstrap.js"></script>
 <link href="../../Content/css/BackControl/bootstrap-responsive.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/clean.css" rel="stylesheet" type="text/css" />
 <link href="../../Content/css/BackControl/model.css" rel="stylesheet" type="text/css" />
 <script type="text/javascript" src="../../Scripts/BackControl/jquery.js"></script>
+<style>
+a:hover
+{
+   cursor:pointer;
+    }
+
+</style>
 <script type="text/javascript">
+
     $(document).ready(function () {
 
 
@@ -34,200 +43,287 @@
 
 
         });
+        $(".btn").click(
+        function () {
+            var NameInput = document.getElementById("NameID");
+            var name = NameInput.value;
+            var form1 = document.getElementById("search_form");
+            form1.action = "/Home/TaxiList?type=search&NameID=" + name + "&page=1";
+            form1.submit();
 
-       
 
+
+        }
+
+        );
+        $(".ChangePage").click(
+        function () {
+
+            var type = this.id;
+            var form1 = document.getElementById("changepage");
+            var content = form1.title;
+
+            var CurrentPage = parseInt(content.substring(0, content.indexOf(' ')));
+            var WholePage = parseInt(content.substring(content.indexOf(' ') + 1, content.length));
+
+
+            if (type == "Prev") {
+                if (CurrentPage <= 1) {
+                    window.alert("已到最前页");
+                } else {
+
+                    var type = document.getElementById("type").value;
+
+
+                    if ("common" == type) {
+                        form1.action = "/Home/TaxiList?type=common&page=" + (CurrentPage - 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/TaxiList?type=search&NameID=" + name + "&page=" + (CurrentPage - 1);
+                    }
+                    form1.submit();
+
+                }
+
+
+
+
+            } else if (type == "Next") {
+                if (CurrentPage >= WholePage) {
+                    window.alert("已到最后页");
+
+                } else {
+                    var type = document.getElementById("type").value;
+
+
+                    if ("common" == type) {
+                        form1.action = "/Home/TaxiList?type=common&page=" + (CurrentPage + 1);
+                    } else if ("search" == type) {
+
+                        var name = document.getElementById("name_id").value;
+                        form1.action = "/Home/TaxiList?type=search&NameID=" + name + "&page=" + (CurrentPage + 1);
+                    }
+                    form1.submit();
+                }
+
+            }
+
+
+
+        }
+
+
+
+        );
 
 
     });
 </script>
 
+<% List<Taxi> taxis = (List<Taxi>)ViewData["taxis"];
+    MyPage page = (MyPage)ViewData["page"];
+    string type = (string)ViewData["type"];
+    %>
 <table width="100%" border="0" cellspacing="0" cellpadding="0">
   <tr>
     <td height="24" class="CenterUp"><table width="100%" border="0" cellspacing="0" cellpadding="0">
      <tr>
-        <td width="77" height="24" align="center" valign="middle" class="UpSelect1" style="color:#06F;">车辆列表</td>
-        <a>        </a>
-        
+        <td width="77" height="24" align="center" valign="middle" class="UpSelect1" style="color:#06F;background-image:url(../../Content/picture/BackControl/CenterUp2Select.png);"></td>
         <td height="24">&nbsp;</td>
         <td width="379" height="24">&nbsp;</td>
         <td width="48" height="24" class="UpRight2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="38%" height="24"><input type="checkbox" name="checkbox" id="checkbox" /></td>
-            <td width="62%" style="font-size:12px;">全选</td>
+            <td width="38%" height="24">&nbsp;</td>
+            <td width="62%" style="font-size:12px;">&nbsp;</td>
+          </tr>
+        </table></td>
+        <td width="48" height="24" class="UpRight">&nbsp;</td>
+        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
+          <tr>
+            <td width="42%" align="center" valign="middle"><input type="image" name="imageField" id="imageField" src="../../Content/picture/BackControl/add.png" /></td>
+            <td width="58%" height="23" style="font-size:12px;"><a href="/Home/AddCar">增加</a></td>
+          </tr>
+        </table></td>
+        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0"></
+          <tr>
+           
+            
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="35%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/add.png" width="11" height="11" /></td>
-            <td width="65%" style="font-size:12px;"><%:Html.ActionLink("增加","AddCar","Home") %></td>
-          </tr>
-        </table></td>
-        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="42%" align="center" valign="middle"><img src="../../Content/picture/BackControl/edit.png" width="14" height="14" /></td>
-            <td width="58%" height="23" style="font-size:12px;">编辑</td>
-          </tr>
-        </table></td>
-           <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="42%" align="center" valign="middle"><img src="../../Content/picture/BackControl/edit.png" width="14" height="14" /></td>
-            <td width="58%" height="23" style="font-size:12px;">删除</td>
-          </tr>
-        </table></td>
-        </tr>
-        </table></td>
-        <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
-          <tr>
-            <td width="44%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/save.png" width="12" height="12" /></td>
-            <td width="56%" height="23" style="font-size:12px;">保存</td>
+          
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight">&nbsp;</td>
         <td width="45" height="24">&nbsp;</td>
+      </tr>
+    </table>
   </tr>
   <tr>
-    <td height="24" colspan="4" class="CenterUp"><div class="container-fluid">
-      <div class="row-fluid">
-        <div class="span12">
-          <div class="row-fluid">
-            <div class="span6">
-              <div class="page-header">
-                <h1>车辆列表</h1>
-                <h1><small></small></h1>
+    <td align="left" valign="middle"><div class="container-fluid">
+        <div class="row-fluid">
+            <div class="span12">
+              <div class="row-fluid">
+                    <div class="span6">
+                        <div class="page-header">
+                          <h1>车辆列表</h1>
+                            <h1>&nbsp;</h1>
+                      </div>
+              </div>
+                    <div class="span6">
+                         <p>&nbsp;</p>
+                         <p>&nbsp;</p>
+                         <form id="search_form" method="post"> 
+                            <input type="text" title= "输入客户名或id" class="input-medium search-query" id="NameID" name="NameID" /> <button type="button" class="btn">搜索</button>
+                      </form>
+                       <input type="hidden" id="type" value=<%:type%> />
+                </div>
+                </div>
+                <table class="table table-hover table-bordered">
+                    <thead>
+                        <tr>
+                        
+                          <th>序号</th>
+                          <th>车牌</th>
+                          <th>
+                                品牌</th>
+                          <th>
+                                颜色</th>
+                          <th>车主</th>
+                         
+                            <th>信息</th>
+                        </tr>
+                    </thead>
+                    <% if (taxis != null && taxis.Count != 0)
+                       { %>
+                    <tbody>
+                    <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+
+                      for (int i = 0; i < taxis.Count; i++)
+                      {
+                          Taxi taxi = taxis[i];%>
+                       
+                        <%if (i == 0 || i == 5)
+                          {%>  <tr>
+                        <%}
+                          else if (i == 1 || i == 6)
+                          {%> <tr class="success">
+                        <%}
+                          else if (i == 2 || i == 7)
+                          { %><tr class="error">
+                        <%}
+                          else if (i == 3 || i == 8)
+                          { %><tr class="warning">
+                        <%}
+                          else if (i == 4 || i == 9)
+                          { %><tr class="info">
+                        <%}%>
+                     
+                            <td>
+                                <%:num++%>
+                            </td>
+                            <td><%:taxi.PlateNumber%></td>
+                            <td>
+                                <%:taxi.TaxiBrand%></td>
+                            <td><%:taxi.TaxiColor%></td>
+                           <td> <%if (taxi.OwenerID == null)
+                                  {%>
+                            "无"
+                            <%}
+                                  else
+                                  {%>
+                            <%:(int)taxi.OwenerID%>
+                            <%}%></td>
+                            
+                            <td  style="color:#900" class="pointer"><a href="/Home/CarInfoDisplay?id=<%:taxi.PlateNumber%>">信息管理</a></td>
+                        </tr>
+                        <%}
+                      
+                       %>
+                    
+                    </tbody><%} %>
+                </table>
+                
+               <form id="changepage" title="<%:(page.CurrentPage)+" "+page.WholePage%>" class="<%:page.WholePage%>" method="post"></form>
+
+              
+               <%if ("search".Equals(type)) { 
+                 
+                 %>
+                 
+                 <input type="hidden" id="name_id" value="<%:ViewData["NameID"] %>" />
+                 <%
+                 
+                 }%>
+            <div class="pagination pagination-centered">
+              <ul>
+                <li> <a class="ChangePage" id="Prev">Prev</a> </li>
+                <%  int current = page.CurrentPage - 3;
+                    for (int i = 0; i < page.PageWidth; i++)
+                    {
+                        current++;
+                        if (current == page.CurrentPage)
+                        {
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/TaxiList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/TaxiList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
+}
+                        else if (current >= 1 && current <= page.WholePage)
+                        
+                            if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/TaxiList?type=common&page=<%:current%>"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/TaxiList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
+                        else if (current < 1)
+                        {
+                            while (current < 1)
+                            { current++; }
+
+                            if (current == page.CurrentPage)
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/TaxiList?type=common&page=<%:current%>" style="background-color:Orange"><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/TaxiList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>" style="background-color:Orange"><%:current%></a> </li>
+                            <%
+                            }
+}
+                            else
+                            {  if ("common".Equals(type))
+                            {%>
+                      <li> <a href="/Home/TaxiList?type=common&page=<%:current%>" ><%:current%></a> </li>
+                      <%}
+                            else if ("search".Equals(type))
+                            {%>
+                            <li> <a href="/Home/TaxiList?type=search&page=<%:current%>&NameID=<%:ViewData["NameID"] %>"><%:current%></a> </li>
+                            <%
+                            }
+}
+                        }
+                    }%>
+            
+                <li> <a class="ChangePage" id="Next">Next</a> </li>
+                        
+                  </ul>
               </div>
             </div>
-            <div class="span6">
-              <p>&nbsp;</p>
-              <p>&nbsp;</p>
-              <form class="form-search">
-                <input type="text" title= "输入客户名或id" class="input-medium search-query" />
-                <button type="submit" class="btn">搜索</button>
-              </form>
-            </div>
-          </div>
-          <table class="table table-hover table-bordered">
-            <thead>
-              <tr>
-                <th width="34" align="center">选中</th>
-                <th width="34">序号</th>
-                <th width="87">车牌</th>
-                <th width="68"> 是否租出</th>
-                <th width="80">车辆品牌</th>
-                <th width="49">还车时间</th>
-                <th width="122">详细信息</th>
-              </tr>
-            </thead>
-            <tbody>
-              <tr>
-                <td align="center"><input name="input" type="checkbox" value="" />
-                  &nbsp;</td>
-                <td> 1 </td>
-                <td>皖A154111</td>
-                <td> 是 </td>
-                <td>大众帕萨特</td>
-                <td> 2014-5-28</td>
-                <td  style="color:#900" class="pointer"><%:Html.ActionLink("具体信息","CarInfoDisplay","Home") %></td>
-              </tr>
-              <tr class="success">
-                <td align="center"><input name="input" type="checkbox" value="" /></td>
-                <td>2</td>
-                <td>皖A154111</td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span style="color: #900"></span><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="error">
-                <td align="center"><input name="input2" type="checkbox" value="" /></td>
-                <td>3</td>
-                <td>皖A154111 </td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="warning">
-                <td align="center"><input name="input3" type="checkbox" value="" /></td>
-                <td>4</td>
-                <td>皖A154111</td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="info">
-                <td align="center"><input name="input4" type="checkbox" value="" /></td>
-                <td>5</td>
-                <td>皖A154111</td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr>
-                <td align="center"><input name="input5" type="checkbox" value="" /></td>
-                <td> 1 </td>
-                <td>皖A154111</td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="success">
-                <td align="center"><input name="input6" type="checkbox" value="" /></td>
-                <td>2</td>
-                <td>皖A154111</td>
-                <td>是 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="error">
-                <td align="center"><input name="input7" type="checkbox" value="" /></td>
-                <td>3</td>
-                <td>皖A154111</td>
-                <td> 否 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="warning">
-                <td align="center"><input name="input8" type="checkbox" value="" /></td>
-                <td>4</td>
-                <td>皖A154111</td>
-                <td>否 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-              <tr class="info">
-                <td align="center"><input name="input9" type="checkbox" value="" /></td>
-                <td>5</td>
-                <td>皖A154111</td>
-                <td>否 </td>
-                <td>雪弗兰</td>
-                <td>2014-5-28</td>
-                <td><span class="pointer" style="color:#900">具体信息</span></td>
-              </tr>
-            </tbody>
-          </table>
-          <div class="pagination pagination-centered">
-            <ul>
-              <li> <a href="#">Prev</a></li>
-              <li> <a href="#">1</a></li>
-              <li> <a href="#">2</a></li>
-              <li> <a href="#">3</a></li>
-              <li> <a href="#">4</a></li>
-              <li> <a href="#">5</a></li>
-              <li> <a href="#">Next</a></li>
-            </ul>
-          </div>
         </div>
-      </div>
     </div></td>
   </tr>
-    </table>
-
-
+</table>
 </asp:Content>

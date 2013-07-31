@@ -1,6 +1,7 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace = "TaxiFirm.Models" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager" %>
+<%@ Import Namespace="System.Text" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     公告内容
 </asp:Content>
@@ -15,7 +16,7 @@
     Manager CurrentManager = (Manager)Session["CurrentManager"];
     if (CurrentManager == null)
     {
-        Response.Redirect("../FrontPage/Login",false);
+        Response.Redirect("../Home/Login",false);
     }
 %>
     <div class="container-fluid">
@@ -37,7 +38,12 @@
                      %>
                         <form>
                         <fieldset>
-                            <legend>基本信息</legend>
+                            <legend>基本信息<small><%
+                                                   if (Request.QueryString["hint_msg"] != null)
+                                                   {
+                                                       Response.Write("删除失败！"+Request.QueryString["hint_msg"]);
+                                                   }
+                                                    %></small></legend>
                             <label>
                                 标题：<%=this_record.title %>
                             </label>
@@ -50,7 +56,7 @@
                         <form>
                         <fieldset>
                             <legend>内容</legend>
-                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%=this_record.notice_content %></font></p>	
+                        <p style="TEXT-ALIGN: left" align="left"><font color="navy" face="微软雅黑">  &nbsp; &nbsp; &nbsp; &nbsp;<%= HttpUtility.HtmlDecode(this_record.notice_content)%></font></p>	
                         </fieldset>
                         </form>
                     </div>
@@ -58,8 +64,9 @@
                         <ul class="nav nav-list">
                             <li class="nav-header">基本操作 </li>
                             <li class="active"><a href="#">公告展示</a> </li>
-                            <li><a id="modal-614546" href="" data-toggle="modal">
-                               删除</a>
+                            <li><%
+                                    Response.Write("<a href=\"../Home/deleteNotice?notice_id="+Request.QueryString["notice_id"]+"\">删除</a>");   
+                                  %>
                                 <div id="modal-container-614546" class="modal hide fade" role="dialog" aria-labelledby="myModalLabel"
                                     aria-hidden="true">
                                     <div class="modal-header">
@@ -83,7 +90,7 @@
                                 </div>
                             </li>
                           
-                            <li><a href="#">修改</a> </li>
+                            <li><%Response.Write("<a href=\"../Home/ChangeNotice?notice_id="+Request.QueryString["notice_id"]+"\">修改公告<a>"); %> </li>
                           
                             <li class="nav-header">备注信息 </li>
                             <li><a href="#">备注</a></li>

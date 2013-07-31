@@ -18,6 +18,15 @@ namespace TaxiFirm.Models
             this.isNotice = !isANews;
         }
         //返回页数
+        public void UpdateNotice(int id, string title, string content)
+        {
+            db.updateNoticeContentByID(id, title, content);
+        }
+        public void UpdateNews(int id, string title, string content, string Path)
+        {
+            db.updateNewsContentByID(id, title, content);
+            db.setNewsPicturePathByID(id, Path);
+        }
         public int getPageCount(int perPage)
         {
             int result;
@@ -54,7 +63,7 @@ namespace TaxiFirm.Models
                 return db.getNoticeByPage(page, perPage);
             }
         }
-
+      
         //根据ID返回记录
         public IQueryable<getNewsByIDResult> getNewsById(int id)
         {
@@ -64,7 +73,31 @@ namespace TaxiFirm.Models
         {
             return db.getNoticeByID(id);
         }
-
+        //发送新通告
+        public void sendNewNotice(string title,int id,string content)
+        {
+            
+            //db.andNotice函数返回值并未进行判断*********************************************
+            db.addNotice(title, id, content);
+            
+        }
+        //发送新新闻
+        public void sendNewNews(string title,int id,string content,string picPath)
+        {
+           
+            db.addNews(title, id, content, picPath);
+            
+        }
+        //删除新闻
+        public void deleteNews(int id)
+        {
+            db.deleteNewsByID(id);
+        }
+        //删除通告
+        public void deleteNotice(int id)
+        {
+            db.deleteNoticeByID(id);
+        }
 
 
     }
