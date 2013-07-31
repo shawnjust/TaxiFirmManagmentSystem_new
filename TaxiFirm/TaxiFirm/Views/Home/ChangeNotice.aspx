@@ -115,8 +115,10 @@
                                  
                             <h4>公告内容：</h4>
                             <% 
-                                Response.Write("<textarea id=\"content_str\" name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\" >" + content + "</textarea>");
+                                Response.Write("<textarea id=\"content_str\" name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\" >" + content.Replace("<br>","\n").Replace("&nbsp;"," ") + "</textarea>");
                              %>
+
+                          
                             
                             <input type="submit" id="submit" value="确认修改"  />
                             <br/>

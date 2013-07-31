@@ -113,7 +113,7 @@
                                    <br/>
                             <h4>新闻内容：</h4>
                             <% 
-                                Response.Write("<textarea name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\">"+content +"</textarea>");
+                                Response.Write("<textarea name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\">"+content.Replace("&nbsp;"," ").Replace("<br>","\n") +"</textarea>");
                             %>
                             <br/>
    	   &nbsp;&nbsp;
