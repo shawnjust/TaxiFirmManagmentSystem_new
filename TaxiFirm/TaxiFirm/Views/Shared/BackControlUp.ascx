@@ -97,10 +97,19 @@
         <td width="218" height="100%"><img src="../../Content/picture/BackControl/2.png" width="155" height="17" /></td>
         <td width="731">&nbsp;</td>
        <td width="40"  class="controlArea"><a href="/FrontPage/Index"><img  title="返回主页面" src="../../Content/picture/BackControl/homeButton.png" width="40" height="17" /></a></td>
-         <td width="40" class="controlArea"><img src="../../Content/picture/BackControl/Upback.png" width="43" height="15" /></td>
-        <td width="40" class="controlArea"><img src="../../Content/picture/BackControl/Upnext.png" width="42" height="15" /></td>
-         <td width="40" class="controlArea"><img src="../../Content/picture/BackControl/User.png" width="38" height="15" /></td>
+         <td width="40" class="controlArea"><img src="../../Content/picture/BackControl/Upback.png" width="43" height="15" onclick="back()" /></td>
+        <td width="40" class="controlArea"><img src="../../Content/picture/BackControl/Upnext.png" width="42" height="15" onclick="next()" /></td>
+         <td width="40" class="controlArea"><a href="/Home/ManagerSelfInfo"><img  src="../../Content/picture/BackControl/User.png" width="38" height="15" /></a></td>
       </tr>
     </table></td>
+    <script type+"text/javascript">
+        function back() {
+            history.go(-1);
+        }
+        function next() {
+            history.go(1);
+        }
+    
+    </script>
   </tr>
 </table>

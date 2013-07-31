@@ -49,18 +49,26 @@
 <script type="text/javascript">
     function Submit() {
 
-        var content1 = document.getElementById("username");
-        var content2 = document.getElementById("psword");
-        if (content1 == null || content1 == "") return;
-        if (content2 == null || content2 == "") return;
+        var content1 = document.getElementById("username").value;
+        var content2 = document.getElementById("psword").value;
+        if (content1 == null || content1 == "") {
+            window.alert("用户名不能为空");
+            return;
+        }
+        if (content2 == null || content2 == "") {
+            window.alert("密码不能为空");
+        return; }
         var form1 = document.getElementById("login_form");
         form1.submit();
 
     }
 
     function invoiceSubmit() {
-        var content1 = document.getElementById("invoiceNumber");
-        if (content1 == null || content1 == "") return;
+        var content1 = document.getElementById("invoiceNumber").value;
+        if (content1 == null || content1 == "") {
+            window.alert("发票号不能为空");
+            return
+         };
         var form1 = document.getElementById("invoiceSubmit");
         form1.submit();
     }
@@ -274,7 +282,7 @@
                 <form id="invoiceSubmit" method="post" action="/FrontPage/GetCredit">
                 <h4>发票号</h4>
                 <p>
-                <input id="invoiceNumber" type="text" style="width: 70%;" id="invoiceNumber" name="invoiceNumber"/>
+                <input id="invoiceNumber" type="text" style="width: 70%;name="invoiceNumber"/>
                 </p>
                 <% if (Session["InvoiceSuccess"] == null)
                    { %>
@@ -315,10 +323,10 @@
             <form class="login active" id="login_form" action="/FrontPage/CustomerLoginHandle" method="post">
 			<div class="large-notice">
 				<h3>用户名</h3>
-                <input id="Text2" type="text" style="width: 70%;" id="username" name="username"/>
+                <input  type="text" style="width: 70%;" id="username" name="username"/>
                 <h4>密码</h4>
                 <p>
-                <input id="Text1" type="password" style="width: 70%;" id="psword" name="psword"/>
+                <input  type="password" style="width: 70%;" id="psword" name="psword"/>
                 </p>
                 <p>登录获取优惠</p>
                 <a class="button medium color" onclick="Submit()">登录</a>

@@ -27,7 +27,7 @@ namespace TaxiFirm.Controllers
 
             try
             {
-               
+                if (Session["CurrentManager"] != null) { Session.Remove("CurrentManager"); Session.Remove("Identity"); }
                 if (new DataClasses1DataContext().checkCustomerLoginPasswordByEmail(username, psword) != 0)
                 {
                     if (Session["CurrentCustomer"] != null)
@@ -81,7 +81,7 @@ namespace TaxiFirm.Controllers
             }
 
           //  Response.Redirect("/FrontPage/Elements");
-            return RedirectToAction("Index","FrontPage");
+            return RedirectToAction("Elements","FrontPage");
 
         }
         [HttpPost]

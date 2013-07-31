@@ -141,32 +141,32 @@ a:hover
         <td width="379" height="24">&nbsp;</td>
         <td width="48" height="24" class="UpRight2"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="38%" height="24"><input type="checkbox" name="checkbox" id="checkbox" /></td>
-            <td width="62%" style="font-size:12px;">全选</td>
+            <td width="38%" height="24"></td>
+            <td width="62%" style="font-size:12px;"></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="35%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/add.png" width="11" height="11" /></td>
-            <td width="65%" style="font-size:12px;">添加</td>
+            <td width="35%" height="23" align="center" valign="middle"></td>
+            <td width="65%" style="font-size:12px;"></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="42%" align="center" valign="middle"><img src="../../Content/picture/BackControl/edit.png" width="14" height="14" /></td>
-            <td width="58%" height="23" style="font-size:12px;">编辑</td>
+            <td width="42%" align="center" valign="middle"></td>
+            <td width="58%" height="23" style="font-size:12px;"></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="29%" align="center" valign="middle"><img src="../../Content/picture/BackControl/delete.png" width="11" height="12" /></td>
-            <td width="71%" height="23" style="font-size:12px;" style="font-size:12px;">删除</td>
+            <td width="29%" align="center" valign="middle"></td>
+            <td width="71%" height="23" style="font-size:12px;" style="font-size:12px;"></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight"><table width="100%" border="0" cellspacing="0" cellpadding="0">
           <tr>
-            <td width="44%" height="23" align="center" valign="middle"><img src="../../Content/picture/BackControl/save.png" width="12" height="12" /></td>
-            <td width="56%" height="23" style="font-size:12px;">保存</td>
+            <td width="44%" height="23" align="center" valign="middle"></td>
+            <td width="56%" height="23" style="font-size:12px;"></td>
           </tr>
         </table></td>
         <td width="48" height="24" class="UpRight">&nbsp;</td>

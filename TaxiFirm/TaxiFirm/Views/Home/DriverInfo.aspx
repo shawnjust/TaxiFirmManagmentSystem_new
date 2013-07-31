@@ -73,7 +73,7 @@
                 </tr>
                 <tr>
 					 <td>出生日期：</td>
-					 <td><%:driver.birthday %></td>
+					 <td><%:driver.birthday.ToShortDateString().Replace("/","-") %></td>
 				</tr>
                 <tr>
                      <td>健康状况：</td>

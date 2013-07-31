@@ -142,6 +142,7 @@ namespace TaxiFirm.Controllers
 
             try
             {
+                if (Session["CurrentCustomer"] != null) { Session.Remove("CurrentCustomer"); Session.Remove("Identity"); }
                 int userid = int.Parse(username);
                 Current = IdHandle.CheckIdentity(userid, psword);
                 if (Current == Identity.manager)

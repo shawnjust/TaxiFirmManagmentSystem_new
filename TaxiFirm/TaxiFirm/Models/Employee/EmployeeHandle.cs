@@ -113,7 +113,7 @@ namespace TaxiFirm.Models.Employee
             employee.Telephone = col.telephone;
             employee.firm = new TaxiFirm.Models.Firm.Firm(employee.FirmID); ;
             employee.EmployeeId = col.empolyee_id;
-
+            employee.Age = col.age==null?0:(int)col.age;
             if (col.gender == null)
             {
                 employee.Gender = "未知";
@@ -152,7 +152,7 @@ namespace TaxiFirm.Models.Employee
                 employee.Telephone = col.telephone;
                 employee.firm = new TaxiFirm.Models.Firm.Firm(employee.FirmID); ;
                 employee.EmployeeId = col.empolyee_id;
-                
+                employee.Age = col.age==null?0:(int)col.age;
                 if (col.gender == null)
                 {
                     employee.Gender = "未知";

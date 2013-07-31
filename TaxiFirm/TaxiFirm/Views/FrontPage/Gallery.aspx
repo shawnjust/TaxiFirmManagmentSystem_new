@@ -168,7 +168,7 @@
 
 	<div class="sixteen floated page-title">
 
-		<h2>画廊 <span>/ 显示新闻图片</span></h2>
+		<h2>画廊 <span>/ 显示公司信息图片</span></h2>
 
 		<nav id="breadcrumbs">
 			<ul>
