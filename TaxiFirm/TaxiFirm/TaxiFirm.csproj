@@ -457,6 +457,7 @@
     <Content Include="Views\FrontPage\News.aspx" />
     <Content Include="Views\FrontPage\NewsContent.aspx" />
     <Content Include="Views\FrontPage\Notification.aspx" />
+    <Content Include="Views\Home\AcceptedComplaintSearchList.aspx" />
     <Content Include="Views\Home\AddCar.aspx" />
     <Content Include="Views\Home\AddDriver.aspx" />
     <Content Include="Views\Home\AddEmployee.aspx" />
@@ -471,6 +472,7 @@
     <Content Include="Views\Home\AddNotice.aspx" />
     <Content Include="Views\Home\ChangeNews.aspx" />
     <Content Include="Views\Home\ChangeNotice.aspx" />
+    <Content Include="Views\Home\ComplainListAccepted.aspx" />
     <Content Include="Views\Home\Customer.aspx" />
     <Content Include="Views\Home\DriverInfo.aspx" />
     <Content Include="Views\Home\DriverList.aspx" />
