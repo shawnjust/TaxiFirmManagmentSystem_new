@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Import Namespace="TaxiFirm.Models.News" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -40,6 +41,13 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%
+    List<News> newses = (List<News>)ViewData["newses"];
+    MyPage page = (MyPage)ViewData["page"];
+    string type = (string)ViewData["type"];
+    string myType = (string)Session["subtype"];
+    NewsHandle newsHandler = new NewsHandle();
+    %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -62,7 +70,7 @@
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
-				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="Nevia Premium Template" height="62" /></a></h1>
+				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="TF Server" height="62" /></a></h1>
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
@@ -146,8 +154,6 @@
 </ul>
 </nav>
 <div class="clearfix"></div>
-
-
 <!-- Content
 ================================================== -->
 <div id="content">
@@ -176,35 +182,38 @@
 
 <!-- 960 Container -->
 <div class="container floated">
-
+    <%
+        if (newses != null && newses.Count != 0)
+        { %>
 	<!-- Page Content -->
 	<div class="eleven floated">
+     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
 
+       for (int i = 0; i < newses.Count; i++)
+       {
+           News news = newses[i];%>
 		<!-- Post -->
 		<article class="post medium">
 
 		<div class="medium-image">
 			<figure class="post-img picture">
-				<a href="#"><img src="../../Content/picture/FrontPage/blog-01-medium.jpg" alt="" /></a>
+				<a href="#"><img src="<%:news.picture_path %>" alt="" /></a>
 			</figure>
 		</div>
-
 		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
+			<span class="day"><%:newsHandler.getNewsDay(news) %></span>
+			<span class="month"><%:newsHandler.getNewsMonth(news) %></span>
 		</section>
-			
 		<div class="medium-content">
-
-			<header class="meta">
-				<h2><a href="NewsContent">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="#">方志晗</a></span>
+	    <header class="meta">
+				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
+<%:news.Title %></a></h2>
+				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id) %></a></span>
 			</header>
 
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
+			<p><%:newsHandler.GetPartOfContent(news.content) %></p>
 			
-			<a href="news-content.html" class="button color">Read More</a>
+			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
 
 		</div>
 
@@ -212,109 +221,10 @@
 
 		<!-- Divider -->
 		<div class="line"></div>
+        <%}
+        } %>
 
-
-		<!-- Post -->
-		<article class="post medium">
-
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="news-content.html"><img src="../../Content/picture/FrontPage/blog-02-medium.jpg" alt="" /></a>
-			</figure>
-		</div>
-		
-		<section class="date">
-			<span class="day">25</span>
-			<span class="month">Jun</span>
-		</section>
-
-		<div class="medium-content">
-			<header class="meta">
-				<h2><a href="news-content.html">淮南加气站大面积停业 出租车营运影响严重</a></h2>
-				<span><i class="halflings user"></i>By <a href="#">程冉</a></span>
-			</header>
-
-			<p>连日来，淮南市区14座加气站9座停业，导致出租车纷纷涌向仅剩的几座加气站排队加气，加一罐气要等几个小时，营运秩序受到较大影响。记者调查中，歇业的气站表示，因供货企业私自抬价，他们没有利润可赚只有停业，而该市物价部门认为价格并非问题的根源。</p>
-				
-			<a href="news-content.html" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-
-		<!-- Divider -->
-		<div class="line"></div>
-
-
-		<!-- Post -->
-		<article class="post medium">
-
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="news-content.html"><img src="../../Content/picture/FrontPage/blog-03-medium.jpg" alt="" /></a>
-			</figure>
-		</div>
-
-		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
-		</section>
-			
-		<div class="medium-content">
-
-			<header class="meta">
-				<h2><a href="news-content.html">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="news-content.html">方志晗</a></span>
-			</header>
-
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
-			
-			<a href="news-content.html" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-
-		<!-- Divider -->
-		<div class="line"></div>
-
-
-		<!-- Post -->
-		<article class="post medium">
-
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="news-content.html"><img src="../../Content/picture/FrontPage/blog-04-medium.jpg" alt="" /></a>
-			</figure>
-		</div>
-
-		<section class="date">
-			<span class="day">28</span>
-			<span class="month">Jul</span>
-		</section>
-			
-		<div class="medium-content">
-
-			<header class="meta">
-				<h2><a href="news-content.html">
-记者曝石家庄新客站出租车乱象:7.4元路程要价20元 </a></h2>
-				<span><i class="halflings user"></i>By <a href="news-content.html">方志晗</a></span>
-			</header>
-
-			<p>在京广西街和新石南路路口，大约有十多辆出租车亮着空车灯停在路边，发现有刚出站的旅客经过，司机就赶紧下车招揽生意。记者刚一停下，一辆车厢上写着“宇宙276”字样的出租车就停下来，记者发现车里已经座了三名乘客，可是司机却还在招揽生意。</p>
-			
-			<a href="news-content.html" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-
-		<!-- Divider -->
-		<div class="line"></div>
+	
 
 
 		<!-- Pagination -->
