@@ -1,5 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-<%@ Import Namespace="TaxiFirm.Models.News" %>
+<%@ Import Namespace="TaxiFirm.Models.Notice" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -23,7 +23,6 @@
 <!--[if lt IE 9]>
 	<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 <![endif]-->
-
 <!-- Java Script
 ================================================== -->
 <script src="../../Scripts/FrontPage/jquery.min.js"></script>
@@ -42,12 +41,9 @@
 
 <script src='../../google_analytics_auto.js'></script></head>
 <%
-    List<News> newses = (List<News>)ViewData["newses"];
-    MyPage page = (MyPage)ViewData["page"];
-    string type = (string)ViewData["type"];
-    string myType = (string)Session["subtype"];
-    NewsHandle newsHandler = new NewsHandle();
-    %>
+    News news = (News)ViewData["news"];
+    NewsHandle handler = new NewsHandle();
+     %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -70,7 +66,7 @@
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
-				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="TF Server" height="62" /></a></h1>
+				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="Nevia Premium Template" height="62" /></a></h1>
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
@@ -90,7 +86,7 @@
 
 			<div class="clearfix"></div>
 
-				<!-- Search -->
+			<!-- Search -->
 			<nav class="top-search">
               <%if(current==Identity.unlegal){ %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
@@ -147,11 +143,11 @@
 
 <ul class="menu" id="responsive">
 
-	<li><a href="/FrontPage/Index"><i class="halflings white home"></i> 主页</a></li>
+<li><a href="/FrontPage/Index"><i class="halflings white home"></i> 主页</a></li>
 
-	<li><a href="/FrontPage/News" id="current"><i class="halflings white file"></i> 新闻</a>
+	<li><a href="/FrontPage/News"><i class="halflings white file"></i> 新闻</a>
 	</li>
-	<li><a href="/FrontPage/Notification"><i class="halflings white bullhorn"></i> 通知</a>
+	<li><a href="/FrontPage/Notification" id="current"><i class="halflings white bullhorn"></i> 通知</a>
     </li>
     <li><a href="/FrontPage/Complain"><i class="halflings white hdd"></i> 评价</a>
 	</li>
@@ -164,147 +160,67 @@
 </ul>
 </nav>
 <div class="clearfix"></div>
+
 <!-- Content
 ================================================== -->
-<div id="content">
 
+<div id="content">
 
 <!-- 960 Container -->
 <div class="container floated">
 
 	<div class="sixteen floated page-title">
 
-		<h2>Taxi Firm新闻</h2>
+		<h2>新闻内容 <span>/ 详细信息</span></h2>
 
-		<nav id="breadcrumbs">
+		<!-- Portfolio Navi -->
+		<div id="portfolio-navi">
 			<ul>
-				<li>你在这:</li>
-				<li><a href="/FrontPage/Index">主页</a></li>
-				<li>新闻</li>
+				<li><a class="prev" href="#"><b>←</b> 上一页</a></li>
+				<li><a class="next" href="#">下一页 <b>→</b></a></li>
 			</ul>
-		</nav>
+		</div>
+		<div class="clearfix"></div>
 
 	</div>
 
 </div>
 <!-- 960 Container / End -->
+
+<!-- Page Content -->
+<div class="page-content">
+
 
 
 <!-- 960 Container -->
-<div class="container floated">
-    <%
-        if (newses != null && newses.Count != 0)
-        { %>
-	<!-- Page Content -->
-	<div class="eleven floated">
-     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
+<div class="container" style="margin-top: 30px;">
 
-       for (int i = 0; i < newses.Count; i++)
-       {
-           News news = newses[i];%>
-		<!-- Post -->
-		<article class="post medium">
+	<div class="twelve columns">
+		<p>上周，当我乘坐旧金山的航班抵达洛杉矶机场时，一下飞机就往出租车站赶，但到了那里，等了十分钟才打上车。就在我打算上车的时候，司机和调度员却因谁该将我的手提箱放到出租车上争吵起来。见他们炒得没完没了，我只好自己动手，将手提箱放到后备箱。当出租车最终启动时，我发现里面脏兮兮的，还散发着像香烟一样的味道。</p>
+		<p>这一经历也让我再次思考一个问题，那就是出租车行业到了该彻底颠覆的时候了。硅谷的一些创业公司，如Uber、Lyft、Sidecar等，正在将这种想法付诸于行动。同另外两家打车服务一样，Uber也没有自己的车队，该公司与现有豪华车服务商联手，通过移动应用为提前预订的客户提供租车服务，而自己的角色就像“数字调度员”。 </p>
+        <p>虽然Uber定价方式与出租车公司一样，同样以时间和里程计算费用，但服务价格只是普通出租车的50%。Uber提供的另一项服务“UberX”，则可以让用户乘坐混合动力车出行，价格上与传统出租车差不多。</p>
+        <p>不过，Uber这样的创业公司仍然面临不少发展障碍，如政府的官僚作风、出租车司机和调度员的抵制，以及州和政府不同的监管制度等。最新的障碍则来自于洛杉矶，Uber从今年3月开始进军这座城市。</p>
+	</div>
 
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="#"><img src="<%:news.picture_path %>" alt="" /></a>
-			</figure>
-		</div>
-		<section class="date">
-			<span class="day"><%:newsHandler.getNewsDay(news) %></span>
-			<span class="month"><%:newsHandler.getNewsMonth(news) %></span>
-		</section>
-		<div class="medium-content">
-	    <header class="meta">
-				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
-<%:news.Title %></a></h2>
-				<span><i class="halflings user"></i>By <a href="NewsContent?NWID=<%:news.NewsId %>"><%:newsHandler.GetNewsAuthor(news.employee_id) %></a></span>
-			</header>
-
-			<p><%:newsHandler.GetPartOfContent(news.content) %></p>
-			
-			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-		<!-- Divider -->
-		<div class="line"></div>
-        <%}
-        } %>
-
-	
-
-
-		<!-- Pagination -->
-		<nav class="pagination">
-			<ul>
-				<li><a href="#" class="current">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">Next</a></li>
+	<div class="four columns">
+		<div class="project-info-container">
+				<ul class="project-info">
+				<li><strong>作者:</strong> Cheng</li>
+				<li><strong>日期:</strong> Dec 2012</li>
+				<li><a href="Gallery" class="button color launch"> 查看图片</a></li>
 			</ul>
-			<div class="clearfix"></div>
-		</nav>
-
+		</div>
 	</div>
-	<!-- Content / End -->
-
-
-	<!-- Sidebar -->
-	<div class="four floated sidebar right">
-		<aside class="sidebar">
-
-			<!-- Search -->
-			<nav class="widget-search">
-				<form action="http://vasterad.com/themes/nevia/404-page.html" method="get">
-					<button class="search-btn-widget"></button>
-					<input class="search-field" type="text" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
-				</form>
-			</nav>
-			<div class="clearfix"></div>
-
-			<!-- Categories -->
-			<nav class="widget">
-				<h4>分类</h4>
-				<ul class="categories">
-					<li><a href="#">公司</a></li>
-					<li><a href="#">最近新闻</a></li>
-					<li><a href="#">客户相关</a></li>
-					<li><a href="#">司机相关</a></li>
-					<li><a href="#">其他</a></li>
-				</ul>
-			</nav>
-
-			<!-- Tags -->
-			<div class="widget">
-				<h4>标签</h4>
-				<nav class="tags">
-					<a href="#">出租车</a>
-					<a href="#">油价</a>
-					<a href="#">乱收费</a>
-					<a href="#">天然气</a>
-					<a href="#">政策改革</a>
-					<a href="#">客流量高峰</a>
-					<a href="#">租赁</a>
-					<a href="#">乘客</a>
-				</nav>
-			</div>
-			<!-- Archives -->
-			<nav class="widget">
-				<h4>时间轴</h4>
-				<ul class="categories">
-					<li><a href="#">October 2012</a></li>
-					<li><a href="#">November 2012</a></li>
-					<li><a href="#">December 2012</a></li>
-				</ul>
-			</nav>
-		</aside>
-	</div>
-	<!-- Page Content / End -->
 
 </div>
-<!-- 960 Container / End -->
+<!-- End 960 Container -->
+
+
+<div class="line" style="margin: 20px 0 37px 0;"></div>
+
+
+</div>
+<!-- Page Content / End -->
 
 </div>
 <!-- Content / End -->
@@ -401,7 +317,7 @@
 
 <!-- Style Switcher
 ================================================== -->
-<link rel="stylesheet" href="../../Content/css/FrontPage/switcher.css">
+<link rel="stylesheet" href="../../Content/css/FrontPage /switcher.css">
 <script src="../../Scripts/FrontPage/switcher.js"></script>
 
 <section id="style-switcher">
@@ -462,5 +378,7 @@
 
 </section>
 <!-- Style Switcher / End -->
+
+
 </body>
 </html>

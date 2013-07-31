@@ -70,7 +70,20 @@ namespace TaxiFirm.Models.News
             var table = db.getEmpolyeeById(Employee_id);
             var col = table.First<getEmpolyeeByIdResult>();
             return col.name;
-
+        }
+        public string GetPartOfTitle(string content)
+        {
+            if (content.Length<12)
+            {
+                string subContent = content;
+                return subContent;
+            }
+            else
+            {
+                string subContent = content.Substring(0, 13);
+                subContent = subContent + "...";
+                return subContent;
+            }
         }
         public string GetPartOfContent(string content)
         {
@@ -189,6 +202,24 @@ namespace TaxiFirm.Models.News
             {
                 return "WTF";
             }
+        }
+        public List<News> getAllNews()
+        {
+            List<News> newses = new List<News>();
+            var table = db.getAllNews();
+            foreach (var col in table)
+            {
+                News news = new News();
+                news.Title = col.title;
+                news.publish_time = col.publish_time;
+                news.employee_id = col.empolyee_id;
+                news.NewsId = col.news_id;
+                news.content = col.news_content;
+                news.picture_path = col.picture_path;
+                news.author = col.name;
+                newses.Add(news);
+            }
+            return newses;
         }
     }
 }

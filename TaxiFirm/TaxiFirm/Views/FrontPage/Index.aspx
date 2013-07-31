@@ -1,4 +1,5 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+<%@ Import Namespace="TaxiFirm.Models.News" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -43,6 +44,10 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%  
+    List<News> newses = (List<News>)ViewData["newses"];
+    NewsHandle handler = new NewsHandle();
+     %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -263,109 +268,29 @@
 		<!-- jCarousel -->
 		<section class="jcarousel recent-work-jc">
 			<ul>
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-01.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>最近公司开始裁员</h5>
-								<span>方志晗</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
+            <%
+        if (newses != null && newses.Count != 0)
+        { %>
+           <%
 
+               for (int i = 0; i < newses.Count; i++)
+               {
+                   News news = newses[i];%>
 				<!-- Recent Work Item -->
 				<li class="four columns">
-					<a href="#" class="portfolio-item">
+					<a href="NewsContent?NWID=<%:news.NewsId %>" class="portfolio-item">
 						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-02.jpg" alt=""/>
+							<img src="<%:news.picture_path %>" alt=""/>
 							<figcaption class="item-description">
-								<h5>项目写的怎么样了</h5>
-								<span>王成</span>
+								<h5><%:handler.GetPartOfTitle(news.Title) %></h5>
+								<span><%:news.author %></span>
 							</figcaption>
 						</figure>
 					</a>
 				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-03.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>大家继续努力啊</h5>
-								<span>赵青</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-04.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>我喜欢菊花</h5>
-								<span>路捷</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-05.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>出租车项目开工</h5>
-								<span>洪海捷</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="single-project.html" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-06.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>留下买路财</h5>
-								<span>程冉</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-07.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>我觉得还是可以写完的</h5>
-								<span>方志晗</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
-
-				<!-- Recent Work Item -->
-				<li class="four columns">
-					<a href="#" class="portfolio-item">
-						<figure>
-							<img src="../../Content/picture/FrontPage/portfolio/portfolio-08.jpg" alt=""/>
-							<figcaption class="item-description">
-								<h5>项目写不完啦</h5>
-								<span>宁婧</span>
-							</figcaption>
-						</figure>
-					</a>
-				</li>
+              <%}
+        } %>
+				
 			</ul>
 		</section>
 		<!-- jCarousel / End -->

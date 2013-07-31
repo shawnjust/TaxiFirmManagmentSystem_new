@@ -27,14 +27,39 @@ namespace TaxiFirm.Models.Notice
             page.CountPerPage = 10;
             page.WholePage = (int)db.getNoticeBySearchNameAndContentPageCount(page.CountPerPage, name);
             var table = db.getNoticeBySearchNameAndContentByPage(page.CurrentPage, page.CountPerPage, name);
-            List<Notice> Noticees = new List<Notice>();
+            List<Notice> notices = new List<Notice>();
             foreach (var col in table)
             {
                 Notice notice = new Notice();
-
-                newses.Add(news);
+                notice.notice_title = col.title;
+                notice.notice_id = col.notice_id;
+                notice.publish_time = col.publish_time;
+                notice.employee_id = col.empolyee_id;
+                notice.author = col.name;
+                notice.notice_content = col.notice_content;
+                notices.Add(notice);
             }
-            return newses;
+            return notices;
+        }
+        //分页得到经理页面
+        public List<Notice> GetNoticeByPage(MyPage page)
+        {
+            page.CountPerPage = 4;
+            page.WholePage = (int)db.getNoticePageCount(page.CountPerPage);
+            var table = db.getNoticeByPage(page.CurrentPage, page.CountPerPage);
+            List<Notice> notices = new List<Notice>();
+            foreach (var col in table)
+            {
+                Notice notice = new Notice();
+                notice.notice_title = col.title;
+                notice.notice_id = col.notice_id;
+                notice.publish_time = col.publish_time;
+                notice.employee_id = col.empolyee_id;
+                notice.author = col.name;
+                notice.notice_content = col.notice_content;
+                notices.Add(notice);
+            }
+            return notices;
         }
     }
 }
