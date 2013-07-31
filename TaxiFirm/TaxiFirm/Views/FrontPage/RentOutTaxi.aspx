@@ -25,13 +25,13 @@
                             <legend>租赁信息</legend><strong>车牌号:</strong>
                             <%= Html.Encode(Model.plate_number) %>
                             <br />
-                           <!--   <br />
-                          
+                            <br />
+                            
                             <strong>订单号:</strong>
                             <%= Html.TextBox("order_id",Model.order_id) %>
                             <%= Html.ValidationMessage("order_id","*") %>
-                           
-                            <br /> -->
+                            
+                            <br />
                             <br />
                             <strong>司机ID:</strong>
                             <%=Html.DropDownList("driver_employee_id",ViewData["drivers"] as SelectList,"--请选择--")%>

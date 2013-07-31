@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿    <%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
 <%@ Import Namespace="TaxiFirm.Models.News" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>

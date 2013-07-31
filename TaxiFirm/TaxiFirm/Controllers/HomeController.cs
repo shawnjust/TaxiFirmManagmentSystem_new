@@ -1736,7 +1736,6 @@ namespace TaxiFirm.Controllers
             if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
-            Taxi.order_id = int.Parse(Request.Form["order_id"]);
             Taxi.driver_empolyee_id = int.Parse(Request.Form["driver_employee_id"]);
             Taxi.rent_begin_time = DateTime.Parse(Request.Form["rent_begin_time"]);
             Taxi.rent_due_return_time = DateTime.Parse(Request.Form["rent_due_return_time"]);

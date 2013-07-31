@@ -500,6 +500,8 @@
     <Content Include="Views\Home\ModifySelfInfo.aspx" />
     <Content Include="Views\Home\NewsList.aspx" />
     <Content Include="Views\Home\NotificationContent.aspx" />
+    <Content Include="Views\Home\RentOutTaxi.aspx" />
+    <Content Include="Views\Home\ReturnCar.aspx" />
     <Content Include="Views\Home\SaveDriverInfo.aspx" />
     <Content Include="Views\Home\TaxiList.aspx" />
     <Content Include="Views\Home\NewsContent.aspx" />
