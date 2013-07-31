@@ -89,7 +89,7 @@ namespace TaxiFirm.Models.News
             }
             else
             {
-                string subContent = content.Substring(0, 13);
+                string subContent = content.Substring(0, 11);
                 subContent = subContent + "...";
                 return subContent;
             }
