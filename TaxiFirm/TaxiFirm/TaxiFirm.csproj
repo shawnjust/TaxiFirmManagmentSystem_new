@@ -404,10 +404,13 @@
     <Content Include="Views\Home\AddEmployee.aspx" />
     <Content Include="Views\Home\AddHost.aspx" />
     <Content Include="Views\Home\AddNews.aspx" />
+    <Content Include="Views\Home\AddNotice.aspx" />
     <Content Include="Views\Home\Backup.aspx" />
     <Content Include="Views\Home\BackupList.aspx" />
     <Content Include="Views\Home\CarDealing.aspx" />
     <Content Include="Views\Home\CarInfoDisplay.aspx" />
+    <Content Include="Views\Home\ChangeNews.aspx" />
+    <Content Include="Views\Home\ChangeNotice.aspx" />
     <Content Include="Views\Home\ChangePassword.aspx" />
     <Content Include="Views\Home\ComplainList.aspx" />
     <Content Include="Views\Home\Customer.aspx" />

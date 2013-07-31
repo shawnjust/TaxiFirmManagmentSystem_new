@@ -41,12 +41,25 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
-<%
-    List<News> newses = (List<News>)ViewData["newses"];
-    MyPage page = (MyPage)ViewData["page"];
-    string type = (string)ViewData["type"];
-    string myType = (string)Session["subtype"];
-    NewsHandle newsHandler = new NewsHandle();
+<script type="text/javascript">
+    function mySubmit()
+     {
+
+        var form1 = document.getElementById("form1");
+        var name =document.getElementById("NameID");
+        form1.action = "/FrontPage/News?type=search&page=1&NameID=" + name.value;
+        form1.submit();
+
+    }
+
+</script>
+<%try
+  {
+      List<News> newses = (List<News>)ViewData["newses"];
+      MyPage page = (MyPage)ViewData["page"];
+      string type = (string)ViewData["type"];
+      string myType = (string)Session["subtype"];
+      NewsHandle newsHandler = new NewsHandle();
     %>
 <body>
 
@@ -63,10 +76,10 @@
 	<!-- Header -->
 	<header id="header">
     <%Identity current = Identity.unlegal;
-  if (Session["Identity"] != null)
-  {
-      current=(Identity)Session["Identity"]; 
-  }%>
+      if (Session["Identity"] != null)
+      {
+          current = (Identity)Session["Identity"];
+      }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
@@ -92,7 +105,8 @@
 
 				<!-- Search -->
 			<nav class="top-search">
-              <%if(current==Identity.unlegal){ %>
+              <%if (current == Identity.unlegal)
+                { %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
                 	<i class="icon-cloud white"></i>注册
@@ -103,8 +117,8 @@
                    登录
                      </a>
                     <%}
-                   else if (current == Identity.manager)
-                   { 
+                else if (current == Identity.manager)
+                { 
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
@@ -115,7 +129,9 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%}else if(current==Identity.custemer) {%>
+               <%}
+                else if (current == Identity.custemer)
+                {%>
                   <a class="button color medium"   href="/FrontPage/ChangerPassword">
                 	<i class="icon-user white"></i>改密
                      </a>
@@ -193,8 +209,8 @@
 <!-- 960 Container -->
 <div class="container floated">
     <%
-        if (newses != null && newses.Count != 0)
-        { %>
+    if (newses != null && newses.Count != 0)
+    { %>
 	<!-- Page Content -->
 	<div class="eleven floated">
      <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
@@ -211,17 +227,17 @@
 			</figure>
 		</div>
 		<section class="date">
-			<span class="day"><%:newsHandler.getNewsDay(news) %></span>
-			<span class="month"><%:newsHandler.getNewsMonth(news) %></span>
+			<span class="day"><%:newsHandler.getNewsDay(news)%></span>
+			<span class="month"><%:newsHandler.getNewsMonth(news)%></span>
 		</section>
 		<div class="medium-content">
 	    <header class="meta">
 				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
-<%:news.Title %></a></h2>
-				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id) %></a></span>
+<%:news.Title%></a></h2>
+				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id)%></a></span>
 			</header>
 
-			<p><%:newsHandler.GetPartOfContent(news.content) %></p>
+			<p><%:newsHandler.GetPartOfContent(news.content)%></p>
 			
 			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
 
@@ -232,17 +248,35 @@
 		<!-- Divider -->
 		<div class="line"></div>
         <%}
-        } %>
+    } %>
 
 	
 
 
 		<!-- Pagination -->
 		<nav class="pagination">
+
 			<ul>
-				<li><a href="#" class="current">1</a></li>
-				<li><a href="#">2</a></li>
-				<li><a href="#">Next</a></li>
+            <%   if (page.CurrentPage > 1)
+                 {%>
+                 <li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage-1 %>">Pre</a></li>
+            <%} %>
+                <%for (int i = (page.CurrentPage - 1) > 1 ? (page.CountCurrentPage - 1) : 1; i < page.CurrentPage + 1&&i<=page.WholePage; i++)
+                  {
+                      if (page.CurrentPage == i)
+                      {%> 
+				<li><a href="/FrontPage/News?type=common&page=<%:i %>" class="current"><%:i %></a></li>
+                <%}
+                      else
+                      { %>
+                	 <li><a href="/FrontPage/News?type=common&page=<%:i %>"><%:i %></a></li>
+                <%}
+                  }%>
+				
+              <%if (page.CurrentPage < page.WholePage)
+                { %>
+				<li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage+1 %>">Next</a></li>
+                <%} %>
 			</ul>
 			<div class="clearfix"></div>
 		</nav>
@@ -257,9 +291,9 @@
 
 			<!-- Search -->
 			<nav class="widget-search">
-				<form action="http://vasterad.com/themes/nevia/404-page.html" method="get">
-					<button class="search-btn-widget"></button>
-					<input class="search-field" type="text" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
+				<form  method="post" id="form1">
+					<button class="search-btn-widget" id="button1" onclick="mySubmit()"></button>
+					<input class="search-field" type="text" id="NameID" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
 				</form>
 			</nav>
 			<div class="clearfix"></div>
@@ -463,4 +497,10 @@
 </section>
 <!-- Style Switcher / End -->
 </body>
+<%}
+  catch {
+
+      Response.Redirect("/FrontPage/ErrorPage");
+  }%>
+
 </html>

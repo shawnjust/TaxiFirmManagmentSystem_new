@@ -221,8 +221,10 @@ namespace TaxiFirm.Controllers
         {
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            if (type!=null)
+            if (type == null)
             {
+                type = "common";
+            }
                 if (type.Equals("search"))   //搜索类型
                 {
                     int page1 = int.Parse(Request.QueryString.Get("page"));
@@ -255,7 +257,7 @@ namespace TaxiFirm.Controllers
                         ViewData["NameID"] = NameID;
                     }
                 }
-            }
+            
             else
             {
                 int page1;
@@ -279,7 +281,13 @@ namespace TaxiFirm.Controllers
                 }
 
             }
-            return View();
+            try
+            {
+                return View();
+            }
+            catch {
+                return RedirectToAction("ErrorPage");
+            }
         }
         public ActionResult Notification()
         {
