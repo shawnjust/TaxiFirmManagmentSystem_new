@@ -62,16 +62,24 @@ namespace TaxiFirm.Models
 			OnCreated();
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isManager", IsComposable=true)]
-		public System.Nullable<int> isManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		public System.Data.Linq.Table<View_taxi> View_taxi
 		{
-			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
+			get
+			{
+				return this.GetTable<View_taxi>();
+			}
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPassword", IsComposable=true)]
 		public System.Nullable<int> checkCustomerLoginPassword([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> customer_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
 		{
 			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), customer_id, password).ReturnValue));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.isManager", IsComposable=true)]
+		public System.Nullable<int> isManager([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), empolyee_id).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.checkCustomerLoginPasswordByEmail", IsComposable=true)]
@@ -170,6 +178,12 @@ namespace TaxiFirm.Models
 			return this.CreateMethodCallQuery<getAllHostResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNews", IsComposable=true)]
+		public IQueryable<getAllNewsResult> getAllNews()
+		{
+			return this.CreateMethodCallQuery<getAllNewsResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNotAcceptComplaint", IsComposable=true)]
 		public IQueryable<getAllNotAcceptComplaintResult> getAllNotAcceptComplaint()
 		{
@@ -192,6 +206,12 @@ namespace TaxiFirm.Models
 		public IQueryable<getAllTaxiInformationResult> getAllTaxiInformation()
 		{
 			return this.CreateMethodCallQuery<getAllTaxiInformationResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllTaxiPlatenumber", IsComposable=true)]
+		public IQueryable<getAllTaxiPlatenumberResult> getAllTaxiPlatenumber()
+		{
+			return this.CreateMethodCallQuery<getAllTaxiPlatenumberResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getBackupByDescriptionByPage", IsComposable=true)]
@@ -452,6 +472,12 @@ namespace TaxiFirm.Models
 			return this.CreateMethodCallQuery<getNewsByIDResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), news_id);
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByPage", IsComposable=true)]
+		public IQueryable<getNewsByPageResult> getNewsByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		{
+			return this.CreateMethodCallQuery<getNewsByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsBySearchNameAndContentByPage", IsComposable=true)]
 		public IQueryable<getNewsBySearchNameAndContentByPageResult> getNewsBySearchNameAndContentByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string search)
 		{
@@ -528,6 +554,18 @@ namespace TaxiFirm.Models
 		public IQueryable<getTaxiByPageResult> getTaxiByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
 		{
 			return this.CreateMethodCallQuery<getTaxiByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiByPlateNumberByPage", IsComposable=true)]
+		public IQueryable<getTaxiByPlateNumberByPageResult> getTaxiByPlateNumberByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plateNumber)
+		{
+			return this.CreateMethodCallQuery<getTaxiByPlateNumberByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize, plateNumber);
+		}
+		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiByPlateNumberPageCount", IsComposable=true)]
+		public System.Nullable<int> getTaxiByPlateNumberPageCount([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="NVarChar(50)")] string plateNumber)
+		{
+			return ((System.Nullable<int>)(this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageSize, plateNumber).ReturnValue));
 		}
 		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getTaxiCountByEmpolyeeId", IsComposable=true)]
@@ -815,6 +853,13 @@ namespace TaxiFirm.Models
 			return ((int)(result.ReturnValue));
 		}
 		
+		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateCustomerPasswordByEmail")]
+		public int updateCustomerPasswordByEmail([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string email, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string password)
+		{
+			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), email, password);
+			return ((int)(result.ReturnValue));
+		}
+		
 		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.updateDriverById")]
 		public int updateDriverById([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> empolyee_id, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> health, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="VarChar(50)")] string license_id)
 		{
@@ -856,17 +901,320 @@ namespace TaxiFirm.Models
 			IExecuteResult result = this.ExecuteMethodCall(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), order_id, plate_number, empolyee_id, rent_begin_time, rent_due_return_tiem, rent_return_time);
 			return ((int)(result.ReturnValue));
 		}
+	}
+	
+	[global::System.Data.Linq.Mapping.TableAttribute(Name="dbo.View_taxi")]
+	public partial class View_taxi
+	{
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getNewsByPage", IsComposable=true)]
-		public IQueryable<getNewsByPageResult> getNewsByPage([global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageNumber, [global::System.Data.Linq.Mapping.ParameterAttribute(DbType="Int")] System.Nullable<int> pageSize)
+		private string _plate_number;
+		
+		private string _taxi_color;
+		
+		private string _taxi_brand;
+		
+		private System.Nullable<int> _order_id;
+		
+		private System.Nullable<System.DateTime> _rent_begin_time;
+		
+		private System.Nullable<System.DateTime> _rent_due_return_time;
+		
+		private System.Nullable<System.DateTime> _rent_return_time;
+		
+		private System.Nullable<int> _driver_empolyee_id;
+		
+		private string _driver_name;
+		
+		private string _driver_id_card;
+		
+		private string _driver_telephone;
+		
+		private string _driver_address;
+		
+		private System.Nullable<int> _host_empolyee_id;
+		
+		private string _host_name;
+		
+		private string _host_id_card;
+		
+		private string _host_telephone;
+		
+		private string _host_address;
+		
+		public View_taxi()
 		{
-			return this.CreateMethodCallQuery<getNewsByPageResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())), pageNumber, pageSize);
 		}
 		
-		[global::System.Data.Linq.Mapping.FunctionAttribute(Name="dbo.getAllNews", IsComposable=true)]
-		public IQueryable<getAllNewsResult> getAllNews()
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
 		{
-			return this.CreateMethodCallQuery<getAllNewsResult>(this, ((MethodInfo)(MethodInfo.GetCurrentMethod())));
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_color
+		{
+			get
+			{
+				return this._taxi_color;
+			}
+			set
+			{
+				if ((this._taxi_color != value))
+				{
+					this._taxi_color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_brand
+		{
+			get
+			{
+				return this._taxi_brand;
+			}
+			set
+			{
+				if ((this._taxi_brand != value))
+				{
+					this._taxi_brand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
+		public System.Nullable<int> order_id
+		{
+			get
+			{
+				return this._order_id;
+			}
+			set
+			{
+				if ((this._order_id != value))
+				{
+					this._order_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_begin_time
+		{
+			get
+			{
+				return this._rent_begin_time;
+			}
+			set
+			{
+				if ((this._rent_begin_time != value))
+				{
+					this._rent_begin_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_due_return_time
+		{
+			get
+			{
+				return this._rent_due_return_time;
+			}
+			set
+			{
+				if ((this._rent_due_return_time != value))
+				{
+					this._rent_due_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_return_time
+		{
+			get
+			{
+				return this._rent_return_time;
+			}
+			set
+			{
+				if ((this._rent_return_time != value))
+				{
+					this._rent_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
+		public System.Nullable<int> driver_empolyee_id
+		{
+			get
+			{
+				return this._driver_empolyee_id;
+			}
+			set
+			{
+				if ((this._driver_empolyee_id != value))
+				{
+					this._driver_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
+		public string driver_name
+		{
+			get
+			{
+				return this._driver_name;
+			}
+			set
+			{
+				if ((this._driver_name != value))
+				{
+					this._driver_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
+		public string driver_id_card
+		{
+			get
+			{
+				return this._driver_id_card;
+			}
+			set
+			{
+				if ((this._driver_id_card != value))
+				{
+					this._driver_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
+		public string driver_telephone
+		{
+			get
+			{
+				return this._driver_telephone;
+			}
+			set
+			{
+				if ((this._driver_telephone != value))
+				{
+					this._driver_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
+		public string driver_address
+		{
+			get
+			{
+				return this._driver_address;
+			}
+			set
+			{
+				if ((this._driver_address != value))
+				{
+					this._driver_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
+		public System.Nullable<int> host_empolyee_id
+		{
+			get
+			{
+				return this._host_empolyee_id;
+			}
+			set
+			{
+				if ((this._host_empolyee_id != value))
+				{
+					this._host_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
+		public string host_name
+		{
+			get
+			{
+				return this._host_name;
+			}
+			set
+			{
+				if ((this._host_name != value))
+				{
+					this._host_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
+		public string host_id_card
+		{
+			get
+			{
+				return this._host_id_card;
+			}
+			set
+			{
+				if ((this._host_id_card != value))
+				{
+					this._host_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
+		public string host_telephone
+		{
+			get
+			{
+				return this._host_telephone;
+			}
+			set
+			{
+				if ((this._host_telephone != value))
+				{
+					this._host_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
+		public string host_address
+		{
+			get
+			{
+				return this._host_address;
+			}
+			set
+			{
+				if ((this._host_address != value))
+				{
+					this._host_address = value;
+				}
+			}
 		}
 	}
 	
@@ -2722,6 +3070,140 @@ namespace TaxiFirm.Models
 		}
 	}
 	
+	public partial class getAllNewsResult
+	{
+		
+		private int _news_id;
+		
+		private string _title;
+		
+		private int _empolyee_id;
+		
+		private System.DateTime _publish_time;
+		
+		private string _picture_path;
+		
+		private string _name;
+		
+		private string _news_content;
+		
+		public getAllNewsResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_id", DbType="Int NOT NULL")]
+		public int news_id
+		{
+			get
+			{
+				return this._news_id;
+			}
+			set
+			{
+				if ((this._news_id != value))
+				{
+					this._news_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
+		public int empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_time", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime publish_time
+		{
+			get
+			{
+				return this._publish_time;
+			}
+			set
+			{
+				if ((this._publish_time != value))
+				{
+					this._publish_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_picture_path", DbType="NVarChar(256)")]
+		public string picture_path
+		{
+			get
+			{
+				return this._picture_path;
+			}
+			set
+			{
+				if ((this._picture_path != value))
+				{
+					this._picture_path = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_content", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string news_content
+		{
+			get
+			{
+				return this._news_content;
+			}
+			set
+			{
+				if ((this._news_content != value))
+				{
+					this._news_content = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getAllNotAcceptComplaintResult
 	{
 		
@@ -3721,6 +4203,32 @@ namespace TaxiFirm.Models
 				if ((this._host_address != value))
 				{
 					this._host_address = value;
+				}
+			}
+		}
+	}
+	
+	public partial class getAllTaxiPlatenumberResult
+	{
+		
+		private string _plate_number;
+		
+		public getAllTaxiPlatenumberResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
 				}
 			}
 		}
@@ -8766,6 +9274,158 @@ namespace TaxiFirm.Models
 		}
 	}
 	
+	public partial class getNewsByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private int _news_id;
+		
+		private string _title;
+		
+		private int _empolyee_id;
+		
+		private System.DateTime _publish_time;
+		
+		private string _picture_path;
+		
+		private string _name;
+		
+		private string _news_content;
+		
+		public getNewsByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_id", DbType="Int NOT NULL")]
+		public int news_id
+		{
+			get
+			{
+				return this._news_id;
+			}
+			set
+			{
+				if ((this._news_id != value))
+				{
+					this._news_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string title
+		{
+			get
+			{
+				return this._title;
+			}
+			set
+			{
+				if ((this._title != value))
+				{
+					this._title = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
+		public int empolyee_id
+		{
+			get
+			{
+				return this._empolyee_id;
+			}
+			set
+			{
+				if ((this._empolyee_id != value))
+				{
+					this._empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_time", DbType="SmallDateTime NOT NULL")]
+		public System.DateTime publish_time
+		{
+			get
+			{
+				return this._publish_time;
+			}
+			set
+			{
+				if ((this._publish_time != value))
+				{
+					this._publish_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_picture_path", DbType="NVarChar(256)")]
+		public string picture_path
+		{
+			get
+			{
+				return this._picture_path;
+			}
+			set
+			{
+				if ((this._picture_path != value))
+				{
+					this._picture_path = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
+		public string name
+		{
+			get
+			{
+				return this._name;
+			}
+			set
+			{
+				if ((this._name != value))
+				{
+					this._name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_content", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
+		public string news_content
+		{
+			get
+			{
+				return this._news_content;
+			}
+			set
+			{
+				if ((this._news_content != value))
+				{
+					this._news_content = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getNewsBySearchNameAndContentByPageResult
 	{
 		
@@ -9920,6 +10580,338 @@ namespace TaxiFirm.Models
 		}
 	}
 	
+	public partial class getTaxiByPlateNumberByPageResult
+	{
+		
+		private System.Nullable<long> _rowNum;
+		
+		private string _plate_number;
+		
+		private string _taxi_color;
+		
+		private string _taxi_brand;
+		
+		private System.Nullable<int> _order_id;
+		
+		private System.Nullable<System.DateTime> _rent_begin_time;
+		
+		private System.Nullable<System.DateTime> _rent_due_return_time;
+		
+		private System.Nullable<System.DateTime> _rent_return_time;
+		
+		private System.Nullable<int> _driver_empolyee_id;
+		
+		private string _driver_name;
+		
+		private string _driver_id_card;
+		
+		private string _driver_telephone;
+		
+		private string _driver_address;
+		
+		private System.Nullable<int> _host_empolyee_id;
+		
+		private string _host_name;
+		
+		private string _host_id_card;
+		
+		private string _host_telephone;
+		
+		private string _host_address;
+		
+		public getTaxiByPlateNumberByPageResult()
+		{
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
+		public System.Nullable<long> rowNum
+		{
+			get
+			{
+				return this._rowNum;
+			}
+			set
+			{
+				if ((this._rowNum != value))
+				{
+					this._rowNum = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_plate_number", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
+		public string plate_number
+		{
+			get
+			{
+				return this._plate_number;
+			}
+			set
+			{
+				if ((this._plate_number != value))
+				{
+					this._plate_number = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_color", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_color
+		{
+			get
+			{
+				return this._taxi_color;
+			}
+			set
+			{
+				if ((this._taxi_color != value))
+				{
+					this._taxi_color = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_taxi_brand", DbType="NVarChar(20) NOT NULL", CanBeNull=false)]
+		public string taxi_brand
+		{
+			get
+			{
+				return this._taxi_brand;
+			}
+			set
+			{
+				if ((this._taxi_brand != value))
+				{
+					this._taxi_brand = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_order_id", DbType="Int")]
+		public System.Nullable<int> order_id
+		{
+			get
+			{
+				return this._order_id;
+			}
+			set
+			{
+				if ((this._order_id != value))
+				{
+					this._order_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_begin_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_begin_time
+		{
+			get
+			{
+				return this._rent_begin_time;
+			}
+			set
+			{
+				if ((this._rent_begin_time != value))
+				{
+					this._rent_begin_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_due_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_due_return_time
+		{
+			get
+			{
+				return this._rent_due_return_time;
+			}
+			set
+			{
+				if ((this._rent_due_return_time != value))
+				{
+					this._rent_due_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rent_return_time", DbType="Date")]
+		public System.Nullable<System.DateTime> rent_return_time
+		{
+			get
+			{
+				return this._rent_return_time;
+			}
+			set
+			{
+				if ((this._rent_return_time != value))
+				{
+					this._rent_return_time = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_empolyee_id", DbType="Int")]
+		public System.Nullable<int> driver_empolyee_id
+		{
+			get
+			{
+				return this._driver_empolyee_id;
+			}
+			set
+			{
+				if ((this._driver_empolyee_id != value))
+				{
+					this._driver_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_name", DbType="NVarChar(50)")]
+		public string driver_name
+		{
+			get
+			{
+				return this._driver_name;
+			}
+			set
+			{
+				if ((this._driver_name != value))
+				{
+					this._driver_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_id_card", DbType="Char(20)")]
+		public string driver_id_card
+		{
+			get
+			{
+				return this._driver_id_card;
+			}
+			set
+			{
+				if ((this._driver_id_card != value))
+				{
+					this._driver_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_telephone", DbType="VarChar(20)")]
+		public string driver_telephone
+		{
+			get
+			{
+				return this._driver_telephone;
+			}
+			set
+			{
+				if ((this._driver_telephone != value))
+				{
+					this._driver_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_driver_address", DbType="NVarChar(50)")]
+		public string driver_address
+		{
+			get
+			{
+				return this._driver_address;
+			}
+			set
+			{
+				if ((this._driver_address != value))
+				{
+					this._driver_address = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_empolyee_id", DbType="Int")]
+		public System.Nullable<int> host_empolyee_id
+		{
+			get
+			{
+				return this._host_empolyee_id;
+			}
+			set
+			{
+				if ((this._host_empolyee_id != value))
+				{
+					this._host_empolyee_id = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_name", DbType="NVarChar(50)")]
+		public string host_name
+		{
+			get
+			{
+				return this._host_name;
+			}
+			set
+			{
+				if ((this._host_name != value))
+				{
+					this._host_name = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_id_card", DbType="Char(20)")]
+		public string host_id_card
+		{
+			get
+			{
+				return this._host_id_card;
+			}
+			set
+			{
+				if ((this._host_id_card != value))
+				{
+					this._host_id_card = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_telephone", DbType="VarChar(20)")]
+		public string host_telephone
+		{
+			get
+			{
+				return this._host_telephone;
+			}
+			set
+			{
+				if ((this._host_telephone != value))
+				{
+					this._host_telephone = value;
+				}
+			}
+		}
+		
+		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_host_address", DbType="NVarChar(50)")]
+		public string host_address
+		{
+			get
+			{
+				return this._host_address;
+			}
+			set
+			{
+				if ((this._host_address != value))
+				{
+					this._host_address = value;
+				}
+			}
+		}
+	}
+	
 	public partial class getTaxiInformationByEmpolyeeIdResult
 	{
 		
@@ -10543,292 +11535,6 @@ namespace TaxiFirm.Models
 				if ((this._host_address != value))
 				{
 					this._host_address = value;
-				}
-			}
-		}
-	}
-	
-	public partial class getNewsByPageResult
-	{
-		
-		private System.Nullable<long> _rowNum;
-		
-		private int _news_id;
-		
-		private string _title;
-		
-		private int _empolyee_id;
-		
-		private System.DateTime _publish_time;
-		
-		private string _picture_path;
-		
-		private string _name;
-		
-		private string _news_content;
-		
-		public getNewsByPageResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_rowNum", DbType="BigInt")]
-		public System.Nullable<long> rowNum
-		{
-			get
-			{
-				return this._rowNum;
-			}
-			set
-			{
-				if ((this._rowNum != value))
-				{
-					this._rowNum = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_id", DbType="Int NOT NULL")]
-		public int news_id
-		{
-			get
-			{
-				return this._news_id;
-			}
-			set
-			{
-				if ((this._news_id != value))
-				{
-					this._news_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
-		public int empolyee_id
-		{
-			get
-			{
-				return this._empolyee_id;
-			}
-			set
-			{
-				if ((this._empolyee_id != value))
-				{
-					this._empolyee_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_time", DbType="SmallDateTime NOT NULL")]
-		public System.DateTime publish_time
-		{
-			get
-			{
-				return this._publish_time;
-			}
-			set
-			{
-				if ((this._publish_time != value))
-				{
-					this._publish_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_picture_path", DbType="NVarChar(256)")]
-		public string picture_path
-		{
-			get
-			{
-				return this._picture_path;
-			}
-			set
-			{
-				if ((this._picture_path != value))
-				{
-					this._picture_path = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_content", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string news_content
-		{
-			get
-			{
-				return this._news_content;
-			}
-			set
-			{
-				if ((this._news_content != value))
-				{
-					this._news_content = value;
-				}
-			}
-		}
-	}
-	
-	public partial class getAllNewsResult
-	{
-		
-		private int _news_id;
-		
-		private string _title;
-		
-		private int _empolyee_id;
-		
-		private System.DateTime _publish_time;
-		
-		private string _picture_path;
-		
-		private string _name;
-		
-		private string _news_content;
-		
-		public getAllNewsResult()
-		{
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_id", DbType="Int NOT NULL")]
-		public int news_id
-		{
-			get
-			{
-				return this._news_id;
-			}
-			set
-			{
-				if ((this._news_id != value))
-				{
-					this._news_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_title", DbType="NVarChar(50) NOT NULL", CanBeNull=false)]
-		public string title
-		{
-			get
-			{
-				return this._title;
-			}
-			set
-			{
-				if ((this._title != value))
-				{
-					this._title = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_empolyee_id", DbType="Int NOT NULL")]
-		public int empolyee_id
-		{
-			get
-			{
-				return this._empolyee_id;
-			}
-			set
-			{
-				if ((this._empolyee_id != value))
-				{
-					this._empolyee_id = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_publish_time", DbType="SmallDateTime NOT NULL")]
-		public System.DateTime publish_time
-		{
-			get
-			{
-				return this._publish_time;
-			}
-			set
-			{
-				if ((this._publish_time != value))
-				{
-					this._publish_time = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_picture_path", DbType="NVarChar(256)")]
-		public string picture_path
-		{
-			get
-			{
-				return this._picture_path;
-			}
-			set
-			{
-				if ((this._picture_path != value))
-				{
-					this._picture_path = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_name", DbType="NVarChar(50)")]
-		public string name
-		{
-			get
-			{
-				return this._name;
-			}
-			set
-			{
-				if ((this._name != value))
-				{
-					this._name = value;
-				}
-			}
-		}
-		
-		[global::System.Data.Linq.Mapping.ColumnAttribute(Storage="_news_content", DbType="NText NOT NULL", CanBeNull=false, UpdateCheck=UpdateCheck.Never)]
-		public string news_content
-		{
-			get
-			{
-				return this._news_content;
-			}
-			set
-			{
-				if ((this._news_content != value))
-				{
-					this._news_content = value;
 				}
 			}
 		}
