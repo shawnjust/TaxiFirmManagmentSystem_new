@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager" %>
-<%@ Import Namespace="TaxiFimr.Models" %>
+<%@ Import Namespace="TaxiFirm.Models" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
 </asp:Content>
@@ -50,7 +50,7 @@
             <div class="span12">
                 <div class="page-header">
                     <h1>
-                        发布新闻<small><%if (Request.QueryString["hint_message"] != null)
+                        修改新闻<small><%if (Request.QueryString["hint_message"] != null)
                                          Response.Write(Request.QueryString["hint_message"]);
                                           %></small></h1>
                 </div>
@@ -75,13 +75,31 @@
 						</div>
 					</div>-->
   <%-- <form id="form_upload" action="" method="post">--%>
-  <form action="../Home/SaveNewNews" method="post" enctype="multipart/form-data">
+  <%
+                                //处理数据
+                                int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+                                NewsAndNotice model = new NewsAndNotice(true);
+                                IQueryable<getNewsByIDResult> record_result = model.getNewsById(news_id);
+                                if(record_result.Count() == 0)
+                                {
+                                    Response.Redirect("../Home/NewsList",false);
+                                }
+                                getNewsByIDResult this_record = record_result.First();
+                                string title = this_record.title;
+                                string content = this_record.news_content;
+                                string path = this_record.picture_path;
+                             %>   
+  <% 
+  Response.Write("<form action=\"../Home/SaveChangeNews?news_id="+news_id+"\" method=\"post\" enctype=\"multipart/form-data\">");
+  %>
                           <fieldset>
                                 <legend>基本内容 </legend>
                                 <label>
-                                                                
+                                                  
                             <h4>新闻标题：&nbsp;&nbsp;</h4></label> <br/>
-                            <input type="text" align="middle" name="title_str" class="span10"/>
+                            <% 
+                                Response.Write("<input type=\"text\" align=\"middle\" name=\"title_str\" class=\"span10\" value=\""+title+"\"/>");
+                            %>
 
                                
                                     <label><h4>新闻图片： &nbsp;&nbsp;</h4></label>
@@ -94,8 +112,9 @@
                                    <label>
                                    <br/>
                             <h4>新闻内容：</h4>
-                            <textarea name="content_str" cols="800" rows="10" spellcheck="true" class="span12"></textarea>
-
+                            <% 
+                                Response.Write("<textarea name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\">"+content +"</textarea>");
+                            %>
                             <br/>
    	   &nbsp;&nbsp;
    	   </label>

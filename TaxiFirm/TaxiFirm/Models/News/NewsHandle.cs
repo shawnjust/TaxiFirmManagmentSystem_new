@@ -12,15 +12,24 @@ namespace TaxiFirm.Models.News
         public News getNewsById(int news_id)
         {
             News news = new News();
-            var table = db.getNewsByID(news_id);
-            var col = table.First<getNewsByIDResult>();
-            news.NewsId = col.news_id;
-            news.employee_id = col.empolyee_id;
-            news.publish_time = col.publish_time;
-            news.Title = col.title;
-            news.content = col.news_content;
-            news.picture_path = col.picture_path;
-            news.author = col.name;
+            try
+            {
+                
+                var table = db.getNewsByID(news_id);
+                var col = table.First<getNewsByIDResult>();
+                news.NewsId = col.news_id;
+                news.employee_id = col.empolyee_id;
+                news.publish_time = col.publish_time;
+                news.Title = col.title;
+                news.content = col.news_content;
+                news.picture_path = col.picture_path;
+                news.author = col.name;
+                return news;
+            }
+            catch (System.Exception ex)
+            {
+            	
+            }
             return news;
         }
         public List<News> GetNewsByNameByPage(MyPage page, string name)
@@ -202,6 +211,17 @@ namespace TaxiFirm.Models.News
             {
                 return "WTF";
             }
+        }
+        public List<int> getNewsIdSet()
+        {
+            var table = db.getAllNews();
+            List<int> id_list = new List<int>();
+            foreach(var col in table)
+            {
+                int news_id = col.news_id;
+                id_list.Add(news_id);
+            }
+            return id_list;
         }
         public List<News> getAllNews()
         {

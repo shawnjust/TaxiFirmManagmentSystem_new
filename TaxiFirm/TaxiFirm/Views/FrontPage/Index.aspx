@@ -82,7 +82,14 @@
 			<!-- Social Icons -->
 	
 
-			<div class="clearfix"></div>
+			<div class="clearfix">
+			  <table width="100%" border="0" cellspacing="0" cellpadding="0">
+			    <tr>
+			      <td width="63%">&nbsp;</td>
+			      <td width="37%" align="right">我的TaxiServer</td>
+		        </tr>
+		      </table>
+		  </div>
 			<br/>
             <br/>
 			<!-- Contact Details -->

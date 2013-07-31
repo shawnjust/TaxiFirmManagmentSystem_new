@@ -18,6 +18,15 @@ namespace TaxiFirm.Models
             this.isNotice = !isANews;
         }
         //返回页数
+        public void UpdateNotice(int id, string title, string content)
+        {
+            db.updateNoticeContentByID(id, title, content);
+        }
+        public void UpdateNews(int id, string title, string content, string Path)
+        {
+            db.updateNewsContentByID(id, title, content);
+            db.setNewsPicturePathByID(id, Path);
+        }
         public int getPageCount(int perPage)
         {
             int result;

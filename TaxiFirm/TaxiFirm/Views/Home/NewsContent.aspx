@@ -103,7 +103,7 @@
                                 </div>
                             </li>
                           
-                            <li><a href="#">修改</a> </li>
+                            <li><%Response.Write("<a href=\"../Home/ChangeNews?news_id="+Request.QueryString["news_id"]+"\">修改新闻<a>"); %>  </li>
                           
                             <li class="nav-header">图片信息 </li>
                             <li><a href="#" >图片</a></li>

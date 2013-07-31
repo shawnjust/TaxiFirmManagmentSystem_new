@@ -1,6 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager"  %>
-<%@ Import Namespace="TaxiFimr.Models" %>
+<%@ Import Namespace="TaxiFirm.Models" %>
 
 <script runat="server">
 
@@ -58,7 +58,7 @@
             <div class="span12">
                 <div class="page-header">
                     <h1>
-                        发布公告<small><%if (Request.QueryString["hint_message"] != null)
+                        修改公告<small><%if (Request.QueryString["hint_message"] != null)
                                          Response.Write(Request.QueryString["hint_message"]);
                                          %></small></h1>
                 </div>
@@ -84,25 +84,41 @@
 					</div>-->
   <%-- <form id="form_upload" action="" method="post">--%><%--
   <%using(Html.BeginForm("SaveNewNotice","Home",FormMethod.Post,new { enctype = "multipart/form-data" })){ %>--%>
-  <form action="../Home/SaveNewNotice" method="post" enctype="multipart/form-data">
+  <%
+   //预先处理数据
+      int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+      NewsAndNotice model = new NewsAndNotice(false);
+      IQueryable<getNoticeByIDResult> record_result = model.getNoticeById(notice_id);
+      if (record_result.Count() == 0)
+      {
+          Response.Redirect("../Home/InformationList",false);
+      }
+      getNoticeByIDResult this_record = record_result.First();
+      string title = this_record.title;
+      string content = this_record.notice_content;
+      
+   %>
+   <%
+    Response.Write("<form action=\"../Home/SaveChangeNotice?notice_id="+notice_id+"\" method=\"post\" enctype=\"multipart/form-data\">");
+   %>
                           <fieldset>
                                 <legend>基本内容 </legend>
                                 <label>
                                                                 
                             <h4>公告标题：&nbsp;&nbsp;</h4></label> <br/>
-                            <%--<input type="text" align="middle" name="title_str" id="title_str" class="span10"/>--%>
-                            <% 
-                                //显示默认的文件
-                                
-                                <input type="text" align="middle" name="title_str" id="title_str" class="span10"/>
+                            <%
+                                Response.Write("<input type=\"text\" align=\"middle\" name=\"title_str\" id=\"title_str\" class=\"span10\" value=\""+title+"\"/>");
                                 %>
+
                                
                                     
                                  
                             <h4>公告内容：</h4>
-                            <textarea id="content_str" name="content_str" cols="800" rows="10" spellcheck="true" class="span12">
-                            </textarea>
-                            <input type="submit" id="submit" value="发送公告"  />
+                            <% 
+                                Response.Write("<textarea id=\"content_str\" name=\"content_str\" cols=\"800\" rows=\"10\" spellcheck=\"true\" class=\"span12\" >" + content + "</textarea>");
+                             %>
+                            
+                            <input type="submit" id="submit" value="确认修改"  />
                             <br/>
    	   &nbsp;&nbsp;
    	   </label>

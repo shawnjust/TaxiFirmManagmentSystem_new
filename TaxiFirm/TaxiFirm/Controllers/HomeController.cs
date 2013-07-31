@@ -256,7 +256,71 @@ namespace TaxiFirm.Controllers
         }
        
         //}
-       
+        public void SaveChangeNotice()
+        {
+            int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
+            try
+            {
+                string title = Request.Form["title_str"];
+                string content = Request.Form["Content_str"];
+                NewsAndNotice model = new NewsAndNotice(false);
+                model.UpdateNotice(notice_id, title, content);
+                Response.Redirect("../Home/InformationList");
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/InformationList");
+            }
+        }
+        public void SaveChangeNews()
+        {
+            int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
+            string msg = "发送失败，不能为空或输入html代码！";
+            try
+            {
+
+                string title = Request.Form["title_str"];
+                string content = Request.Form["content_str"];
+
+                msg = "图片上传不能为空";
+                HttpPostedFileBase postFile = Request.Files.Get(0);
+                msg = "上传图片的类型必须为jpg或png";
+                string type = postFile.ContentType;
+                string type1 = "image/jpeg"; ;
+                string type2 = "image/png";
+                if (!type.Equals(type1) && !type.Equals(type2))
+                {
+                    throw new Exception();
+                }
+                msg = "上传图片失败！";
+                string newFilePath = Server.MapPath("~/Content/NewsIMG/");
+                // string newFilePath = @"C:/pictures/NewsIMG/";
+                string path = newFilePath + Path.GetFileName(postFile.FileName);
+                postFile.SaveAs(path);
+                msg = "数据库存储出问题！";
+                path = "../../Content/NewsIMG/" + Path.GetFileName(postFile.FileName);
+                NewsAndNotice model = new NewsAndNotice(true);
+                model.UpdateNews(news_id, title, content, path);
+                msg = "上传一则新闻！";
+                Response.Redirect("../Home/NewsList");
+                return;
+
+            }
+            catch (Exception ex)
+            {
+                Response.Redirect("../Home/NewsList");
+                return;
+            }
+
+        }
+        public ActionResult ChangeNews()
+        {
+            return View();
+        }
+        public ActionResult ChangeNotice()
+        {
+            return View();
+        }
         public void deleteNews()
         {
             if (Session["Identity"] == null) { RedirectToAction("login"); return; }
@@ -986,11 +1050,11 @@ namespace TaxiFirm.Controllers
             if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
-        public ActionResult ChangeNews()
-        {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
-            return View();
-        }
+        //public ActionResult ChangeNews()
+        //{
+        //    if (Session["Identity"] == null) { return RedirectToAction("login"); }
+        //    return View();
+        //}
        
         public ActionResult BackupList()
         {
