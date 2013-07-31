@@ -3,6 +3,7 @@
 <%@ Import Namespace = "TaxiFirm.Models.Manager" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
    新闻列表
+   <% Session["upselect"] = "news"; %>
 </asp:Content>
 
 <asp:Content ID="aboutContent" ContentPlaceHolderID="MainContent" runat="server">

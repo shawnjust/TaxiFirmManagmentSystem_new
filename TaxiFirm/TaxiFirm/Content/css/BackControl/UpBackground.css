@@ -37,7 +37,18 @@ a
 	width:129px;
 	
 	}
+.upSelect2{
+	background-image:url(../../picture/BackControl/Beselect.jpg);
+	height:40px;
+	width:129px;
+	
+	}
+
 .upSelect:hover
+{
+	cursor:pointer;
+	}
+.upSelect2:hover
 {
 	cursor:pointer;
 	}

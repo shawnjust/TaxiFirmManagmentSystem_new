@@ -89,7 +89,7 @@
                                 </div>
                             </li>
                           
-                            <li><a href="#">修改</a> </li>
+                            <li><%Response.Write("<a href=\"../Home/ChangeNotice?notice_id="+Request.QueryString["notice_id"]+"\">修改公告<a>"); %> </li>
                           
                             <li class="nav-header">备注信息 </li>
                             <li><a href="#">备注</a></li>
