@@ -1,5 +1,4 @@
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Strict//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-strict.dtd">
 <html>
     <head>
@@ -20,7 +19,15 @@
 		    function Submit() {
 		        var form1 = document.getElementById("login_form");
 		        form1.submit();
-		         
+
+		    }
+		    function mySubmit() {
+		        var psword1 = document.getElementById("ps1").value;
+		        var psword2 = document.getElementById("ps2").value;
+		        if (psword1.length < 6) { window.alert("密码长度应大于6"); return; }
+		        if (psword1 != psword2) {window.alert("两次密码不一致");return; }
+		        var form1 = document.getElementById("register");
+		        form1.submit();
             }
 		</script>
     </head>
@@ -30,54 +37,46 @@
 			<h2></h2>
 			<div class="content">
 				<div id="form_wrapper" class="form_wrapper">
-					<form class="register">
+					<form class="register" id="register" method="post" action="/FrontPage/RegisterHandle">
 						<h3>注册</h3>
 						<div class="column">
 							<div>
-								<label>姓:</label>
-								<input type="text" />
+								<label>昵称:</label>
+								<input name="NickName" type="text" />
 								<span class="error" pattern="[\u4e00-\u9fa5]{1,2}" title="输入汉字">需要输入汉字</span>
 							</div>
+						
 							<div>
-								<label>名:</label>
-								<input type="text" />
-								<span class="error" pattern="[\u4e00-\u9fa5]{1,2}" title="输入汉字">需要输入汉字</span>
-							</div>
-							<div>
-								<label>权限:</label>
-								<input type="text" value=""/>
+								<label>密码:</label>
+								<input  name="Password" type="password" id="ps1"/>
 								<span class="error">This is an error</span>
 							</div>
 						</div>
 						<div class="column">
 							<div>
-								<label>用户名:</label>
-								<input type="text"/>
+								<label>Email:</label>
+								<input name="email" type="text"/> 
 								<span class="error">This is an error</span>
 							</div>
+						
 							<div>
-								<label>Email:</label>
-								<input type="text" />
-								<span class="error">Email格式不正确</span>
-							</div>
-							<div>
-								<label>密码:</label>
-								<input type="password" />
+								<label>确认密码:</label>
+								<input name="Password2"  id="ps2" type="password"/>
 								<span class="error">密码输入错误</span>
 							</div>
 						</div>
 						<div class="bottom">
-							<input type="submit" value="注册" />
-							<a href="/FrontPage/Index" rel="login" class="linkform">已有账户？在这登录</a>
+							<input type="submit"  onclick="mySubmit()" value="注册" />
+							<a  rel="login" class="linkform">已有账户？在这登录</a>
 							<div class="clear"></div>
 						</div>
 					</form>
 
-					<form class="login active" id="login_form" action="/Home/LoginHandle" method="post">
+					<form class="login active" id="login_form" action="/FrontPage/CustomerLoginHandle" method="post">
 						<h3>用户登录</h3>
 						<div>
 							<label>用户名:</label>
-							<input type="text" name="username"  onkeyup="this.value=this.value.replace(/\D/g,'')" onafterpaste="this.value=this.value.replace(/\D/g,'')"/>
+							<input type="text" name="username"/>
 							<span class="error">用户名错误</span>
 						</div>
 						<div>
@@ -88,7 +87,7 @@
 						<div class="bottom">
 							<div class="remember"><input type="checkbox" /><span>保持登录</span></div>
 							<input type="submit"  value="登录" onclick="Submit()"></input>
-							<a href="register.html" rel="register" class="linkform">还没账户？在这里注册</a>
+							<a href="#" rel="register" class="linkform">还没账户？在这里注册</a>
 							<div class="clear"></div>
 						</div>
 					</form>
@@ -103,7 +102,7 @@
 						<div class="bottom">
 							<input type="submit" value="Send reminder"></input>
 							<a href="/FrontPage/Index" rel="login" class="linkform">Suddenly remebered? Log in here</a>
-							<a href="register.html" rel="register" class="linkform">You don't have an account? Register here</a>
+							<a  rel="register" class="linkform">You don't have an account? Register here</a>
 							<div class="clear"></div>
 						</div>
 					</form>
@@ -189,4 +188,46 @@
 		    });
         </script>
     </body>
+    <%
+        if (Session["AddCustomerSuccess"] != null)
+        {
+            string success = (string)Session["AddCustomerSuccess"];
+            if ("success".Equals(success))  //删除才成功
+            {%>
+            
+            
+            <script type="text/javascript">
+                window.alert("注册成功");
+            
+            </script>
+            <%
+
+            }
+            else if ("failed".Equals(success))
+            { %>
+            
+            
+            <script type="text/javascript">
+                window.alert("注册失败");
+            
+            </script>
+            <%
+            
+            
+            
+            
+}
+            else if ("EmailError".Equals(success))
+            {%>
+            
+             <script type="text/javascript">
+                 window.alert("该email已经注册,注册失败");
+            
+            </script>
+            <%}
+
+                Session.Remove("AddCustomerSuccess");
+        }
+        
+         %>
 </html>

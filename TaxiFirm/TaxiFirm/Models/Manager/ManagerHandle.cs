@@ -19,6 +19,7 @@ namespace TaxiFirm.Models.Manager
 
         }
 
+     
         //添加经理
         public bool AddManager(int id)
         {

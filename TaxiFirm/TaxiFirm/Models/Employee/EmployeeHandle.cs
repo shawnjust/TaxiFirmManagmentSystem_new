@@ -71,7 +71,33 @@ namespace TaxiFirm.Models.Employee
                 return false;
             }
         }
+        //密码验证
+        public bool CheckPassword(int id, string password)
+        {
+            try
+            {
+                return data.checkEmpolyeeLoginPassword(id, password) != 0 ? true : false;
 
+            }
+            catch
+            {
+                return false;
+            }
+        }
+
+        //修改密码 
+        public bool UpdateEmployeePassword(int id, string password)
+        {
+            try
+            {
+                data.updateEmpolyeePassword(id, password);
+                return true;
+            }
+            catch
+            {
+                return false;
+            }
+        }
         //通过id得到工号
         public Employee getEmployeeById(int id)
         {
