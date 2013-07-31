@@ -14,6 +14,7 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
+using TaxiFirm.Models.Notice;
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -305,41 +306,43 @@ namespace TaxiFirm.Controllers
         {
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            if (type != null)
+            if (type == null)
             {
-                if (type.Equals("search"))   //搜索类型
+                type = "common";
+            }
+            if (type.Equals("search"))   //搜索类型
+            {
+                int page1 = int.Parse(Request.QueryString.Get("page"));
+                string NameID = Request.QueryString.Get("NameID");
+                try
                 {
-                    int page1 = int.Parse(Request.QueryString.Get("page"));
-                    string NameID = Request.QueryString.Get("NameID");
-                    try
+                    int id = int.Parse(NameID);
+                    Notice notice = new NoticeHandle().getNoticeByID(id);
+                    List<Notice> notices = new List<Notice>();
+                    if (notice.notice_title != null && !notice.Equals(""))
                     {
-                        int id = int.Parse(NameID);
-                        News news = new NewsHandle().getNewsById(id);
-                        List<News> newses = new List<News>();
-                        if (news.Title != null && !news.Equals(""))
-                        {
-                            newses.Add(news);
-                        }
-                        ViewData["type"] = "search";
-                        ViewData["newses"] = newses;
+                        notices.Add(notice);
+                    }
+                    ViewData["type"] = "search";
+                    ViewData["notices"] = notices;
 
-                        page.CurrentPage = page1;
-                        page.CountPerPage = 10;
-                        page.WholePage = 1;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
-                    catch
-                    {
-                        page.CurrentPage = page1;
-                        List<Notice> notices = new NoticeHandle().GetNoticeByNameByPage(page, NameID);
-                        ViewData["type"] = "search";
-                        ViewData["notice"] = notices;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
+                    page.CurrentPage = page1;
+                    page.CountPerPage = 10;
+                    page.WholePage = 1;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
+                }
+                catch
+                {
+                    page.CurrentPage = page1;
+                    List<Notice> notices = new NoticeHandle().GetNoticeByNameByPage(page, NameID);
+                    ViewData["type"] = "search";
+                    ViewData["notices"] = notices;
+                    ViewData["page"] = page;
+                    ViewData["NameID"] = NameID;
                 }
             }
+
             else
             {
                 int page1;
@@ -361,8 +364,16 @@ namespace TaxiFirm.Controllers
                     ViewData["notices"] = notices;
                     ViewData["page"] = page;
                 }
+
             }
-            return View();
+            try
+            {
+                return View();
+            }
+            catch
+            {
+                return RedirectToAction("ErrorPage");
+            }
         }
         public ActionResult Gallery()
         {
@@ -407,8 +418,6 @@ namespace TaxiFirm.Controllers
             if (ModelState.IsValid)
             { s.addComplaint(model.name, model.email, model.content); Session["err"] = "谢谢"; return RedirectToAction("Complain"); }
             else return View();
-
-
         }
         public ActionResult ErrorPage()
         {
@@ -416,6 +425,11 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult NotificationContent()
         {
+            int noti_id = int.Parse(Request.QueryString.Get("NOID"));
+            Notice notice= new Notice();
+            NoticeHandle handler = new NoticeHandle();
+            notice = handler.getNoticeByID(noti_id);
+            ViewData["notice"] = notice;
             return View();
         }
     }
