@@ -93,6 +93,18 @@ namespace TaxiFirm.Models.Notice
         {
             return notice.publish_time.Day.ToString();
         }
+
+        public List<int> getNoticeIdSet()
+        {
+            var table = db.getAllNotice();
+            List<int> id_list = new List<int>();
+            foreach (var col in table)
+            {
+                int notice_id = col.notice_id;
+                id_list.Add(notice_id);
+            }
+            return id_list;
+        }
         public string getNoticeMonth(Notice notice)
         {
             string month = notice.publish_time.Month.ToString();

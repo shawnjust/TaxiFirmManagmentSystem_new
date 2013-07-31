@@ -42,8 +42,12 @@
 <script src='../../google_analytics_auto.js'></script></head>
 <%
     News news = (News)ViewData["news"];
-    NewsHandle handler = new NewsHandle();
-     %>
+    NewsHandle handler = new NewsHandle(); 
+    int news_id = (int)ViewData["Current_news_id"];
+    List<int> id_list = (List<int>)ViewData["news_id_set"];
+    int prev_id;
+    int next_id;
+      %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -70,7 +74,7 @@
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
-		</div>
+		</div> 
 
 		<!-- Social / Contact -->
 		<div class="six columns">
@@ -176,8 +180,35 @@
 		<!-- Portfolio Navi -->
 		<div id="portfolio-navi">
 			<ul>
-				<li><a class="prev" href="#"><b>←</b> 上一页</a></li>
-				<li><a class="next" href="#">下一页 <b>→</b></a></li>
+				            <%
+
+                int index = id_list.IndexOf(news_id);
+                if (index<1)
+                {
+                    index = 0;
+                    prev_id = id_list[index];
+                    next_id = id_list[index + 1];
+                }
+                else if (index>(id_list.Count))
+                {
+                    index = id_list.Count;
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index];
+                }
+                else
+                {
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index + 1];
+                }
+
+                 %>
+                 <%if (index > 0)
+                   {%>
+				<li><a class="prev" href="NewsContent?NWID=<%:prev_id %>"><b>←</b> 上一页</a></li>
+                <%} if (index < id_list.Count-2)
+                   {%>
+				<li><a class="next" href="NewsContent?NWID=<%:next_id %>">下一页 <b>→</b></a></li>
+                <%} %>
 			</ul>
 		</div>
 		<div class="clearfix"></div>
