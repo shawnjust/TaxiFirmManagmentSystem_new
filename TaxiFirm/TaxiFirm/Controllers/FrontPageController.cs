@@ -397,8 +397,11 @@ namespace TaxiFirm.Controllers
             int news_id = int.Parse(Request.QueryString.Get("NWID"));
             News news = new News();
             NewsHandle handler = new NewsHandle();
+            List<int> id_set = handler.getNewsIdSet();
             news = handler.getNewsById(news_id);
+            ViewData["Current_news_id"] = news_id;
             ViewData["news"] = news;
+            ViewData["news_id_set"] = id_set;
             return View();
         }
         public ActionResult Contact()
@@ -427,9 +430,14 @@ namespace TaxiFirm.Controllers
         {
             int noti_id = int.Parse(Request.QueryString.Get("NOID"));
             Notice notice= new Notice();
+            List<int> id_list = new List<int>();
             NoticeHandle handler = new NoticeHandle();
+            id_list = handler.getNoticeIdSet();
             notice = handler.getNoticeByID(noti_id);
+            ViewData["Current_Notice_id"] = noti_id;
             ViewData["notice"] = notice;
+            ViewData["notice_id_list"] = id_list;
+            int index = id_list.IndexOf(noti_id);
             return View();
         }
     }

@@ -42,7 +42,11 @@
 <script src='../../google_analytics_auto.js'></script></head>
 <%
     Notice notice = (Notice)ViewData["notice"];
+    int notice_id = (int)ViewData["Current_Notice_id"];
+    List<int> id_list = (List<int>)ViewData["notice_id_list"];
     NoticeHandle handler = new NoticeHandle();
+    int prev_id;
+    int next_id;
      %>
 <body>
 
@@ -176,8 +180,35 @@
 		<!-- Portfolio Navi -->
 		<div id="portfolio-navi">
 			<ul>
-				<li><a class="prev" href="#"><b>←</b> 上一页</a></li>
-				<li><a class="next" href="#">下一页 <b>→</b></a></li>
+            <%
+
+                int index = id_list.IndexOf(notice_id);
+                if (index<1)
+                {
+                    index = 0;
+                    prev_id = id_list[index];
+                    next_id = id_list[index + 1];
+                }
+                else if (index>(id_list.Count))
+                {
+                    index = id_list.Count;
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index];
+                }
+                else
+                {
+                    prev_id = id_list[index - 1];
+                    next_id = id_list[index + 1];
+                }
+
+                 %>
+                 <%if (index > 0)
+                   {%>
+				<li><a class="prev" href="NotificationContent?NOID=<%:prev_id %>"><b>←</b> 上一页</a></li>
+                <%} if (index < id_list.Count-2)
+                   {%>
+				<li><a class="next" href="NotificationContent?NOID=<%:next_id %>">下一页 <b>→</b></a></li>
+                <%} %>
 			</ul>
 		</div>
 		<div class="clearfix"></div>

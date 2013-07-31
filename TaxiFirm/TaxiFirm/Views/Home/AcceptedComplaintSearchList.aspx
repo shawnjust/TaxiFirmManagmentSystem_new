@@ -73,11 +73,11 @@ div a:hover{
                     </h4>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="46" style="font-size: 13px;">
+                            <td width="50" style="font-size: 13px;">
                                 <small>Email：<%: Model.ElementAt(p).customer_email %>
                                 </small>
                             </td>
-                            <td width="54%" style="font-size: 13px;">
+                            <td width="50%" style="font-size: 13px;">
                                 <small>投诉时间：<%: Model.ElementAt(p).complaint_time%>
                                 </small>
                                 <small>处理时间：<%: Model.ElementAt(p).accept_time%>

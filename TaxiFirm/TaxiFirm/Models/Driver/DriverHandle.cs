@@ -116,6 +116,7 @@ namespace TaxiFirm.Models.Driver
                 driver.Health = (int)col.health;
                 driver.License_id = col.license_id;
                 driver.plateNumber = col.plate_number;
+                driver.license = new License.License();
                 driver.license.photo_path = col.photo_path;
                 driver.license.license_id = col.license_id;
                 driver.license.license_time = (DateTime)col.license_time;
@@ -187,9 +188,10 @@ namespace TaxiFirm.Models.Driver
 
                 var table1 = db.getDriverViewByID(driver.Employee_id);
                 var col1 = table1.First<getDriverViewByIDResult>();
-
+                
                 driver.license = new License.License();
                 driver.license.photo_path = col1.photo_path;
+
 
                 if (col.gender == null)
                 {
