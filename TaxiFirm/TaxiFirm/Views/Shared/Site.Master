@@ -1,4 +1,5 @@
 ﻿<%@ Master Language="C#" Inherits="System.Web.Mvc.ViewMasterPage" %>
+<%@ Import Namespace="TaxiFirm.Models.Manager" %>
 <html xmlns="http://www.w3.org/1999/xhtml">
 <head>
 <meta http-equiv="Content-Type" content="text/html; charset=utf-8" />
@@ -69,7 +70,7 @@
       <tr>
         <td width="150" height="23">&nbsp;</td>
         <td width="95">&nbsp;</td>
-        <td width="810">当前登录用户：<%:Session["name"] %></td>
+        <td width="810">当前登录用户：<%:((Manager)Session["CurrentManager"]).Name%></td>
         <td width="17" height="22"><img src="../../Content/picture/BackControl/date.png" width="12" height="22" /></td>
         <td width="294" id="time" style="font-size:12px;">时间：2013年07月15日 星期五 15:22:22</td>
         

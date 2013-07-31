@@ -12,6 +12,17 @@ namespace TaxiFirm.Models.News
         public News getNewsById(int news_id)
         {
             News news = new News();
+<<<<<<< HEAD
+            var table = db.getNewsByID(news_id);
+            var col = table.First<getNewsByIDResult>();
+            news.NewsId = col.news_id;
+            news.employee_id = col.empolyee_id;
+            news.publish_time = col.publish_time;
+            news.Title = col.title;
+            news.content = col.news_content;
+            news.picture_path = col.picture_path;
+            news.author = col.name;
+=======
             try
             {
                 
@@ -30,6 +41,7 @@ namespace TaxiFirm.Models.News
             {
             	
             }
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
             return news;
         }
         public List<News> GetNewsByNameByPage(MyPage page, string name)
@@ -79,6 +91,9 @@ namespace TaxiFirm.Models.News
             var table = db.getEmpolyeeById(Employee_id);
             var col = table.First<getEmpolyeeByIdResult>();
             return col.name;
+<<<<<<< HEAD
+
+=======
         }
         public string GetPartOfTitle(string content)
         {
@@ -89,10 +104,11 @@ namespace TaxiFirm.Models.News
             }
             else
             {
-                string subContent = content.Substring(0, 11);
+                string subContent = content.Substring(0, 13);
                 subContent = subContent + "...";
                 return subContent;
             }
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
         }
         public string GetPartOfContent(string content)
         {
@@ -152,6 +168,9 @@ namespace TaxiFirm.Models.News
             }
             return news_group;
         }
+<<<<<<< HEAD
+       
+=======
         public string getNewsDay(News news)
         {
             return news.publish_time.Day.ToString();
@@ -241,5 +260,6 @@ namespace TaxiFirm.Models.News
             }
             return newses;
         }
+>>>>>>> faefe100654e81db2fede278084980785464e1cf
     }
 }

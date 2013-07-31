@@ -55,8 +55,8 @@
 						<div class="column">
 							<div>
 								<label>Email:</label>
-								<input name="email" type="text"/> 
-								<span class="error">This is an error</span>
+								<input name="email" type="text" class="error" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" title="email格式错误" onBlur="if (!(/^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$/.test(this.value)) ){alert('email格式错误\n请仔细检查您的输入'); this.value='';this.focus();}"/>
+								<span class="error">email输入错误</span>
 							</div>
 						
 							<div>
