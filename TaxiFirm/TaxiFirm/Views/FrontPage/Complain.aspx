@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ComplainModal>" %>
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -72,7 +72,7 @@
 		<div class="six columns">
 
 			<!-- Social Icons -->
-	
+
 
 			<div class="clearfix"></div>
 			<br/>
@@ -100,6 +100,12 @@
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
+                     </a>
+               
+
+                   <a class="button color medium" href="/Home/BackHandle?type=logout">
+                	<i class="icon-user white"></i>
+                    注销
                      </a>
                
 			
@@ -262,30 +268,39 @@
 
 					<!-- Form -->
 					<form method="post" action="#" name="complainform" id="complainform">
-
+                    <% using (Html.BeginForm())
+                       {%>
+                    <%: Html.ValidationSummary(true)%>
 						<fieldset>
 
 							<div>
 								<label for="name" accesskey="U">姓名:</label>
-								<input name="name" type="text" id="name" />
+								<%: Html.TextBoxFor(model => model.name) %>
 							</div>
 
 							<div>
 								<label for="email" accesskey="E">Email: <span>*</span></label>
-								<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />
-							</div>
+                                <%: Html.TextBoxFor(model => model.email)%>
+								<%--<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />--%>
+							    <%:Html.ValidationMessageFor(model => model.email)%>
+                            </div>
 
 							<div>
 								<label for="comments" accesskey="C">意见: <span>*</span></label>
-								<textarea name="comments" cols="40" rows="3" id="comments" spellcheck="true"></textarea>
+								<%--<textarea name="comments" cols="40" rows="3" id="comments" spellcheck="true"></textarea>--%>
+                                <%: Html.TextAreaFor(model => model.content, new { name="comments", cols="40", rows="3", id="comments", spellcheck="true"})%>
 							</div>
 
 						</fieldset>
 
-						<input type="submit" class="submit" id="submit" value="提交" />
+						<input type="submit" class="submit" id="submit" value="提交"/>
 						<div class="clearfix"></div>
+                        <script type="text/javascript">
+                            <% if (Session["err"]!=null) %> alert("我们已经收到您的投诉建议，工作人员会尽快处理您的信息。");
+                            <% Session["err"]=null; %>
+                        </script>
 
-					</form>
+					<%} %>
 
 				</section>
 				<!-- Contact Form / End -->

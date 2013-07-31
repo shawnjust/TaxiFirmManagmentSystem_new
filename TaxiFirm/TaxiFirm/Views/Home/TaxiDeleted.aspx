@@ -21,7 +21,7 @@
                     <br />
                     <br />
                     <p>
-                        <a class="btn btn-primary btn-large" href="/Home/TaxiList">
+                        <a class="btn btn-primary btn-large" href="/Home/TaxiList?type=common&page=1">
                             返回车辆列表 »</a>
                     </p>
                 </div>

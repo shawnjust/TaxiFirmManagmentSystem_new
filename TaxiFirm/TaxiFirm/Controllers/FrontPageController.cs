@@ -187,33 +187,39 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult GetCredit(string invoiceNumber)
         {
-            try {
-                if(Session["CurrentCustomer"]!=null)
+            try
+            {
+                if (Session["CurrentCustomer"] != null)
                 {
-                Customer customer = (Customer) Session["CurrentCustomer"];
-                int Inumber = int.Parse(invoiceNumber);
-                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
-                Session["InvoiceSuccess"] = "success";
-                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
-                }
-                    else{
+                    Customer customer = (Customer)Session["CurrentCustomer"];
+                    int Inumber = int.Parse(invoiceNumber);
+                    if (new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber))
+                    {
+                        Session["InvoiceSuccess"] = "success";
+                        Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
+                    }
+                    else
+                    {
                         Session["InvoiceSuccess"] = "failed";
                     }
                 }
-                else{
-                 Session["InvoiceSuccess"] = "failed";
+                else
+                {
+                    Session["InvoiceSuccess"] = "failed";
                 }
-            
+
             }
 
-            catch {
+            catch
+            {
 
                 Session["InvoiceSuccess"] = "failed";
-            
+
             }
             return RedirectToAction("Elements");
-        
+
         }
+
         public ActionResult Index() 
         {
             News news = new News();
@@ -227,8 +233,10 @@ namespace TaxiFirm.Controllers
         {
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
-            if (type!=null)
+            if (type == null)
             {
+                type = "common";
+            }
                 if (type.Equals("search"))   //搜索类型
                 {
                     int page1 = int.Parse(Request.QueryString.Get("page"));
@@ -261,7 +269,7 @@ namespace TaxiFirm.Controllers
                         ViewData["NameID"] = NameID;
                     }
                 }
-            }
+            
             else
             {
                 int page1;
@@ -285,7 +293,13 @@ namespace TaxiFirm.Controllers
                 }
 
             }
-            return View();
+            try
+            {
+                return View();
+            }
+            catch {
+                return RedirectToAction("ErrorPage");
+            }
         }
         public ActionResult Notification()
         {
@@ -380,9 +394,21 @@ namespace TaxiFirm.Controllers
         {
             return View();
         }
+
         public ActionResult Complain()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Complain(ComplainModal model)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            if (ModelState.IsValid)
+            { s.addComplaint(model.name, model.email, model.content); Session["err"] = "谢谢"; return RedirectToAction("Complain"); }
+            else return View();
+
+
         }
         public ActionResult ErrorPage()
         {

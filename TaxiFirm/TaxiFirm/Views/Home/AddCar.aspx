@@ -21,14 +21,14 @@
                     <fieldset>
                         <legend>基本信息</legend>
                         <lable>车牌号:</lable>
-                        <input name="plate_number" id="plate_number" type="text" class="error" pattern="^(?:0|[1-9][0-9]?|100)$"
+                        <input name="plate_number" id="plate_number" type="text" class="error" pattern="^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]\d*$"
                             value="<%:Model.plate_number%>" title="确认车牌号格式输入正确，如“晋A12345”" onblur="if (!(/^[\u4e00-\u9fa5]{1}[A-Z]{1}[A-Z_0-9]\d*$/.test(this.value)) ){alert('车牌号：省+地级市+字母或数字组合'); this.value='';this.focus();}" />
                         <%= Html.ValidationMessage("plate_number","*") %>
                         <br />
                         <br />
                         <lable>颜色:</lable>
                         <input name="taxi_color" id="taxi_color" type="text" value="<%:Model.taxi_color%>"
-                            class="error" pattern="^[A-Za-z]+$" title="颜色请用字母和数字表示" onblur="if (!(/^[A-Za-z0-9]+$/.test(this.value)) ){alert('颜色请用字母和数字表示'); this.value='';this.focus();}" />
+                            class="error" pattern="^[A-Za-z0-9]+$" title="颜色请用字母和数字表示" onblur="if (!(/^[A-Za-z0-9]+$/.test(this.value)) ){alert('颜色请用字母和数字表示'); this.value='';this.focus();}" />
                         <%= Html.ValidationMessage("taxi_color","*") %>
                         <br />
                         <br />

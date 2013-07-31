@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager"  %>
+<%@ Import Namespace="TaxiFimr.Models" %>
 
 <script runat="server">
 
@@ -23,7 +24,7 @@
     Manager CurrentManager = (Manager)Session["CurrentManager"];
     if (CurrentManager == null)
     {
-        Response.Redirect("../FrontPage/Login",false);
+        Response.Redirect("../Home/Login",false);
     }
 %>
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>
@@ -89,8 +90,12 @@
                                 <label>
                                                                 
                             <h4>公告标题：&nbsp;&nbsp;</h4></label> <br/>
-                            <input type="text" align="middle" name="title_str" id="title_str" class="span10"/>
-
+                            <%--<input type="text" align="middle" name="title_str" id="title_str" class="span10"/>--%>
+                            <% 
+                                //显示默认的文件
+                                
+                                <input type="text" align="middle" name="title_str" id="title_str" class="span10"/>
+                                %>
                                
                                     
                                  

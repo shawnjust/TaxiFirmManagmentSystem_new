@@ -159,6 +159,13 @@
                                 <%value = employee.Address; %>
                                   <input name="Driver_HomeAddress" type="text" value="<%:value %>" class="error" pattern="^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+" title="地址不能为空" onBlur="if (!(/^(?=.*?[\u4E00-\u9FA5])[\d\u4E00-\u9FA5]+/.test(this.value)) ){alert('地址不能为空\n请仔细检查您的输入'); this.value='';this.focus();}" disabled/>
                                 </p>
+
+                                <p>
+                                    照片
+                                </p>
+                                <p>
+                                    <input name="ImgUpload" type="file" />
+                                </p>
                             </fieldset>
                             </form>
                         </div>

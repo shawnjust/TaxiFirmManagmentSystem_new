@@ -175,7 +175,8 @@
                 	<h3><%:driver.name %></h3>
                     <a class="more" href="/Home/DriverInfo?EMID=<%:driver.Employee_id %>">更多信息</a> 
                 </div>
-               <a class="more" href="#info1"><img alt=" " src="../../Content/picture/drivers/02.jpg" /></a>
+                
+               <a class="more" href="#info1"><img alt=" " src='<%=driver.license.photo_path %>' /></a>
             </li>
  <%} %>
            

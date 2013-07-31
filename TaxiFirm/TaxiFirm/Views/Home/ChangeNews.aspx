@@ -1,5 +1,6 @@
 ﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage" %>
 <%@ Import Namespace="TaxiFirm.Models.Manager" %>
+<%@ Import Namespace="TaxiFimr.Models" %>
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     关于我们
 </asp:Content>
@@ -15,7 +16,7 @@
     Manager CurrentManager = (Manager)Session["CurrentManager"];
     if (CurrentManager == null)
     {
-        Response.Redirect("../FrontPage/Login",false);
+        Response.Redirect("../Home/Login",false);
     }
 %>
     <script src="../../Scripts/BackControl/bootstrap.js" type="text/javascript"></script>

@@ -11,9 +11,12 @@ using TaxiFirm.Models.Invoice;
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
-using System.IO;
+<<<<<<< HEAD
 using System.Text;
+=======
 using TaxiFirm.Models.Taxi;
+>>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
+using System.IO;
 namespace TaxiFirm.Controllers
 {
 
@@ -24,10 +27,16 @@ namespace TaxiFirm.Controllers
     {
 
         DataClasses1DataContext context = new DataClasses1DataContext();
+<<<<<<< HEAD
+        
+
+
+=======
         TaxiRepository taxiRepository = new TaxiRepository();
         
 
 
+>>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
         public ActionResult BackHandle()
         {
 
@@ -183,13 +192,11 @@ namespace TaxiFirm.Controllers
        
         public ActionResult AddNotice()
         {
-            if (Session["Identity"] == null) return RedirectToAction("login");
             return View();
         }
         //存一个新闻
         public void SaveNewNews()
         {
-            if (Session["Identity"] == null) return;
             string msg = "发送失败，不能为空或输入html代码！";
             try { 
                 
@@ -228,9 +235,7 @@ namespace TaxiFirm.Controllers
             }
         }
         public void SaveNewNotice()
-        {
-            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
-            //为处理的数据
+        { //为处理的数据
             try {
               string title = Request.Form["title_str"];
             string content = Request.Form["content_str"];
@@ -259,7 +264,6 @@ namespace TaxiFirm.Controllers
        
         public void deleteNews()
         {
-            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             string msg="该条新闻不存在！";
             int news_id = Convert.ToInt32(Request.QueryString["news_id"]);
             try { 
@@ -286,7 +290,6 @@ namespace TaxiFirm.Controllers
         }
         public void deleteNotice()
         {
-            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             string msg = "该通告不存在！";
             int notice_id = Convert.ToInt32(Request.QueryString["notice_id"]);
             try{
@@ -308,7 +311,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Index()
         {
-            if (Session["Identity"] == null) return RedirectToAction("login");
             return View();
         }
 
@@ -323,7 +325,7 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Customer()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
              string type = Request.QueryString.Get("type");
 
              if (type.Equals("search"))   //搜索类型
@@ -385,7 +387,7 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult TaxiList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             string type = Request.QueryString.Get("type");
             if (type.Equals("search"))   //搜索类型
             {
@@ -441,7 +443,7 @@ namespace TaxiFirm.Controllers
         public ActionResult InvoiceList()
         {
 
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
               string type = Request.QueryString.Get("type");
               if (type.Equals("search"))   //搜索类型
               {
@@ -489,7 +491,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult EmployeeInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             
             ViewData["subtype"] = Request.QueryString.Get("subtype");
@@ -502,7 +503,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult ComplainList(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             DataClasses1DataContext s = new DataClasses1DataContext();
 
 
@@ -517,7 +517,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AcceptedComplaintSearchList(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             DataClasses1DataContext s = new DataClasses1DataContext();
             int? count = s.getAcceptedComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
             IQueryable<getAcceptedComplaintBySearchContentByPageResult> fs = s.getAcceptedComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
@@ -526,12 +525,12 @@ namespace TaxiFirm.Controllers
             ViewData["maxPage"] = count;
             return View();
         }
+<<<<<<< HEAD
 
 
 
         public ActionResult NotAcceptedComplaintSearchList(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             DataClasses1DataContext s = new DataClasses1DataContext();
             int? count = s.getNotAcceptComplaintBySearchContentPageCount(6, "%" + Request["query"] + "%");
             IQueryable<getNotAcceptComplaintBySearchContentByPageResult> fs = s.getNotAcceptComplaintBySearchContentByPage(id + 1, 6, "%" + Request["query"] + "%");
@@ -543,7 +542,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult ComplainAccept(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             DataClasses1DataContext s = new DataClasses1DataContext();
             s.acceptComplaint(id, 1);
             return RedirectToAction("ComplainList");
@@ -551,7 +549,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult ComplainDelete(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             DataClasses1DataContext s = new DataClasses1DataContext();
             s.deleteComplaintById(id);
             return RedirectToAction("ComplainListAccepted");
@@ -560,7 +557,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult ComplainListAccepted(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             DataClasses1DataContext s = new DataClasses1DataContext();
             int? sz = s.getAcceptedComplaintPageCount(6);
             IQueryable<getAcceptedComplaintByPageResult> fs = s.getAcceptedComplaintByPage(id + 1, 6);
@@ -570,9 +567,23 @@ namespace TaxiFirm.Controllers
             return View();
         }
 
+        public ActionResult AddCar()
+        {
+            return View();
+        }
+        public ActionResult CarDealing()
+        {
+            return View();
+        }
+        public ActionResult CarInfoDisplay()
+        {
+            return View();
+        }
+=======
+       
+>>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
         public ActionResult DriverList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int page1 = int.Parse(Request.QueryString.Get("page"));
             string type = Request.QueryString.Get("type");
             MyPage page = new MyPage();
@@ -622,7 +633,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult AddDriver()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int employee_id = int.Parse(Request.QueryString.Get("id"));
             Employee employee = new Employee();
             employee = new EmployeeHandle().getEmployeeById(employee_id);
@@ -631,7 +641,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult DriverInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int employee_id = int.Parse(Request.QueryString.Get("EMID"));
             Driver driver = new Driver();
             driver = new DriverHandle().GetDriverByEmployeeID(employee_id);
@@ -645,7 +654,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostList(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int pageIndex = id;
             int pageSize = 15;
             int? count = context.getHostPageCount(pageSize);
@@ -679,7 +687,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostBuyTaxi(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             BuyTaxiModal s = new BuyTaxiModal()
             {
                 now_id = id,
@@ -692,7 +699,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult HostBuyTaxi(int id, BuyTaxiModal modal)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             context.setTaxiOwnerEmpolyeeId(modal.car_id, id);
             return RedirectToAction("HostList");
         }
@@ -700,7 +706,6 @@ namespace TaxiFirm.Controllers
         [HttpGet]
         public void getTaxiInfoByID(string comment)
         {
-            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             List<getTaxiInformationByPlatenumberResult> tx = context.getTaxiInformationByPlatenumber(comment).ToList();
             if (tx.Count() > 0)
             {
@@ -710,7 +715,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult hostTaxiDetail(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult s = context.getTaxiInformationByPlatenumber(id).First();
             ViewData.Model = s;
             return View();
@@ -718,7 +722,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostTransaction(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult l = context.getTaxiInformationByPlatenumber(id).First();
             TransactionModal s = new TransactionModal()
             {
@@ -736,7 +739,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult HostTransaction(string id, TransactionModal modal)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult tx = context.getTaxiInformationByPlatenumber(id).First();
             context.setTaxiOwnerEmpolyeeId(tx.plate_number, modal.buyer_id);
             return RedirectToAction("HostList");
@@ -744,7 +746,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddHost(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             int? employee_id = id;
 
             getEmpolyeeByIdResult idr = context.getEmpolyeeById(employee_id).First();
@@ -770,7 +772,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult AddHost(int id, AddHostModal host)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
 
@@ -811,7 +812,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult EditHost(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             var dd = context.getEmpolyeeById(id);
 
             getEmpolyeeByIdResult g = dd.First();
@@ -836,10 +836,14 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public ActionResult EditHost(int id, ShowHostModal modal)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
                 // TODO: Add update logic here
+<<<<<<< HEAD
+               // context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
+=======
+                //context.updateEmpolyeeById(id, modal.name, modal.gender, modal.telephone, modal.address);
+>>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
                 return RedirectToAction("HostList");
             }
             catch
@@ -850,7 +854,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult DeleteHost(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try
             {
                 context.deleteHostById(id);
@@ -865,7 +868,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddEmployee()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["firms"] = new FirmHandle().GetAllFirm();
             return View();
         
@@ -873,7 +875,7 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult AddEmployeeHandle(string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
+
             try
             {
                 int? NewID =new EmployeeHandle().AddEmployee(Employee_Name, gender, Employee_Birthday, FirmID, Employee_IDCard, Employee_TelePhone, Employee_HomeAddress);
@@ -898,7 +900,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult HostInfo(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             var dd = context.getEmpolyeeById(id);
             IQueryable<getAllTaxiInformationResult> taxi = context.getAllTaxiInformation();
             List<getAllTaxiInformationResult> taxilist = new List<getAllTaxiInformationResult>();
@@ -943,7 +944,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult HostTaxiInfo(int id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["employee_id"] = id;
             List<getTaxiInformationByEmpolyeeIdResult> taxilist = context.getTaxiInformationByEmpolyeeId(id).ToList();
 
@@ -954,7 +954,6 @@ namespace TaxiFirm.Controllers
         [HttpGet]
         public ActionResult HostSearchResult(int id = 0)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int? count = context.getHostByNamePageCount(15, "%"+Request["query"]+"%");
             ViewData["pageCount"] = id;
             ViewData["maxPage"] = count;
@@ -983,18 +982,15 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddNews()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
         public ActionResult ChangeNews()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
        
         public ActionResult BackupList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             string type = Request.QueryString.Get("type");
             if (type.Equals("search"))   //搜索类型
             {
@@ -1035,7 +1031,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult DeleteEmployee()
         {
-            if (Session["Identity"] == null) { RedirectToAction("login"); }
             try
             {
                 string id = Request.QueryString.Get("id");
@@ -1057,7 +1052,7 @@ namespace TaxiFirm.Controllers
        
         public ActionResult ManagerList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             string type = Request.QueryString.Get("type");
             if (type.Equals("search"))   //搜索类型
             {
@@ -1116,7 +1111,6 @@ namespace TaxiFirm.Controllers
         //添加经理
         public RedirectResult AddManager()
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int id = int.Parse(Request.QueryString.Get("id"));
@@ -1141,7 +1135,6 @@ namespace TaxiFirm.Controllers
         //修改工号
         public ActionResult ModifyEmployee()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             ViewData["employee"] = new EmployeeHandle().getEmployeeById(id);
             ViewData["firms"] = new FirmHandle().GetAllFirm();
@@ -1150,7 +1143,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ModifyManager()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             ViewData["manager"] =new EmployeeHandle().getEmployeeById(id);
             ViewData["firms"] = new FirmHandle().GetAllFirm();
@@ -1160,7 +1152,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ManagerInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             int id = int.Parse(Request.QueryString.Get("id"));
             Manager manager = new Manager(id);
             ViewData["manager"] = manager;
@@ -1168,14 +1159,12 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult ManagerSelfInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
 
         [HttpPost]
         public ActionResult GetSelfManagerModify(string Manager_ID,string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             try{
 
             Manager manager = (Manager)Session["CurrentManager"];
@@ -1211,7 +1200,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult GetManagerModify(string Manager_ID, string Manager_Name, string gender, string Manager_Birthday, string FirmID, string Manager_IDCard, string Manager_TelePhone, string Manager_HomeAddress)
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 if (new EmployeeHandle().UpdateEmployee(Manager_ID, Manager_Name, gender, Manager_Birthday, FirmID, Manager_IDCard, Manager_TelePhone, Manager_HomeAddress))
@@ -1237,7 +1225,6 @@ namespace TaxiFirm.Controllers
         //收回经理权限
         public RedirectResult GetManagerRightBack()
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int id = int.Parse(Request.QueryString.Get("id"));
@@ -1264,7 +1251,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult GetSelfEmployeeModify(string Employee_ID,string Employee_Name, string gender, string Employee_Birthday, string FirmID, string Employee_IDCard, string Employee_TelePhone, string Employee_HomeAddress)
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try{
               if(new EmployeeHandle().UpdateEmployee(Employee_ID,Employee_Name,gender,Employee_Birthday,FirmID,Employee_IDCard,Employee_TelePhone,Employee_HomeAddress))
               {
@@ -1289,7 +1275,7 @@ namespace TaxiFirm.Controllers
 
         public ActionResult FirmList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             MyPage page = new MyPage();
 
             page.CurrentPage = int.Parse(Request.QueryString.Get("page"));
@@ -1300,12 +1286,10 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult Backup()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();
         }
         public ActionResult ModifySelfInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             ViewData["firms"] = new FirmHandle().GetAllFirm();
             return View();
         }
@@ -1331,7 +1315,6 @@ namespace TaxiFirm.Controllers
         //分页转到经理页面
         public RedirectResult DeleteDriver()
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             int employee_id = int.Parse(Request.QueryString.Get("id"));
             DriverHandle handler = new DriverHandle();
             if (handler.deleteDriver(employee_id))
@@ -1342,7 +1325,6 @@ namespace TaxiFirm.Controllers
         }
         public void GoManagerList(int pagecount)
         {
-            if (Session["Identity"] == null) { RedirectToAction("login"); return; }
             MyPage page = new MyPage();
             page.CurrentPage = pagecount;
             List<Manager> managers = new ManagerHandle().GetManagerByPage(page);
@@ -1356,7 +1338,6 @@ namespace TaxiFirm.Controllers
         [HttpPost]
         public RedirectResult SaveDriver(string Driver_Condition, string Driver_LicenseID,string License_Date)
         {
-            if (Session["Identity"] == null) { return Redirect("/Home/Login"); }
             try
             {
                 int em_id = int.Parse(Request.QueryString.Get("EMID"));
@@ -1404,13 +1385,12 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult SaveDriverInfo()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             return View();   
         }
 
         public ActionResult EmployeeList()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
+
             string type = Request.QueryString.Get("type");
             if (Request.QueryString.Get("subtype") != null) 
             { 
@@ -1515,7 +1495,6 @@ namespace TaxiFirm.Controllers
         */
         public ActionResult CarInfoDisplay(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             //TaxiRepository taxiRepository = new TaxiRepository();
 
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
@@ -1527,7 +1506,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult EditCarInfo(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
             IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
 
@@ -1560,7 +1538,6 @@ namespace TaxiFirm.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult EditCarInfo(string id, FormCollection formValues)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             // try
@@ -1578,7 +1555,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult AddCar()
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             View_taxi Taxi = new View_taxi();
 
             IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
@@ -1596,7 +1572,7 @@ namespace TaxiFirm.Controllers
         }
 
         [AcceptVerbs(HttpVerbs.Post)]
-       public ActionResult AddCar(View_taxi Taxi)
+   /*     public ActionResult AddCar(View_taxi Taxi)
         {
             if (ModelState.IsValid)
             {
@@ -1618,10 +1594,9 @@ namespace TaxiFirm.Controllers
             }
             return View(Taxi);
         }
- 
+   */
         public ActionResult RentOutTaxi(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             IQueryable<getAllDriverResult> Drivers = taxiRepository.GetAllDrivers();
@@ -1644,7 +1619,6 @@ namespace TaxiFirm.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult RentOutTaxi(string id, FormCollection formValues)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             Taxi.order_id = int.Parse(Request.Form["order_id"]);
@@ -1661,7 +1635,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult ReturnCar(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             Taxi.order_id = null;
@@ -1676,7 +1649,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult CarDealing(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
             IQueryable<getAllHostResult> Hosts = taxiRepository.GetAllHosts();
 
@@ -1699,7 +1671,6 @@ namespace TaxiFirm.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult CarDealing(string id, string confirmButton)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             if (Taxi == null)
@@ -1713,7 +1684,6 @@ namespace TaxiFirm.Controllers
 
         public ActionResult DeleteTaxi(string id)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             if (Taxi == null)
@@ -1725,7 +1695,6 @@ namespace TaxiFirm.Controllers
         [AcceptVerbs(HttpVerbs.Post)]
         public ActionResult DeleteTaxi(string id, string confirmButton)
         {
-            if (Session["Identity"] == null) { return RedirectToAction("login"); }
             getTaxiInformationByPlatenumberResult Taxi = taxiRepository.FindTaxiByPlatenumber(id);
 
             if (Taxi == null)

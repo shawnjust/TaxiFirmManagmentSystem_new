@@ -8,14 +8,13 @@ using TaxiFirm.Models;
 using TaxiFirm.Models.Firm;
 using TaxiFirm.Models.Customer;
 <<<<<<< HEAD
-using TaxiFirm.Models.News;
-using TaxiFirm.Models;
-=======
 using TaxiFirm.Models.Invoice;
+=======
+using TaxiFirm.Models;
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 using TaxiFirm.Models.Employee;
 using TaxiFirm.Models.Backup;
 using TaxiFirm.Models.Driver;
->>>>>>> 708e11d60acbb4bb94bc821e994321bfc5a97113
 namespace TaxiFirm.Controllers
 {
     public class FrontPageController : Controller
@@ -151,7 +150,6 @@ namespace TaxiFirm.Controllers
             
         }
         // GET: /FrontPage/
-        DataClasses1DataContext db = new DataClasses1DataContext();
         [HttpPost]
         public ActionResult RegisterHandle(string NickName, string Password, string email, string Password2)
         {
@@ -184,6 +182,7 @@ namespace TaxiFirm.Controllers
             return RedirectToAction("Login");
         
         }
+<<<<<<< HEAD
 
 
         [HttpPost]
@@ -210,6 +209,34 @@ namespace TaxiFirm.Controllers
 
             catch {
 
+=======
+
+
+        [HttpPost]
+        public ActionResult GetCredit(string invoiceNumber)
+        {
+            try {
+                if(Session["CurrentCustomer"]!=null)
+                {
+                Customer customer = (Customer) Session["CurrentCustomer"];
+                int Inumber = int.Parse(invoiceNumber);
+                    if(new CustomerHandle().RegistInvoiceToCustomer(customer.CustomerId, Inumber)){
+                Session["InvoiceSuccess"] = "success";
+                Session["CurrentCustomer"] = new CustomerHandle().getCustomerById(customer.CustomerId);
+                }
+                    else{
+                        Session["InvoiceSuccess"] = "failed";
+                    }
+                }
+                else{
+                 Session["InvoiceSuccess"] = "failed";
+                }
+            
+            }
+
+            catch {
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                 Session["InvoiceSuccess"] = "failed";
             
             }
@@ -222,66 +249,6 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult News()
         {
-            string type = Request.QueryString.Get("type");
-            MyPage page = new MyPage();
-            if (type!=null)
-            {
-                if (type.Equals("search"))   //搜索类型
-                {
-                    int page1 = int.Parse(Request.QueryString.Get("page"));
-                    string NameID = Request.QueryString.Get("NameID");
-                    try
-                    {
-                        int id = int.Parse(NameID);
-                        News news = new NewsHandle().getNewsById(id);
-                        List<News> newses = new List<News>();
-                        if (news.Title != null && !news.Equals(""))
-                        {
-                            newses.Add(news);
-                        }
-                        ViewData["type"] = "search";
-                        ViewData["newses"] = newses;
-
-                        page.CurrentPage = page1;
-                        page.CountPerPage = 10;
-                        page.WholePage = 1;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
-                    catch
-                    {
-                        page.CurrentPage = page1;
-                        List<News> newses = new NewsHandle().GetNewsByNameByPage(page, NameID);
-                        ViewData["type"] = "search";
-                        ViewData["newses"] = newses;
-                        ViewData["page"] = page;
-                        ViewData["NameID"] = NameID;
-                    }
-                }
-            }
-            else
-            {
-                int page1;
-                if (Request.QueryString.Get("page")==null)
-                {
-                    page1 = 1;
-                    page.CurrentPage = page1;
-                    List<News> newses = new NewsHandle().GetNewsByPage(page);
-                    ViewData["type"] = "common";
-                    ViewData["newses"] = newses;
-                    ViewData["page"] = page;
-                }
-                else
-                {
-                    page1 = int.Parse(Request.QueryString.Get("page"));
-                    page.CurrentPage = page1;
-                    List<News> newses = new NewsHandle().GetNewsByPage(page);
-                    ViewData["type"] = "common";
-                    ViewData["newses"] = newses;
-                    ViewData["page"] = page;
-                }
-
-            }
             return View();
         }
         public ActionResult Notification()
@@ -307,20 +274,27 @@ namespace TaxiFirm.Controllers
         }
         public ActionResult NewsContent()
         {
-            int news_id = int.Parse(Request.QueryString.Get("NWID"));
-            News news = new News();
-            NewsHandle handler = new NewsHandle();
-            news = handler.getNewsById(news_id);
-            ViewData["news"] = news;
             return View();
         }
         public ActionResult Contact()
         {
             return View();
         }
+
         public ActionResult Complain()
         {
             return View();
+        }
+
+        [HttpPost]
+        public ActionResult Complain(ComplainModal model)
+        {
+            DataClasses1DataContext s = new DataClasses1DataContext();
+            if (ModelState.IsValid)
+            { s.addComplaint(model.name, model.email, model.content); Session["err"] = "谢谢"; return RedirectToAction("Complain"); }
+            else return View();
+
+
         }
         public ActionResult ErrorPage()
         {

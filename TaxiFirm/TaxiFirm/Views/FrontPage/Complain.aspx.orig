@@ -1,5 +1,8 @@
+<<<<<<< HEAD
 ﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<dynamic>" %>
-<%@ Import Namespace="TaxiFirm.Models.News" %>
+=======
+﻿<%@ Page Language="C#" Inherits="System.Web.Mvc.ViewPage<TaxiFirm.Models.ComplainModal>" %>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
 <%@ Import Namespace="TaxiFirm.Models" %>
 <!DOCTYPE html>
 <!--[if IE 8 ]><html class="ie ie8" lang="en"> <![endif]-->
@@ -41,26 +44,6 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
-<script type="text/javascript">
-    function mySubmit()
-     {
-
-        var form1 = document.getElementById("form1");
-        var name =document.getElementById("NameID");
-        form1.action = "/FrontPage/News?type=search&page=1&NameID=" + name.value;
-        form1.submit();
-
-    }
-
-</script>
-<%try
-  {
-      List<News> newses = (List<News>)ViewData["newses"];
-      MyPage page = (MyPage)ViewData["page"];
-      string type = (string)ViewData["type"];
-      string myType = (string)Session["subtype"];
-      NewsHandle newsHandler = new NewsHandle();
-    %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -72,18 +55,18 @@
 
 <!-- 960 Container -->
 <div class="container">
-
+<%Identity current = Identity.unlegal;
+  if (Session["Identity"] != null)
+  {
+      current=(Identity)Session["Identity"]; 
+  }%>
 	<!-- Header -->
 	<header id="header">
-    <%Identity current = Identity.unlegal;
-      if (Session["Identity"] != null)
-      {
-          current = (Identity)Session["Identity"];
-      }%>
+
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
-				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="TF Server" height="62" /></a></h1>
+				<h1><a href="#"><img src="../../Content/picture/FrontPage/logo.png" alt="Nevia Premium Template" height="62" /></a></h1>
 				<div id="tagline">欢迎使用出租车信息管理系统</div>
 				<div class="clearfix"></div>
 			</div>
@@ -93,7 +76,7 @@
 		<div class="six columns">
 
 			<!-- Social Icons -->
-	
+
 
 			<div class="clearfix"></div>
 			<br/>
@@ -103,10 +86,9 @@
 
 			<div class="clearfix"></div>
 
-				<!-- Search -->
+			<!-- Search -->
 			<nav class="top-search">
-              <%if (current == Identity.unlegal)
-                { %>
+              <%if(current==Identity.unlegal){ %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
                 	<i class="icon-cloud white"></i>注册
@@ -117,26 +99,32 @@
                    登录
                      </a>
                     <%}
-                else if (current == Identity.manager)
-                { 
+                   else if (current == Identity.manager)
+                   { 
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
                      </a>
                
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%}
-                else if (current == Identity.custemer)
-                {%>
+               <%}else if(current==Identity.custemer) {%>
                   <a class="button color medium"   href="/FrontPage/ChangerPassword">
                 	<i class="icon-user white"></i>改密
                      </a>
                
+<<<<<<< HEAD
 			
+=======
+
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
                    <a class="button color medium" href="/Home/BackHandle?type=logout">
                 	<i class="icon-user white"></i>
                     注销
@@ -163,13 +151,13 @@
 
 <ul class="menu" id="responsive">
 
-	<li><a href="/FrontPage/Index"><i class="halflings white home"></i> 主页</a></li>
+	<li><a href="/FrontPage/Index" ><i class="halflings white home"></i> 主页</a></li>
 
-	<li><a href="/FrontPage/News" id="current"><i class="halflings white file"></i> 新闻</a>
+	<li><a href="/FrontPage/News"><i class="halflings white file"></i> 新闻</a>
 	</li>
 	<li><a href="/FrontPage/Notification"><i class="halflings white bullhorn"></i> 通知</a>
     </li>
-    <li><a href="/FrontPage/Complain"><i class="halflings white hdd"></i> 评价</a>
+    <li><a href="/FrontPage/Complain" id="current"><i class="halflings white hdd"></i> 评价</a>
 	</li>
 	<li><a href="/FrontPage/Gallery"><i class="halflings white picture"></i> 画廊</a>
 	</li>
@@ -180,6 +168,7 @@
 </ul>
 </nav>
 <div class="clearfix"></div>
+
 <!-- Content
 ================================================== -->
 <div id="content">
@@ -190,13 +179,13 @@
 
 	<div class="sixteen floated page-title">
 
-		<h2>Taxi Firm新闻</h2>
+		<h2>客户评价</h2>
 
 		<nav id="breadcrumbs">
 			<ul>
-				<li>你在这:</li>
+				<li>你在这里:</li>
 				<li><a href="/FrontPage/Index">主页</a></li>
-				<li>新闻</li>
+				<li>关于我们</li>
 			</ul>
 		</nav>
 
@@ -208,134 +197,130 @@
 
 <!-- 960 Container -->
 <div class="container floated">
-    <%
-    if (newses != null && newses.Count != 0)
-    { %>
-	<!-- Page Content -->
-	<div class="eleven floated">
-     <%int num = (page.CurrentPage - 1) * page.CountPerPage + 1;
-
-       for (int i = 0; i < newses.Count; i++)
-       {
-           News news = newses[i];%>
-		<!-- Post -->
-		<article class="post medium">
-
-		<div class="medium-image">
-			<figure class="post-img picture">
-				<a href="#"><img src="<%:news.picture_path %>" alt="" /></a>
-			</figure>
-		</div>
-		<section class="date">
-			<span class="day"><%:newsHandler.getNewsDay(news)%></span>
-			<span class="month"><%:newsHandler.getNewsMonth(news)%></span>
-		</section>
-		<div class="medium-content">
-	    <header class="meta">
-				<h2><a href="NewsContent?NWID=<%:news.NewsId %>">
-<%:news.Title%></a></h2>
-				<span><i class="halflings user"></i>By <a href="#"><%:newsHandler.GetNewsAuthor(news.employee_id)%></a></span>
-			</header>
-
-			<p><%:newsHandler.GetPartOfContent(news.content)%></p>
-			
-			<a href="NewsContent?NWID=<%:news.NewsId %>" class="button color">Read More</a>
-
-		</div>
-
-		</article>
-
-		<!-- Divider -->
-		<div class="line"></div>
-        <%}
-    } %>
-
-	
-
-
-		<!-- Pagination -->
-		<nav class="pagination">
-
-			<ul>
-            <%   if (page.CurrentPage > 1)
-                 {%>
-                 <li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage-1 %>">Pre</a></li>
-            <%} %>
-                <%for (int i = (page.CurrentPage - 1) > 1 ? (page.CountCurrentPage - 1) : 1; i < page.CurrentPage + 1&&i<=page.WholePage; i++)
-                  {
-                      if (page.CurrentPage == i)
-                      {%> 
-				<li><a href="/FrontPage/News?type=common&page=<%:i %>" class="current"><%:i %></a></li>
-                <%}
-                      else
-                      { %>
-                	 <li><a href="/FrontPage/News?type=common&page=<%:i %>"><%:i %></a></li>
-                <%}
-                  }%>
-				
-              <%if (page.CurrentPage < page.WholePage)
-                { %>
-				<li><a href="/FrontPage/News?type=common&page=<%:page.CurrentPage+1 %>">Next</a></li>
-                <%} %>
-			</ul>
-			<div class="clearfix"></div>
-		</nav>
-
-	</div>
-	<!-- Content / End -->
-
 
 	<!-- Sidebar -->
-	<div class="four floated sidebar right">
-		<aside class="sidebar">
+	<div class="four floated sidebar left">
+		<aside class="sidebar padding-reset">
 
-			<!-- Search -->
-			<nav class="widget-search">
-				<form  method="post" id="form1">
-					<button class="search-btn-widget" id="button1" onclick="mySubmit()"></button>
-					<input class="search-field" type="text" id="NameID" onBlur="if(this.value=='')this.value='Search';" onFocus="if(this.value=='Search')this.value='';" value="搜索" />
-				</form>
-			</nav>
-			<div class="clearfix"></div>
-
-			<!-- Categories -->
-			<nav class="widget">
-				<h4>分类</h4>
-				<ul class="categories">
-					<li><a href="#">公司</a></li>
-					<li><a href="#">最近新闻</a></li>
-					<li><a href="#">客户相关</a></li>
-					<li><a href="#">司机相关</a></li>
-					<li><a href="#">其他</a></li>
-				</ul>
-			</nav>
-
-			<!-- Tags -->
 			<div class="widget">
-				<h4>标签</h4>
-				<nav class="tags">
-					<a href="#">出租车</a>
-					<a href="#">油价</a>
-					<a href="#">乱收费</a>
-					<a href="#">天然气</a>
-					<a href="#">政策改革</a>
-					<a href="#">客流量高峰</a>
-					<a href="#">租赁</a>
-					<a href="#">乘客</a>
-				</nav>
+				<h4>基本信息</h4>
+				<p>在这里您可以留下您对我们的宝贵意见，我们会认真对待</p>
 			</div>
-			<!-- Archives -->
-			<nav class="widget">
-				<h4>时间轴</h4>
-				<ul class="categories">
-					<li><a href="#">October 2012</a></li>
-					<li><a href="#">November 2012</a></li>
-					<li><a href="#">December 2012</a></li>
+
+			<div class="widget">
+				<h4>格式要求</h4>
+
+				<ul class="contact-informations">
+					<li><span><i class="halflings user"></i>姓名: &nbsp;程冉</span></li>
+					<li><span><i class="halflings envelope"></i>Email: &nbsp;752050943@qq.com</span></li>
 				</ul>
-			</nav>
+
+				<ul class="contact-informations second">
+					<li>
+                    <i class="halflings file"></i>内容:
+                    <p>我觉得你们公司的管理太混乱，需要引进新的信息化管理模式，如果对TaxiFirmServer加大建设力度的话可以取得很好的成效。</p>
+                    </li>
+				</ul>
+
+			</div>
+
+
 		</aside>
 	</div>
+	<!-- Sidebar / End -->
+
+	<!-- Page Content -->
+	<div class="eleven floated">
+		<section class="page-content">
+
+			<h3 class="margin-reset">我们的位置</h3>
+
+			<br />
+
+			<!-- Google Maps -->
+			<section class="google-map-container">
+
+				<div id="googlemaps" class="google-map google-map-full" style="padding-bottom:40%"></div>
+
+				<script src="http://maps.google.com/maps/api/js?sensor=true"></script>
+				<script src="../../Scripts/FrontPage/jquery.gmap.min.js"></script>
+
+				<script type="text/javascript">
+				jQuery('#googlemaps').gMap({
+					maptype: 'ROADMAP',
+					scrollwheel: false,
+					zoom: 16,
+					markers: [
+						{
+							address: '上海同济大学嘉定校区', 
+							html: '',
+							popup: false,
+						}
+					],
+				});
+				</script>
+			</section>
+			<!-- Google Maps / End -->
+
+
+			<h3 class="margin">投诉表格</h3>
+			<p class="margin">以下表格需要填写完整，包含基本的姓名，Email，以及你对公司的意见或者司机的意见，谢谢您对我们提出的宝贵意见</p>
+
+				<!-- Contact Form -->
+				<section id="contact">
+
+					<!-- Success Message -->
+					<mark id="message"></mark>
+
+					<!-- Form -->
+<<<<<<< HEAD
+					<form method="post" action="#" name="complainform" id="complainform">
+
+=======
+                    <% Html.EnableClientValidation(); %>
+                    <% using (Html.BeginForm())
+                       {%>
+                    <%: Html.ValidationSummary(true)%>
+>>>>>>> 476ad80b9bdee0ee50cb4be9b7eb4d6ec84f5b4c
+						<fieldset>
+
+							<div>
+								<label for="name" accesskey="U">姓名:</label>
+								<%: Html.TextBoxFor(model => model.name) %>
+							</div>
+
+							<div>
+								<label for="email" accesskey="E">Email: <span>*</span></label>
+                                <%: Html.TextBoxFor(model => model.email)%>
+								<%--<input name="email" type="email" id="email" pattern="^[A-Za-z0-9](([_\.\-]?[a-zA-Z0-9]+)*)@([A-Za-z0-9]+)(([\.\-]?[a-zA-Z0-9]+)*)\.([A-Za-z]{2,})$" />--%>
+							    <%:Html.ValidationMessageFor(model => model.email)%>
+                            </div>
+
+							<div>
+								<label for="comments" accesskey="C">意见: <span>*</span></label>
+								<%--<textarea name="comments" cols="40" rows="3" id="comments" spellcheck="true"></textarea>--%>
+                                <%: Html.TextAreaFor(model => model.content, new { name="comments", cols="40", rows="3", id="comments", spellcheck="true"})%>
+							</div>
+
+						</fieldset>
+
+						<input type="submit" class="submit" id="submit" value="提交"/>
+						<div class="clearfix"></div>
+                        <script type="text/javascript">
+                            <% if (Session["err"]!=null) %> alert("我们已经收到您的投诉建议，工作人员会尽快处理您的信息。");
+                            <% Session["err"]=null; %>
+                        </script>
+
+					<%} %>
+
+				</section>
+				<!-- Contact Form / End -->
+
+
+		</section>
+	</div>
 	<!-- Page Content / End -->
+
 
 </div>
 <!-- 960 Container / End -->
@@ -345,6 +330,7 @@
 
 </div>
 <!-- Wrapper / End -->
+
 
 
 <!-- Footer
@@ -496,11 +482,7 @@
 
 </section>
 <!-- Style Switcher / End -->
+
+
 </body>
-<%}
-  catch {
-
-      Response.Redirect("/FrontPage/ErrorPage");
-  }%>
-
 </html>

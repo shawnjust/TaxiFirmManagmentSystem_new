@@ -1,4 +1,4 @@
-﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getNotAcceptComplaintByPageResult>>" %>
+﻿<%@ Page Language="C#" MasterPageFile="~/Views/Shared/Site.Master" Inherits="System.Web.Mvc.ViewPage<IEnumerable<TaxiFirm.Models.getComplaintBySearchContentByPageResult>>" %>
 
 <asp:Content ID="aboutTitle" ContentPlaceHolderID="TitleContent" runat="server">
     意见管理
@@ -45,7 +45,7 @@ div a:hover{
                 </div>
             </div>
             <div class="span6">
-                <% using (Html.BeginForm("NotAcceptedComplaintSearchList", "Home", new { page = "" }, FormMethod.Get))
+                <% using (Html.BeginForm("ComplainList", "Home", new { page = "" }, FormMethod.Get))
                             {%>
                                 <%= Html.TextBox("query") %>
                                 <button type="submit" class="btn">搜索</button>
@@ -67,24 +67,24 @@ div a:hover{
                     {
                 %>
                 <div class="span4">
-                    <h4>
+                    <h2>
                         投诉人姓名：<%: Model.ElementAt(p).customer_name %>
-                    </h4>
+                    </h2>
                     <table width="100%" border="0" cellspacing="0" cellpadding="0">
                         <tr>
-                            <td width="47" style="font-size: 13px;">
+                            <td width="45" style="font-size: 13px;">
                                 <small>Email：<%: Model.ElementAt(p).customer_email %>
                                 </small>
                             </td>
-                            <td width="53%" style="font-size: 13px;">
-                                <small>投诉时间：<%: Model.ElementAt(p).complaint_time %></small>
+                            <td width="55%" style="font-size: 13px;">
+                                <small></small>
                             </td>
                         </tr>
                     </table>
                     <p>
                         <%: Model.ElementAt(p).complaint_content %></p>
                     <p>
-                        <%: Html.ActionLink("放入已受理", "ComplainAccept", new { id = Model.ElementAt(p).complaint_id })%>
+                        <%: Html.ActionLink("受理", "ComplainAccept", new { id = Model.ElementAt(p).complaint_id })%>
                     </p>
                     <div class="row-fluid">
                         <div class="span6">
