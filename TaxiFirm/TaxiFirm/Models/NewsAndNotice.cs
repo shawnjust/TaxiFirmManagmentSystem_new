@@ -54,7 +54,7 @@ namespace TaxiFirm.Models
                 return db.getNoticeByPage(page, perPage);
             }
         }
-
+      
         //根据ID返回记录
         public IQueryable<getNewsByIDResult> getNewsById(int id)
         {
@@ -64,7 +64,21 @@ namespace TaxiFirm.Models
         {
             return db.getNoticeByID(id);
         }
-
+        //发送新通告
+        public void sendNewNotice(string title,int id,string content)
+        {
+            
+            //db.andNotice函数返回值并未进行判断*********************************************
+            db.addNotice(title, id, content);
+            
+        }
+        //发送新新闻
+        public void sendNewNews(string title,int id,string content,string picPath)
+        {
+           
+            db.addNews(title, id, content, picPath);
+            
+        }
 
 
     }
