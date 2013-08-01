@@ -31,6 +31,8 @@
 		    }
 		</script>
     </head>
+    <%try
+      { %>
 <body>
     <div class="wrapper">
 			<h1></h1>
@@ -74,4 +76,10 @@
 			</div>
 		</div>
 </body>
+<%}
+      catch
+      { %>
+      
+      Response.Redirect("/FrontPage/ErrorPage");
+<%} %>
 </html>

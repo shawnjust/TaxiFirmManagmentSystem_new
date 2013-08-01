@@ -40,6 +40,8 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%try
+  { %>
 <body>
 
 <!-- Wrapper / Start -->
@@ -55,10 +57,10 @@
 	<!-- Header -->
 	<header id="header">
     <%Identity current = Identity.unlegal;
-  if (Session["Identity"] != null)
-  {
-      current=(Identity)Session["Identity"]; 
-  }%>
+      if (Session["Identity"] != null)
+      {
+          current = (Identity)Session["Identity"];
+      }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
@@ -84,7 +86,8 @@
 
 				<!-- Search -->
 			<nav class="top-search">
-              <%if(current==Identity.unlegal){ %>
+              <%if (current == Identity.unlegal)
+                { %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
                 	<i class="icon-cloud white"></i>注册
@@ -95,8 +98,8 @@
                    登录
                      </a>
                     <%}
-                   else if (current == Identity.manager)
-                   { 
+                else if (current == Identity.manager)
+                { 
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
@@ -107,7 +110,9 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%}else if(current==Identity.custemer) {%>
+               <%}
+                else if (current == Identity.custemer)
+                {%>
                   <a class="button color medium"   href="/FrontPage/ChangerPassword">
                 	<i class="icon-user white"></i>改密
                      </a>
@@ -494,4 +499,11 @@
 
 
 </body>
+<%}
+  catch
+  {
+
+      Response.Redirect("/FrontPage/ErrorPage");
+
+  }%>
 </html>

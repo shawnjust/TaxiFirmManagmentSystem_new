@@ -27,14 +27,14 @@ namespace TaxiFirm.Models.Invoice
         //跟据客户id得到发票的分页页面
         public List<Invoice> GetCustomerInvoiceByPage(int CustomerId,MyPage page)
         {
+            List<Invoice> invoices = new List<Invoice>();
+
             try
             {
                 page.CountPerPage = 10;
                 page.WholePage = (int)data.getCustomerInvoicePageCount(page.CountPerPage, CustomerId);
                 var table = data.getCustomerInvoiceByPage(page.CurrentPage, page.CountPerPage, CustomerId);
-              
-                List<Invoice> invoices = new List<Invoice>();
-
+             
 
 
                 foreach (var col in table)
@@ -56,7 +56,7 @@ namespace TaxiFirm.Models.Invoice
                 return invoices;
             }
             catch {
-                return null;
+                return invoices;
             }
         }
     }

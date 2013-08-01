@@ -45,6 +45,8 @@
 <script src="../../Scripts/FrontPage/custom.js"></script>
 
 <script src='../../google_analytics_auto.js'></script></head>
+<%try
+  { %>
 <body>
 <script type="text/javascript">
     function Submit() {
@@ -90,17 +92,17 @@
 	<!-- Header -->
 	<header id="header">
     <%
-        Identity current = Identity.unlegal;
-        Customer customer = null;
-  if (Session["Identity"] != null)
-  {
-      current=(Identity)Session["Identity"];
-      
-      if (Identity.custemer == current)
-      {
-          customer = (Customer)Session["CurrentCustomer"];
-      }
-  }%>
+    Identity current = Identity.unlegal;
+    Customer customer = null;
+    if (Session["Identity"] != null)
+    {
+        current = (Identity)Session["Identity"];
+
+        if (Identity.custemer == current)
+        {
+            customer = (Customer)Session["CurrentCustomer"];
+        }
+    }%>
 		<!-- Logo -->
 		<div class="ten columns">
 			<div id="logo">
@@ -127,7 +129,8 @@
 			<!-- Search -->
 			<!-- Search -->
 			<nav class="top-search">
-              <%if(current==Identity.unlegal){ %>
+              <%if (current == Identity.unlegal)
+                { %>
                 <a class="button color medium" href="/FrontPage/Login"  rel="register" >
                 
                 	<i class="icon-cloud white"></i>注册
@@ -138,8 +141,8 @@
                    登录
                      </a>
                     <%}
-                   else if (current == Identity.manager)
-                   { 
+                else if (current == Identity.manager)
+                { 
                        %> 
                      <a class="button color medium"   href="/Home/Index">
                 	<i class="icon-user white"></i>后台
@@ -150,7 +153,9 @@
                 	<i class="icon-user white"></i>
                     注销
                      </a>
-               <%}else if(current==Identity.custemer) {%>
+               <%}
+                else if (current == Identity.custemer)
+                {%>
                   <a class="button color medium"   href="/FrontPage/ChangerPassword">
                 	<i class="icon-user white"></i>改密
                      </a>
@@ -261,7 +266,7 @@
     <%if (Session["Identity"] != null && (Identity)Session["Identity"] == Identity.custemer)
       {
           int grade = new CustomerHandle().GetCurrentGrade(customer.Credit);
-          int percent = new CustomerHandle().GetCurrentPercent(grade,customer.Credit);%>
+          int percent = new CustomerHandle().GetCurrentPercent(grade, customer.Credit);%>
 		<div class="eight columns">
 			
 			<!-- Headline -->
@@ -269,15 +274,15 @@
 
 			<!-- Large Notice -->
 			<div class="large-notice">
-				<h3>当前等级： <%:grade %></h3>
+				<h3>当前等级： <%:grade%></h3>
                 <div class="skill-bar"><div class="skill-bar-content" data-percentage="<%:percent %>" style="width: <%:percent%> %;">
-                      <%:percent %>%
+                      <%:percent%>%
 
                     </div><span class="skill-title">
-                      完成  <%:percent %>%
+                      完成  <%:percent%>%
                     </span>
                 </div>
-                <p>当前积分： <%:customer.Credit %>&nbsp;&nbsp;升级积分：<%:(50+50*grade) %></p>
+                <p>当前积分： <%:customer.Credit%>&nbsp;&nbsp;升级积分：<%:(50 + 50 * grade)%></p>
 				<p>当前优惠： 积分满50可换取50元话费</p>
                 <form id="invoiceSubmit" method="post" action="/FrontPage/GetCredit">
                 <h4>发票号</h4>
@@ -288,20 +293,23 @@
                    { %>
                 <p>一张发票仅能作用一次</p>
                 <%}
-                   else if(((string)Session["InvoiceSuccess"]).Equals("failed")) { 
+                   else if (((string)Session["InvoiceSuccess"]).Equals("failed"))
+                   { 
                    %>
                    <p>发票已使用或不存在</p>
                    <%
                        
-                       Session.Remove("InvoiceSuccess");
-                   } else if(((string)Session["InvoiceSuccess"]).Equals("success")){%>
+    Session.Remove("InvoiceSuccess");
+                   }
+                   else if (((string)Session["InvoiceSuccess"]).Equals("success"))
+                   {%>
                     <p>一张发票仅能作用一次</p>
                     <script type="text/javascript">
                         window.alert("发票登记成功");
                  
                     </script>
                    <%
-                       Session.Remove("InvoiceSuccess");
+    Session.Remove("InvoiceSuccess");
                    } 
          
           
@@ -313,7 +321,9 @@
 		<br /><br />
 
 		</div>
-        <%} else{%>
+        <%}
+      else
+      {%>
         <div class="eight columns">
 			
 			<!-- Headline -->
@@ -386,7 +396,7 @@
        {
            MyPage page = new MyPage();
            page.CurrentPage = 1;
-           List<Invoice> invoices =null;
+           List<Invoice> invoices = null;
            if (customer.Credit > 0)
            {
                invoices = new InvoiceHandle().GetCustomerInvoiceByPage(customer.CustomerId, page);
@@ -406,22 +416,22 @@
 				</tr>
 
                 <%
-                      if (invoices!=null&&invoices.Count>0)
-                      {
-                          for(int i=0;i<invoices.Count&&i<5;i++ )
-                          {
+    if (invoices != null && invoices.Count > 0)
+    {
+        for (int i = 0; i < invoices.Count && i < 5; i++)
+        {
                       %> 
                     	<tr>
 					<td><%:(i + 1)%></td>
-					<td><%:invoices[i].InvoiceId %></td>
-					<td><%:invoices[i].RegisterTime.ToShortDateString() %></td>
-					<td><%:invoices[i].Amount %> ￥</td>
+					<td><%:invoices[i].InvoiceId%></td>
+					<td><%:invoices[i].RegisterTime.ToShortDateString()%></td>
+					<td><%:invoices[i].Amount%> ￥</td>
 				</tr>
                 
                   
                   
                 <%}
-                  }
+    }
                       
                       %>
 			
@@ -625,7 +635,12 @@
 
 
 </body>
+<%}
+  catch {
 
+
+      Response.Redirect("/FrontPage/ErrorPage");
+  }%>
 
 <%
         if (Session["CustomerLoginSuccess"] != null)
